@@ -1,0 +1,51 @@
+default_language_version:
+  python: python3.13              # ⬅️ global Python version
+
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v5.0.0                     # Python 3.13 tested release :contentReference[oaicite:0]{index=0}
+  hooks:
+  - id: check-added-large-files
+  - id: check-toml
+  - id: check-yaml
+  - id: requirements-txt-fixer
+  - id: check-ast
+  - id: check-builtin-literals
+  - id: check-executables-have-shebangs
+  - id: check-json
+  - id: check-merge-conflict
+  - id: end-of-file-fixer
+  - id: trailing-whitespace
+
+- repo: https://github.com/pycqa/isort
+  rev: 6.0.1                      # 3.13 classifier present :contentReference[oaicite:1]{index=1}
+  hooks:
+  - id: isort
+    name: isort (python)
+  - id: isort
+    name: isort (cython)
+    types: [cython]
+  - id: isort
+    name: isort (pyi)
+    types: [pyi]
+
+- repo: https://github.com/psf/black
+  rev: 25.1.0                     # First Black series fully tested on 3.13 :contentReference[oaicite:2]{index=2}
+  hooks:
+  - id: black
+
+- repo: https://github.com/pycqa/flake8
+  rev: 7.2.0                      # Latest, Python ≥ 3.9 (includes 3.13) :contentReference[oaicite:3]{index=3}
+  hooks:
+  - id: flake8
+    args: ["--ignore=E501,W503"]
+
+- repo: https://github.com/pre-commit/mirrors-mypy
+  rev: v1.15.0                    # 3.13 wheels + classifiers :contentReference[oaicite:4]{index=4}
+  hooks:
+  - id: mypy
+- repo: https://github.com/myint/autoflake
+  rev: v2.3.1                     # Current stable (≥ 3.8) :contentReference[oaicite:5]{index=5}
+  hooks:
+  - id: autoflake
+    args: ["--remove-all-unused-imports"]

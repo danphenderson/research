@@ -1,0 +1,22 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+ipython      = "*"
+numpy        = "*"
+matplotlib   = "*"
+xde          = {path = "./common", editable = true}
+
+[dev-packages]
+pre-commit  = "*"
+black       = "==25.1.0"
+flake8      = "==7.2.0"
+isort       = "==6.0.1"
+autoflake   = "==2.3.1"
+mypy        = "==1.15.0"
+
+
+[requires]
+python_version = "3.13"

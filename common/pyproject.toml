@@ -1,0 +1,81 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"xde" = ""}
+
+[tool.setuptools.dynamic]
+readme = {file = ["README.md"], content-type = "text/markdown"}
+
+[project]
+name = "xde"
+version = "0.1.0"
+requires-python = ">=3.8"
+description = "Ordinary and Partial Differential Equations Library."
+authors = [
+    {name = "Daniel Henderson", email = "me@danhenderson.dev"},
+]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Operating System :: Unix",
+    "Operating System :: POSIX",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13"
+]
+dependencies = [
+]
+
+[project.optional-dependencies]
+tests = [
+    "coverage[toml]",
+    "pytest",
+    "pytest-cov"
+]
+
+dev = [
+]
+
+[tool.coverage.paths]
+source = ["xde"]
+
+
+[tool.coverage.run]
+branch = ["true"]
+source =[
+    "xde"
+]
+parallel = ["false"]
+
+
+[tool.coverage.report]
+show_missing = ["true"]
+precision = 2
+
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra --strict-markers --ignore=.eggs --doctest-modules --tb=long"
+norecursedirs = [
+    ".git",
+    "dist",
+    "build",
+]
+testpaths = [
+    "tests"
+]
+
+[tool.black]
+line-length = 140
+target-version = ['py313']
+skip-string-normalization = true
+
+[tool.isort]
+profile = "black"
