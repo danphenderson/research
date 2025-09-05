@@ -12,7 +12,7 @@ from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 import numpy as np
 
-from xde.mesh.base import (  # type: ignore  # imported for protocol compliance
+from src.mesh.base import (  # type: ignore  # imported for protocol compliance
     Array,
     Mesh,
 )
