@@ -19,6 +19,43 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global/global}
+    \entry{MathematicalEngineering}{book}{}{}
+      \name{author}{3}{}{%
+        {{hash=688405f096f6d3f0106a661f73a03d2d}{%
+           family={Formaggia},
+           familyi={F\bibinitperiod},
+           given={Luca},
+           giveni={L\bibinitperiod}}}%
+        {{hash=c28a2501b2d78ab05e717a1f7a22209f}{%
+           family={Quarteroni},
+           familyi={Q\bibinitperiod},
+           given={Alfio},
+           giveni={A\bibinitperiod}}}%
+        {{hash=208f5793fba9a23a322eea9dd4372d91}{%
+           family={Veneziani},
+           familyi={V\bibinitperiod},
+           given={Alessandro},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{a14b85e049b549b8be3c122930621176}
+      \strng{fullhash}{a14b85e049b549b8be3c122930621176}
+      \strng{fullhashraw}{a14b85e049b549b8be3c122930621176}
+      \strng{bibnamehash}{a14b85e049b549b8be3c122930621176}
+      \strng{authorbibnamehash}{a14b85e049b549b8be3c122930621176}
+      \strng{authornamehash}{a14b85e049b549b8be3c122930621176}
+      \strng{authorfullhash}{a14b85e049b549b8be3c122930621176}
+      \strng{authorfullhashraw}{a14b85e049b549b8be3c122930621176}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{subtitle}{Modeling and Simulation of the Circulatory System}
+      \field{title}{Cardiovascular Mathematics}
+      \field{year}{2009}
+    \endentry
     \entry{ehab332}{article}{}{}
       \name{author}{1}{}{%
         {{hash=2d2dd6e05d59effb4f5ac937ad6080d8}{%
@@ -57,3 +94,4 @@
   \enddatalist
 \endrefsection
 \endinput
+

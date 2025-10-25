@@ -4,6 +4,8 @@
 \usepackage{csquotes} % recommended with biblatex
 \usepackage[backend=biber,style=numeric]{biblatex}
 \addbibresource{citations.bib}
+
+
 % ----------------- Document TITLE
 \title{Modeling Blood Flow in Macrocirculatory System}
 \author{Names Here}
@@ -21,25 +23,115 @@
     \noindent Notes pertaining to mathematical models of blood flow in
     the macrocirculatory system.
 
-    \bigskip \tableofcontents \newpage
+    \medskip \tableofcontents \medskip
+    \newpage
+
+    % ------------------ SECTION: Preliminaries
+    % -----------------------------------------------------------------
+    \section{Preliminaries}
+        \label{sec:preliminaries}
+        \medskip
+        \subsection*{Mathematical Notation}
+            \begin{minipage}[t]{0.48\textwidth}
+                \begin{tabular}{@{}p{0.4\linewidth} p{1.8\linewidth}@{}}
+                    $ \R$                             & set of real numbers \\
+                    $ \R^{+}$                         & set of positive real numbers \\
+                    $ \R^{-}$                         & set of negative real numbers \\
+                    $ \R^{n}$                         & n-dimensional real vector space \\
+                    $ \Omega \subset \R^{n}$          & a connected open subset of $\R^{n}$ \\
+                    $ \OmegaBar$                      & the closure of $\Omega$ \\
+                    $ \partial \Omega$                & the boundary of $\Omega$ \\
+                    $ dx $                            & Lebesgue measure on $\R^{n}$ \\
+                    $ dS $                            & surface measure on $\partial \Omega$ \\
+                    $ \nabla $                        & gradient operator \\
+                    $ \del $                          & Laplace operator \\
+                    $ \Div $                          & divergence of a vector field \\
+                    $ \Divbf $                        & divergence of a tensor \\
+                    $ \vct{v}_i$                      & $i$-th component of vector $\vct{v}$ \\
+                    $ \langle \cdot, \cdot \rangle_X$ & inner product on vector space $X$ \\
+                    $ \langle \vct{u}, \vct{v} \rangle$ & inner product of vectors $\vct{u}, \vct{v} \in \R^n$ \\
+                    $ \dfrac{\partial}{\partial \hat{\vct{n}}} = \langle \nabla, \hat{\vct{n}} \rangle$ & normal derivative on $\partial \Omega$ \\
+                    $\| \cdot \|$                     & $L^2$-norm \\
+                    $C^{k}(\Omega)$                   & space of $k$ times continuously differentiable functions on $\Omega$ \\
+                    $C^{k}_{0}(\Omega)$               & space of $k$ times continuously differentiable functions with compact support in $\Omega$ \\
+                    $C^{k}_{0}(\overline{\Omega})$    & space of $k$ times continuously differentiable functions which have bounded and uniformly
+                                                    continuous derivatives up to order $k$ with compact support in $\Omega$ \\
+                    $C^{\infty}_{0}(\Omega)$          & space of smooth functions with compact support in $\Omega$ \\
+                    $L^{p}(\Omega)$                   & Lebesgue space of $p$-integrable functions on $\Omega$ \\
+                \end{tabular}
+            \end{minipage}\hfill
+        \newpage
+        
+        \subsection*{Symbols and Abbreviations}
+            \label{subsec:symbols}
+            \medskip
+            \begin{minipage}[t]{0.48\textwidth}
+                \begin{tabular}{@{}p{0.4\linewidth} p{1.8\linewidth}@{}}
+                    $\therefore$ & consequently\\
+                    $\because$ & because\\ 
+                    $\implies$ & implies \\
+                    $\iff$ & if and only if \\
+                    $:=$ & defines\\
+                    $\equiv$ & equivalent \\
+                    s.t. & such that \\
+                    w.r.t. & with respect to\\
+                    r.t.a. & referred to as \\
+                    a.e. & almost everywhere\\
+                    wlog & without loss of generality \\
+                    i.e. & "id est" (that means) \\
+                    e.g. & "exempli gratia" (for example)\\
+                    ODE & Ordinary Differential Equation \\
+                    PDE & Partial Differential Equation \\
+                    IC & Initial Condition \\
+                    BC & Boundary Condition \\
+                    0D & Zero dimensional \\
+                    1D & One dimensional \\
+                    2D & Two dimensional \\
+                    3D & Three dimensional \\
+                    FSI & Fluid-Structure Interaction \\
+                    WHO & World-Health Organization \\
+                    SB & Stenotic Bloodflow \\
+                    bpm & beats per minute \\
+                \end{tabular}
+            \end{minipage}
+        \medskip
+
+        \subsection*{Parameters and Units}
+            \label{subsec:params}
+            \medskip
+            \begin{minipage}[t]{0.48\textwidth}
+                \begin{tabular}{@{}p{0.4\linewidth} p{1.8\linewidth}@{}}
+                    $\rho$ & density of blood  $\quad \big[ \frac{kg}{m^3} \big]$\\
+                    $\eta$ & dynamic viscosity $\quad \big[Pa \cdot s]$ \\
+                    $\mu$ & kinematic viscosity $\quad \big[ \frac{m^2}{s} \big]$\\
+                    $\tau$ & shear stress \\
+                    $\dot{\gamma}$ & shear rate \\
+                    $W_0$ & Wormsley number $\big[ - \big]$ \\
+                    $Re$ & Reynolds number $\big[ - \big]$ \\
+                    $Pe$ & Peclet number $\big[ - \big]$ \\
+                \end{tabular}
+            \end{minipage}
+        \medskip
+    \newpage
 
     % ------------------ SECTION: Introduction
     % -----------------------------------------------------------------
-    \section{Introduction}
+    \section{Physiological Introduction}
         \label{sec:introduction}
         \medskip
 
-        The circulatory system consits of a human's humans heart,
+        The circulatory system consists of a human's heart,
         vascular network, lungs and organs. The heart is the source,
         transporting Oxygen-rich blood to the organs and
         deoxygenated (and carbon dioxide enriched) blood back to the lungs;
-        to discharge $CO2$ and enrich blood with Oxygen. We refer to these
+        which discharge $CO2$ and enrich blood with Oxygen. We refer to these
         respective processes as the \emph{pulmonary circulation} and
         the \emph{systemic circulation} (resp.). The \emph{macrocirculatory
         system}, consists of the heart and the large vessels in the systemic circulation.
-        Particularly, the arteries and large vessels of the macrocirculatory system transport
-        oxygenated blood from the heart, driving the return of deoxygenated blood back to the heart.
-        Hemodynamics refers to the study of blood flow in the circulatory system.
+        Particularly, the arteries of the macrocirculatory system transport
+        oxygenated blood from the heart, driving the return of deoxygenated blood in
+        large vessels back to the heart. Hemodynamics refers to the study of blood flow in
+        the circulatory system.
 
         \medskip
 
@@ -55,21 +147,34 @@
         \medskip
 
         A single beat of the heart propels blood through the macrocirculatory system,
-        and the cardiac cycle refers to the events between two successive heartbeats.
-        The cardiac cycle consists of two main phases: systole and diastole, during which
-        the heart chamber is accumulating blood and releasing blood (resp.).
-        The beat can be recognized as a pulse wave in large vessels.
+        the "lub-dub" sound and the sequence of successive events until the next
+        heartbeat is referred to as the \emph{cardiac cycle}. The cardiac cycle consists of
+        two main phases: systole and diastole, during which the heart chamber is
+        accumulating blood and releasing blood (resp.). The beat can be recognized as a pulse
+        wave in large vessels, characterized by the Wormsley number $W_0$:
+        \[ 
+            W_0 := D \cdot \sqrt{\frac{\omega \rho}{\eta}},
+        \]
+        a dimensionless parameter comparing the frequency $\omega$
+        of the pulse wave to the blood viscosity $\eta$ and the vessel diameter $D$.
+        The Reynolds number $Re$ characterizes flow in blood vessels:
+        \[
+            Re := \frac{\rho U D}{\eta},
+        \]
+        where $U$ is the mean flow velocity. Low $Re$ indicates laminar flow,
+        while high $Re$ suggests turbulent flow. Note \autocite[Table~1.1, p.~10, §1.1]{MathematicalEngineering}
+        shows $W_0 \propto D$ and $Re \propto D^{-1}$; we
+        observe large pulses and turbulent flow in large vessels and small pulses
+        and laminar flow in small vessels.
 
         \medskip
-
-        We assume a normal resting heart rate of approximately 70 beats per minute (bpm),
-        which corresponds to a cardiac cycle duration of approximately 0.86 seconds.
-        We refer to a single beat of the heart, and the following relaxation period,
-        as the cardiac cycle. The cardiac cycle consists of two main phases:
+        
+        Assume a normal resting heart rate of $\omega = 70$ bpm,
+        so the duration of a cardiac cycle is approximately $0.86 s.$:
         \begin{itemize}
-            \item Systole  duration $\approx 0.15-0.3$ seconds. Heart contracts,
+            \item Systole duration $\approx 0.15-0.3$ seconds. Heart contracts,
             propelling blood into the arteries. The "lub-dub" sound derives from
-            the start and end of systole, when the heart valves close.
+            the start and end of systole, where heart valves open and close.
             \item Diastole duration $\approx 0.7$ seconds. Heart relaxes,
             allowing the chambers to fill with blood.
         \end{itemize}
@@ -78,76 +183,48 @@
         the flow comes from oxygen and nutrients absorbed from food, creating waste
         products that must be removed; the \emph{coronary artery}'s responsibility.
         The buildup of waste products results in Arteriosclerosis, a narrowing of
-        the artery.
-
+        the coronary artery, leading to reduced and turbulent blood flow. (Add citations
+        here of turbulence in the presence of stenotic arteries)
         \medskip
+
+    \newpage
+
+
+
+
+    \section{Navier Stokes System}
+        \label{subsec:intro-navier-stokes}
 
         Our concern is the flow of blood in the
         macrocirculatory system. We develop mathematical
-        models descibing the hemodynamics of arterial and
-        large venous segments, refered to as \emph{compliant vessels},
-        then we extend our models to macrocirculation networks.
+        models describing the hemodynamics of arterial and
+        large venous segments, then we extend our models to macrocirculation networks.
 
-    \newpage
+        In \textit{continuum mechanics}, matter is modeled by
+        \textit{continuous fields}. For instance, to model the
+        behavior of an \textit{incompressible} fluid in time,
+        one could use a \textbf{pressure field} and a \textbf{velocity field}.
+        At \textit{atomic scales}, this model breaks down—fluids
+        as fluids are discrete collections of molecules, not continuous
+        fields. However, at the macroscopic scale, one can hope that
+        such models remain accurate.
 
-
-    % ------------------ SECTION: Preliminaries
-    % -----------------------------------------------------------------
-    \section{Preliminaries}
-        \label{sec:preliminaries}
         \medskip
 
-        \subsection*{Mathematical Notation}
-            \label{subsec:notation}
+        \begin{equation}
+            \label{eq:ns}
+            \text{TODO: Add system}
+        \end{equation}
+
+
+        \subsubsection{NS-Sytem Derivation}
+            \label{subsubsec:deriving-ns}
+
+
+        \subsection{}
+            \label{subsec:1D-model}
             \medskip
-            \begin{itemize}
-                \item $\R$ denotes the set of real numbers.
-                \item $\R^n$ denotes $n$-dimensional Euclidean space.
-                \item $\R^{m \times n}$ denotes the set of $m
-                \times n$ real-valued matrices.
-                \item $\nabla$ denotes the gradient operator.
-                \item $\del$ denotes the Laplace operator.
-            \end{itemize}
-
-        \medskip
-
-        \subsection*{Symbols}
-            \label{subsec:symbols}
-        \medskip
-
-
-        \subsection{The Navier Stokes System}
-            \label{subsec:intro-navier-stokes}
-
-            In \textit{continuum mechanics}, matter is modeled by
-            \textit{continuous fields}. For instance, to model the
-            behavior of an \textit{incompressible} fluid in time,
-            one could use a \textbf{pressure field} and a \textbf{velocity field}.
-            At \textit{atomic scales}, this model breaks down—fluids
-            as fluids are discrete collections of molecules, not continuous
-            fields. However, at the macroscopic scale, one can hope that
-            such models remain accurate.
-
-            \medskip
-
-            \begin{equation}
-                \label{eq:ns}
-                \text{TODO: Add system}
-            \end{equation}
-
-
-            \subsubsection{NS-Sytem Derivation}
-                \label{subsubsec:deriving-ns}
-
-
-            \subsection{}
-                \label{subsec:1D-model}
-                
-
     \newpage
-
-
-
 
     % ------------------ SECTION: Coronary Artery Stenosis (CAS)
     % -----------------------------------------------------------------
