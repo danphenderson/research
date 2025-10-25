@@ -1,7 +1,7 @@
 # xde/mesh/base.py
 
 from abc import ABC, abstractmethod
-from typing import Any, Sequence, Optional
+from typing import Any, Optional, Sequence
 
 Array = Any
 

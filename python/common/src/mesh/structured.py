@@ -11,11 +11,8 @@ NOTE: 3‑D can be added analogously.
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 import numpy as np
-
 from src.mesh.base import (  # type: ignore  # imported for protocol compliance
-    Array,
-    Mesh,
-)
+    Array, Mesh)
 
 
 class _StructuredMeshBase(Mesh):

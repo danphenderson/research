@@ -1,0 +1,368 @@
+\documentclass[10pt]{article}
+
+\input{preamble.tex}
+
+
+% ----------------- Document TITLE
+\title{Modeling Blood Flow in Stenotic Arteries}
+\author{Daniel Henderson}
+\date{\today}
+
+
+
+% ------------------ DOCUMENT START
+% -----------------------------------------------------------------
+% ------------------
+\begin{document}
+\maketitle
+
+
+% ------------------ COVER PAGE
+% -----------------------------------------------------------------
+% ------------------
+
+\noindent Collection of notes pertaining to modeling blood flow in
+stenotic arteries. This document is a work in progress, and will be
+updated as new information is learned.
+
+
+\tableofcontents \newpage
+
+
+
+% ------------------ SECTION: INTRODUCTION
+% -----------------------------------------------------------------
+% ------------------
+\section{Introduction}
+    \label{sec:intro}
+
+    \medskip
+
+    Current methods for predicting coronary artery stenosis are
+    rudimentary; and often prediction does mean coronary artery stenosis
+    obstruction. (\hyperlink{https://watermark.silverchair.com/ehab332.pdf}{ref})
+
+    \bigskip
+
+    \td{Are we merely intrested in predicting an obstruction, or, are we interested
+    in predicting the risk associated with the obstruction? TODO: continue to define research
+    problem(s) of interest. }
+
+    \bigskip
+
+    We perform a literature survey of arterial blood flow using known
+    methods from the literature, with the hope of understanding the
+    computational challenges and tradeoffs of various \emph{mathematical models}.
+
+    \bigskip
+
+    The human cardiovascular system supplys the human organs
+    with blood, also known as the circulatory system. We study various
+    mathematical models describing the dynamics of the circularty
+    system. The principal quantities of our models are the bloods velocity $\vct{u}$
+    and pressure $\vct{p}$, and throughout it will be assumed that we are modeling a segment
+    of the circulatory sytem restrict corresponding to an arterial region.
+    Knowing the pressure and velocity for a portion of time allows us to compute stresses to
+    which an arterial wall is subjected to due to the blood movement.
+
+    Note, our arterial boundary $\partial \Omega$ is a surface in $\R^3$
+    that evolves in time which we refer to as the interface.
+    Note, an explicit representation of $\partial \Omega$ maps $(t, \theta, r, \theta, z)
+    \mapsto (x, y, z)$. At times, it may be advantagoues to consider
+    $\partial \Omega$ as an implicit interface, where the isocontors of our boundary
+    represent the interface... \todo{This is a bit weird, look into the cylindrical coordinates
+    implicit dynamical surface representations of our arterory}.
+
+    The region enclosed our interface is $\Omega$, and we aim to model the
+    velocity and pressure fields on $\Omega$; which also is evolving in time.
+
+
+    \todo{
+        Make some comment about "correct terminology for describing the
+        types of coronary arterial stenosis is "coronary artery stenosis morphology." and ref
+        figures in DOI: 10.1056
+    }
+
+    \todo{
+        Understand Dr. Zhou's statement: Regarding the assumption about the absence
+        of a vortex, I cannot definitively say whether it is correct or not. Please review
+        the references provided. If needed, we can discuss this further with interventional
+        cardiologists.
+    }
+
+
+
+In \textit{continuum mechanics}, matter is modeled by \textit{continuous fields}.
+For instance, to model the behavior of an \textit{incompressible} fluid in time, one could use a \textbf{pressure field}:
+
+\[
+p: \mathbb{R} \times \mathbb{R}^3 \to \mathbb{R}, \quad (t, x) \mapsto p(t, x)
+\]
+
+and a \textbf{velocity field}:
+
+\[
+\mathbf{u}: \mathbb{R} \times \mathbb{R}^3 \to \mathbb{R}^3, \quad (t, x) \mapsto \mathbf{u}(t, x)
+\]
+
+\[
+\mathbf{u}(t, x) = (u_1(t, x), u_2(t, x), u_3(t, x))
+\]
+
+At \textit{atomic scales}, this model breaks down—fluids are discrete collections of molecules, not continuous fields. However, one can hope that such models remain accurate at macroscopic scales.
+
+
+% ------------------ SECTION: INTRODUCTION
+% -----------------------------------------------------------------
+% ------------------
+\section{Preliminaries}
+    \label{sec:preliminaries}
+    \medskip
+    % ------------------ Subsection: Navier-Stokes Equations
+
+
+\subsection{The Navier-Stokes Equations}
+    \label{sec:preliminaries}
+
+    \medskip
+
+The fundamental mathematical model for incompressible fluids (e.g., water) is the \textbf{viscous incompressible Navier-Stokes equations} (NS):
+
+\[
+\begin{cases}
+    \frac{\partial}{\partial t} \mathbf{u} + (\mathbf{u} \cdot \nabla) \mathbf{u} = \nu \Delta \mathbf{u} - \nabla p, & \text{(Momentum equation: Newton's law } F = ma\text{)} \\
+    \nabla \cdot \mathbf{u} = 0, & \text{(Incompressibility condition)} \\
+    \mathbf{u}(0, x) = \mathbf{u}_0(x), & \text{(Initial conditions)}
+\end{cases}
+\]
+
+where \( \nu > 0 \) is the \textit{viscosity} of the fluid (the limiting case \( \nu = 0 \) corresponds to the \textit{Euler equations}).
+
+The initial velocity field is given by:
+
+\[
+\mathbf{u}_0 : \mathbb{R}^3 \to \mathbb{R}^3, \quad \nabla \cdot \mathbf{u}_0 = 0.
+\]
+
+\section*{Global Regularity Problem}
+
+Given smooth, spatially localized initial data
+
+\[
+\mathbf{u}_0 : \mathbb{R}^3 \to \mathbb{R}^3,
+\]
+
+do there exist smooth solutions
+
+\[
+\mathbf{u} : [0, +\infty) \times \mathbb{R}^3 \to \mathbb{R}^3, \quad p : [0, +\infty) \times \mathbb{R}^3 \to \mathbb{R}
+\]
+
+to the Navier-Stokes equations?
+
+\section*{Local Existence Theorem}
+
+For any smooth, spatially localized initial data \( \mathbf{u}_0 \), there exists a \textbf{maximal time of existence} \( 0 < T_* \leq +\infty \) and a solution.
+
+If \( T_* \neq +\infty \), then \textbf{blowup} occurs in the sense that
+
+\[
+\sup_{x \in \mathbb{R}^3} |\mathbf{u}(t, x)| \to +\infty \quad \text{as} \quad t \to T_*.
+\]
+
+If \( T_* = +\infty \), no blowup occurs, and \( |\mathbf{u}| \to 0 \) as \( t \to +\infty \).
+
+\section*{Turbulence and Regularity}
+
+Numerical simulations suggest that global regularity is generally \textbf{true}—for \textit{most} choices of initial data \( \mathbf{u}_0 \), one has a global smooth solution to (NS).
+
+However, for large initial data, turbulence can occur. Energy moves from coarse to fine scales in a complex way before dissipating due to viscous effects.
+
+\section*{Dimensional Analysis}
+
+The Navier-Stokes equation consists of a balance between:
+
+\begin{itemize}
+    \item The \textbf{transport term}: \( \mathbf{u} \cdot \nabla \mathbf{u} \)
+    \item The \textbf{dissipation term}: \( \nu \Delta \mathbf{u} \)
+\end{itemize}
+
+Heuristically, if \( \nu \Delta \mathbf{u} \gg (\mathbf{u} \cdot \nabla) \mathbf{u} \), one expects linear, non-turbulent behavior (\textit{global regularity}).
+
+If \( (\mathbf{u} \cdot \nabla) \mathbf{u} \gg \nu \Delta \mathbf{u} \), one expects \textbf{nonlinear turbulence} (and possibly \textbf{blowup}).
+
+\section*{Kinetic Energy Considerations}
+
+The kinetic energy is given by:
+
+\[
+E(t) = \frac{1}{2} \int_{\mathbb{R}^3} |\mathbf{u}(t, x)|^2 \, dx.
+\]
+
+This quantity is \textit{decreasing in time} due to dissipation. Heuristically:
+
+\[
+E(t) \gtrsim V^2 L^3.
+\]
+
+This leads to a bound:
+
+\[
+V = O(L^{-3/2}).
+\]
+
+\section*{Blowup Scenarios}
+
+This suggests a \textbf{possible blowup scenario}. If the velocity field concentrates in a ball of radius \( L_1 \), we estimate:
+
+\[
+|\mathbf{u}| \approx L_1^{-3/2}.
+\]
+
+At a later time \( t_2 \), the energy has concentrated further into a ball of radius \( L_2 = L_1 / 2 \), so:
+
+\[
+|\mathbf{u}| \approx L_2^{-3/2}.
+\]
+
+This leads to \textbf{potential infinite velocity} at a single spatial point:
+
+\[
+\sum_{n} L_n^{r_2} < \infty.
+\]
+
+At each stage, the dissipative forces are negligible compared to the transport effects. This results in an approximately self-similar solution.
+
+\textbf{Perfectly self-similar solutions are known to not exist for Navier-Stokes.}
+
+\section*{Final Question}
+
+\textbf{But can one actually \underline{construct} such an approximately self-similar solution?}
+
+Thanks to Tarrance Tao for the wonderful lecture.
+
+
+
+
+
+
+
+
+
+% ------------------ SECTION: Literature Review
+% -----------------------------------------------------------------
+% ------------------
+\newpage
+\section{Literature Review}
+    \label{sec:litreview}
+    \bigskip
+
+
+    % ------------------ Article 1
+    \subsection{Review of Modeling Blood Flow in Human Circulatory System}
+    \label{sec:article-1}
+
+
+
+    We start by simulating a cut region, i.e., an arterial segment. We perform numerical simulations
+    of various models to understand the following:
+    \begin{center}
+        Suppose there are $n$ stenotic regions within our arterial segment and $j$ regions are determined
+        to be high risk. Standard protocol suggests to remove the $j$ regions regions; but in what order? Also,
+        how are the blood flow dynamics effected at each step of cardiologists intervention. Additionally,
+        consider the first step of intervention, which region should be focused on first? How does the removal
+        of the first stenotic region effect the remaining $n - 1$ regions (it may release debry to only get blocked
+        in a later region). What is the best by-pass configuration?
+    \end{center}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    \newpage
+    % ------------------ Article 2
+    \subsection{Extended 1d model for blood flow within a stenotic artery}
+    \label{sec:article-1}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% ------------------ SECTION: Appendix
+% -----------------------------------------------------------------
+% ------------------
+\newpage
+\section{Apendix}
+    \label{sec:appendix}
+    \medskip
+
+
+    % ------------------ BIBLIOGRAPHY
+    \subsection*{References}
+    \label{sec:bibliography}
+    \medskip
+
+    \bibliographystyle{plain}
+    \bibliography{../references.bib}
+
+    % ------------------- Code Listings
+    \subsection*{Code Listings}
+
+    \td{Optional Space for sumplementary code listings of computations done while investigating}
+
+    \lstset{language=julia}
+    \begin{lstlisting}[language=julia, caption={Algorithm 16.5}, label={lst:problem-sampling}]
+    function foo()
+        println("Hello World)
+    end
+    \end{lstlisting}
+
+
+
+\end{document}

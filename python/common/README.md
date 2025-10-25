@@ -129,3 +129,81 @@ The design of the library is guided by several software design patterns and prin
 -   **Facade**: The Solver class itself is a facade that provides a simple solve() method. It delegates to lower-level subsystems (mesh, operator, linear algebra) while hiding their complexity.
 -   **Composition over Inheritance**: While we use inheritance (e.g., base classes for time steppers or operators), much reuse is achieved by composing objects rather than deep class hierarchies.
 -   **SOLID Principles**: The library design adheres to SOLID for maintainability. Classes have single responsibilities (e.g., mesh only handles geometry, BC classes only apply conditions). Code is open for extension but closed for modification: new solver methods or BC types can be added without changing existing code. Interfaces are kept minimal (Interface Segregation): for instance, the Mesh interface only includes necessary queries, so clients aren’t forced to depend on unused methods. We also invert dependencies by programming to interfaces (abstract classes or types) rather than concrete classes.
+
+
+```mermaid
+classDiagram
+    class ArrayBackend {
+        <<protocol>>
+        +array();
+        +zeros();
+        +ones();
+        +dot();
+        +norm();
+    }
+
+    class LinearOperator {
+        <<protocol>>
+        +matvec(x): Array
+        +rmatvec(x): Array
+        +shape
+    }
+
+    class Mesh {
+        <<abstract>>
+        +dimension
+        +entities(tags)
+        +coordinates()
+        +connectivity()
+    }
+    Mesh <|-- Structured
+    Mesh <|-- Unstructured
+
+    class FunctionSpace {
+        +mesh: Mesh
+        +basis +quad
+        +dofmap
+    }
+
+    class Field {
+        +space: FunctionSpace
+        +values: Array
+        +project()
+        +interpolate()
+    }
+
+    class BCTag {
+        region,
+        component,
+        kind,
+        data
+    }
+    class BoundaryConditionSet {
+        +tags: BCTag[]
+    }
+
+    class Assembler {+residual(u,t): Array +jacobian(u,t): LinearOperator +mass(u,t): LinearOperator|None}
+    Assembler --> Mesh
+    Assembler --> FunctionSpace
+    Assembler --> BoundaryConditionSet
+    Assembler --> ArrayBackend
+
+    class Problem {<<protocol>> +residual(u,t) +mass(u,t) +jacobian(u,t)}
+    Problem <.. Assembler
+
+    class Stepper {
+        <<protocol>>
+        +step(problem,u,t,dt)
+    }
+
+    class Solver {
+        +problem: Problem
+        +time_step: Stepper
+        +space_update: Unknown
+    }
+    Solver --> Problem
+    Problem --> ArrayBackend
+    Solver --> Stepper
+    Solver --> DS
+
+```
