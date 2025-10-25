@@ -1,0 +1,59 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global/global}
+    \entry{ehab332}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=2d2dd6e05d59effb4f5ac937ad6080d8}{%
+           family={here},
+           familyi={h\bibinitperiod},
+           given={Add},
+           giveni={A\bibinitperiod},
+           prefix={authors},
+           prefixi={a\bibinitperiod}}}%
+      }
+      \strng{namehash}{2d2dd6e05d59effb4f5ac937ad6080d8}
+      \strng{fullhash}{2d2dd6e05d59effb4f5ac937ad6080d8}
+      \strng{fullhashraw}{2d2dd6e05d59effb4f5ac937ad6080d8}
+      \strng{bibnamehash}{2d2dd6e05d59effb4f5ac937ad6080d8}
+      \strng{authorbibnamehash}{2d2dd6e05d59effb4f5ac937ad6080d8}
+      \strng{authornamehash}{2d2dd6e05d59effb4f5ac937ad6080d8}
+      \strng{authorfullhash}{2d2dd6e05d59effb4f5ac937ad6080d8}
+      \strng{authorfullhashraw}{2d2dd6e05d59effb4f5ac937ad6080d8}
+      \field{sortinit}{h}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{European Heart Journal}
+      \field{title}{Add exact title here}
+      \field{year}{2021}
+      \verb{doi}
+      \verb 10.1093/eurheartj/ehab332
+      \endverb
+      \verb{urlraw}
+      \verb https://watermark.silverchair.com/ehab332.pdf
+      \endverb
+      \verb{url}
+      \verb https://watermark.silverchair.com/ehab332.pdf
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
