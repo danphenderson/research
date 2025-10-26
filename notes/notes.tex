@@ -43,6 +43,7 @@
                     $ \partial \Omega$                & the boundary of $\Omega$ \\
                     $ dx $                            & Lebesgue measure on $\R^{n}$ \\
                     $ dS $                            & surface measure on $\partial \Omega$ \\
+                    $ dV $                            & volume measure on $\Omega$ \\
                     $ \nabla $                        & gradient operator \\
                     $ \del $                          & Laplace operator \\
                     $ \Div $                          & divergence of a vector field \\
@@ -55,7 +56,7 @@
                     $C^{k}(\Omega)$                   & space of $k$ times continuously differentiable functions on $\Omega$ \\
                     $C^{k}_{0}(\Omega)$               & space of $k$ times continuously differentiable functions with compact support in $\Omega$ \\
                     $C^{k}_{0}(\overline{\Omega})$    & space of $k$ times continuously differentiable functions which have bounded and uniformly
-                                                    continuous derivatives up to order $k$ with compact support in $\Omega$ \\
+                                                        continuous derivatives up to order $k$ with compact support in $\Omega$ \\
                     $C^{\infty}_{0}(\Omega)$          & space of smooth functions with compact support in $\Omega$ \\
                     $L^{p}(\Omega)$                   & Lebesgue space of $p$-integrable functions on $\Omega$ \\
                 \end{tabular}
@@ -116,119 +117,274 @@
 
     % ------------------ SECTION: Introduction
     % -----------------------------------------------------------------
-    \section{Physiological Introduction}
+    \section{Introduction}
         \label{sec:introduction}
         \medskip
 
-        The circulatory system consists of a human's heart,
-        vascular network, lungs and organs. The heart is the source,
-        transporting Oxygen-rich blood to the organs and
-        deoxygenated (and carbon dioxide enriched) blood back to the lungs;
-        which discharge $CO2$ and enrich blood with Oxygen. We refer to these
-        respective processes as the \emph{pulmonary circulation} and
-        the \emph{systemic circulation} (resp.). The \emph{macrocirculatory
-        system}, consists of the heart and the large vessels in the systemic circulation.
-        Particularly, the arteries of the macrocirculatory system transport
-        oxygenated blood from the heart, driving the return of deoxygenated blood in
-        large vessels back to the heart. Hemodynamics refers to the study of blood flow in
-        the circulatory system.
+        \subsection{Physiological Background}
+            \label{subsec:physio-background}
 
-        \medskip
+            The circulatory system consists of a human's heart,
+            vascular network, lungs and organs. The heart is the source,
+            transporting Oxygen-rich blood to the organs and
+            deoxygenated (and carbon dioxide enriched) blood back to the lungs;
+            which discharge $CO2$ and enrich blood with Oxygen. We refer to these
+            respective processes as the \emph{pulmonary circulation} and
+            the \emph{systemic circulation} (resp.). The \emph{macrocirculatory
+            system}, consists of the heart and the large vessels in the systemic circulation.
+            Particularly, the arteries of the macrocirculatory system transport
+            oxygenated blood from the heart, driving the return of deoxygenated blood in
+            large vessels back to the heart. Hemodynamics refers to the study of blood flow in
+            the circulatory system.
 
-        Cardiovascular disease (CVD) is the leading cause of death in developed nations.
-        According to the World Health Organization (WHO), CVD accounts for approximately
-        31\% of all global deaths, making it a significant public health concern.
-        Understanding the hemodynamics of the macrocirculatory system is crucial for
-        diagnosing, treating, and preventing CVD. We aim to develop mathematical models
-        that accurately describe blood flow in the macrocirculatory system. Our motivation
-        is to use these models to simulate and analyze various cardiovascular conditions,
-        such as arterial stenosis, aneurysms, and heart valve disorders.
-
-        \medskip
-
-        A single beat of the heart propels blood through the macrocirculatory system,
-        the "lub-dub" sound and the sequence of successive events until the next
-        heartbeat is referred to as the \emph{cardiac cycle}. The cardiac cycle consists of
-        two main phases: systole and diastole, during which the heart chamber is
-        accumulating blood and releasing blood (resp.). The beat can be recognized as a pulse
-        wave in large vessels, characterized by the Wormsley number $W_0$:
-        \[ 
-            W_0 := D \cdot \sqrt{\frac{\omega \rho}{\eta}},
-        \]
-        a dimensionless parameter comparing the frequency $\omega$
-        of the pulse wave to the blood viscosity $\eta$ and the vessel diameter $D$.
-        The Reynolds number $Re$ characterizes flow in blood vessels:
-        \[
-            Re := \frac{\rho U D}{\eta},
-        \]
-        where $U$ is the mean flow velocity. Low $Re$ indicates laminar flow,
-        while high $Re$ suggests turbulent flow. Note \autocite[Table~1.1, p.~10, §1.1]{MathematicalEngineering}
-        shows $W_0 \propto D$ and $Re \propto D^{-1}$; we
-        observe large pulses and turbulent flow in large vessels and small pulses
-        and laminar flow in small vessels.
-
-        \medskip
-        
-        Assume a normal resting heart rate of $\omega = 70$ bpm,
-        so the duration of a cardiac cycle is approximately $0.86 s.$:
-        \begin{itemize}
-            \item Systole duration $\approx 0.15-0.3$ seconds. Heart contracts,
-            propelling blood into the arteries. The "lub-dub" sound derives from
-            the start and end of systole, where heart valves open and close.
-            \item Diastole duration $\approx 0.7$ seconds. Heart relaxes,
-            allowing the chambers to fill with blood.
-        \end{itemize}
-        The blood volume of human is approximately 5.7-6.0 liters of blood,
-        flowing a full cycle approximately every 70 beats. The energy driving
-        the flow comes from oxygen and nutrients absorbed from food, creating waste
-        products that must be removed; the \emph{coronary artery}'s responsibility.
-        The buildup of waste products results in Arteriosclerosis, a narrowing of
-        the coronary artery, leading to reduced and turbulent blood flow. (Add citations
-        here of turbulence in the presence of stenotic arteries)
-        \medskip
-
-    \newpage
-
-
-
-
-    \section{Navier Stokes System}
-        \label{subsec:intro-navier-stokes}
-
-        Our concern is the flow of blood in the
-        macrocirculatory system. We develop mathematical
-        models describing the hemodynamics of arterial and
-        large venous segments, then we extend our models to macrocirculation networks.
-
-        In \textit{continuum mechanics}, matter is modeled by
-        \textit{continuous fields}. For instance, to model the
-        behavior of an \textit{incompressible} fluid in time,
-        one could use a \textbf{pressure field} and a \textbf{velocity field}.
-        At \textit{atomic scales}, this model breaks down—fluids
-        as fluids are discrete collections of molecules, not continuous
-        fields. However, at the macroscopic scale, one can hope that
-        such models remain accurate.
-
-        \medskip
-
-        \begin{equation}
-            \label{eq:ns}
-            \text{TODO: Add system}
-        \end{equation}
-
-
-        \subsubsection{NS-Sytem Derivation}
-            \label{subsubsec:deriving-ns}
-
-
-        \subsection{}
-            \label{subsec:1D-model}
             \medskip
+
+            Cardiovascular disease (CVD) is the leading cause of death in developed nations.
+            According to the World Health Organization (WHO), CVD accounts for approximately
+            30\% of all global deaths in 2012. Understanding the hemodynamics of the macrocirculatory system is crucial for
+            diagnosing, treating, and preventing CVD. We aim to develop mathematical models
+            that accurately describe blood flow in the macrocirculatory system. Our motivation
+            is to use these models to simulate and analyze various cardiovascular conditions,
+            such as arterial stenosis, aneurysms, and heart valve disorders.
+
+            \medskip
+
+            A single beat of the heart propels blood through the macrocirculatory system,
+            the "lub-dub" sound. We refer to the beat and the sequence of events until the
+            successive beat as the \emph{cardiac cycle}. The cardiac cycle consists of
+            two main phases: systole and diastole, during which the heart chamber is
+            accumulating blood and releasing blood (resp.). The beat can be recognized as a pulse
+            wave in large vessels, characterized by the Wormsley number $W_0$:
+            \[ 
+                W_0 := D \cdot \sqrt{\frac{\omega \rho}{\eta}},
+            \]
+            a dimensionless parameter comparing the frequency $\omega$
+            of the pulse wave to the blood viscosity $\eta$ and the vessel diameter $D$.
+            The Reynolds number $Re$ characterizes flow in blood vessels:
+            \[
+                Re := \frac{\rho U D}{\eta},
+            \]
+            where $U$ is the mean flow velocity. Low $Re$ indicates laminar flow,
+            while high $Re$ suggests turbulent flow. 
+
+            \medskip
+
+            \subsubsection*{Observed Cardiac Cycle Characteristics}
+            Normal resting heart rate is considered to be $\omega = 70$ bpm,
+            so the cardiac cycle is approximately $0.86 s.$, consisting of:\\
+            1. Systole (ventricular contraction) $\approx 0.3$ seconds.\\
+            2. Diastole (ventricular relaxation) $\approx 0.7$ seconds.
+
+            \medskip
+
+            The blood volume of human is approximately 5.7-6.0 liters of blood,
+            flowing a full cycle approximately every minute. The energy driving
+            the flow comes from oxygen and nutrients absorbed from food, creating waste
+            products that must be removed; the \emph{coronary artery}'s responsibility.
+            The buildup of waste products results in Arteriosclerosis, a narrowing of
+            the coronary artery, leading to reduced and turbulent blood flow. (Add citations
+            here of turbulence in the presence of stenotic arteries)
+
+            \medskip
+
+            Note \autocite[Table~1.1, p.~10, §1.1]{MathematicalEngineering}
+            shows $W_0 \propto D$ and $Re \propto D^{-1}$; we
+            observe large pulses and turbulent flow in large vessels and small pulses
+            and laminar flow in small vessels.
+            
+            \medskip
+
+
+            \subsubsection*{Properties of Blood}
+                Blood consists of plasma and cells. The red blood cells
+                comprise $\approx 97\%$ of the cell volume, which is $\approx 45\%$
+                of blood volume. The remaining blood volume, plasma, is $\approx 90\%$
+                water. The ratio of red blood cells and the total blood volume is called the \emph{hematocrit
+                value}, a metric describing the influence of red blood cells on the flow.
+                \begin{definition}
+                    \label{def:newt-fluid}
+                    Let $V$ be a fluid volume $V$ with viscosity $\eta = \frac{\tau}{\dot{\gamma}} \equiv$ const.,
+                    where \emph{shear stress} $\tau := \frac{F}{A}$ (s.t. $F$ is parallel to it's surface $S$ with area $A$)
+                    and \emph{shear rate} $\dot{\gamma}$. Such fluids are \emph{Newtonian fluids}.
+                \end{definition}
+                A shear stress $\tau$ deforms $V$ by an angle $\gamma ~\implies ~\dot{\gamma}$ is 
+                an angular velocity (const. for Newtonian fluids).
+                Our models assume blood is Newtonian. We use a 
+                relative viscosity $\eta_r$, which depends on the absolute 
+                viscosity $\eta$, scaled vessel diameter $D : = D/(1.0 \mu m)$, and
+                hematocrit value $H$. In particular, an empirical model from \cite{bviscosity} gives:
+                \begin{equation}
+                    \label{relative_viscosity}
+                    \eta_r = 1 + (\eta_{0.45} - 1) \frac{(1 - H)^C - 1}{(1 - 0.45)^C - 1} ~ : ~ \begin{cases*}
+                        \eta_{0.45} = 6 e^{-0.085 D} + 3.2 - 2.44 e^{-0.06 D^{0.645}} \\
+                        C = (0.8 + e^{-0.075 D}) \cdot (-1 + \frac{1}{1 + 10^{-11} D^{12}}) + \frac{1}{1 + 10^{-11} D^{12}} \quad
+                    \end{cases*}.
+                \end{equation}
+                In large vessels, $\eta_r$ is observed constant ($\implies$ Newtonian behavior).
+                
+                \medskip 
+
+                Our concern is the flow of blood in the
+                macrocirculatory system. We develop mathematical
+                models describing the hemodynamics of arterial and
+                large venous segments, then we extend our models to macrocirculation networks
+                using a domain decomposition approach.
+            \medskip
+
+        \newpage
+
+        \subsection{Navier Stokes System}
+            \label{subsec:intro-navier-stokes}
+
+            In \textit{continuum mechanics}, matter is modeled by
+            \textit{continuous fields}. For instance, to model the
+            behavior of an \textit{incompressible} fluid in time,
+            one could use a \textbf{pressure field} and a \textbf{velocity field}.
+            At \textit{atomic scales}, this model breaks down—fluids
+            as fluids are discrete collections of molecules, not continuous
+            fields. However, at the macroscopic scale, one can hope that
+            such models remain accurate.
+            
+            The fundamental mathematical model for incompressible fluids (e.g., water) is the \textbf{viscous incompressible Navier-Stokes equations} (NS):
+
+            \[
+            \begin{cases}
+                \frac{\partial}{\partial t} \mathbf{u} + (\mathbf{u} \cdot \nabla) \mathbf{u} = \nu \Delta \mathbf{u} - \nabla p, & \text{(Momentum equation: Newton's law } F = ma\text{)} \\
+                \nabla \cdot \mathbf{u} = 0, & \text{(Incompressibility condition)} \\
+                \mathbf{u}(0, x) = \mathbf{u}_0(x), & \text{(Initial conditions)}
+            \end{cases}
+            \]
+
+            where $ \mathbf{u} : [0, +\infty) \times \mathbb{R}^3 \to \mathbb{R}^3 $ is the velocity field and
+            $ p : [0, +\infty) \times \mathbb{R}^3 \to \mathbb{R} $ is the pressure field.
+            The initial velocity field is given by:
+            
+            \[
+                \mathbf{u}_0 : \mathbb{R}^3 \to \mathbb{R}^3, \quad \nabla \cdot \mathbf{u}_0 = 0.
+            \]
+            
+            The \emph{global regularity problem} for (NS) asks:
+            \begin{center}
+                \textit{For any smooth, spatially localized initial data $ \mathbf{u}_0 $, 
+                does there exist a global smooth solution $ (\mathbf{u}, p) $ to (NS)?}
+            \end{center}
+            This problem is one of the seven Millennium Prize Problems posed 
+            by the Clay Mathematics Institute in 2000, with a prize of one million 
+            dollars for a correct solution.
+
+            It is known that (NS) has a \emph{local existence and uniqueness theorem}:
+
+            \begin{theorem}
+                For any smooth, spatially localized initial data $ \mathbf{u}_0 $, 
+                there exists a \textbf{maximal time of existence} $ 0 < T_* \leq +\infty $
+                and a solution.
+            \end{theorem}
+
+            If $ T_* \neq +\infty $, then \textbf{blowup} occurs in the sense that
+
+            \[
+                \sup_{x \in \mathbb{R}^3} |\mathbf{u}(t, x)| \to +\infty \quad \text{as} \quad t \to T_*.
+            \]
+
+            If $ T_* = +\infty $, no blowup occurs, and $ |\mathbf{u}| \to 0 $ as $ t \to +\infty $.
+
+            Numerical simulations suggest that global regularity is generally 
+            \textbf{true}—for \textit{most} choices of initial data $ \mathbf{u}_0 $, 
+            one has a global smooth solution to (NS).
+
+            However, for large initial data, turbulence can occur. Energy moves from 
+            coarse to fine scales in a complex way before dissipating due to viscous effects.
+            The NS equations contain two competing effects:
+
+            \begin{itemize}
+                \item The \textbf{transport term}: $ \mathbf{u} \cdot \nabla \mathbf{u} $
+                \item The \textbf{dissipation term}: $ \nu \Delta \mathbf{u} $
+            \end{itemize}
+
+
+            Heuristically, if $ \nu \Delta \mathbf{u} \gg (\mathbf{u} \cdot \nabla) \mathbf{u} $, one expects linear, non-turbulent behavior (\textit{global regularity}).
+            If \( (\mathbf{u} \cdot \nabla) \mathbf{u} \gg \nu \Delta \mathbf{u} \), one expects \textbf{nonlinear turbulence} (and possibly \textbf{blowup}).
+
+            \subsubsection*{Kinetic Energy Considerations}
+
+                The kinetic energy is given by:
+
+                \[
+                E(t) = \frac{1}{2} \int_{\mathbb{R}^3} |\mathbf{u}(t, x)|^2 \, dx.
+                \]
+
+                This quantity is \textit{decreasing in time} due to dissipation. Heuristically:
+
+                \[
+                E(t) \gtrsim V^2 L^3.
+                \]
+
+                This leads to a bound:
+
+                \[
+                    V = O(L^{-3/2}).
+                \]
+            \medskip
+
+            \subsubsection*{Blowup Scenarios}
+
+                This suggests a \textbf{possible blowup scenario}. If the velocity field concentrates in a ball of radius $ L_1 $, we estimate:
+
+                \[
+                    |\mathbf{u}| \approx L_1^{-3/2}.
+                \]
+
+                At a later time $ t_2 $, the energy has concentrated further into a ball of radius $ L_2 = L_1 / 2 $, so:
+
+                \[
+                    |\mathbf{u}| \approx L_2^{-3/2}.
+                \]
+
+                This leads to \textbf{potential infinite velocity} at a single spatial point:
+
+                \[
+                    \sum_{n} L_n^{r_2} < \infty.
+                \]
+
+                At each stage, the dissipative forces are negligible compared to the transport effects. This results in an approximately self-similar solution.
+            \medskip
+        \medskip
     \newpage
+
+    \section{Mathematical Models of Blood Flow}
+        \label{sec:math-models}
+        \medskip
+
+        Mathematical models of blood flow in the macrocirculatory system
+        can be classified into different categories based on their dimensionality
+        and complexity. The choice of model depends on the specific application,
+        computational resources, and desired accuracy.
+
+        \bigskip
+
+    
+
+    \section{Numerical Methods for Blood Flow Simulation}
+        \label{sec:num-methods}
+        \medskip
+
+        Numerical methods play a crucial role in simulating blood flow in various vascular geometries.
+        These methods allow for the approximation of complex fluid dynamics equations and enable the study of
+        hemodynamics in realistic scenarios.
+
+        \bigskip
+
+        \todo{
+            Provide an overview of the different numerical methods used for blood flow simulation,
+            including finite element methods (FEM), finite volume methods (FVM), and computational fluid dynamics (CFD) approaches.
+            Discuss the advantages and limitations of each method.
+        }
+
+
 
     % ------------------ SECTION: Coronary Artery Stenosis (CAS)
     % -----------------------------------------------------------------
-    \section{Coronary Artery Stenosis (CAS)}
+    \section{Misc}
         \label{sec:cas}
 
         Coronary artery stenosis (CAS) is the narrowing of the
@@ -271,14 +427,6 @@
             the references provided. If needed, we can discuss this further with interventional
             cardiologists.
         }
-        \bigskip
-
-
-    % ------------------ SECTION: Literature Review
-    % -----------------------------------------------------------------
-    \newpage
-    \section{Literature Review}
-        \label{sec:lit}
         \bigskip
 
 
