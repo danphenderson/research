@@ -21,9 +21,22 @@
     % ------------------ COVER PAGE
     % -----------------------------------------------------------------
     \noindent Notes pertaining to mathematical models of blood flow in
-    the macrocirculatory system.
+    the macrocirculatory system. We aim to develop mathematical
+    models describing the hemodynamics of arterial and
+    large venous segments, then we extend our models to macrocirculation networks
+    using a domain decomposition approach.
 
-    \medskip \tableofcontents \medskip
+    \medskip
+
+    \textbf{Keywords:} \textit{computational hemodynamics, 0D blood-flow, 1D blood-flow, 2D-blood-flow, PINN's,
+    finite element methods, discontinous galerkin, Lax-Wendroff, fluid-structure ineraction (FSI)}
+
+    \medskip
+
+    \tableofcontents
+
+    \medskip
+
     \newpage
 
     % ------------------ SECTION: Preliminaries
@@ -62,21 +75,21 @@
                 \end{tabular}
             \end{minipage}\hfill
         \newpage
-        
+
         \subsection*{Symbols and Abbreviations}
             \label{subsec:symbols}
             \medskip
             \begin{minipage}[t]{0.48\textwidth}
                 \begin{tabular}{@{}p{0.4\linewidth} p{1.8\linewidth}@{}}
                     $\therefore$ & consequently\\
-                    $\because$ & because\\ 
+                    $\because$ & because\\
                     $\implies$ & implies \\
                     $\iff$ & if and only if \\
                     $:=$ & defines\\
                     $\equiv$ & equivalent \\
                     s.t. & such that \\
                     w.r.t. & with respect to\\
-                    r.t.a. & referred to as \\
+                    m.b.s. & m.b.s.\\
                     a.e. & almost everywhere\\
                     wlog & without loss of generality \\
                     i.e. & "id est" (that means) \\
@@ -107,9 +120,9 @@
                     $\mu$ & kinematic viscosity $\quad \big[ \frac{m^2}{s} \big]$\\
                     $\tau$ & shear stress \\
                     $\dot{\gamma}$ & shear rate \\
-                    $W_0$ & Wormsley number $\big[ - \big]$ \\
+                    $W_0$ & Womersley number $\big[ - \big]$ \\
                     $Re$ & Reynolds number $\big[ - \big]$ \\
-                    $Pe$ & Peclet number $\big[ - \big]$ \\
+                    $Pe$ & Péclet number $\big[ - \big]$ \\
                 \end{tabular}
             \end{minipage}
         \medskip
@@ -123,15 +136,14 @@
 
         \subsection{Physiological Background}
             \label{subsec:physio-background}
-
             The circulatory system consists of a human's heart,
-            vascular network, lungs and organs. The heart is the source,
+            vascular network, lungs, and organs. The heart is the source,
             transporting Oxygen-rich blood to the organs and
-            deoxygenated (and carbon dioxide enriched) blood back to the lungs;
-            which discharge $CO2$ and enrich blood with Oxygen. We refer to these
+            deoxygenated (and carbon dioxide-enriched) blood back to the lungs.
+            Lungs discharge $CO2$ and enrich the blood with Oxygen. We refer to these
             respective processes as the \emph{pulmonary circulation} and
             the \emph{systemic circulation} (resp.). The \emph{macrocirculatory
-            system}, consists of the heart and the large vessels in the systemic circulation.
+            system} consists of the heart and the large vessels in the systemic circulation.
             Particularly, the arteries of the macrocirculatory system transport
             oxygenated blood from the heart, driving the return of deoxygenated blood in
             large vessels back to the heart. Hemodynamics refers to the study of blood flow in
@@ -142,10 +154,10 @@
             Cardiovascular disease (CVD) is the leading cause of death in developed nations.
             According to the World Health Organization (WHO), CVD accounts for approximately
             30\% of all global deaths in 2012. Understanding the hemodynamics of the macrocirculatory system is crucial for
-            diagnosing, treating, and preventing CVD. We aim to develop mathematical models
-            that accurately describe blood flow in the macrocirculatory system. Our motivation
-            is to use these models to simulate and analyze various cardiovascular conditions,
-            such as arterial stenosis, aneurysms, and heart valve disorders.
+            diagnosing, treating, and preventing CVD. Consequently, our motivation is to
+            simulate and analyze various cardiovascular conditions, including arterial
+            stenosis, aneurysms, and heart valve disorders, with the aim to better enable
+            provider treatment. \todo{SEO for insurance companies}
 
             \medskip
 
@@ -154,18 +166,19 @@
             successive beat as the \emph{cardiac cycle}. The cardiac cycle consists of
             two main phases: systole and diastole, during which the heart chamber is
             accumulating blood and releasing blood (resp.). The beat can be recognized as a pulse
-            wave in large vessels, characterized by the Wormsley number $W_0$:
-            \[ 
-                W_0 := D \cdot \sqrt{\frac{\omega \rho}{\eta}},
-            \]
+            wave in large vessels, characterized by the Wormersley number $W_0$:
+            \begin{flalign*}
+                    \quad & W_0 := D \cdot \sqrt{\frac{\omega \rho}{\eta}} &&
+            \end{flalign*}
             a dimensionless parameter comparing the frequency $\omega$
-            of the pulse wave to the blood viscosity $\eta$ and the vessel diameter $D$.
+            of the pulse wave to the blood's kinematic viscosity $\eta$ and the vessel diameter $D$.
             The Reynolds number $Re$ characterizes flow in blood vessels:
-            \[
-                Re := \frac{\rho U D}{\eta},
-            \]
+            \begin{flalign*}
+                    \quad & Re := \frac{\rho U D}{\eta}, &&
+            \end{flalign*}
             where $U$ is the mean flow velocity. Low $Re$ indicates laminar flow,
-            while high $Re$ suggests turbulent flow. 
+            while high $Re$ suggests turbulent flow. \todo{replace D with radius R}
+            \todo{Be more explicit that we are deteriving a 1D "lumped model"?}
 
             \medskip
 
@@ -177,13 +190,23 @@
 
             \medskip
 
-            The blood volume of human is approximately 5.7-6.0 liters of blood,
-            flowing a full cycle approximately every minute. The energy driving
+             The blood volume of a human is approximately 5.7-6.0 liters of blood,
+            flowing a full cycle roughly every minute. The energy driving
             the flow comes from oxygen and nutrients absorbed from food, creating waste
             products that must be removed; the \emph{coronary artery}'s responsibility.
             The buildup of waste products results in Arteriosclerosis, a narrowing of
             the coronary artery, leading to reduced and turbulent blood flow. (Add citations
-            here of turbulence in the presence of stenotic arteries)
+            here of turbulence in the presence of stenotic arteries).
+
+            \medskip
+
+            \td{Explain Anuerysms and their hemodynamic characteristics}
+
+            \medskip
+
+            \medskip
+
+            \td{Explain Heart valve conditions and there hemodynamic Characteristics}
 
             \medskip
 
@@ -191,26 +214,38 @@
             shows $W_0 \propto D$ and $Re \propto D^{-1}$; we
             observe large pulses and turbulent flow in large vessels and small pulses
             and laminar flow in small vessels.
-            
-            \medskip
 
+            \medskip
 
             \subsubsection*{Properties of Blood}
                 Blood consists of plasma and cells. The red blood cells
                 comprise $\approx 97\%$ of the cell volume, which is $\approx 45\%$
                 of blood volume. The remaining blood volume, plasma, is $\approx 90\%$
                 water. The ratio of red blood cells and the total blood volume is called the \emph{hematocrit
-                value}, a metric describing the influence of red blood cells on the flow.
+                value}, a metric describing the influence of red blood cells on the flow.\\
+
+                \medskip
+
+                In \textit{continuum mechanics}, matter is modeled by \textit{continuous fields}.
+                At \textit{microscopic scales}, our models will break down—fluids as fluids
+                are discrete collections of molecules, not continuous fields. However, at the
+                macroscopic scale we can hope that such models remain accurate.
+                The Incompressibility assumption is reasonable for blood, as water comprises
+                $\approx 55\% \cdot .90 \approx 50\%$. Despite blood being a heterogeneous mixture of
+                compounds, we assume it is a single constituent, homogeneous and isotropic Newtonian fluid.
+
                 \begin{definition}
                     \label{def:newt-fluid}
-                    Let $V$ be a fluid volume $V$ with viscosity $\eta = \frac{\tau}{\dot{\gamma}} \equiv$ const.,
+                    Let $V$ be a fluid volume $V$ with dynamic viscosity $\eta = \frac{\tau}{\dot{\gamma}} \equiv$ const.,
                     where \emph{shear stress} $\tau := \frac{F}{A}$ (s.t. $F$ is parallel to it's surface $S$ with area $A$)
                     and \emph{shear rate} $\dot{\gamma}$. Such fluids are \emph{Newtonian fluids}.
                 \end{definition}
-                A shear stress $\tau$ deforms $V$ by an angle $\gamma ~\implies ~\dot{\gamma}$ is 
+
+                \medskip
+                A shear stress $\tau$ deforms $V$ by an angle $\gamma ~\implies ~\dot{\gamma}$ is
                 an angular velocity (const. for Newtonian fluids).
-                Our models assume blood is Newtonian. We use a 
-                relative viscosity $\eta_r$, which depends on the absolute 
+                Our models assume blood is Newtonian. We use a
+                relative viscosity $\eta_r$, which depends on the absolute
                 viscosity $\eta$, scaled vessel diameter $D : = D/(1.0 \mu m)$, and
                 hematocrit value $H$. In particular, an empirical model from \cite{bviscosity} gives:
                 \begin{equation}
@@ -221,133 +256,232 @@
                     \end{cases*}.
                 \end{equation}
                 In large vessels, $\eta_r$ is observed constant ($\implies$ Newtonian behavior).
-                
-                \medskip 
 
-                Our concern is the flow of blood in the
-                macrocirculatory system. We develop mathematical
-                models describing the hemodynamics of arterial and
-                large venous segments, then we extend our models to macrocirculation networks
-                using a domain decomposition approach.
+                \medskip
+
+                \begin{remark}[Dynamic vs. Kinematic Viscosity]
+                    Let $\eta \in \R^+$ denote the \emph{dynamic viscosity} of blood, and let $\mu \in \R^+$ denote the \emph{kinematic viscosity}. Then:
+                    \begin{equation}
+                    \mu := \frac{\eta}{\rho}
+                    \end{equation}
+                    where $\rho$ is the blood density $\big[\frac{kg}{m^3}\big]$ (assumed constant by incompressibility). Thus:
+                    \begin{itemize}
+                    \item $\eta$ quantifies the internal resistance of blood to shear deformation, i.e., $\eta := \dfrac{\tau}{\dot{\gamma}}$, with units $[Pa \cdot s]$;
+                    \item $\mu$ adjusts $\eta$ by the density $\rho$, capturing the viscous diffusion of momentum per unit mass, with units $\big[\frac{m^2}{s}\big]$.
+                    \end{itemize}
+                    Intuitively, $\eta$ measures how "thick" or "sticky" the fluid is, while $\mu$ measures how quickly momentum diffuses through the fluid due to viscosity.
+                    Both quantities appear in our hemodynamic models.
+                \end{remark}
             \medskip
-
-        \newpage
+        \medskip
 
         \subsection{Navier Stokes System}
             \label{subsec:intro-navier-stokes}
+            Let
+            \begin{flalign*}
+                \quad \Omega(t) &:= \{ x \in \R^3 ~:~ x \text{ is inside the blood vessel at time } t \}.&&
+            \end{flalign*}
+            To simulate the kinematics of blood flow on the time interval $[0, T]$
+            in the lumen $\Omega(t) \subset \R^3$ of a blood vessel,
+            we use the Generalized Newtonian Navier-Stokes (NS) system:
+            \begin{definition}[Incompressible Viscous NS (Conservative Form)]
+                \label{def:NSEquations}
+                We seek velocity and pressure feilds
+                \begin{flalign*}
+                    \quad & \vct{u}: \Omega(t) \to \R^3, ~ (x, y, z) \mapsto (u_1(x, y, z), ~ u_2(x, y, z), ~u_3(x, y, z)), && \\
+                    \quad & p: \Omega(t) \to \R, ~ (x, y, z) \mapsto p(x, y, z), && 
+                \end{flalign*}
+                such that for $T \geq t > 0$ and in $\Omega(t)$,
+                \begin{flalign*}
+                    \quad & \begin{cases*}
+                    \quad \rho\big(\partial_t \vct{u} + (\vct{u}\cdot\nabla)\vct{u}\big) = -\,\nabla p \;+\; \Divbf\!\Big( 2\,\mu|\vct{D}|^2\,\vct{D}\Big) \;+\; \rho\,\vct{f} \\
+                    \quad \Div(\vct{u}) = 0,
+                    \end{cases*} &&
+                \end{flalign*}
+                where $\vct{f}$ is an external force field (e.g., gravity), $\mu|\vct{D}|^2$ is the dynamic viscosity and $\vct{D}$ is the Cauchy deformation tensor defined as
+                \begin{flalign*}
+                    \quad & \vct{D}(\vct{u}) := \tfrac12\big(\nabla\vct{u} + \nabla\vct{u}^{\mathsf T}\big). &&
+                \end{flalign*}
+            \end{definition}
 
-            In \textit{continuum mechanics}, matter is modeled by
-            \textit{continuous fields}. For instance, to model the
-            behavior of an \textit{incompressible} fluid in time,
-            one could use a \textbf{pressure field} and a \textbf{velocity field}.
-            At \textit{atomic scales}, this model breaks down—fluids
-            as fluids are discrete collections of molecules, not continuous
-            fields. However, at the macroscopic scale, one can hope that
-            such models remain accurate.
+            \medskip
             
-            The fundamental mathematical model for incompressible fluids (e.g., water) is the \textbf{viscous incompressible Navier-Stokes equations} (NS):
-
-            \[
-            \begin{cases}
-                \frac{\partial}{\partial t} \mathbf{u} + (\mathbf{u} \cdot \nabla) \mathbf{u} = \nu \Delta \mathbf{u} - \nabla p, & \text{(Momentum equation: Newton's law } F = ma\text{)} \\
-                \nabla \cdot \mathbf{u} = 0, & \text{(Incompressibility condition)} \\
-                \mathbf{u}(0, x) = \mathbf{u}_0(x), & \text{(Initial conditions)}
-            \end{cases}
-            \]
-
-            where $ \mathbf{u} : [0, +\infty) \times \mathbb{R}^3 \to \mathbb{R}^3 $ is the velocity field and
-            $ p : [0, +\infty) \times \mathbb{R}^3 \to \mathbb{R} $ is the pressure field.
-            The initial velocity field is given by:
+            We rewrite Eq.~\ref{def:NSEquations} in standard form (as found in \cite{ns-formulation}, \cite{MathematicalEngineering}.)
+            \begin{flalign*}
+                \quad &\rho\big(\partial_t \vct{u} + (\vct{u}\cdot\nabla)\vct{u}\big) = -\,\nabla p \;+\; \Divbf\!\Big( 2\,\mu|\vct{D}|^2\,\vct{D}\Big) \;+\; \rho\,\vct{f}&&\\
+                \quad &\iff \rho\big(\partial_t \vct{u} \;+\; (\vct{u}\cdot\nabla)\vct{u}\big) \;=\; -\,\nabla p \;+\; \Divbf\!\Big( 2\,\frac{\eta}{\rho}|\vct{D}|^2\,\vct{D}\Big) \;+\; \rho\,\vct{f} &&\\
+                \quad &\iff \rho\big(\partial_t \vct{u} \;+\; (\vct{u}\cdot\nabla)\vct{u}\big) \;=\; -\,\nabla p \;+\; \eta ~ \Divbf\!\Big( 2\,\frac{1}{\rho}|\vct{D}|^2\,\vct{D}\Big) \;+\; \rho\,\vct{f} \quad (\because ~\eta = \frac{\mu}{\rho} = \text{const.}) &&\\
+                \quad &\iff \rho\big(\partial_t \vct{u} \;+\; (\vct{u}\cdot\nabla)\vct{u}\big) \;=\; -\,\nabla p \;+\; \mu\;\rho ~ \Divbf\!\Big( 2\,\frac{1}{\rho}|\vct{D}|^2\,\vct{D}\Big) \;+\; \rho\,\vct{f} &&\\
+                \quad &\iff \partial_t \vct{u} \;+\; (\vct{u}\cdot\nabla)\vct{u} \;=\; -\,\frac{\nabla p}{\rho} \;+\; \mu\; ~ \Divbf\!\Big( 2\,\frac{1}{\rho}|\vct{D}|^2\,\vct{D}\Big) \;+\; \,\vct{f} && \\
+                \quad &\iff \partial_t \vct{u} \;+\;  (\vct{u}\cdot\nabla)\vct{u} \;+\; \frac{\nabla p}{\rho}  \;-\;  \Divbf\!\Big( \frac{2}{\rho}\;\mu\;|\vct{D}|^2\,\vct{D}\Big) \;=\; \,\vct{f} && \\
+                \quad &\iff F(\dots) \;=\; \vct{f}&&  
+            \end{flalign*}
             
-            \[
-                \mathbf{u}_0 : \mathbb{R}^3 \to \mathbb{R}^3, \quad \nabla \cdot \mathbf{u}_0 = 0.
-            \]
-            
-            The \emph{global regularity problem} for (NS) asks:
-            \begin{center}
-                \textit{For any smooth, spatially localized initial data $ \mathbf{u}_0 $, 
-                does there exist a global smooth solution $ (\mathbf{u}, p) $ to (NS)?}
-            \end{center}
-            This problem is one of the seven Millennium Prize Problems posed 
-            by the Clay Mathematics Institute in 2000, with a prize of one million 
-            dollars for a correct solution.
+            \medskip
 
-            It is known that (NS) has a \emph{local existence and uniqueness theorem}:
+            \begin{remark}[Interpretation of NS Terms]
+                The first equation of \ref{def:NSEquations} is derived from
+                Newton's second law of motion. The term $(\vct{u} \cdot \nabla) \vct{u}$ represents the convective acceleration,
+                $\frac{\nabla p}{\rho}$ is the pressure gradient force per unit mass, and
+                $\Divbf\big(\frac{2}{\rho} \mu |\vct{D}|^2 \vct{D}\big)$ governs the
+                viscoelastic and diffusive features of the flow.
+                The second equation of \ref{def:NSEquations} follows from the \emph{incompressibility condition},
+                implying that the fluid density remains constant along flow lines.
+            \end{remark}
 
-            \begin{theorem}
-                For any smooth, spatially localized initial data $ \mathbf{u}_0 $, 
-                there exists a \textbf{maximal time of existence} $ 0 < T_* \leq +\infty $
-                and a solution.
+            \medskip
+
+            \begin{remark}[Fluids Model]\
+                The fluid dynamics model is given by the Cauchy stress tensor:
+                \begin{flalign*}
+                    \quad \vct{T} = -p \vct{I} + \vct{S} \quad : \quad \begin{cases*}
+                        ~p \text{ is the hydrodynamical pressure},\\
+                        ~p\vct{I} \text{ is the mean normal stress, } \\
+                        ~\vct{S} \text{ reflects rheological behavior}
+                    \end{cases*}&&
+                \end{flalign*}
+                Under the Newtonian blood assumption $\vct{S} = 2\mu \vct{D}$.
+            \end{remark}
+
+            \medskip
+
+            \begin{remark}[Global Regularity Problem for (NS)]\
+                \label{rem:global-regularity}
+                \textit{For any smooth, spatially localized initial data $ \mathbf{u}_0 $,
+                does there exist a global smooth solution $ (\mathbf{u}, p) $ to NS~\ref{def:NSEquations}
+                Such question is one of the Millennium Prize Problems posed
+                by the Clay Mathematics Institute in 2000, with a prize of one million
+                dollars for a correct solution.}
+            \end{remark}
+
+            \medskip
+
+            \begin{theorem}[Local Existence and Uniqueness]
+                Given smooth, localized initial data $\vct{u}_0$, there exists a maximal time $0 < T_* \leq \infty$
+                for which a unique solution exists.
             \end{theorem}
 
-            If $ T_* \neq +\infty $, then \textbf{blowup} occurs in the sense that
-
-            \[
-                \sup_{x \in \mathbb{R}^3} |\mathbf{u}(t, x)| \to +\infty \quad \text{as} \quad t \to T_*.
-            \]
-
-            If $ T_* = +\infty $, no blowup occurs, and $ |\mathbf{u}| \to 0 $ as $ t \to +\infty $.
-
-            Numerical simulations suggest that global regularity is generally 
-            \textbf{true}—for \textit{most} choices of initial data $ \mathbf{u}_0 $, 
-            one has a global smooth solution to (NS).
-
-            However, for large initial data, turbulence can occur. Energy moves from 
-            coarse to fine scales in a complex way before dissipating due to viscous effects.
-            The NS equations contain two competing effects:
-
-            \begin{itemize}
-                \item The \textbf{transport term}: $ \mathbf{u} \cdot \nabla \mathbf{u} $
-                \item The \textbf{dissipation term}: $ \nu \Delta \mathbf{u} $
-            \end{itemize}
-
-
-            Heuristically, if $ \nu \Delta \mathbf{u} \gg (\mathbf{u} \cdot \nabla) \mathbf{u} $, one expects linear, non-turbulent behavior (\textit{global regularity}).
-            If \( (\mathbf{u} \cdot \nabla) \mathbf{u} \gg \nu \Delta \mathbf{u} \), one expects \textbf{nonlinear turbulence} (and possibly \textbf{blowup}).
-
-            \subsubsection*{Kinetic Energy Considerations}
-
-                The kinetic energy is given by:
-
-                \[
-                E(t) = \frac{1}{2} \int_{\mathbb{R}^3} |\mathbf{u}(t, x)|^2 \, dx.
-                \]
-
-                This quantity is \textit{decreasing in time} due to dissipation. Heuristically:
-
-                \[
-                E(t) \gtrsim V^2 L^3.
-                \]
-
-                This leads to a bound:
-
-                \[
-                    V = O(L^{-3/2}).
-                \]
             \medskip
 
-            \subsubsection*{Blowup Scenarios}
+            If $T_* < \infty$, a \textbf{blow-up} occurs:
+            \begin{flalign*}
+                \quad & \sup_{x \in \mathbb{R}^3} |\mathbf{u}(t, x)| \to +\infty \quad \text{as} \quad t \to T_*. &&
+            \end{flalign*}
+            Otherwise, if $T_* = \infty$, then $|\vct{u}| \to 0$ as $t \to \infty$. Numerical evidence suggests global regularity
+            holds in most practical cases, but turbulent behavior can emerge for large initial data.
 
-                This suggests a \textbf{possible blowup scenario}. If the velocity field concentrates in a ball of radius $ L_1 $, we estimate:
-
-                \[
-                    |\mathbf{u}| \approx L_1^{-3/2}.
-                \]
-
-                At a later time $ t_2 $, the energy has concentrated further into a ball of radius $ L_2 = L_1 / 2 $, so:
-
-                \[
-                    |\mathbf{u}| \approx L_2^{-3/2}.
-                \]
-
-                This leads to \textbf{potential infinite velocity} at a single spatial point:
-
-                \[
-                    \sum_{n} L_n^{r_2} < \infty.
-                \]
-
-                At each stage, the dissipative forces are negligible compared to the transport effects. This results in an approximately self-similar solution.
             \medskip
+
+            \subsubsection*{Heuristic Considerations and Energy Balance}
+                Starting from the incompressibility condition:
+                \begin{flalign*}
+                    \quad & \Div(\vct{u}) = 0 && \\
+                    \quad & \iff ~ \rho \text{ is constant in } \Omega(t) && \\
+                    \quad & \iff ~ \text{ chain rule applies to } \Divbf\big(\frac{2}{\rho} \mu |\vct{D}|^2 \vct{D}\big) &&\\
+                    \quad \implies &  \Divbf\big(\frac{2}{\rho} \mu |\vct{D}|^2 \vct{D}\big) = \nabla \cdot \big(\frac{2}{\rho} \mu |\vct{D}|^2 \vct{D}\big)&&\\
+                    \quad & = \langle\frac{2}{\rho} \mu |\vct{D}|^2 \vct{D}, \nabla \rangle&&\\
+                    \quad  & = \frac{2}{\rho} \langle \mu |\vct{D}|^2 \vct{D}, \nabla \rangle&&\\
+                    \quad & = \frac{2}{\rho} \nabla \cdot \big( \mu |\vct{D}|^2 \vct{D}\big)&&\\
+                    \quad & \therefore \quad \frac{2}{\rho}~ \Divbf\big( \mu |\vct{D}|^2 \vct{D}\big) = 0.&&
+                \end{flalign*}
+                This vanishes if $\mu$ is constant (Newtonian fluid) and $\rho$ is constant (incompressibility).
+                So the diffusive term becomes:
+                \begin{flalign*}
+                    \quad \frac{2\eta}{\rho} \Delta \vct{u}, \quad \text{with } \eta = \mu \rho.&&
+                \end{flalign*}\todo{show simplification of diffusive term to laplacian}
+                We heuristically compare dominant terms:
+                \begin{enumerate}
+                    \item If $\eta \Delta \vct{u} \gg (\vct{u} \cdot \nabla) \vct{u}$, viscous dissipation dominates $\Rightarrow$ smooth, regular behavior.\
+                    \item f $(\vct{u} \cdot \nabla) \vct{u} \gg \eta \Delta \vct{u}$, nonlinearity dominates $\Rightarrow$ turbulence, potential blow-up.
+                \end{enumerate}
+            \medskip
+
+            \subsubsection{Converting to Cylindrical Coordinates}
+                \label{subsubsec:cylindrical-coords}
+                The relation between cartesian and cylindrical coordinates is
+                \begin{flalign*}
+                    \quad (x, ~y, ~z) ~ \mapsto (r \sin(\theta), ~ r\cos(\theta), ~z), \quad r = \sqrt{x^2 + y^2}.&&
+                \end{flalign*}                
+
+    Let our vessel wall $\partial \Omega$ be a surface in $\R^3$
+    that evolves in time which we refer to as the interface. Note $\OmegaBar = \Omega \cup \partial \Omega$.
+    Note, an explicit representation of $\OmegaBar$ maps $(t, \theta, r, \theta, z)
+    \mapsto (x, y, z)$. For simplicity, we assume 
+
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[scale=0.85, >=Stealth]
+            % Axial view of a compliant vessel segment
+            \begin{scope}[shift={(0,0)}]
+                \path[draw=blue!70!black, line width=1pt, fill=blue!12]
+                    (-3.6,1.45) .. controls (-2.3,1.65) and (-1.2,1.55) .. (-0.2,1.70)
+                    .. controls (0.9,1.88) and (2.1,1.75) .. (3.6,1.50)
+                    -- (3.6,-1.50) .. controls (2.1,-1.75) and (0.9,-1.88) .. (-0.2,-1.70)
+                    .. controls (-1.2,-1.55) and (-2.3,-1.65) .. (-3.6,-1.45) -- cycle;
+                \path[draw=blue!55!black, line width=0.9pt, fill=white]
+                    (-3.6,0.95) .. controls (-2.3,1.08) and (-1.2,0.98) .. (-0.2,1.12)
+                    .. controls (0.9,1.30) and (2.1,1.18) .. (3.6,0.96)
+                    -- (3.6,-0.96) .. controls (2.1,-1.18) and (0.9,-1.30) .. (-0.2,-1.12)
+                    .. controls (-1.2,-0.98) and (-2.3,-1.08) .. (-3.6,-0.95) -- cycle;
+                \draw[densely dashed, thick, blue!70!black] (-3.6,1.18) -- (3.6,1.18);
+                \draw[densely dashed, thick, blue!70!black] (-3.6,-1.18) -- (3.6,-1.18);
+                \draw[gray!70, densely dashed] (-3.8,0) -- (3.8,0);
+                \draw[->, thick, orange!80!red] (1.7,1.18) -- (1.7,1.62) node[midway, right] {$u_r(z,t)$};
+                \node[blue!70!black, above left] at (-2.8,1.25) {$R_0(z)$};
+                \node[blue!70!black, above left] at (-1.2,1.66) {$R(z,t)$};
+                \draw[->, thick] (-3.9,-2.05) -- (3.9,-2.05) node[right] {$z$};
+                \draw[->, thick] (-3.9,-2.05) -- (-3.9,-0.45) node[right] {$r$};
+                \node[align=center] at (0,-2.5) {axial view of the vessel wall};
+            \end{scope}
+
+            % Cross-section in cylindrical coordinates
+            \begin{scope}[shift={(9,0)}]
+                \path[draw=blue!70!black, line width=1pt, fill=blue!12] (0,0) circle (1.80);
+                \path[draw=blue!55!black, line width=0.9pt, fill=white] (0,0) circle (1.30);
+                \draw[densely dashed, thick, blue!70!black] (0,0) circle (1.50);
+                \draw[<->, thick, blue!65!black] (0,0) -- (0,1.30) node[midway, left] {$R(z,t)$};
+                \draw[<->, thick, blue!80!black] (0.24,0) -- (0.24,1.50) node[midway, right] {$R_0$};
+                \draw[<->, thick, blue!60!black] (1.30,0.42) -- (1.80,0.42) node[midway, above] {$h(z,t)$};
+                \draw[->, thick, orange!80!red] (1.30,-0.45) -- (1.50,-0.45) node[midway, below] {$u_r$};
+                \draw[->, thick] (0,0) -- (1.00,0) node[below] {$r$};
+                \draw[->, thick] (0.85,0) arc (0:45:0.85);
+                \node at (0.62,0.34) {$\theta$};
+                \draw[->, thick] (0,0) -- (-1.10,1.10) node[above] {$z$};
+                \fill (0,0) circle (0.05);
+                \node[align=center] at (0,-2.1) {cross-section in $(r, \theta)$};
+            \end{scope}
+        \end{tikzpicture}
+        \caption{Schematic representation of a compliant arterial segment in cylindrical
+        coordinates. The axial view highlights the evolving lumen radius $R(z,t)$ relative to
+        a reference configuration $R_0(z)$ and the radial displacement $u_r(z,t)$. The
+        cross-section illustrates the cylindrical coordinates $(r, \theta, z)$ and the wall
+        thickness $h(z,t)$.}
+        \label{fig:compliant-vessel}
+    \end{figure}
+
+        The region enclosed our interface is $\Omega$, and we aim to model the
+        velocity and pressure fields on $\Omega$; which also is evolving in time.
+        Knowing the pressure and velocity for a portion of time allows us to compute stresses to
+        which an arterial wall is subjected to due to the blood movement.
+
+
+            \subsubsection{Dimension reduced Models}
+                \label{subsubsec:dim-reduced-models}
+
+                In many practical applications, especially in large vessels, it is common to use
+                dimensionally reduced models such as 1D or 0D models. The appeal of these models
+                simplifies the Navier-Stokes equations by averaging over the cross-sectional area of the vessel,
+                leading to equations that describe the flow along the length of the vessel.
+
+                \medskip
+
+                The 1D model typically involves equations for the cross-sectional area $A(x,t)$
+                and the flow rate $Q(x,t)$, derived from conservation of mass and momentum.
+                The 0D model, on the other hand, treats the vessel as a lumped parameter system,
+                focusing on overall pressure and flow relationships without spatial resolution.
+
+                \medskip
+
         \medskip
     \newpage
 
@@ -362,7 +496,7 @@
 
         \bigskip
 
-    
+
 
     \section{Numerical Methods for Blood Flow Simulation}
         \label{sec:num-methods}

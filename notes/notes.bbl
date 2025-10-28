@@ -91,6 +91,46 @@
       \verb https://watermark.silverchair.com/ehab332.pdf
       \endverb
     \endentry
+    \entry{ns-formulation}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=921260a6ab76501eed1a784596e82bbc}{%
+           family={John},
+           familyi={J\bibinitperiod},
+           given={L.},
+           giveni={L\bibinitperiod}}}%
+        {{hash=58abfd45d4eb158d56ce0b87772eeadb}{%
+           family={Pustějovská},
+           familyi={P\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=5d51e3d8add524e92e4e529841123a55}{%
+           family={Steinbach},
+           familyi={S\bibinitperiod},
+           given={O.},
+           giveni={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{7989dbf9bb512116c9a7c9449dd8769b}
+      \strng{fullhash}{7989dbf9bb512116c9a7c9449dd8769b}
+      \strng{fullhashraw}{7989dbf9bb512116c9a7c9449dd8769b}
+      \strng{bibnamehash}{7989dbf9bb512116c9a7c9449dd8769b}
+      \strng{authorbibnamehash}{7989dbf9bb512116c9a7c9449dd8769b}
+      \strng{authornamehash}{7989dbf9bb512116c9a7c9449dd8769b}
+      \strng{authorfullhash}{7989dbf9bb512116c9a7c9449dd8769b}
+      \strng{authorfullhashraw}{7989dbf9bb512116c9a7c9449dd8769b}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Computing and Visualization in Science}
+      \field{title}{On the influence of the wall shear stress vector form on hemodynamic indicators}
+      \field{volume}{4}
+      \field{year}{2017}
+      \field{pages}{113\bibrangedash 122}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1007/s00791-017-0277-7
+      \endverb
+    \endentry
     \entry{bviscosity}{article}{}{}
       \name{author}{1}{}{%
         {{hash=977bbd946a754fc235a448817f53ccdf}{%
