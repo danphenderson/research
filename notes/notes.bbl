@@ -56,6 +56,59 @@
       \field{title}{Cardiovascular Mathematics}
       \field{year}{2009}
     \endentry
+    \entry{hemodynamics}{book}{}{}
+      \name{author}{4}{}{%
+        {{hash=694f6d5a6cf9c500d8e15d2bb537e43e}{%
+           family={Galdi},
+           familyi={G\bibinitperiod},
+           given={Giovanni\bibnamedelima P.},
+           giveni={G\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=64a044c07b99f718b5987c9b37261239}{%
+           family={Robertson},
+           familyi={R\bibinitperiod},
+           given={Anne\bibnamedelima M.},
+           giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=83af81466939ff3fac5975243f8ca849}{%
+           family={Rannacher},
+           familyi={R\bibinitperiod},
+           given={Rolf},
+           giveni={R\bibinitperiod}}}%
+        {{hash=6ace5f48649a56137541c711e4b21415}{%
+           family={Turek},
+           familyi={T\bibinitperiod},
+           given={Stefan},
+           giveni={S\bibinitperiod}}}%
+      }
+      \name{editor}{1}{}{%
+        {{hash=88183b946cc5f0e8c96b2e66e1c74a7e}{%
+           family={Unknown},
+           familyi={U\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Birkhäuser Basel}%
+      }
+      \strng{namehash}{75f6404ece3e3eb5473f9d61badb9e0c}
+      \strng{fullhash}{c621353da155012f80278ab6e259e194}
+      \strng{fullhashraw}{c621353da155012f80278ab6e259e194}
+      \strng{bibnamehash}{75f6404ece3e3eb5473f9d61badb9e0c}
+      \strng{authorbibnamehash}{75f6404ece3e3eb5473f9d61badb9e0c}
+      \strng{authornamehash}{75f6404ece3e3eb5473f9d61badb9e0c}
+      \strng{authorfullhash}{c621353da155012f80278ab6e259e194}
+      \strng{authorfullhashraw}{c621353da155012f80278ab6e259e194}
+      \strng{editorbibnamehash}{88183b946cc5f0e8c96b2e66e1c74a7e}
+      \strng{editornamehash}{88183b946cc5f0e8c96b2e66e1c74a7e}
+      \strng{editorfullhash}{88183b946cc5f0e8c96b2e66e1c74a7e}
+      \strng{editorfullhashraw}{88183b946cc5f0e8c96b2e66e1c74a7e}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Hemodynamical Flows: Modeling, Analysis and Simulation}
+      \field{year}{2008}
+      \verb{doi}
+      \verb https://doi.org/10.1007/978-3-7643-7806-6
+      \endverb
+    \endentry
     \entry{ehab332}{article}{}{}
       \name{author}{1}{}{%
         {{hash=2d2dd6e05d59effb4f5ac937ad6080d8}{%
