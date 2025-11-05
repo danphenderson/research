@@ -1,0 +1,52 @@
+        \begin{figure}[H]
+        \centering
+        \resizebox{\textwidth}{!}{%
+        \begin{tikzpicture}[>=Stealth, every node/.style={transform shape}]
+            % Axial view of a compliant vessel segment
+            \begin{scope}[shift={(0,0)}]
+                \path[draw=blue!70!black, line width=1pt, fill=blue!12]
+                    (-3.6,1.45) .. controls (-2.3,1.65) and (-1.2,1.55) .. (-0.2,1.70)
+                    .. controls (0.9,1.88) and (2.1,1.75) .. (3.6,1.50)
+                    -- (3.6,-1.50) .. controls (2.1,-1.75) and (0.9,-1.88) .. (-0.2,-1.70)
+                    .. controls (-1.2,-1.55) and (-2.3,-1.65) .. (-3.6,-1.45) -- cycle;
+                \path[draw=blue!55!black, line width=0.9pt, fill=white]
+                    (-3.6,0.95) .. controls (-2.3,1.08) and (-1.2,0.98) .. (-0.2,1.12)
+                    .. controls (0.9,1.30) and (2.1,1.18) .. (3.6,0.96)
+                    -- (3.6,-0.96) .. controls (2.1,-1.18) and (0.9,-1.30) .. (-0.2,-1.12)
+                    .. controls (-1.2,-0.98) and (-2.3,-1.08) .. (-3.6,-0.95) -- cycle;
+                \draw[densely dashed, thick, blue!70!black] (-3.6,1.18) -- (3.6,1.18);
+                \draw[densely dashed, thick, blue!70!black] (-3.6,-1.18) -- (3.6,-1.18);
+                \draw[gray!70, densely dashed] (-3.8,0) -- (3.8,0);
+                \draw[->, thick, orange!80!red] (1.7,1.18) -- (1.7,1.62) node[midway, right] {$u_r(z,t)$};
+                \node[blue!70!black, above left] at (-2.8,1.25) {$R_0(z)$};
+                \node[blue!70!black, above left] at (-1.2,1.66) {$R(z,t)$};
+                \draw[->, thick] (-3.9,-2.05) -- (3.9,-2.05) node[right] {$z$};
+                \draw[->, thick] (-3.9,-2.05) -- (-3.9,-0.45) node[right] {$r$};
+                \node[align=center] at (0,-2.5) {axial view of the vessel wall};
+            \end{scope}
+
+            % Cross-section in cylindrical coordinates
+            \begin{scope}[shift={(9,0)}]
+                \path[draw=blue!70!black, line width=1pt, fill=blue!12] (0,0) circle (1.80);
+                \path[draw=blue!55!black, line width=0.9pt, fill=white] (0,0) circle (1.30);
+                \draw[densely dashed, thick, blue!70!black] (0,0) circle (1.50);
+                \draw[<->, thick, blue!65!black] (0,0) -- (0,1.30) node[midway, left] {$R(z,t)$};
+                \draw[<->, thick, blue!80!black] (0.24,0) -- (0.24,1.50) node[midway, right] {$R_0$};
+                \draw[<->, thick, blue!60!black] (1.30,0.42) -- (1.80,0.42) node[midway, above] {$h(z,t)$};
+                \draw[->, thick, orange!80!red] (1.30,-0.45) -- (1.50,-0.45) node[midway, below] {$u_r$};
+                \draw[->, thick] (0,0) -- (1.00,0) node[below] {$r$};
+                \draw[->, thick] (0.85,0) arc (0:45:0.85);
+                \node at (0.62,0.34) {$\theta$};
+                \draw[->, thick] (0,0) -- (-1.10,1.10) node[above] {$z$};
+                \fill (0,0) circle (0.05);
+                \node[align=center] at (0,-2.1) {cross-section in $(r, \theta)$};
+            \end{scope}
+        \end{tikzpicture}%
+        }
+        \caption{Schematic representation of a compliant arterial segment in cylindrical
+        coordinates. The axial view highlights the evolving lumen radius $R(z,t)$ relative to
+        a reference configuration $R_0(z)$ and the radial displacement $u_r(z,t)$. The
+        cross-section illustrates the cylindrical coordinates $(r, \theta, z)$ and the wall
+        thickness $h(z,t)$.}
+        \label{fig:compliant-vessel}
+    \end{figure}
