@@ -678,6 +678,110 @@
             \end{remark}
 
 
+            \begin{remark}[Tube law from a thin elastic cylindrical wall]
+                \label{rem:tube-law-derivation}
+                We briefly justify the pressure--area relation used in \textsf{aq\_1d\_compliant.jl}
+                \begin{definition}
+                    \label{def:tube-law}
+                    \begin{flalign*}
+                        \quad & p(A) - p_{ext} \;=\; \beta\big(\sqrt{A} - \sqrt{A_0}\big) &&
+                    \end{flalign*}
+                \end{definition}
+                used in the 1D $(A,Q)$ model.  Consider a straight cylindrical vessel with
+                (local) lumen radius $R(x,t)$, reference radius $R_0$, wall thickness
+                $h \ll R$, and internal pressure $p(x,t)$ relative to an external pressure
+                $p_{ext}$ (assumed constant in space and time for simplicity).  The
+                corresponding lumen area is
+                \begin{flalign*}
+                    \quad & A(x,t) = \pi R(x,t)^2, &&
+                    \qquad
+                    A_0 = \pi R_0^2. &&
+                \end{flalign*}
+
+                Under the thin--wall assumption, balance of forces in the circumferential
+                direction (Young--Laplace law) yields
+                \begin{definition}
+                    \label{def:laplace}
+                    \begin{flalign*}
+                        \quad & (p - p_{ext})\,2\pi R \;=\; \sigma_\theta\,2h\pi &&
+                    \end{flalign*}
+                \end{definition}
+                where $\sigma_\theta$ is the circumferential (hoop) Cauchy stress in the
+                vessel wall.  We model the wall as linearly elastic in the hoop direction,
+                so that
+                \begin{definition}
+                    \label{def:linear-elastic}
+                    \begin{flalign*}
+                        \quad & \sigma_\theta \;=\; E_{eff}\,\varepsilon_\theta &&
+                    \end{flalign*}
+                \end{definition}
+                with an effective circumferential modulus $E_{eff} > 0$ and circumferential
+                strain
+                \begin{flalign*}
+                    \quad & \varepsilon_\theta \;=\; \frac{\text{change in circumference} - {\text{reference circumference}}}{\text{reference circumference}} &&
+                    \quad & = \; \frac{2\pi R - 2\pi R_0}{2\pi R_0} &&
+                    \quad & = \; \frac{R - R_0}{R_0}. &&
+                \end{flalign*}
+
+                Equating \eqref{def:laplace} and \eqref{def:linear-elastic} gives
+                \begin{flalign*}
+                    \quad & (p - p_{ext})\,2\pi R \;=\; E_{eff}\,\frac{R - R_0}{R_0}\,2h\pi &&\\
+                    \quad & \iff (p - p_{ext})\,R \;=\; E_{eff}\,\frac{R - R_0}{R_0}\,h &&
+                \end{flalign*}
+                Express $R$ and $R_0$ in terms of the areas $A$ and $A_0$:
+                \begin{flalign*}
+                    \quad  R & = \sqrt{\frac{A}{\pi}} &&\\
+                    \quad & = \; \frac{\sqrt{A}}{\sqrt{\pi}}, &&\\
+                    R_0 = \sqrt{\frac{A_0}{\pi}}
+                    \quad & = \;
+                    \frac{\sqrt{A_0}}{\sqrt{\pi}},
+                \end{flalign*}
+                so that
+                \begin{flalign*}
+                    \quad R - R_0
+                    \;=\;
+                    \frac{\sqrt{A}}{\sqrt{\pi}} - \frac{\sqrt{A_0}}{\sqrt{\pi}} &&\\
+                    \quad & = \; \frac{1}{\sqrt{\pi}}\big(\sqrt{A} - \sqrt{A_0}\big). &&
+                \end{flalign*}
+                Substituting into the expression for $p - p_{ext}$, we obtain
+                \begin{flalign*}
+                    \quad & (p - p_{ext})\,\frac{\sqrt{A}}{\sqrt{\pi}}
+                    \;=\;
+                    E_{eff} h\,
+                    \frac{\dfrac{1}{\sqrt{\pi}}\big(\sqrt{A} - \sqrt{A_0}\big)}{R_0} &&\\
+                    \quad & \iff (p - p_{ext})\,\frac{\sqrt{A}}{\sqrt{\pi}}
+                    \;=\;
+                    E_{eff} h\,
+                    \frac{\dfrac{1}{\sqrt{\pi}}\big(\sqrt{A} - \sqrt{A_0}\big)}{R_0}. &&\\
+                \end{flalign*}
+                For moderate deformations where $A$ remains close to $A_0$, we approximate
+                the factor $1/\sqrt{A}$ by its reference value $1/\sqrt{A_0}$, which yields
+                \begin{flalign*}
+                    \quad & (p - p_{ext})\,\frac{\sqrt{A_0}}{\sqrt{\pi}}
+                    \;=\;
+                    E_{eff} h\,
+                    \frac{\dfrac{1}{\sqrt{\pi}}\big(\sqrt{A} - \sqrt{A_0}\big)}{R_0} &&\\
+                    \quad & \iff (p - p_{ext})
+                    \;=\;
+                    \frac{E_{eff} h}{R_0\sqrt{A_0}}\,
+                    \big(\sqrt{A} - \sqrt{A_0}\big). &&
+                \end{flalign*}
+                Defining the lumped stiffness parameter
+                \begin{flalign*}
+                    \quad & \beta \;:=\; \frac{E_{eff} h}{R_0\sqrt{A_0}}. &&
+                \end{flalign*}
+                we arrive at the tube law \eqref{eq:tube-law} used in the 1D model:
+                \begin{flalign*}
+                    \quad &
+                    p(A) - p_{ext}
+                    \;=\;
+                    \beta\big(\sqrt{A} - \sqrt{A_0}\big). &&
+                \end{flalign*}
+                In the numerical experiments below, we take $\beta$ and $A_0$ to be
+                constant along the vessel, so that $p$ can be written as a function of
+                $A$ alone.
+            \end{remark}
+
 
 
 
@@ -763,6 +867,7 @@
             cardiologists.
         }
         \medskip
+
         \subsubsection{Existence and Uniqueness of NS}
             \label{sec:existenceUniqueness}
 
