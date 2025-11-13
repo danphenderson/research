@@ -7,7 +7,7 @@
 
 
 % ----------------- Document TITLE
-\title{Modeling Blood Flow in Macrocirculatory System}
+\title{Modeling Blood Flow in Macrocirculatory Systems}
 \author{Names Here}
 \date{\today}
 
@@ -20,10 +20,10 @@
 
     % ------------------ COVER PAGE
     % -----------------------------------------------------------------
-    \noindent Notes pertaining to mathematical models of blood flow in
-    the macrocirculatory system. We aim to develop mathematical
+    \noindent Notes follow pertaining to mathematical models of blood flow in
+    the macrocirculatory systems. We develop mathematical
     models describing the hemodynamics of arterial and
-    large venous segments, then we extend our models to macrocirculation networks
+    large venous segments. We then extend our models to macrocirculation networks
     using a domain decomposition approach.
 
     \medskip
@@ -58,12 +58,12 @@
                     $ dS $                            & surface measure on $\partial \Omega$ \\
                     $ dV $                            & volume measure on $\Omega$ \\
                     $ \nabla $                        & gradient operator \\
-                    $ \del $                          & Laplace operator \\
+                    $ \del = \nabla^2 = \nabla \cdot \nabla(\cdot)$ & Laplace operator \\
                     $ \Div $                          & divergence of a vector field \\
                     $ \Divbf $                        & divergence of a tensor \\
                     $ \vct{v}_i$                      & $i$-th component of vector $\vct{v}$ \\
                     $ \langle \cdot, \cdot \rangle_X$ & inner product on vector space $X$ \\
-                    $ \langle \vct{u}, \vct{v} \rangle$ & inner product of vectors $\vct{u}, \vct{v} \in \R^n$ \\
+                    $ \langle \vu, \vct{v} \rangle$ & inner product of vectors $\vu, \vct{v} \in \R^n$ \\
                     $ \dfrac{\partial}{\partial \nhat} = \langle \nabla, \nhat \rangle$ & normal derivative on $\partial \Omega$ \\
                     $\| \cdot \|$                     & $L^2$-norm \\
                     $C^{k}(\Omega)$                   & space of $k$ times continuously differentiable functions on $\Omega$ \\
@@ -122,7 +122,7 @@
                     $\tau$ & shear stress \\
                     $\dot{\gamma}$ & shear rate \\
                     $R$ & radius of vessel with diameter $2R$ \\
-                    $\vct{u}$ & velocity field \\
+                    $\vu$ & velocity field \\
                     $p$ & pressure field \\
                     $W_0$ & Womersley number $\big[ - \big]$ \\
                     $Re$ & Reynolds number $\big[ - \big]$ \\
@@ -142,7 +142,7 @@
                     $\tau$ & shear stress \\
                     $\dot{\gamma}$ & shear rate \\
                     $R$ & radius of vessel with diameter $2R$ \\
-                    $\vct{u}$ & velocity field \\
+                    $\vu$ & velocity field \\
                     $p$ & pressure field \\
                     $W_0$ & Womersley number $\big[ - \big]$ \\
                     $Re$ & Reynolds number $\big[ - \big]$ \\
@@ -159,23 +159,15 @@
         \medskip
 
         Coronary artery stenosis (CAS) is the narrowing of the
-        coronary arteries due to the buildup of plaque. This
+        coronary arteries due to the buildup of plaque. Such
         narrowing can restrict blood flow to the heart muscle,
-        leading to various cardiovascular problems, including
-        chest pain (angina), heart attacks, and other serious
-        complications. Current methods for predicting coronary
-        artery stenosis are rudimentary; and often prediction
-        does mean coronary artery stenosis obstruction (\cite{ehab332}).
+        which may lead to various cardiovascular problems.
+        Current methods for predicting coronary artery stenosis are rudimentary;
+        and often prediction doesn’t mean coronary artery stenosis obstruction (\cite{ehab332}).
         There is a need for more accurate and reliable methods
         to predict and assess the severity of CAS.
-        narrowing can restrict blood flow to the heart muscle,
-        leading to various cardiovascular problems, including
-        chest pain (angina), heart attacks, and other serious
-        complications. Current methods for predicting coronary
-        artery stenosis are rudimentary; and often prediction
-        does mean coronary artery stenosis obstruction.
-        There is a need for more accurate and reliable methods
-        to predict and assess the severity of CAS.
+
+        \medskip
 
         \subsection{   Physiological Background}
             \label{subsec:physio-background}
@@ -198,32 +190,27 @@
             According to the World Health Organization (WHO), CVD accounts for approximately
             30\% of all global deaths in 2012. Understanding the hemodynamics of the macrocirculatory system is crucial for
             diagnosing, treating, and preventing CVD. Consequently, our motivation is to
-            simulate and analyze various cardiovascular conditions, including arterial
-            stenosis, aneurysms, and heart valve disorders, with the aim to better enable
-            provider treatment. \todo{SEO for insurance companies}
+            simulate and analyze areterial stenosis with the aim to better enable
+            patient-provider outcomes.
 
             \medskip
 
             A single beat of the heart propels blood through the macrocirculatory system,
-            the "lub-dub" sound. We refer to the beat and the sequence of events until the
+            the "lub-dub" sound. We refer to the beat and the following sequence of events until the
             successive beat as the \emph{cardiac cycle}. The cardiac cycle consists of
             two main phases: systole and diastole, during which the heart chamber is
             accumulating blood and releasing blood (resp.). The beat can be recognized as a pulse
-            wave in large vessels, characterized by the Wormersley number $W_0$:
+            wave in large vessels, characterized by the Wormersley number
             \begin{flalign*}
-                    \quad & W_0 := 2R \cdot \sqrt{\frac{\omega \rho}{\eta}} &&
+                    \quad & W_0 := 2R \cdot \sqrt{\frac{\omega \rho}{\eta}},  \quad : ~ \rho \text{ is fixed blood density} &&
             \end{flalign*}
             a dimensionless parameter comparing the frequency $\omega$
-            of the pulse wave to the blood's kinematic viscosity $\eta$ and the vessel diameter $2R$.
-            \begin{definition}
-                \label{def:reynolds_number}
-                The Reynolds number $Re$ characterizes flow in blood vessels:
-                \begin{flalign*}
-                        \quad & Re := 2R \cdot \frac{\rho U}{\eta}, \quad : ~ \rho \text{ is fixed blood density}
-                \end{flalign*}
-                where $U$ is the mean flow velocity.
-            \end{definition}
-            Low $Re$ indicates laminar flow, while high $Re$ suggests turbulent flow. \todo{what is $\rho$?}
+            of the pulse wave to the blood's dynamic viscosity $\eta$ and the vessel diameter $2R$.
+            The Reynolds number $Re$ characterizes flow in blood vessels
+            \begin{flalign*}
+                    \quad & Re := 2R \cdot \frac{\rho U}{\eta}, \quad : ~ \rho \text{ is fixed blood density} &&
+            \end{flalign*}
+            Low $Re$ indicates laminar flow, while high $Re$ suggests turbulent flow.
 
             \medskip
 
@@ -245,100 +232,92 @@
 
             \medskip
 
-            \td{Explain Anuerysms and their hemodynamic characteristics}
-
-            \medskip
-
-            \medskip
-
-            \td{Explain Heart valve conditions and there hemodynamic Characteristics}
-
-            \medskip
-
-            Note \autocite[Table~1.1, p.~10, §1.1]{MathematicalEngineering}
+            Note \autocite[Table~1.1, p.~10, §1.1]{book1}
             shows $W_0 \propto 2R$ and $Re \propto (2R)^{-1}$; we
             observe large pulses and turbulent flow in large vessels and small pulses
             and laminar flow in small vessels.
 
             \medskip
 
-            \subsection{Fluid Model of Blood}
+            \paragraph{Constituents and hematocrit.}
+            Blood consists of plasma and formed elements which we call cells. Red blood cells (RBCs) comprise
+            $\approx 97\%$ of the cellular volume, and cellular volume is approximately $\approx 45\%$ of the blood volume.
+            The remaining $\approx 55\%$ of blood volume is plasma, which is $\approx 90\%$ water. The ratio of RBC
+            volume to total blood volume is the \emph{hematocrit value} $H$, a key metric governing apparent viscosity
+            $\eta$: as $H$ increases, $\eta$ typically increases (cf.\ S6.5.1~\cite{hemodynamics}).
+
+            \subsection{Modeling Blood Flow as a Continuum Fluid}
                 \label{subsec:fluid-model}
-                We define the term \emph{domain} as an open, nontrival, bounded, and path-connected subset of $~\R^N :  N \; =  \;1, \, 2, \, 3$.
-                Our aim is to model the kinematics of blood on the time interval $[0, T]$ in the lumen $\Omega(t) \subset \R^3$ of a blood vessel:
+                A \emph{domain} in an open, nontrivial, bounded, path-connected subset of $\R^N$ for $N\in\{1,2,3\}$.
+                W.a.t. simulate the hemodynamics in a spatial fluid domain $\Omega(t)\subset\R^N$, where
                 \begin{flalign*}
-                    \quad \Omega(t) &:= \{ x \in \R^3 ~:~ x \text{ is inside the blood vessel at time } t \},&&
+                    \quad \Omega(t) &:= \{ x \in \R^N ~:~ x \text{ lies inside the blood vessel at time } t \}. &&
                 \end{flalign*}
-                Here we say $\Omega(t)$ is the \emph{fluid domain}.
-
-                \medskip
-
-                \begin{definition}
-                    \label{def:feilds}
-                    Let $\Omega$ be a domain, then if:
-                    \begin{flalign*}
-                        \quad  f: \Omega \to \R, \quad & \text{then $f$ is a scalar feild.} &&\\
-                        \quad  \vct{f}: \Omega \to \R^N, \quad &  \text{then $f$ defines a vector feild.} &&\\
-                        \quad  \vct{T}: \Omega \to \R^{N\times N}, \quad &  \text{then $T$ defines a tensor feild},  &&\\
-                        \quad & \text{assuming $T$ defines a second-order tensor on $\Omega$.} &&
-                    \end{flalign*}
-                \end{definition}
-
-                \paragraph{Constituents and hematocrit.}
-                Blood consists of plasma and formed elements (cells). Red blood cells (RBCs) comprise
-                $\approx 97\%$ of the cellular volume, and cells occupy $\approx 45\%$ of the blood volume.
-                The remaining $\approx 55\%$ is plasma, which is $\approx 90\%$ water. The ratio of RBC
-                volume to total blood volume is the \emph{hematocrit value} $H$, an important metric
-                describing the influence of red blood cells on the flow. Blood viscosity $\eta$
-                increases dramatically as $H$ increases (see S6.5.1~\cite{hemodynamics}).
-
-
-                \medskip
-
-                \paragraph{Modeling framework.}
-                In \textit{continuum mechanics}, fluids are modeled by \textit{continuous fields}.
-                At \textit{microscopic scales}, our models break down—fluids as fluids are
-                discrete collections of molecules, not continuous fields. However, at macroscopic scales we can hope
-                that such models remain accurate. We proceed with an overview of the continum hypothesis in the context of blood flow,
-                explaining the consequences of assuming that blood is a single-constituent,
-                homoegenous, isotropic fluid in domain $\Omega(t)$.
-                \todo{cite references that our asssump. holds in the scale of large artiers}
-                \todo{explain how isotropic implies Adiabatic}
-
-                \medskip
-
+                for all $t \in [0,T]$ (s.t. $T>0$ is the final time of interest). On occasion, we refer to the
+                spatial-temporal domain $\Omega \defined \Omega(t) \times [0,T] \; \subset \; \R^{N+1}$ as
+                our \emph{computational domain}.
+                We use the following field terminology on $\Omega(t)$:
+                \begin{flalign*}
+                    \quad & \phi:\Omega(t)\to\R \;\text{is a \emph{scalar field}}, & \\
+                    \quad & \vct f:\Omega(t)\to\R^N \;\text{is a \emph{vector field}}, &&\\
+                    \quad & \vct T:\Omega(t)\to\R^{N\times N} \;\text{is a \emph{(second-order) tensor field}}. &&
+                \end{flalign*}
+                \paragraph{Continuum modeling framework.}
+                In \emph{continuum mechanics}, fluids are modeled by continuous fields.
+                At microscopic scales the continuum hypothesis breaks down, but at macroscopic scales such models
+                are accurate.
                 Let the blood's velocity, thermodynamic pressure, and density fields be
                 \begin{flalign*}
-                    \quad & \vct{u}: \Omega(t) \to \R^3, ~ (x, y, z) \mapsto (u_1(x, y, z), ~ u_2(x, y, z), ~u_3(x, y, z))^\top, \quad \bigg[\; \frac{m}{s^2} \;\bigg] && \\
-                    \quad & p: \Omega(t) \to \R, ~ (x, y, z) \mapsto p(x, y, z), \quad \bigg[\; \frac{kg}{m^3} \;\bigg]&& \\
-                    \quad & \rho: \Omega(t) \to \R^+, ~ (x, y, z) \mapsto \rho(x, y, z).\quad \bigg[\; Pa \equiv \frac{N}{m^2}\;\bigg] &&
+                    \quad & \vu: \Omega(t) \to \R^3, ~ (x, y, z) \mapsto (u_1(x, y, z), ~ u_2(x, y, z), ~u_3(x, y, z))^\top, \quad \bigg[\; \frac{m}{s^2} \;\bigg] && \\
+                    \quad & p: \Omega(t) \to \R, ~ (x, y, z) \mapsto p(x, y, z), \quad \bigg[\; Pa \equiv \frac{N}{m^2}\;\bigg] && \\
+                    \quad & \rho: \Omega(t) \to \R^+, ~ (x, y, z) \mapsto \rho(x, y, z).\quad \bigg[\; \frac{kg}{m^3} \;\bigg]&&
                 \end{flalign*}
-                \td{
-                Consider a fluid element $V$, explain how newton's second law implies Euler equations for invcisid
-                and incompressible. Then assuming the flow is incompresible,
-                we obatin the Cauchy equations for conservation of mass and
-                balance of momentum.
-                }
-                Then the rate-of-deformation tensor is defined as the symmetric part of the velocity gradient,
+                We adopt the continuum hypothesis and treat blood (at large-vessel scales)
+                as a single-constituent, homogeneous, isotropic fluid in $\Omega(t)$; ensuring that $\vu, ~p, \text{ and } \rho$
+                are sufficiently smooth in space.
+
+                \begin{definition}
+                    \label{def:material_derivative}
+                    The material derivative of a physical quantity $\phi$ in a material
+                    element moving with velocity field $\vu$ is
+                    \begin{flalign*}
+                        \quad D_t\phi \;:=\; \partial_t \phi + \vu\!\cdot\!\Div(\phi). &&
+                    \end{flalign*}
+                    The literature also refers to $D_t$ as the \emph{substantial derivative},
+                    \emph{advective derivative}, \emph{lagrangian derivative}, or \emph{convective
+                    derivative}.
+                \end{definition}
+                By our assumption that blood is homogenous, the material property $\rho$ does not depend
+                on position in $\Omega(t)$, i.e., $\rho \equiv \rho(t)$.
+                Applying Newton's Laws, mass conservation and linear momentum balance read respectively:
                 \begin{flalign*}
-                    \quad \vct{D}(\vct{u}) := \tfrac{1}{2}\big(\nabla\vct{u}+(\nabla\vct{u})^\top\big)
-                    \quad \text{s.t.} \quad \nabla\vct{u} := \vect{
+                    \quad \begin{cases*}
+                        \partial_t \rho + \Div(\rho \vu) \;=\; 0, \\
+                        \rho(\partial_t \vu + (\vu\cdot\nabla)\vu ) \;=\; \Divbf(\vT) + \rho \vfb,
+                    \end{cases*} \qquad \text{in} ~ \Omega(t) &&
+                \end{flalign*}
+                where $\vT$ is the Cauchy stress tensor, $\vfb$ is body force per unit mass $\big[\dfrac{m}{s^2}\big]$,
+                and $\Divbf$ acts rowwise on $\vT$. Let the rate-of-deformation tensor be defined as the symmetric
+                part of the velocity gradient,
+                \begin{flalign*}
+                    \quad \vct{D}(\vu) := \tfrac{1}{2}\big(\nabla\vu+(\nabla\vu)^\top\big)
+                    \quad \text{s.t.} \quad \nabla\vu := \vect{
                         \dfrac{\partial u_1}{\partial x} & \dfrac{\partial u_1}{\partial y} & \dfrac{\partial u_1}{\partial z} \\
                         \dfrac{\partial u_2}{\partial x} & \dfrac{\partial u_2}{\partial y} & \dfrac{\partial u_2}{\partial z} \\
                         \dfrac{\partial u_3}{\partial x} & \dfrac{\partial u_3}{\partial y} & \dfrac{\partial u_3}{\partial z}
                     }, &&
                 \end{flalign*}
-                measuring how a continuum of fluid deforms locally under the velocity field $\vct{u}$.
+                measuring how continuum of fluid deforms locally under the velocity field $\vu$.
                 \begin{definition}
                     \label{def:newtonian-fluid}
-                    A fluid is \emph{Newtonian} if its Cauchy stress $\vct{T}\;$ depends
-                    linearly on the rate-of-deformation tensor $\vct{D}(\vct{u})$.
+                    A fluid is \emph{Newtonian} if its Cauchy stress tensor $\vct{T}\;$ depends
+                    linearly on the rate-of-deformation tensor $\vct{D}(\vu)$.
                 \end{definition}
                 \begin{definition}
                     \label{def:isotropic}
                     A fluid is \emph{isotropic} if its constitutive response is independent of the coordinate system.
                     Writing the Cauchy stress as $\vct{T}\;=\vct{T}\;(\vct{D})$,
-                    isotropy means that for every orthogonal rotator $\vct{Q}\in\mathrm{SO}(3)$, \todo{remove group ref to SO(3)}
+                    isotropy means that for every orthogonal rotator $\vct{Q}\in\mathrm{SO}(3)$,
                     \begin{flalign*}
                         \quad & \vct{Q}\, \vct{T}(\vct{D})\,\vct{Q}^{\top} \;=\; \vct{T}\;\!\big(\vct{Q}\,\vct{D}\,\vct{Q}^{\top}\big). &&
                     \end{flalign*}
@@ -347,166 +326,174 @@
                     \label{def:fluidsmodel}
                     For a Newtonian, isotropic fluid the Cauchy stress is
                     \begin{flalign*}
-                        \quad & \vct{T} = -\,p\,\mathrm{I} + 2\,\eta\,\vct{D}(\vct{u}) + \lambda\,\Div(\vct{u})\,\mathrm{I}, &&
+                        \quad & \vct{T} = -\,p\,\mathrm{I} + 2\,\eta\,\vct{D}(\vu) + \lambda\,\Div(\vu)\,\mathrm{I}, &&
                     \end{flalign*}
                     where $\eta>0$ is the dynamic (shear) viscosity and $\lambda$ the bulk viscosity.
                 \end{definition}
-                Note, an isotropic fluid at rest (quiescent state $\vct{u}\equiv\vct{0}$) sustains only
+                So an isotropic fluid at rest (quiescent state $\vu\equiv\vct{0}$) sustains only
                 hydrostatic stress: $\vct{T}=-p\,\mathrm{I}$.
                 \begin{definition}[Incompressibile fluid]
                     \label{def:incompressible-fluid}
-                    A fluid is \emph{incompressible} if its density is constant in space and time.
+                    A fluid is \emph{incompressible} if its density is constant (in space and time), i.e.\ $\rho\equiv\rho_0>0$.
                 \end{definition}
                 \begin{definition}[Incompressible flow]
                 \label{def:incompressible-flow}
                     A flow is \emph{incompressible} if density is materially constant
-                    in space and time. Let $D_t : = \partial_t + \Div\big((\cdot) \vct{u})$ be the material derivative,
-                    then incompressible flow means $D_t(\rho)=0$ in $\Omega(t)$ for all time $t$.
+                    (in space and time), i.e. $D_t\rho=0$ in $\Omega(t)$ for all $t$.
                 \end{definition}
-                \begin{remark}
+                \begin{remark}[Divergence-free condition under incompressibility]
                     \label{rmk:incompressibility-divergence-free}
-                    By assumption that blood is an incompressible fluid, $\rho\equiv\rho_0>0$ constant.
-                    By mass conservation of an incompressible fluid volume, it may be shown that
-                    the fluid's flow is incompressible in the sense of Definition~\ref{def:incompressible-flow}.
+                    By assumption that blood is an incompressible fluid, it's density
+                    $\rho\equiv\rho_0 \in \R^+$. By the conservation of mass in an
+                    incompressible fluid volume, it may be shown that the fluid's flow
+                    is incompressible in the sense of Definition~\ref{def:incompressible-flow}.
                     Assuming incompressibility of the fluid and flow, we have the equivalences:
                     \begin{flalign*}
                         \quad & D_t \rho = 0 &&\\
                         \quad & \iff \partial_t \rho + \Div(\rho \vct{u}) = 0 &&\\
-                        \quad & \iff \Div(\rho \vct{u}) = 0 \quad (\because ~ \rho \text{ is constant})&&\\
-                        \quad & \iff \nabla \cdot (\rho \vct{u}) = 0 &&\\
-                        \quad & \iff \langle\rho \vct{u},  \nabla \rangle = 0 &&\\
-                        \quad & \iff \rho \langle \vct{u},  \nabla \rangle = 0 &&\\
-                        \quad & \iff\langle \vct{u},  \nabla \rangle = 0 \quad (\because ~ \rho > 0) &&\\
+                        \quad & \iff \Div(\rho \vct{u}) = 0 \quad (\because ~ \rho=\rho_0)&&\\
+                        \quad & \iff \nabla \cdot (\rho_0 \vct{u}) = 0 &&\\
+                        \quad & \iff \langle\rho_0 \vct{u}, \nabla \rangle = 0 &&\\
+                        \quad & \iff \rho_0 \langle \vct{u}, \nabla \rangle = 0 &&\\
+                        \quad & \iff\langle \vct{u}, \nabla \rangle = 0 &&\\
                         \quad & \iff \nabla \cdot \vct{u} = 0 &&
                     \end{flalign*}
-                    So under incompressibility of the fluid and flow, the
-                    divergence-free condition $\Div(\vct{u}) = 0$ of our velocity field holds
-                    in $\Omega(t)$. Consequently, the Cauchy stress simplifies to
-                    \begin{equation*}
-                        \label{def:improssible-stress-tensor}
-                        \quad \vct{T} ~ = ~ -\,p\,\mathrm{I} + 2\,\eta\,\vct{D}(\vct{u})
-                    \end{equation*}
+                    So under incompressibility of the fluid and flow, we obtain the \emph{divergence-free condition}
+                    $\Div(\vct{u}) = 0$ in $\Omega(t)$.
                 \end{remark}
-                \begin{remark}[Dynamic vs. Kinematic Viscosity]
-                    Throughout assume $\eta \in \R^+$ denote the \emph{dynamic viscosity} of blood, and let $\mu \in \R^+$ denote the \emph{kinematic viscosity}. Then:
+                Consequently, the constitutive law simplifies as follows.
+                \begin{definition}[Incompressible stress tensor]
+                    \label{def:improssible-stress-tensor}
+                    The Cauchy stress~\ref{def:fluidsmodel} simplifies to
                     \begin{flalign*}
-                        \quad \mu := \frac{\eta}{\rho} &&
+                        \quad \vct{T} ~ = ~ -\,p\,\mathrm{I} + 2\,\eta\,\vct{D}(\vu). &&
                     \end{flalign*}
-                    where $\rho$ is the blood density $\big[\frac{kg}{m^3}\big]$ (assumed constant by incompressibility). Thus:
-                    \begin{itemize}
-                    \item $\eta$ quantifies the internal resistance of blood to shear deformation, i.e., $\eta := \dfrac{\tau}{\dot{\gamma}}$, with units $[Pa \cdot s]$;
-                    \item $\mu$ adjusts $\eta$ by the density $\rho$, capturing the viscous diffusion of momentum per unit mass, with units $\big[\frac{m^2}{s}\big]$.
-                    \end{itemize}
+                \end{definition}
+                \begin{remark}[Dynamic vs. Kinematic Viscosity]
+                    We model blood as Newtonian and incompressibile.
+                    Throughout we assume the constanst \emph{dynamic viscosity} $\eta \in \R^+$ and blood with constant denisity $\rho \equiv \rho_0 \in \R^+$.
+                    The \emph{kinematic viscosity} follows, defined as:
+                    \begin{flalign*}
+                        \quad \mu\; :=\; \frac{\eta}{\rho} \; \in \; \R^+. &&
+                    \end{flalign*}
+                    Here $\eta$ quantifies the internal resistance of blood to shear deformation, i.e., $\eta := \dfrac{\tau}{\dot{\gamma}}$,
+                    with units $[Pa \cdot s]$. Moreover $\mu$ adjusts $\eta$ by the density $\rho$, capturing the viscous diffusion of momentum per unit mass, with units $\big[\frac{m^2}{s}\big]$.
                     Intuitively, $\eta$ measures how "thick" or "sticky" the fluid is, while $\mu$ measures how quickly momentum diffuses through the fluid due to viscosity.
                 \end{remark}
-                \todo{How do we conclude now that $\eta$ is constant, so $\mu$ is constant? Confirm this follows from Newtonian assumption.}
-                We will model blood as Newtonian in large arteries by taking $\eta$ constant
-                (so $\mu=\eta/\rho$ constant). When diameter $d$ and hematocrit effects are needed, we use a
-                relative viscosity $\eta_r(H,d)$ that scales an absolute baseline $\eta$:
-                \begin{flalign*}
-                    \eta_{\mathrm{eff}} \;=\; \eta_r(H,d)\,\eta
-                \end{flalign*}
-                An empirical fit (e.g.\ \cite{bviscosity}) is
-                \begin{equation}
-                \label{eq:relative_viscosity}
-                \eta_r \;=\; 1 + (\eta_{0.45}-1)\,
-                \frac{(1-H)^{C}-1}{(1-0.45)^{C}-1},
-                \qquad
-                \begin{cases}
-                    \eta_{0.45} = 6\,e^{-0.085\,d} + 3.2 - 2.44\,e^{-0.06\,d^{0.645}},\\[3pt]
-                    C = \big(0.8 + e^{-0.075\,d}\big)\!\left(-1 + \dfrac{1}{1 + 10^{-11}\,d^{12}}\right)
-                        + \dfrac{1}{1 + 10^{-11}\,d^{12}},
-                \end{cases}
-                \end{equation}
-                where $d : = 2R/(1.0 \mu m)$ is the (scaled) vessel diameter.
-                In large vessels, $\eta_r$ is often constant, justifying the Newtonian assumption.
+                \begin{remark}[Newtonian Blood Justification]
+                    \label{rmk:newtonian-justification}
+                    When diameter $d$ and hematocrit effects are needed, one may use a Non-Newtonian
+                    model with relative viscosity $\eta_r(H,d)$ that scales an absolute baseline $\eta$:
+                    \begin{flalign*}
+                        \quad \eta_{\mathrm{eff}} \;=\; \eta_r(H,d)\,\eta \quad \text{(effective viscosity)}&&
+                    \end{flalign*}
+                    An empirical fit from \cite{bviscosity}
+                    \begin{flalign*}
+                        \quad \eta_r \;=\; 1 + (\eta_{0.45}-1)\,
+                        \frac{(1-H)^{C}-1}{(1-0.45)^{C}-1}
+                        \text{ s.t. }
+                        \begin{cases}
+                            \eta_{0.45} = 6\,e^{-0.085\,d} + 3.2 - 2.44\,e^{-0.06\,d^{0.645}},\\[3pt]
+                            C = \big(0.8 + e^{-0.075\,d}\big)\!\left(\dfrac{1}{1 + 10^{-11}\,d^{12}} - 1\right)
+                                + \dfrac{1}{1 + 10^{-11}\,d^{12}},
+                        \end{cases} &&
+                    \end{flalign*}
+                    where $d \defined 2R/(1.0 \mu m)$ is the (scaled) vessel diameter.
+                    In large vessels, $\eta_r$ is often constant, justifying the Newtonian assumption.
+                    [\cite{book1}, sec. 3.1]
+                \end{remark}
             \medskip
         \medskip
 
-        \subsection{Navier Stokes System}
+        \subsection{Navier-Stokes System}
             \label{subsec:intro-navier-stokes}
-
-            The Navier-Stokes (NS) system in conservative form:
-            \begin{definition}[Incompressible-Newtonian NS (Conservative Form)]
-                \label{def:NSEquations}
-                \begin{flalign*}
-                    \quad & \begin{cases*}
-                    \quad \rho\big(\partial_t \vct{u} + (\vct{u}\cdot\nabla)\vct{u}\big) = -\,\nabla p \;+\; \Divbf\!\Big( 2\,\mu(|\vct{D}|^2)\,\vct{D}\Big) \;+\; \rho\,\vct{f} \\
-                    \quad \Div(\vct{u}) = 0,
-                    \end{cases*} &&
-                \end{flalign*}
-                where $\vct{f}$ is an external force field (e.g., gravity),
-            \end{definition}
-
-            We rewrite Eq. \ref{def:NSEquations} in standard form (as found in
-            \cite{ns-formulation}, \cite{MathematicalEngineering}.)
-            \begin{definition}
-                \label{def:standard-form-ns}
-                \begin{flalign*}
-                    \quad &\rho\big(\partial_t \vct{u} + (\vct{u}\cdot\nabla)\vct{u}\big) = -\,\nabla p \;+\; \Divbf\!\Big( 2\,\mu(|\vct{D}|^2)\,\vct{D}\Big) \;+\; \rho\,\vct{f}&&\\
-                    \quad &\iff \rho\big(\partial_t \vct{u} \;+\; (\vct{u}\cdot\nabla)\vct{u}\big) \;=\; -\,\nabla p \;+\; \Divbf\!\Big( 2\,\frac{\eta}{\rho}(|\vct{D}|^2)\,\vct{D}\Big) \;+\; \rho\,\vct{f} &&\\
-                    \quad &\iff \rho\big(\partial_t \vct{u} \;+\; (\vct{u}\cdot\nabla)\vct{u}\big) \;=\; -\,\nabla p \;+\; \eta ~ \Divbf\!\Big( 2\,\frac{1}{\rho}(|\vct{D}|^2)\,\vct{D}\Big) \;+\; \rho\,\vct{f} \quad (\because ~\eta = \frac{\mu}{\rho} = \text{const.}) &&\\
-                    \quad &\iff \rho\big(\partial_t \vct{u} \;+\; (\vct{u}\cdot\nabla)\vct{u}\big) \;=\; -\,\nabla p \;+\; \mu\;\rho ~ \Divbf\!\Big( 2\,\frac{1}{\rho}(|\vct{D}|^2)\,\vct{D}\Big) \;+\; \rho\,\vct{f} &&\\
-                    \quad &\iff \partial_t \vct{u} \;+\; (\vct{u}\cdot\nabla)\vct{u} \;=\; -\,\frac{\nabla p}{\rho} \;+\; \mu\; ~ \Divbf\!\Big( 2\,\frac{1}{\rho}(|\vct{D}|^2)\,\vct{D}\Big) \;+\; \,\vct{f} && \\
-                    \quad &\iff \partial_t \vct{u} \;+\;  (\vct{u}\cdot\nabla)\vct{u} \;+\; \frac{\nabla p}{\rho}  \;-\;  \Divbf\!\Big( \frac{2}{\rho}\;\mu\;(|\vct{D}|^2)\,\vct{D}\Big) \;=\; \,\vct{f} && \\
-                    \quad &\iff F\!\big(\partial_t\vct{u},\,\nabla\vct{u},\,\nabla p,\, \vct{u},\, p;\, \rho, \mu\big) \;=\; \vct{f}&&
-                \end{flalign*}
-            \end{definition}
-            \begin{remark}
-                \label{classifying NS}
-                The NS system~\ref{def:NSEquations} is a non-linear coupled system of PDEs.
-                \medskip
-                The first equation expresses the conservation of linear momentum,
-                as derived from Newton's second law, where
-                \begin{itemize}
-                    \item  $\rho (\vct{u}\cdot\nabla)\vct{u} = \rho \vect{
-                        \langle \vct{u}, \nabla \vct{u}_1 \rangle\\
-                        \langle \vct{u}, \nabla \vct{u}_2 \rangle\\
-                        \langle \vct{u}, \nabla \vct{u}_3 \rangle
-                    }$ is the convective acceleration term (non-linear),
-                    \item $\Divbf\!\Big( 2\,\mu(|\vct{D}|^2)\,\vct{D}\Big)$ is the viscouselastic and diffusive term (linear if $\mu$ constant).
-                \end{itemize}
-                The second equation is the continuity equation, a consequence of the assumed fluid properties of blood.
-                The total system comprises of four equations in four unknowns: the three components of the velocity field
-                $\vct{u}$ and the pressure field $p$.
-            \end{remark}
-            We will seek solutions of Eq.~\ref{def:NSEquations} to an initial value problem.
-            \begin{definition}
-                \label{def:init_condition}
-                Let $\vct{u_0} : \Omega(0) \to R^3, ~ \vct{x} \mapsto \vct{u_0}(x) ~ : ~ u(0, \vct(x)) = \vct{u_0}$.
-                We refer to $\vct{u_0}$ as the initial condition of velocity feild $\vct{u}$
-            \end{definition}
-            In practice, $\vct{u_0}$ may be prescribed or determined from sensor data.
-
-            \medskip
-
-            To model non-Newtonian effects (when $\eta \neq \text{ constant}$), the kinematic viscosity
+            Let $\vct{f}$ an external force acting on a continumm of blood fluid.
+            When modeling non-Newtonian effects (when $\eta \neq \text{ constant}$), the kinematic viscosity
             $\mu(\cdot)$ is often chosen by Careau model \cite{hemodynamics}
             \begin{flalign*}
                 \quad 2\,\mu(|\vct{D}|^2) = \eta_\infty + (\eta_0 - \eta_\infty) \cdot \big(1 + \kappa |\vct{D}|^2\big). &&
             \end{flalign*}
             Where $\eta_0$ and $~\eta_\infty$ are chosen to be the viscosity for very small
             and very large shear rates, resp., and $\kappa \in \R^+$ and $n \in (-0.5, 0)$ are model parameters.
-            According to \cite{MathematicalEngineering}, we often set
+            According to [\cite{book1}, pg. $38$], we often set
             \begin{flalign*}
                 \quad \eta_0 = 65.7 \cdot 10^{-3} ~Pa \cdot s, ~ \eta_\infty = 4.45\cdot10^{-3} ~Pa \cdot s,
                     \kappa = 212.2 ~s^2, ~ \text{ and } n = -0.325 &&
             \end{flalign*}
-            In a Newtonian case, one often chooses $\mu(|\vct{D}|^2) = \eta_\infty$ (\cite{MathematicalEngineering}, pg. 38).
-
-            \medskip
-
-            If pressure $P$ and the velocity $\vct{u}$ are given,
-            the Caucy stress $\vct{T}$ is computed from Eq.~\ref{def:improssible-stress-tensor}.
-            The wall shear stress (WSS) at the vessel wall is:
-
+            In the Newtonian case, we choose $\eta = \eta_\infty$ which allows us to determine $\mu$
+            as $\mu(|\vct{D}|^2) = \eta$.
+            When coupling our momentum balance equation with the divergence-free condition of $\vu$, we obtain the
+            Navier-Stokes (NS) equations.
+            \begin{definition}[Conservative-Momentum Balance Form]
+                \label{def:nsconservative}
+                \begin{flalign*}
+                    \quad & \begin{cases*}
+                        \quad \partial_t(\rho \vct u) \;+\;  (\rho\vu\cdot\nabla)\vu
+                            \;=\; -\,\nabla p \;+\; \Divbf\!\big( 2\,\eta\,\vct D(\vct u) \big) \;+\; \rho\,\vct f, \\
+                        \quad \Div(\vct u) \;=\; 0,\qquad \rho \equiv \rho_0>0 \text{ (constant).}
+                    \end{cases*} &&
+                \end{flalign*}
+            \end{definition}
+            Since $\rho \equiv \rho_0$ and $\eta = \mu |\vct{D}|^2$, the advective form follows from~\ref{def:nsconservative}.
+            \begin{definition}[Generalized-Newtonian Navier-Stokes (NS)]
+                \label{def:NSEquations}
+                \begin{flalign*}
+                    \quad & \begin{cases*}
+                    \quad \rho\big(\partial_t \vu + (\vu\cdot\nabla)\vu\big) = -\,\nabla p \;+\; \Divbf\!\Big( 2\,\mu(|\vct{D}|^2)\,\vct{D}\Big) \;+\; \rho\,\vct{f} \\
+                    \quad \Div(\vu) = 0,
+                    \end{cases*} &&
+                \end{flalign*}
+            \end{definition}
+            We divide $\rho$ and obtain the kinematic-viscosity form from~\ref{def:NSEquations}.
+            \begin{definition}[Kinematic-Viscosity Navier-Stokes (NS)]
+                \label{def:kinematic-viscosity-ns}
+                \begin{flalign*}
+                    \quad & \begin{cases*}
+                    \quad \partial_t \vu + (\vu\cdot\nabla)\vu = -\,\frac{\nabla p}{\rho}\, \;+\; \Divbf\!\Big( \frac{2}{\rho}\,\mu(|\vct{D}|^2)\,\vct{D}\Big) \;+\; \vct{f}, \\
+                    \quad \Div(\vu) = 0,
+                    \end{cases*} &&
+                \end{flalign*}
+            \end{definition}
+            Finally, we write the NS system in operator form.
+            \begin{definition}
+                \label{def:standard-form-ns}
+                We write Eq. \ref{def:NSEquations} in standard form
+                \begin{flalign*}
+                    \quad & \begin{cases*}
+                        \quad F\!\big(\partial_t\vu,\,\nabla\vu,\,\nabla p,\, \vu,\, p;\, \rho, \mu\big) \;=\; \vct{f}, \\
+                        \quad \Div(\vu) \;=\; 0,
+                    \end{cases*} && \\
+                    \text{where} \quad & F\!\big(\partial_t\vu,\,\nabla\vu,\,\nabla p,\, \vu,\, p;\, \rho, \mu\big) \defined \partial_t \vu \;+\;  (\vu\cdot\nabla)\vu \;+\; \frac{\nabla p}{\rho}  \;-\;  \Divbf\!\Big( \frac{2}{\rho}\;\mu\;(|\vct{D}|^2)\,\vct{D}\Big) &&
+                \end{flalign*}
+            \end{definition}
+            \begin{remark}
+                \label{classifying NS}
+                The NS equations are a non-linear coupled system of PDEs.
+                \medskip
+                The first equation follows from the balance of linear momentum,
+                where the terms:
+                \begin{itemize}
+                    \item  $\rho (\vu\cdot\nabla)\vu = \rho \vect{
+                        \langle \vu, \nabla \vu_1 \rangle\\
+                        \langle \vu, \nabla \vu_2 \rangle\\
+                        \langle \vu, \nabla \vu_3 \rangle
+                    }$ is the convective term governing acceleration of fluid (non-linear).
+                    \item $\Divbf\!\Big( 2\,\mu(|\vct{D}|^2)\,\vct{D}\Big)$ is the diffusive term describing the viscouselastic behavior (linear since $\mu$ is constant).
+                \end{itemize}
+                The second equation is the continuity equation, a consequence of the assumed fluid properties of blood
+                that lead to the divergence-free condition on $\vu$.
+                \medskip
+                The total system comprises of four equations in four unknowns: the three components of the velocity field
+                $\vu$ and the pressure field $p$.
+            \end{remark}
+            If pressure $p$ and the velocity $\vu$ are given, the Caucy stress $\vct{T}$ is computed
+            from Eq. \ref{def:improssible-stress-tensor}. The wall shear stress (WSS) at the vessel wall is:
             \begin{flalign*}
-                \quad \text{WSS} \; := \; \langle \vct{t_{blood}}, ~\vct{T}\;\hat{n} \rangle \quad : \quad \begin{cases*}
+                \quad \text{WSS} \defined \langle \vct{t_{blood}}, ~\vct{T}\;\hat{n} \rangle \quad : \quad \begin{cases*}
                     t_{blood} \text{ is tangent of a flow line through a cross-sectional area} \\
                     \hat{n} \text{ is outer normal of the cross-sectional area}
                 \end{cases*}&&
             \end{flalign*}
-
             Forgoing the rigid-wall assumption allows us to model the relationship
             between the vessel wall and blood flow. Applicable models are reffered
             to as fluid-structure interaction (FSI) models.\todo{discuss in a later section}
@@ -515,7 +502,7 @@
             \subsubsection{NS in Cylindrical Coordinates}
                 \label{subsubsec:cylindrical-coords}
 
-                Let our vessel wall $\partial \Omega$ be a surface in $\R^3$
+                Let our vessel wall $\partial \Omega = [0, T] \times \Omega(t)$ be a surface in $\R^4$
                 that evolves in time which we refer to as the interface.
                 Let $\OmegaBar = \partial \Omega \cup \Omega$ be the closed and compact
                 region enclosed by our interface. So the region enclosed by our interface
@@ -532,9 +519,18 @@
                     \label{fluid-domain-cylidrical}
                     \Omega(t) \; = \; \{(r, ~,\theta ~, z) \in \R^3 ~ : ~r \in [0, R(z, t)], ~ \theta \in [0, 2\pi), ~ z \in [0, l) \}
                 \end{equation*}
+                where $R(z,t)$ is the vessel radius at axial position $z$ and time $t$.
+
+                \medskip
+                \td{
+                    Ref. notes for further details on deriving the transformation rules for vector
+                    calculus operators, or, notes where I do the derivation directly.
+                    Then discuss simplifications for axisymmetric flow.
+                }
+                \medskip
             \medskip
         \medskip
-    \newpage
+
 
     \section{Mathematical Models of Blood Flow}
         \label{sec:math-models}
@@ -542,126 +538,144 @@
 
         One chooses a model based upon the specific application, computational resources,
         and desired accuracy. We construct models of blood flow in
-        various geometries, starting from a single vessel, then extendind our approach to
+        various geometries, starting from a single vessel, then extending our approach to
         bifurcations and arterial networks. Our strategy involves a \emph{domain decomposition approach}.
 
         \medskip
+
+        We seek solutions to inital and boundary value problems of Eq.~\ref{def:NSEquations}.
+        \begin{definition}
+            \label{def:init_condition}
+            Let $\vct{u_0} : \Omega(0) \to R^3, ~ \vct{x} \mapsto \vct{u_0}(x) ~ : ~ \vu(0, \vct{x}) = \vct{u_0}$.
+            We refer to $\vct{u_0}$ as the initial condition of velocity feild $\vu$
+        \end{definition}
+        \begin{definition}
+            Let $\vct{u^0}(t)$ and $\vct{u^1}(t)$ be the velocity feilds at $S_0$ and $S_1$.
+        \end{definition}
+        In practice, $\vct{u_0}(z)$ may be prescribed or determined from sensor data.
 
         \subsection{Dimension-Reduced Models of Blood Flow}
             \label{subsec:dim-reduced-models}
 
             We start our disscusion with 1D and 0D models, reducing the
             d.o.f. in the NS system~\ref{def:NSEquations} by imposing further
-            simplifying assumptions.
+            simplifying assumptions. Namely, w.a.t. compute average pressures
+            and velocities after a relatively short simulation time by solving
+            the 1D NS system in a compliant vessel with suitable side conditions.
+            Because our model averages pressure and velocity over a surface-area, we obtain
+            a uniform distribution of WSS on the vessel.
+
             \medskip
 
-            \subsubsection{1D Models}
-                \label{subsubsec:1D}
-                By averaging pressure and blood velocity on slice of a vessel,
-                we consider the flow through each cross-section, leading to a
-                model of the flow along the length of the vessel. Because our model
-                averages pressure and velocity over a surface-area, we obtain
-                a uniform distibution of WSS on the vessel. There are various
-                approaches to deriving a 1D model:
-                \begin{enumerate}
-                    \item Assume $R << \ell$, e.g., (ref dimension reduced paper)
-                    \item Integrating the NS system~\ref{def:NSEquations} in a compliant
-                    vessel.
-                    \item A simplification of the reynolds equation (\ref{}, Chap. 10, \ref{}, \ref{})
-                \end{enumerate}
-                \begin{figure}[!htb]
-                    \label{fig:compliant-vessel}
-                    \centering
-                    \captionsetup{aboveskip=2pt,belowskip=2pt}
-                    \includegraphics[width=0.9\linewidth,height=0.35\textheight,keepaspectratio]{compliant-vessel.png}
-                    \caption{From \cite{MathematicalEngineering} [Fig. 3.2, pg. 37]}
-                \end{figure}
-                \newpage
-                Assume the vessel under study may be transformed to a simplified
-                geometry as displayed in Figure~\ref{fig:compliant-vessel}. One may start by
-                introducing a rigid-vessel assumption, which leads to a no slip condition
-                that $\vct{u} \big|_{\partial\Omega} \; = \; \vct{0}$. Instead we seek
-                to model the link between blood flow and the deformation of the vessel wall.
+            One may start by introducing a rigid-vessel assumption, which leads to a no slip condition
+            that $\vu \big|_{\partial\Omega} \; = \; \vct{0}$. Instead we seek
+            to model the link between blood flow and the deformation of the vessel wall.
+            We begin our derivation of Dimension-Reduced models by assuming the following
+            transformation exists of our fluid domain boundary $\Omega(t)$ to a simplified geometry.
 
-                \medskip
+            \medskip
 
+            \begin{figure}[!htb]
+                \label{fig:compliant-vessel}
+                \centering
+                \captionsetup{aboveskip=2pt,belowskip=2pt}
+                \includegraphics[width=0.95\linewidth,height=0.45\textheight,keepaspectratio]{compliant-vessel.png}
+                \caption{
+                    From \cite{book1} [Fig. 3.2, pg. 37]
+                }
+            \end{figure}
 
-                Let $V(t) \subset \Omega(t)$ be a material fluid element of the vessel $\OmegaBar(t)$
-                such that $\partial V(t) \subset \partial \Omega(t)$, i.e., $V(t)$ is on the
-                the vessel wall. According to the Reynold's transport theorem for $f \in L^1(\Omega(t))$
-                \begin{flalign*}
-                    \quad \dfrac{d}{dt} \int_{V_t} f dV \;
-                        = \; \int_{V(t)} \dfrac{\partial f }{\partial t} dV \;
-                        + \; \int_{\partial V(t)}  (\vct{u_b} \cdot \nhat) f dS &&
-                \end{flalign*}
-                where $\vct{u_b}$ is the velocity feild deforming the boundary $\partial V(t)$
-                (Pf. see \href{https://en.wikipedia.org/wiki/Reynolds_transport_theorem}{wiki}).
-                If we assume the normal component of $\vct{u_b} = \vct{0}$ near the inlet
-                and outlet boundaries $S_1$ and $S_2$ (resp.) of $\Omega$, then the motion of the vessel wall
-                is coupled to the blood flow through the fluid element $V(t)$. The velocity $\vct{u_b}$
-                is equivalent to the velocity of the vessel wall $\partial \Omega(t)$ in contact with the boundary element $\partial V(t)$.
-                I.e., the vessel wall velocity $\vct{u_w} = \vct{u_b}$.
-                Now let $\vct{w} = \vct{u_w} - \vct{u}$ be the relative velocity of the vessel wall
-                w.r.t. the velocity $\vct{u} = (u_1, u_2, u_3)^\top$ of the blood element $V(t)$. Then it follows that
-                \begin{flalign*}
-                    \quad \; \int_{\partial V(t)} \big(\vct{u_b} \cdot \nhat \big)f \; dS ~
-                        & = ~ \; \int_{\partial V(t)} \big(\vct{u_w} \cdot \nhat \big)f \; dS &&\\
-                    \quad \; & = \; \int_{\partial V(t)} \big(\vct{w} \cdot \nhat \big)f \; dS
-                        ~ + ~ \; \int_{\partial V(t)} \big(\vct{u} \cdot \nhat \big)f \; dS &&\\
-                \end{flalign*}
-                Let $\bar{f}$ denote the average value of $f$ defined over a surface $S$
-                \begin{flalign*}
-                    \quad \bar{f} \; := \; \frac{1}{A} ~ \int_{S(z, t)} f \;dS\quad :  \quad  A(z, t) \; := \; \int_{S(z, t)} dS &&
-                \end{flalign*}
-                No we may rewrite the volume integral in the LHS of RT theorem
-                \begin{flalign*}
-                    \quad  \int_{V_t} f dV \; = \; \int_{z_1}^{z_2} \int_{S(z, t)} f \;dS \; dz
-                        \;=\; \int_{z_1}^{z_2} A \cdot \bar{f} \; dz &&
-                \end{flalign*}
-                where $z_1 < z_2$ are fixed $z$-coordinates for $S_1$ and $S_2$.
-                Then we differentiate the integrands in the above equation w.r.t. $t$
-                \begin{flalign*}
-                    \quad \int_{V(t)} \dfrac{\partial f}{\partial t} dV \;=\; \int_{z_1}^{z_2} \dfrac{\partial}{\partial t} \bigg[A \cdot \bar{f} \bigg]\; dz, &&
-                \end{flalign*}
-                and we've rewritten the first term in the RHS of the reynolds system.
-                The surface integral in the RHS may be written as
-                \begin{flalign*}
-                    \quad \int_{\partial V(t)}  (\vct{u_b} \cdot \nhat) f dS = \int_{\partial V(t)}  (\vct{u_b} \cdot \nhat) f dS.... &&
-                \end{flalign*}\todo{cleanup, ref. pg. 43}
-                With a little more work, one may obtain:
-                \begin{definition}
-                    \label{def:1dReynolds}
-                    The 1D Reynolds Transport theorem for both compressible and incompressible fluids:
-                    \begin{flalign*}
-                        \quad \frac{\partial }{\partial t} \bigg( A \bar{f} \bigg) \; + \; \frac{\partial}{\partial z}\big( A (\overline{f \cdot u_3}) \big)
-                        \; = \; \int_S \bigg( \dfrac{\partial f}{\partial t} + \nabla \cdot (f \vct{u}) \bigg) dS
-                        \; + \; \int_{\partial S} f \vct{w} \cdot \nhat \; d \gamma &&
-                    \end{flalign*}
-                \end{definition}
+            \newpage
 
-                \begin{remark}
-                    \label{1DMassConservation}
-                    By taking $f = \rho$ in \ref{def:1dReynolds}, mass conservation follows directly. Also, by our assumption
-                    that blood is incompressible, we have $\begin{cases*}\Div(\vct{u}) = 0\\\rho =\text{const.}\\
-                    \end{cases*}$ and we simplify \ref{def:1dReynolds} as
-                    \begin{flalign*}
-                        \quad \frac{\partial A }{\partial t} \; + \; \frac{\partial}{\partial z}\big( A (\overline{u_3}) \big)
-                        \; = \; \int_{\partial S} \vct{w} \cdot \nhat \; d \gamma &&
-                    \end{flalign*}
-                    The RHS term above describing the transport process across the vessel wall. \todo{complete, pg. 45}
-                \end{remark}
+            We consider the fluid dynamics of the following fluid element contained in a portion of the lumen $\Omega(t)$
+            \begin{figure}[!htb]`'
+                \label{fig:fluid-element}
+                \centering
+                \captionsetup{aboveskip=2pt,belowskip=2pt}
+                \includegraphics[width=0.8\linewidth,height=0.25\textheight,keepaspectratio]{fig33.png}
+                \caption{
+                    From \cite{book1} [Fig. 3.3, pg. XX]
+                }
+            \end{figure}
+            Let $S_1(t), ~ S_2(t)$ be the time-dependent shaded boundaries at $z = z_1$ and $z = z_2$ s.t.
+            $0 < z_1 < z_2 < \ell$.
+            Let $V_t$ be the fluid element of blood. The boundary of the fluid element is
+            $\partial V_t \; = \; S_1(t) \cup S_2(t) \cup \partial V_{t,w}$ such that $\partial V_{t,w}$
+            is the vessel wall in contact with the fluid element.
+            According to the Reynold's transport theorem for scalar feild $\phi \in L^1(\Omega(t))$.
+            \begin{flalign*}
+                \quad \dfrac{d}{dt} \int_{V_t} \phi dV \;
+                    = \; \int_{V_t} \dfrac{\partial \phi }{\partial t} dV \;
+                    + \; \int_{\partial V_t}  (\vct{u_b} \cdot \nhat) \phi dS &&
+            \end{flalign*}
+            where $\vct{u_b}$ is the velocity feild deforming the boundary $\partial V_t$
+            (Pf. see \href{https://en.wikipedia.org/wiki/Reynolds_transport_theorem}{wiki}).
+            If we assume the normal component of $\vct{u_b} = \vct{0}$ near the inlet
+            and outlet boundaries $S_1$ and $S_2$ (resp.) of $\Omega$, then the motion of the vessel wall
+            is coupled to the blood flow through the fluid element $V_t$. The velocity $\vct{u_b}$
+            is equivalent to the velocity of the vessel wall $\partial \Omega(t)$ in contact with the boundary element $\partial V_t$.
+            I.e., the vessel wall velocity $\vct{u_w} = \vct{u_b}$.
+            Now let $\vct{w} = \vct{u_w} - \vu$ be the relative velocity of the vessel wall
+            w.r.t. the velocity $\vu = (u_1, u_2, u_3)^\top$ of the blood element $V_t$. Then it follows that
+            \begin{flalign*}
+                \quad \; \int_{\partial V_t} \big(\vct{u_b} \cdot \nhat \big)\phi \; dS ~
+                    & = ~ \; \int_{\partial V_t} \big(\vct{u_w} \cdot \nhat \big)\phi \; dS &&\\
+                \quad \; & = \; \int_{\partial V_t} \big(\vct{w} \cdot \nhat \big)\phi \; dS
+                    ~ + ~ \; \int_{\partial V_t} \big(\vu \cdot \nhat \big)\phi \; dS &&
+            \end{flalign*}
+            Let $\bar{\phi}$ denote the average value of $\phi$ defined over a surface $S$
+            \begin{flalign*}
+                \quad \bar{\phi} \defined \frac{1}{A} ~ \int_{S(z, t)} \phi \;dS\quad :  \quad  A(z, t) \defined \int_{S(z, t)} dS &&
+            \end{flalign*}
+            Now we may rewrite the volume integral in the LHS of RT theorem
+            \begin{flalign*}
+                \quad  \int_{V_t} \phi dV \; = \; \int_{z_1}^{z_2} \int_{S(z, t)} \phi \;dS \; dz
+                    \;=\; \int_{z_1}^{z_2} A \cdot \bar{\phi} \; dz &&
+            \end{flalign*}
+            where $z_1 < z_2$ are fixed $z$-coordinates for $S_1$ and $S_2$.
+            Then we differentiate the integrands in the above equation w.r.t. $t$
+            \begin{flalign*}
+                \quad \int_{V_t} \dfrac{\partial \phi}{\partial t} dV \;=\; \int_{z_1}^{z_2} \dfrac{\partial}{\partial t} \bigg[A \cdot \bar{\phi} \bigg]\; dz, &&
+            \end{flalign*}
+            and we've rewritten the first term in the RHS of the reynolds system.
+            The surface integral in the RHS may be written as
+            \begin{flalign*}
+                \quad \int_{\partial V_t}  (\vct{u_b} \cdot \nhat) \phi dS = \int_{\partial V_t}  (\vct{u_b} \cdot \nhat) \phi dS.... &&
+            \end{flalign*}\todo{cleanup, ref. pg. 43}
+            With a little more work, one may obtain:
+            \begin{definition}
+                \label{def:1dReynolds}
+                The 1D Reynolds Transport theorem for both compressible and incompressible fluids:
+                \begin{flalign*}
+                    \quad \frac{\partial }{\partial t} \bigg( A \bar{\phi} \bigg) \; + \; \frac{\partial}{\partial z}\big( A (\overline{\phi \cdot u_3}) \big)
+                    \; = \; \int_S \bigg( \dfrac{\partial \phi}{\partial t} + \nabla \cdot (\phi \vu) \bigg) dS
+                    \; + \; \int_{\partial S} \phi \vct{w} \cdot \nhat \; d \gamma &&
+                \end{flalign*}
+            \end{definition}
 
-                \begin{remark}
-                    \label{1DMomentumConservation}
-                    By taking $f = u_3$ in \ref{def:1dReynolds}, momentum conservation follows directly. Also,
-                    by our assumption that blood is incompressible, we simplify \ref{def:1dReynolds} as
-                    \begin{flalign*}
-                        \quad \frac{\partial }{\partial t} \bigg( A u_3 \bigg) \; + \; \frac{\partial}{\partial z}\big( A (\overline{u_3^2}) \big)
-                        \; = \; \int_S \bigg( \dfrac{\partial u_3}{\partial t} + \nabla u_3 \cdot \vct{u} \bigg) dS
-                        \; + \; \int_{\partial S} u_3 \vct{w} \cdot \nhat \; d \gamma &&
-                    \end{flalign*}
-                    The RHS term above describing the transport process across the vessel wall.
-                \end{remark}
+            \begin{remark}
+                \label{1DMassConservation}
+                By taking $f = \rho$ in \ref{def:1dReynolds}, mass conservation follows directly. Also, by our assumption
+                that blood is incompressible, we have $\begin{cases*}\Div(\vu) = 0\\\rho =\text{const.}\\
+                \end{cases*}$ and we simplify \ref{def:1dReynolds} as
+                \begin{flalign*}
+                    \quad \frac{\partial A }{\partial t} \; + \; \frac{\partial}{\partial z}\big( A (\overline{u_3}) \big)
+                    \; = \; \int_{\partial S} \vct{w} \cdot \nhat \; d \gamma &&
+                \end{flalign*}
+                The RHS term above describing the transport process across the vessel wall. \todo{complete, pg. 45}
+            \end{remark}
+
+            \begin{remark}
+                \label{1DMomentumConservation}
+                By taking $f = u_3$ in \ref{def:1dReynolds}, momentum conservation follows directly. Also,
+                by our assumption that blood is incompressible, we simplify \ref{def:1dReynolds} as
+                \begin{flalign*}
+                    \quad \frac{\partial }{\partial t} \bigg( A u_3 \bigg) \; + \; \frac{\partial}{\partial z}\big( A (\overline{u_3^2}) \big)
+                    \; = \; \int_S \bigg( \dfrac{\partial u_3}{\partial t} + \nabla u_3 \cdot \vu \bigg) dS
+                    \; + \; \int_{\partial S} u_3 \vct{w} \cdot \nhat \; d \gamma &&
+                \end{flalign*}
+                The RHS term above describing the transport process across the vessel wall.
+            \end{remark}
 
 
 
@@ -685,11 +699,10 @@
     \section{Numerical Methods for Blood Flow Simulation}
         \label{sec:num-methods}
         \medskip
-        Numerical methods for PDEs, or \emph{schemes}, are generally of the form:
-
+        W.r.t. numerical methods for PDEs as \emph{schemes}.
         To ensure converge of our schemes, we choose an initial condition
-        by solving the homogenous-stationary NS problem in standard
-        form~\ref{def:NSEquations}:
+        by solving the homogenous-stationary NS problem in
+        form~\ref{def:kinematic-viscosity-ns} with $\vct{f} \equiv \vct{0}$:
         \begin{definition}[Stationary Stokes Problem]
             \label{def:stationary-ns}
             \begin{flalign*}
@@ -698,15 +711,13 @@
                 \Div(\vct{u_0})\; = \;0
             \end{cases*}\quad \text{ in } \Omega(t) &&
             \end{flalign*}
-            and we seek a strong solution .
-            We take the $\vct{f} \equiv \vct{0}$ with
         \end{definition}
 
          Let
          \begin{flalign*}
             \quad \begin{cases*}
-                S_0 \; := \; S(0, t) \quad \text{be the inlet}\\
-                S_T \; := \; S(\ell, t) \quad \text{be the outlet}
+                S_0 \defined S(0, t) \quad \text{be the inlet}\\
+                S_T \defined S(\ell, t) \quad \text{be the outlet}
             \end{cases*} \quad \forall ~ t \in [0, T]&&
         \end{flalign*}
 
@@ -728,24 +739,7 @@
     \section{Misc}
         \label{sec:cas}
 
-        Coronary artery stenosis (CAS) is the narrowing of the
-        coronary arteries due to the buildup of plaque. This
-        narrowing can restrict blood flow to the heart muscle,
-        leading to various cardiovascular problems, including
-        chest pain (angina), heart attacks, and other serious
-        complications. Current methods for predicting coronary
-        artery stenosis are rudimentary; and often prediction
-        does mean coronary artery stenosis obstruction (\cite{ehab332}).
-        There is a need for more accurate and reliable methods
-        to predict and assess the severity of CAS.
-        narrowing can restrict blood flow to the heart muscle,
-        leading to various cardiovascular problems, including
-        chest pain (angina), heart attacks, and other serious
-        complications. Current methods for predicting coronary
-        artery stenosis are rudimentary; and often prediction
-        does mean coronary artery stenosis obstruction.
-        There is a need for more accurate and reliable methods
-        to predict and assess the severity of CAS.
+
 
         \bigskip
 
@@ -783,7 +777,7 @@
 
             \begin{theorem}[Local Existence and Uniqueness]
                 \label{thm:local-existenceUniqueness}
-                Given smooth, localized initial data $\vct{u}_0$, there exists a maximal time $0 < T_* \leq \infty$
+                Given smooth, localized initial data $\vu_0$, there exists a maximal time $0 < T_* \leq \infty$
                 for which a unique solution exists.
             \end{theorem}
 
@@ -793,7 +787,7 @@
             \begin{flalign*}
                 \quad & \sup_{x \in \mathbb{R}^3} |\mathbf{u}(t, x)| \to +\infty \quad \text{as} \quad t \to T_*. &&
             \end{flalign*}
-            Otherwise, if $T_* = \infty$, then $|\vct{u}| \to 0$ as $t \to \infty$. Numerical evidence suggests global regularity
+            Otherwise, if $T_* = \infty$, then $|\vu| \to 0$ as $t \to \infty$. Numerical evidence suggests global regularity
             holds in most practical cases, but turbulent behavior can emerge for large initial data.
 
         \medskip
@@ -801,7 +795,7 @@
         \subsubsection*{Heuristic Considerations and Energy Balance}
             Starting from the incompressibility condition:
             \begin{flalign*}
-                \quad & \Div(\vct{u}) = 0 && \\
+                \quad & \Div(\vu) = 0 && \\
                 \quad & \iff ~ \rho \text{ is constant in } \Omega(t) && \\
                 \quad & \iff ~ \text{ chain rule applies to } \Divbf\big(\frac{2}{\rho} \mu (|\vct{D}|^2) \vct{D}\big) &&\\
                 \quad \implies &  \Divbf\big(\frac{2}{\rho} \mu (|\vct{D}|^2) \vct{D}\big) = \nabla \cdot \big(\frac{2}{\rho} \mu (|\vct{D}|^2) \vct{D}\big)&&\\
@@ -813,12 +807,12 @@
             This vanishes if $\mu$ is constant (Newtonian fluid) and $\rho$ is constant (incompressibility).
             So the diffusive term becomes:
             \begin{flalign*}
-                \quad \frac{2\eta}{\rho} \Delta \vct{u}, \quad \text{with } \eta = \mu \rho.&&
+                \quad \frac{2\eta}{\rho} \Delta \vu, \quad \text{with } \eta = \mu \rho.&&
             \end{flalign*}\todo{show simplification of diffusive term to laplacian}
             We heuristically compare dominant terms:
             \begin{enumerate}
-                \item If $\eta \Delta \vct{u} \gg (\vct{u} \cdot \nabla) \vct{u}$, viscous dissipation dominates $\Rightarrow$ smooth, regular behavior.\
-                \item If $(\vct{u} \cdot \nabla) \vct{u} \gg \eta \Delta \vct{u}$, nonlinearity dominates $\Rightarrow$ turbulence, potential blow-up.
+                \item If $\eta \Delta \vu \gg (\vu \cdot \nabla) \vu$, viscous dissipation dominates $\Rightarrow$ smooth, regular behavior.\
+                \item If $(\vu \cdot \nabla) \vu \gg \eta \Delta \vu$, nonlinearity dominates $\Rightarrow$ turbulence, potential blow-up.
             \end{enumerate}
             We construct rigorous energy estimates in Section~\ref{sec:math-models}.
         \medskip

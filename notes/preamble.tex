@@ -57,7 +57,6 @@
 ]{assumption}
 
 
-
 % Page setup
 \geometry{letterpaper, margin=1in}
 \setlength{\parindent}{0pt}
@@ -72,12 +71,13 @@
   \renewcommand{\thelemma}{\Alph{lemma}}
 \newtheorem*{lem}{Lemma}
 \newtheorem{corollary}[lemma]{Corollary}
-\theoremstyle{definition}
 \newtheorem*{theorem}{theorem}
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
+\theoremstyle{claim}
+\newtheorem*{claim}{Claim}
 
 % TODO notes
 \newcommand{\td}[1]{\todo[inline, color=red!20, size=\small]{#1}}
@@ -90,13 +90,24 @@
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
+\newcommand{\OmegaBar}{\overline{\Omega}}
+\newcommand{\tOmegaBar}{\overline{\tilde{\Omega}}}
+\newcommand{\tlOmega}{\overline{\tilde{\tlOmega}}}
+\newcommand{\Omegat}{\Omega(t)}
+\newcommand{\OmegaWt}{\Omega_W(t)}
+\newcommand{\pOmegat}{\Omega(t)}
+\newcommand{\pOmegaWt}{\Omega_W(t)}
+
+
+
+% Symbols
 \newcommand{\e}{\epsilon}
 \newcommand{\p}{\rho}
 \newcommand{\eps}{\epsilon}
 \newcommand{\la}{\lambda}
 \newcommand{\ol}{\overline}
 
-% Custom commands
+% Linear Algebra
 \newcommand{\matr}[1]{\begin{pmatrix}#1\end{pmatrix}} % For matrices
 \newcommand{\vect}[1]{\begin{bmatrix}#1\end{bmatrix}} % For column vectors
 \newcommand{\vct}[1]{\bm{#1}} % For bold vectors
@@ -109,11 +120,6 @@
 \DeclareMathOperator{\detm}{det} % Determinant
 \DeclareMathOperator{\rank}{rank} % Rank
 \DeclareMathOperator{\nullity}{nullity} % Nullity
-\DeclareMathOperator{\ind}{index}
-\DeclareMathOperator{\crit}{crit}
-\newcommand{\OmegaBar}{\overline{\Omega}}
-\newcommand{\tOmegaBar}{\overline{\tilde{\Omega}}}
-\newcommand{\tlOmega}{\overline{\tilde{\tlOmega}}}
 \newcommand{\del}{\Delta}
 \newcommand{\blockmat}[2]{\begin{pmatrix} #1 & #2 \end{pmatrix}} % Block matrix with 2 columns
 \newcommand{\augmatr}[2]{\left(\begin{array}{#1|#1}#2\end{array}\right)}
@@ -122,8 +128,20 @@
 \newcommand{\Div}{\text{div}}
 \newcommand{\Divbf}{\textbf{div}}
 \newcommand{\nhat}{\hat{\vct{n}}}
+\newcommand{\vu}{\vct{u}}
 
+\newcommand{\vT}{\vct{T}}
+\newcommand{\vx}{\vct{T}}
+\newcommand{\vb}{\vct{b}}
+\newcommand{\vfb}{\vct{f_b}}
+\newcommand{\vw}{\vct{w}}
+\newcommand{\vub}{\vct{u_b}}
+\newcommand{\ej}{\vct{e_j}}
+\newcommand{\eo}{\vct{e_1}}
+\newcommand{\et}{\vct{e_2}}
+\newcommand{\ett}{\vct{e_3}}
 
+\newcommand{\defined}{\; := \;}
 
 
 % Define custom colors

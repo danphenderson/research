@@ -19,42 +19,48 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global/global}
-    \entry{MathematicalEngineering}{book}{}{}
+    \entry{ehab332}{article}{}{}
       \name{author}{3}{}{%
-        {{hash=688405f096f6d3f0106a661f73a03d2d}{%
-           family={Formaggia},
+        {{hash=1a800728155e55fe589e878acabcf553}{%
+           family={Derimay},
+           familyi={D\bibinitperiod},
+           given={Francois},
+           giveni={F\bibinitperiod}}}%
+        {{hash=667dccdc3f4cd7928230974b133a32ea}{%
+           family={Finet},
            familyi={F\bibinitperiod},
-           given={Luca},
-           giveni={L\bibinitperiod}}}%
-        {{hash=c28a2501b2d78ab05e717a1f7a22209f}{%
-           family={Quarteroni},
-           familyi={Q\bibinitperiod},
-           given={Alfio},
-           giveni={A\bibinitperiod}}}%
-        {{hash=208f5793fba9a23a322eea9dd4372d91}{%
-           family={Veneziani},
-           familyi={V\bibinitperiod},
-           given={Alessandro},
-           giveni={A\bibinitperiod}}}%
+           given={Gerard},
+           giveni={G\bibinitperiod}}}%
+        {{hash=89a6c397d9c0449e7f4965b6da03bb04}{%
+           family={Rioufol},
+           familyi={R\bibinitperiod},
+           given={Gilles},
+           giveni={G\bibinitperiod}}}%
       }
-      \list{publisher}{1}{%
-        {Springer}%
-      }
-      \strng{namehash}{a14b85e049b549b8be3c122930621176}
-      \strng{fullhash}{a14b85e049b549b8be3c122930621176}
-      \strng{fullhashraw}{a14b85e049b549b8be3c122930621176}
-      \strng{bibnamehash}{a14b85e049b549b8be3c122930621176}
-      \strng{authorbibnamehash}{a14b85e049b549b8be3c122930621176}
-      \strng{authornamehash}{a14b85e049b549b8be3c122930621176}
-      \strng{authorfullhash}{a14b85e049b549b8be3c122930621176}
-      \strng{authorfullhashraw}{a14b85e049b549b8be3c122930621176}
-      \field{sortinit}{F}
-      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \strng{namehash}{b0e38c2bda1271b3eb193a87c5042e0c}
+      \strng{fullhash}{b0e38c2bda1271b3eb193a87c5042e0c}
+      \strng{fullhashraw}{b0e38c2bda1271b3eb193a87c5042e0c}
+      \strng{bibnamehash}{b0e38c2bda1271b3eb193a87c5042e0c}
+      \strng{authorbibnamehash}{b0e38c2bda1271b3eb193a87c5042e0c}
+      \strng{authornamehash}{b0e38c2bda1271b3eb193a87c5042e0c}
+      \strng{authorfullhash}{b0e38c2bda1271b3eb193a87c5042e0c}
+      \strng{authorfullhashraw}{b0e38c2bda1271b3eb193a87c5042e0c}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{subtitle}{Modeling and Simulation of the Circulatory System}
-      \field{title}{Cardiovascular Mathematics}
-      \field{year}{2009}
+      \field{journaltitle}{European Heart Journal}
+      \field{title}{Coronary Artery Stenosis Prediction Does Not Mean Coronary Artery Stenosis Obstruction}
+      \field{year}{2021}
+      \verb{doi}
+      \verb 10.1093/eurheartj/ehab332
+      \endverb
+      \verb{urlraw}
+      \verb https://watermark.silverchair.com/ehab332.pdf
+      \endverb
+      \verb{url}
+      \verb https://watermark.silverchair.com/ehab332.pdf
+      \endverb
     \endentry
     \entry{hemodynamics}{book}{}{}
       \name{author}{4}{}{%
@@ -79,11 +85,6 @@
            given={Stefan},
            giveni={S\bibinitperiod}}}%
       }
-      \name{editor}{1}{}{%
-        {{hash=88183b946cc5f0e8c96b2e66e1c74a7e}{%
-           family={Unknown},
-           familyi={U\bibinitperiod}}}%
-      }
       \list{publisher}{1}{%
         {Birkhäuser Basel}%
       }
@@ -95,10 +96,6 @@
       \strng{authornamehash}{75f6404ece3e3eb5473f9d61badb9e0c}
       \strng{authorfullhash}{c621353da155012f80278ab6e259e194}
       \strng{authorfullhashraw}{c621353da155012f80278ab6e259e194}
-      \strng{editorbibnamehash}{88183b946cc5f0e8c96b2e66e1c74a7e}
-      \strng{editornamehash}{88183b946cc5f0e8c96b2e66e1c74a7e}
-      \strng{editorfullhash}{88183b946cc5f0e8c96b2e66e1c74a7e}
-      \strng{editorfullhashraw}{88183b946cc5f0e8c96b2e66e1c74a7e}
       \field{sortinit}{G}
       \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
       \field{labelnamesource}{author}
@@ -109,80 +106,37 @@
       \verb https://doi.org/10.1007/978-3-7643-7806-6
       \endverb
     \endentry
-    \entry{ehab332}{article}{}{}
-      \name{author}{1}{}{%
-        {{hash=2d2dd6e05d59effb4f5ac937ad6080d8}{%
-           family={here},
-           familyi={h\bibinitperiod},
-           given={Add},
-           giveni={A\bibinitperiod},
-           prefix={authors},
-           prefixi={a\bibinitperiod}}}%
+    \entry{book1}{book}{}{}
+      \name{author}{2}{}{%
+        {{hash=59bf4734ac7770deface10ea77620522}{%
+           family={Köppl},
+           familyi={K\bibinitperiod},
+           given={Tobias},
+           giveni={T\bibinitperiod}}}%
+        {{hash=e8990a5deba2c8692e33eceaa759457b}{%
+           family={Helmig},
+           familyi={H\bibinitperiod},
+           given={Rainer},
+           giveni={R\bibinitperiod}}}%
       }
-      \strng{namehash}{2d2dd6e05d59effb4f5ac937ad6080d8}
-      \strng{fullhash}{2d2dd6e05d59effb4f5ac937ad6080d8}
-      \strng{fullhashraw}{2d2dd6e05d59effb4f5ac937ad6080d8}
-      \strng{bibnamehash}{2d2dd6e05d59effb4f5ac937ad6080d8}
-      \strng{authorbibnamehash}{2d2dd6e05d59effb4f5ac937ad6080d8}
-      \strng{authornamehash}{2d2dd6e05d59effb4f5ac937ad6080d8}
-      \strng{authorfullhash}{2d2dd6e05d59effb4f5ac937ad6080d8}
-      \strng{authorfullhashraw}{2d2dd6e05d59effb4f5ac937ad6080d8}
-      \field{sortinit}{h}
-      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \list{publisher}{1}{%
+        {Springer Nature Switzerland}%
+      }
+      \strng{namehash}{fe385c2769dc3c39eea3af2032a8b381}
+      \strng{fullhash}{fe385c2769dc3c39eea3af2032a8b381}
+      \strng{fullhashraw}{fe385c2769dc3c39eea3af2032a8b381}
+      \strng{bibnamehash}{fe385c2769dc3c39eea3af2032a8b381}
+      \strng{authorbibnamehash}{fe385c2769dc3c39eea3af2032a8b381}
+      \strng{authornamehash}{fe385c2769dc3c39eea3af2032a8b381}
+      \strng{authorfullhash}{fe385c2769dc3c39eea3af2032a8b381}
+      \strng{authorfullhashraw}{fe385c2769dc3c39eea3af2032a8b381}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{journaltitle}{European Heart Journal}
-      \field{title}{Add exact title here}
-      \field{year}{2021}
-      \verb{doi}
-      \verb 10.1093/eurheartj/ehab332
-      \endverb
-      \verb{urlraw}
-      \verb https://watermark.silverchair.com/ehab332.pdf
-      \endverb
-      \verb{url}
-      \verb https://watermark.silverchair.com/ehab332.pdf
-      \endverb
-    \endentry
-    \entry{ns-formulation}{article}{}{}
-      \name{author}{3}{}{%
-        {{hash=921260a6ab76501eed1a784596e82bbc}{%
-           family={John},
-           familyi={J\bibinitperiod},
-           given={L.},
-           giveni={L\bibinitperiod}}}%
-        {{hash=58abfd45d4eb158d56ce0b87772eeadb}{%
-           family={Pustějovská},
-           familyi={P\bibinitperiod},
-           given={P.},
-           giveni={P\bibinitperiod}}}%
-        {{hash=5d51e3d8add524e92e4e529841123a55}{%
-           family={Steinbach},
-           familyi={S\bibinitperiod},
-           given={O.},
-           giveni={O\bibinitperiod}}}%
-      }
-      \strng{namehash}{7989dbf9bb512116c9a7c9449dd8769b}
-      \strng{fullhash}{7989dbf9bb512116c9a7c9449dd8769b}
-      \strng{fullhashraw}{7989dbf9bb512116c9a7c9449dd8769b}
-      \strng{bibnamehash}{7989dbf9bb512116c9a7c9449dd8769b}
-      \strng{authorbibnamehash}{7989dbf9bb512116c9a7c9449dd8769b}
-      \strng{authornamehash}{7989dbf9bb512116c9a7c9449dd8769b}
-      \strng{authorfullhash}{7989dbf9bb512116c9a7c9449dd8769b}
-      \strng{authorfullhashraw}{7989dbf9bb512116c9a7c9449dd8769b}
-      \field{sortinit}{J}
-      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Computing and Visualization in Science}
-      \field{title}{On the influence of the wall shear stress vector form on hemodynamic indicators}
-      \field{volume}{4}
-      \field{year}{2017}
-      \field{pages}{113\bibrangedash 122}
-      \range{pages}{10}
-      \verb{doi}
-      \verb 10.1007/s00791-017-0277-7
-      \endverb
+      \field{subtitle}{An Introduction for Master Students and First Year Doctoral Students}
+      \field{title}{Dimension Reduced Modeling of Blood Flow in Large Arteries}
+      \field{year}{2023}
     \endentry
     \entry{bviscosity}{article}{}{}
       \name{author}{1}{}{%
@@ -210,7 +164,7 @@
       \field{number}{263}
       \field{title}{Blood viscosity in tube flow: dependence on diameter and hematocrit}
       \field{volume}{(6 Pt 2)}
-      \field{year}{1992 Dec}
+      \field{year}{1992}
       \verb{doi}
       \verb 10.1152/ajpheart.1992.263.6.H1770
       \endverb
@@ -218,4 +172,3 @@
   \enddatalist
 \endrefsection
 \endinput
-
