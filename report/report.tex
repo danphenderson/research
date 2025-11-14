@@ -1,0 +1,96 @@
+\documentclass[10pt]{article}
+
+
+
+% ===================== PREAMBLE ====================================
+% Contains packages, custom commands, and formatting
+% ===================================================================
+\input{preamble.tex}
+\usepackage{csquotes}                                   % TODO: why isn't this in preamble.tex?
+\usepackage[backend=biber,style=numeric]{biblatex}
+\addbibresource{citations.bib}                          % BibTeX file
+
+
+
+% ===================== TITLE PAGE ==================================
+% ===================================================================
+\title{Blood Flow in the Human Circulatory System}
+\author{Daniel Henderson, Michigan Technological University \\ \texttt{dahender@mtu.edu}}
+\date{\today}
+
+
+
+% ===================== BEGIN DOCUMENT ==============================
+% ===================================================================
+\begin{document} \maketitle
+
+    % ------------------ COVER PAGE
+    \noindent Report presents modern techniques for modeling the motion of
+    blood within a Human's Macrocirculatory System. A hemodynamics literature
+    review is presented, summarizing key findings and methodologies.
+    This is followed by a comprehensive mathematical and computational
+
+    \newpage
+
+    \textbf{Keywords:} \textit{computational hemodynamics, 0D blood-flow, 1D blood-flow, 2D-blood-flow, PINN's,
+    finite element methods, discontinous galerkin, Lax-Wendroff, fluid-structure ineraction (FSI)}
+
+    \medskip
+
+    \tableofcontents
+
+    \medskip
+
+    \newpage
+
+    % ------------------ SECTION: Preliminaries
+    \section{Preliminaries}
+        \label{sec:prelims}
+        \medskip
+        \subsection*{Notation}
+            \label{subsec:notation}
+            \input{prelims/notation.tex}
+        \newpage
+
+        \subsection*{Symbols and Abbreviations}
+            \label{subsec:syms-abbrevs}
+            \input{prelims/symbols-abbreviations.tex}
+        \newpage
+
+        \subsection*{Parameters and Units}
+            \label{subsec:params}
+            \input{prelims/parameters-units.tex}
+        \newpage
+
+        \subsection*{Mathematical Foundations}
+            \label{subsec:maths}
+            \input{prelims/maths.tex}
+        \newpage
+
+        \newpage
+
+    % ------------------ SECTION: Appendix
+    \newpage
+    \section{Appendix}
+        \label{sec:appendix}
+
+        % ------------------ BIBLIOGRAPHY
+        \subsection*{Bibliography}
+        \newpage
+
+        % ------------------- CODE LISTINGS
+        \subsection*{Code Listings}
+
+        \td{Optional Space for sumplementary code listings of computations done while investigating}
+        \lstset{language=julia}
+        \begin{lstlisting}[language=julia, caption={Algorithm 16.5}, label={lst:problem-sampling}]
+        function foo()
+            println("Hello World)
+        end
+        \end{lstlisting}
+
+
+
+\end{document}
+% ===================== END DOCUMENT ================================
+% ===================================================================
