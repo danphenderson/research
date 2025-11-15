@@ -1,0 +1,76 @@
+\label{subsec:physio-background}
+The circulatory system consists of a human's heart,
+vascular network, lungs, and organs. The heart is the source,
+transporting Oxygen-rich blood to the organs and
+deoxygenated (and carbon dioxide-enriched) blood back to the lungs.
+Lungs discharge $CO2$ and enrich the blood with Oxygen. We refer to these
+respective processes as the \emph{pulmonary circulation} and
+the \emph{systemic circulation} (resp.). The \emph{macrocirculatory
+system} consists of the heart and the large vessels in the systemic circulation.
+Particularly, the arteries of the macrocirculatory system transport
+oxygenated blood from the heart, driving the return of deoxygenated blood in
+large vessels back to the heart. Hemodynamics refers to the study of blood flow in
+the circulatory system.
+
+\medskip
+
+Cardiovascular disease (CVD) is the leading cause of death in developed nations.
+According to the World Health Organization (WHO), CVD accounts for approximately
+30\% of all global deaths in 2012. Understanding the hemodynamics of the macrocirculatory system is crucial for
+diagnosing, treating, and preventing CVD. Consequently, our motivation is to
+simulate and analyze areterial stenosis with the aim to better enable
+patient-provider outcomes.
+
+\medskip
+
+A single beat of the heart propels blood through the macrocirculatory system,
+the "lub-dub" sound. We refer to the beat and the following sequence of events until the
+successive beat as the \emph{cardiac cycle}. The cardiac cycle consists of
+two main phases: systole and diastole, during which the heart chamber is
+accumulating blood and releasing blood (resp.). The beat can be recognized as a pulse
+wave in large vessels, characterized by the Wormersley number
+\begin{flalign*}
+        \quad & W_0 := 2R \cdot \sqrt{\frac{\omega \rho}{\eta}},  \quad : ~ \rho \text{ is fixed blood density} &&
+\end{flalign*}
+a dimensionless parameter comparing the frequency $\omega$
+of the pulse wave to the blood's dynamic viscosity $\eta$ and the vessel diameter $2R$.
+The Reynolds number $Re$ characterizes flow in blood vessels
+\begin{flalign*}
+        \quad & Re := 2R \cdot \frac{\rho U}{\eta}, \quad : ~ \rho \text{ is fixed blood density} &&
+\end{flalign*}
+Low $Re$ indicates laminar flow, while high $Re$ suggests turbulent flow.
+
+\medskip
+
+\subsubsection*{Observed Cardiac Cycle Characteristics}
+Normal resting heart rate is considered to be $\omega = 70$ bpm,
+so the cardiac cycle is approximately $0.86 s.$, consisting of:\\
+1. Systole (ventricular contraction) $\approx 0.3$ seconds.\\
+2. Diastole (ventricular relaxation) $\approx 0.7$ seconds.
+
+\medskip
+
+The blood volume of a human is approximately 5.7-6.0 liters of blood,
+flowing a full cycle roughly every minute. The energy driving
+the flow comes from oxygen and nutrients absorbed from food, creating waste
+products that must be removed; the \emph{coronary artery}'s responsibility.
+The buildup of waste products results in Arteriosclerosis, a narrowing of
+the coronary artery, leading to reduced and turbulent blood flow. (Add citations
+here of turbulence in the presence of stenotic arteries).
+
+\medskip
+
+Note \autocite[Table~1.1, p.~10, §1.1]{book1}
+shows $W_0 \propto 2R$ and $Re \propto (2R)^{-1}$; we
+observe large pulses and turbulent flow in large vessels and small pulses
+and laminar flow in small vessels.
+
+\medskip
+
+\paragraph{Constituents and hematocrit.}
+Blood consists of plasma and formed elements which we call cells. Red blood cells (RBCs) comprise
+$\approx 97\%$ of the cellular volume, and cellular volume is approximately $\approx 45\%$ of the blood volume.
+The remaining $\approx 55\%$ of blood volume is plasma, which is $\approx 90\%$ water. The ratio of RBC
+volume to total blood volume is the \emph{hematocrit value} $H$, a key metric governing apparent viscosity
+$\eta$: as $H$ increases, $\eta$ typically increases (cf.\ S6.5.1~\cite{hemodynamics}).
+The formed elements suspended in plasma include white blood cells (WBCs) and platelets.

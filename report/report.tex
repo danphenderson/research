@@ -15,7 +15,7 @@
 % ===================== TITLE PAGE ==================================
 % ===================================================================
 \title{Blood Flow in the Human Circulatory System}
-\author{Daniel Henderson, Michigan Technological University \\ \texttt{dahender@mtu.edu}}
+\author{Daniel Henderson\\ Michigan Technological University}
 \date{\today}
 
 
@@ -65,16 +65,22 @@
         elements suspended in plasma, thus, the rheological behavior of blood is non-trivial.
         We report techniques and methodologies for modeling blood's motion in large vessels.
 
-        \medskip Our report is organized as follows. \medskip
+        \medskip 
+        
+        Our report is organized as follows. 
+        
+        \medskip
 
-        We start by stating the report's motivation, then in Sec.~\ref{subsec:physiology} we
-        provide a brief physiological review of the human circulatory system. We follow with
-        Sec.~\ref{subsec:continuum}, which reviews the continuum hypothesis, a necessary postulate 
-        in fluid mechanics which treats blood as a continuous medium. This framing reduces 
-        the hemodynamic problem to describing blood’s motion as a continuum. In Sec.~\ref{subsec:bloodmodel} we discuss various rheological assumptions and 
-        constitutive relations used to model blood as an incompressible fluid. In Sec.~\ref{subsec:ns} we derive
-        the incompressible Newtonian Navier–Stokes (NS) equations governing the motion of blood
-        in large vessels.
+        We start our introduction by stating the report's motivation, then Sec.~\ref{subsec:physiology} 
+        provides a brief physiological review of the human circulatory system. We follow with
+        Sec.~\ref{subsec:continuum}, which reviews the continuum hypothesis, (a necessary postulate 
+        in fluid mechanics), which treats blood as a continuous medium. This framing reduces 
+        the hemodynamic problem to describing blood’s motion in a continuum. Then 
+        Sec.~\ref{subsec:bloodmodel} discusses various rheological assumptions and 
+        constitutive relations for modeling blood as an incompressible fluid. And finally,
+        Sec.~\ref{subsec:ns} derives the kinematic-viscosity Navier–Stokes (NS) equations,
+        a system of nonlinear partial differential equations (PDEs) that herein serves as 
+        the foundation of our modeling efforts. 
 
         \medskip
 
@@ -85,9 +91,10 @@
         blockage (SB) in a coronary artery are rudimentary, and often SB predicition doesn't mean obstruction [\cite{ehab332}].
         Additionally, current clinical methods for assessing the severity of a SB rely on imaging techniques
         such as angiography, intravascular ultrasound (IVUS), and optical coherence tomography (OCT) to visualize the 
-        arteries and identify areas of narrowing. Such methods provide valuable information about the anatomy of the arteries, but they do not
-        provide direct information about the functional significance of the CAS. Functional assessment of CAS typically involves measuring the fractional flow reserve (FFR),
-        which is the ratio of the blood pressure downstream of the stenosis to the blood pressure upstream of the stenosis during maximum blood flow.
+        arteries and identify areas of narrowing. Such methods provide valuable information about the anatomy of the arteries,
+        but they do not provide direct information about the functional significance of the CAS. Functional assessment of 
+        CAS typically involves measuring the fractional flow reserve (FFR), which is the ratio of the blood pressure 
+        downstream of the stenosis to the blood pressure upstream of the stenosis during maximum blood flow.
         However, measuring FFR requires the use of a pressure wire, which can be invasive and carries some risks.
         Therefore, there is a need for non-invasive methods to assess the functional significance of CAS.
 
