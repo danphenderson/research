@@ -1,0 +1,120 @@
+Let $\vct{f}$ an external force acting on a continumm of blood fluid.
+When modeling non-Newtonian effects (when $\eta \neq \text{ constant}$), the kinematic viscosity
+$\mu(\cdot)$ is often chosen by Careau model \cite{hemodynamics}
+\begin{flalign*}
+    \quad 2\,\mu(|\vct{D}|^2) = \eta_\infty + (\eta_0 - \eta_\infty) \cdot \big(1 + \kappa |\vct{D}|^2\big). &&
+\end{flalign*}
+Where $\eta_0$ and $~\eta_\infty$ are chosen to be the viscosity for very small
+and very large shear rates, resp., and $\kappa \in \R^+$ and $n \in (-0.5, 0)$ are model parameters.
+According to [\cite{book1}, pg. $38$], we often set
+\begin{flalign*}
+    \quad \eta_0 = 65.7 \cdot 10^{-3} ~Pa \cdot s, ~ \eta_\infty = 4.45\cdot10^{-3} ~Pa \cdot s,
+        \kappa = 212.2 ~s^2, ~ \text{ and } n = -0.325 &&
+\end{flalign*}
+In the Newtonian case, we choose $\eta = \eta_\infty$ which allows us to determine $\mu$
+as $\mu(|\vct{D}|^2) = \eta$.
+When coupling our momentum balance equation with the divergence-free condition of $\vu$, we obtain the
+Navier-Stokes (NS) equations.
+\begin{definition}[Conservative-Momentum Balance Form]
+    \label{def:nsconservative}
+    \begin{flalign*}
+        \quad & \begin{cases*}
+            \quad \partial_t(\rho \vct u) \;+\;  (\rho\vu\cdot\nabla)\vu
+                \;=\; -\,\nabla p \;+\; \Divbf\!\big( 2\,\eta\,\vct D(\vct u) \big) \;+\; \rho\,\vct f, \\
+            \quad \Div(\vct u) \;=\; 0,\qquad \rho \equiv \rho_0>0 \text{ (constant).}
+        \end{cases*} &&
+    \end{flalign*}
+\end{definition}
+Since $\rho \equiv \rho_0$ and $\eta = \mu |\vct{D}|^2$, the advective form follows from~\ref{def:nsconservative}.
+\begin{definition}[Generalized-Newtonian Navier-Stokes (NS)]
+    \label{def:NSEquations}
+    \begin{flalign*}
+        \quad & \begin{cases*}
+        \quad \rho\big(\partial_t \vu + (\vu\cdot\nabla)\vu\big) = -\,\nabla p \;+\; \Divbf\!\Big( 2\,\mu(|\vct{D}|^2)\,\vct{D}\Big) \;+\; \rho\,\vct{f} \\
+        \quad \Div(\vu) = 0,
+        \end{cases*} &&
+    \end{flalign*}
+\end{definition}
+We divide $\rho$ and obtain the kinematic-viscosity form from~\ref{def:NSEquations}.
+\begin{definition}[Kinematic-Viscosity Navier-Stokes (NS)]
+    \label{def:kinematic-viscosity-ns}
+    \begin{flalign*}
+        \quad & \begin{cases*}
+        \quad \partial_t \vu + (\vu\cdot\nabla)\vu = -\,\frac{\nabla p}{\rho}\, \;+\; \Divbf\!\Big( \frac{2}{\rho}\,\mu(|\vct{D}|^2)\,\vct{D}\Big) \;+\; \vct{f}, \\
+        \quad \Div(\vu) = 0,
+        \end{cases*} &&
+    \end{flalign*}
+\end{definition}
+Finally, we write the NS system in operator form.
+\begin{definition}
+    \label{def:standard-form-ns}
+    We write Eq. \ref{def:NSEquations} in standard form
+    \begin{flalign*}
+        \quad & \begin{cases*}
+            \quad F\!\big(\partial_t\vu,\,\nabla\vu,\,\nabla p,\, \vu,\, p;\, \rho, \mu\big) \;=\; \vct{f}, \\
+            \quad \Div(\vu) \;=\; 0,
+        \end{cases*} && \\
+        \text{where} \quad & F\!\big(\partial_t\vu,\,\nabla\vu,\,\nabla p,\, \vu,\, p;\, \rho, \mu\big) \defined \partial_t \vu \;+\;  (\vu\cdot\nabla)\vu \;+\; \frac{\nabla p}{\rho}  \;-\;  \Divbf\!\Big( \frac{2}{\rho}\;\mu\;(|\vct{D}|^2)\,\vct{D}\Big) &&
+    \end{flalign*}
+\end{definition}
+\begin{remark}
+    \label{classifying NS}
+    The NS equations are a non-linear coupled system of PDEs.
+    \medskip
+    The first equation follows from the balance of linear momentum,
+    where the terms:
+    \begin{itemize}
+        \item  $\rho (\vu\cdot\nabla)\vu = \rho \vect{
+            \langle \vu, \nabla \vu_1 \rangle\\
+            \langle \vu, \nabla \vu_2 \rangle\\
+            \langle \vu, \nabla \vu_3 \rangle
+        }$ is the convective term governing acceleration of fluid (non-linear).
+        \item $\Divbf\!\Big( 2\,\mu(|\vct{D}|^2)\,\vct{D}\Big)$ is the diffusive term describing the viscouselastic behavior (linear since $\mu$ is constant).
+    \end{itemize}
+    The second equation is the continuity equation, a consequence of the assumed fluid properties of blood
+    that lead to the divergence-free condition on $\vu$.
+    \medskip
+    The total system comprises of four equations in four unknowns: the three components of the velocity field
+    $\vu$ and the pressure field $p$.
+\end{remark}
+If pressure $p$ and the velocity $\vu$ are given, the Cauchy stress $\vct{T}$ is computed
+from Eq. \ref{def:improssible-stress-tensor}. It follows that the wall shear stress (WSS) at the vessel wall is:
+\begin{flalign*}
+    \quad \text{WSS} \defined \langle \vct{t_{blood}}, ~\vct{T}\;\hat{n} \rangle \quad : \quad \begin{cases*}
+        t_{blood} \text{ is tangent of a flow line through a cross-sectional area} \\
+        \hat{n} \text{ is outer normal of the cross-sectional area}
+    \end{cases*}&&
+\end{flalign*}
+Forgoing the rigid-wall assumption allows us to model the relationship
+between the vessel wall and blood flow. Applicable models are referred
+to as fluid-structure interaction (FSI) models.\todo{discuss in a later section}
+
+
+\subsubsection{NS in Cylindrical Coordinates}
+    \label{subsubsec:cylindrical-coords}
+
+    Let our vessel wall $\partial \Omega = [0, T] \times \Omega(t)$ be a surface in $\R^4$
+    that evolves in time which we refer to as the interface.
+    Let $\OmegaBar = \partial \Omega \cup \Omega$ be the closed and compact
+    region enclosed by our interface. So the region enclosed by our interface
+    is $\Omega$, and we aim to model the velocity and pressure fields on $\Omega$.\\
+
+    The relationship between cartesian and cylidrical coordinates is
+    \begin{flalign*}
+        \quad (x, ~y, ~z) ~ \mapsto (r \sin(\theta), ~ r\cos(\theta), ~z), \quad r = \sqrt{x^2 + y^2}.&&
+    \end{flalign*}
+    Assume a vessel of length $L$ is aligned with the z-axis
+    whose cross-section is circular with radius $R(z,t)$ at axial position $z$ and time $t$.
+    Our fluid domain becomes
+    \begin{equation*}
+        \label{fluid-domain-cylidrical}
+        \Omega(t) \; = \; \{(r, ~,\theta ~, z) \in \R^3 ~ : ~r \in [0, R(z, t)], ~ \theta \in [0, 2\pi), ~ z \in [0, l) \}
+    \end{equation*}
+    where $R(z,t)$ is the vessel radius at axial position $z$ and time $t$.
+
+    \medskip
+    \td{
+        Ref. notes for further details on deriving the transformation rules for vector
+        calculus operators, or, notes where I do the derivation directly.
+        Then discuss simplifications for axisymmetric flow.
+    }

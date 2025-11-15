@@ -179,4 +179,4 @@ cython_debug/
 *.bcf-SAVE-ERROR
 *.bcf
 *.bbl
-*.blg
+*.blgg
