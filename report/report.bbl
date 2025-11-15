@@ -16,4 +16,53 @@
   {}
 \endgroup
 
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global/global}
+    \entry{ehab332}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=1a800728155e55fe589e878acabcf553}{%
+           family={Derimay},
+           familyi={D\bibinitperiod},
+           given={Francois},
+           giveni={F\bibinitperiod}}}%
+        {{hash=667dccdc3f4cd7928230974b133a32ea}{%
+           family={Finet},
+           familyi={F\bibinitperiod},
+           given={Gerard},
+           giveni={G\bibinitperiod}}}%
+        {{hash=89a6c397d9c0449e7f4965b6da03bb04}{%
+           family={Rioufol},
+           familyi={R\bibinitperiod},
+           given={Gilles},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{b0e38c2bda1271b3eb193a87c5042e0c}
+      \strng{fullhash}{b0e38c2bda1271b3eb193a87c5042e0c}
+      \strng{fullhashraw}{b0e38c2bda1271b3eb193a87c5042e0c}
+      \strng{bibnamehash}{b0e38c2bda1271b3eb193a87c5042e0c}
+      \strng{authorbibnamehash}{b0e38c2bda1271b3eb193a87c5042e0c}
+      \strng{authornamehash}{b0e38c2bda1271b3eb193a87c5042e0c}
+      \strng{authorfullhash}{b0e38c2bda1271b3eb193a87c5042e0c}
+      \strng{authorfullhashraw}{b0e38c2bda1271b3eb193a87c5042e0c}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{European Heart Journal}
+      \field{title}{Coronary Artery Stenosis Prediction Does Not Mean Coronary Artery Stenosis Obstruction}
+      \field{year}{2021}
+      \verb{doi}
+      \verb 10.1093/eurheartj/ehab332
+      \endverb
+      \verb{urlraw}
+      \verb https://watermark.silverchair.com/ehab332.pdf
+      \endverb
+      \verb{url}
+      \verb https://watermark.silverchair.com/ehab332.pdf
+      \endverb
+    \endentry
+  \enddatalist
+  \missing{fung1997biomechanics}
+\endrefsection
 \endinput

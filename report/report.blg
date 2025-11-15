@@ -1,9 +1,17 @@
 [0] Config.pm:308> INFO - This is Biber 2.20
 [0] Config.pm:311> INFO - Logfile is 'report.blg'
-[39] biber-darwin:340> INFO - === Fri Nov 14, 2025, 13:22:30
+[38] biber-darwin:340> INFO - === Fri Nov 14, 2025, 17:32:12
 [47] Biber.pm:420> INFO - Reading 'report.bcf'
-[91] Biber.pm:994> INFO - Found 0 citekeys in bib section 0
-[98] bbl.pm:676> INFO - Writing 'report.bbl' with encoding 'UTF-8'
-[99] bbl.pm:779> INFO - Output to report.bbl
-[99] Biber.pm:131> WARN - The file 'report.bcf' does not contain any citations!
-[99] Biber.pm:133> INFO - WARNINGS: 1
+[90] Biber.pm:994> INFO - Found 2 citekeys in bib section 0
+[98] Biber.pm:4463> INFO - Processing section 0
+[109] Biber.pm:4654> INFO - Looking for bibtex file 'citations.bib' for section 0
+[110] bibtex.pm:1713> INFO - LaTeX decoding ...
+[113] bibtex.pm:1519> INFO - Found BibTeX data source 'citations.bib'
+[132] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[132] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[132] Biber.pm:4283> INFO - Sorting list 'nty/global//global/global/global' of type 'entry' with template 'nty' and locale 'en-US'
+[132] Biber.pm:4289> INFO - No sort tailoring available for locale 'en-US'
+[135] bbl.pm:676> INFO - Writing 'report.bbl' with encoding 'UTF-8'
+[135] bbl.pm:779> INFO - Output to report.bbl
+[135] Biber.pm:131> WARN - I didn't find a database entry for 'fung1997biomechanics' (section 0)
+[135] Biber.pm:133> INFO - WARNINGS: 1

@@ -22,66 +22,91 @@
 
 % ===================== BEGIN DOCUMENT ==============================
 % ===================================================================
-\begin{document} \maketitle
+\begin{document}
+    \maketitle
+
 
     % ------------------ COVER PAGE
-    \noindent Report presents modern techniques for modeling the motion of
-    blood within a Human's Macrocirculatory System. A hemodynamics literature
-    review is presented, summarizing key findings and methodologies.
-    This is followed by a comprehensive mathematical and computational
+    \noindent Report of modern techniques for modeling the motion of
+    blood within a Human's Macrocirculatory System. \medskip
+    \textbf{Keywords:} \textit{
+        computational hemodynamics, 0D blood-flow, 1D blood-flow, 2D-blood-flow,
+        PINN's, finite element methods, discontinous galerkin, Lax-Wendroff, fluid-structure ineraction (FSI)
+    }
+    \medskip \tableofcontents \newpage
 
-    \newpage
 
-    \textbf{Keywords:} \textit{computational hemodynamics, 0D blood-flow, 1D blood-flow, 2D-blood-flow, PINN's,
-    finite element methods, discontinous galerkin, Lax-Wendroff, fluid-structure ineraction (FSI)}
 
-    \medskip
-
-    \tableofcontents
-
-    \medskip
-
-    \newpage
-
-    % ------------------ SECTION: Preliminaries
+    % ------------------ PRELIMINARIES
     \section{Preliminaries}
         \label{sec:prelims}
-        \medskip
+
         \subsection*{Notation}
-            \label{subsec:notation}
-            \input{prelims/notation.tex}
+            \label{subsec:notation} \input{prelims/notation.tex}
         \newpage
 
         \subsection*{Symbols and Abbreviations}
-            \label{subsec:syms-abbrevs}
-            \input{prelims/symbols-abbreviations.tex}
+            \label{subsec:syms-abbrevs} \input{prelims/symbols-abbreviations.tex}
         \newpage
 
         \subsection*{Parameters and Units}
-            \label{subsec:params}
-            \input{prelims/parameters-units.tex}
+            \label{subsec:params} \input{prelims/parameters-units.tex}
         \newpage
 
         \subsection*{Mathematical Foundations}
-            \label{subsec:maths}
-            \input{prelims/maths.tex}
+            \label{subsec:maths} \input{prelims/maths.tex}
         \newpage
 
-        \newpage
+    \section{Introduction}
+        \label{sec:intro}
+        Hemodynamics studies the kinematics of blood. Our interest is the kinematic motion
+        of blood within the Human macrocirculatory system, i.e. the flow of blood in large
+        vessels such as arteries and veins. Blood is observed as a complex fluid of formed elements
+        suspended in plasma, thus, the rheological behavior of blood is non-trivial. We report techniques for modeling
+        bloods' motion in a Human's macrocirculatory system.
 
-    % ------------------ SECTION: Appendix
-    \newpage
+        \medskip
+
+        After stating our reports' motivation, we begin with physiological review of the of the Human's circulatory system
+        in Sec.~\ref{subsec:pysiology}. Sec.~\ref{subsec:continuum} states the continuum hypothesis, a necessary posulate of
+        fluid mechanics. By adopting the continuum hypothesis we treat blood as a continuous medium; the resulting hemodynamics problem becomes
+        a problem in the motion of continous media. In Sec.~\ref{subsec:blood-model}, we discuss various assumptions one may
+        impose on the rheology of bloods material properties. By adopting a particular rheological model, we obtain the necessary constitutive
+        relations for a mathematical description of bloods motion. Treating blood as a simple fluid (single-contitute, homogenous, and isotropic
+        mixture) yeilds a Newtonian rheological model of blood (i.m.b. justified such models are valid in large vessels, e.g.
+        arteries and veins, where the shear rates are sufficiently high [\cite{fung1997biomechanics}, Ch.~2]).
+        Assuming the density of a material element of blood remains constant as it flows within the vessel, is
+        r.t. the incompressibility condition. Together, these assumptions result in an incompressible-newtonian rheological model of blood.
+        Finally, in Sec.~\ref{subsec:navier-stokes} the Navier-Stokes (NS) system of Partial Differential Equations (PDEs) governing
+        the motion of an incompressible-newtonian continuum of blood are derived. The NS equations serve
+        as the foundation for all subsequent modeling techniques reported herein.
+
+        \medskip
+
+        \paragraph{Motivation}
+        Coronary artery stenosis (CAS) is the narrowing of the coronary arteries due
+        to the buildup of plaque. Such narrowing can restrict blood flow to the heart muscle,
+        which may lead to various cardiovascular problems. Current methods for predicting a stenotic
+        blockage (SB) in a coronary artery are rudimentary, and often SB predicition doesn't mean obstruction [\cite{ehab332}].
+        Additionally, current clinical methods for assessing the severity of a SB rely on imaging techniques such as angiography,
+        intravascular ultrasound (IVUS), and optical coherence tomography (OCT) to visualize the arteries and identify areas of narrowing.
+        These methods provide valuable information about the anatomy of the arteries, but they do not
+        provide direct information about the functional significance of the CAS. Functional assessment of CAS typically involves measuring the fractional flow reserve (FFR),
+        which is the ratio of the blood pressure downstream of the stenosis to the blood pressure upstream of the stenosis during maximum blood flow.
+        However, measuring FFR requires the use of a pressure wire, which can be invasive and carries some risks.
+        Therefore, there is a need for non-invasive methods to assess the functional significance of CAS.
+
+
+    % ------------------ APPENDIX
     \section{Appendix}
         \label{sec:appendix}
 
-        % ------------------ BIBLIOGRAPHY
         \subsection*{Bibliography}
-        \newpage
+            \printbibliography
 
-        % ------------------- CODE LISTINGS
         \subsection*{Code Listings}
 
-        \td{Optional Space for sumplementary code listings of computations done while investigating}
+        \td{Code listings}
         \lstset{language=julia}
         \begin{lstlisting}[language=julia, caption={Algorithm 16.5}, label={lst:problem-sampling}]
         function foo()
