@@ -31,7 +31,7 @@
     blood within a Human's Macrocirculatory System. \medskip
     \textbf{Keywords:} \textit{
         computational hemodynamics, 0D blood-flow, 1D blood-flow, 2D-blood-flow,
-        PINN's, finite element methods, discontinous galerkin, Lax-Wendroff, fluid-structure ineraction (FSI)
+        PINN's, finite element methods, discontinuous galerkin, Lax-Wendroff, fluid-structure ineraction (FSI)
     }
     \medskip \tableofcontents \newpage
 
@@ -60,26 +60,21 @@
     \section{Introduction}
         \label{sec:intro}
         Hemodynamics studies the kinematics of blood. Our interest is the kinematic motion
-        of blood within the Human macrocirculatory system, i.e. the flow of blood in large
-        vessels such as arteries and veins. Blood is observed as a complex fluid of formed elements
-        suspended in plasma, thus, the rheological behavior of blood is non-trivial. We report techniques
-        and methodologies for modeling bloods' motion in the Human macrocirculatory system.
+        of blood within the human macrocirculatory system, i.e. the flow of blood in large
+        vessels such as arteries and veins. Blood is observed as a complex fluid of formed 
+        elements suspended in plasma, thus, the rheological behavior of blood is non-trivial.
+        We report techniques and methodologies for modeling blood's motion in large vessels.
 
-        \medskip
+        \medskip Our report is organized as follows. \medskip
 
-        After stating the motivation of our study, Sec.~\ref{subsec:pysiology} provides a physiological review of a Human's circulatory system in
-        Sec.~\ref{subsec:continuum} states the continuum hypothesis, a necessary posulate of
-        fluid mechanics. We adopt the continuum hypothesis and treat blood as a continuous medium, then our hemodynamics
-        problem simplifies describing the motion of a continous media. In Sec.~\ref{subsec:bloodmodel}, we discuss assumptions
-        one may impose on the material-rheological properties of blood. By adopting a particular rheological model, we obtain the necessary constitutive
-        relations for a mathematical description of bloods motion. Treating blood as a simple fluid (single-contitute, homogenous, and isotropic
-        mixture) yeilds a Newtonian rheological model of blood (i.m.b. justified such models are valid in large vessels, e.g.
-        arteries and veins, where the shear rates are sufficiently high) %[\cite{fung1997biomechanics}, Ch.~2]).
-        Assuming the density of a material element of blood remains constant as it flows within the vessel, is
-        r.t. the incompressibility condition. Together, these assumptions result in an incompressible-newtonian rheological model of blood.
-        Finally, in Sec.~\ref{subsec:ns} the Navier-Stokes (NS) system of Partial Differential Equations (PDEs) governing
-        the motion of an incompressible-newtonian continuum of blood are derived. The NS equations serve
-        as the foundation for all subsequent modeling techniques reported herein.
+        We start by stating the report's motivation, then in Sec.~\ref{subsec:physiology} we
+        provide a brief physiological review of the human circulatory system. We follow with
+        Sec.~\ref{subsec:continuum}, which reviews the continuum hypothesis, a necessary postulate 
+        in fluid mechanics which treats blood as a continuous medium. This framing reduces 
+        the hemodynamic problem to describing blood’s motion as a continuum. In Sec.~\ref{subsec:bloodmodel} we discuss various rheological assumptions and 
+        constitutive relations used to model blood as an incompressible fluid. In Sec.~\ref{subsec:ns} we derive
+        the incompressible Newtonian Navier–Stokes (NS) equations governing the motion of blood
+        in large vessels.
 
         \medskip
 
@@ -99,8 +94,9 @@
         
         \newpage
 
-        \subsection{Pysiology}
-            \label{subsec:pysiology} \input{intro/pysiology.tex}
+
+        \subsection{Physiology}
+            \label{subsec:physiology} \input{intro/physiology.tex}
         \newpage
 
         \subsection{Continuum}
