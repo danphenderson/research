@@ -165,18 +165,18 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 .idea/
 
-# .DS_Store
+.DS_Store
 
-# # LaTex Build Artifacts
-# *.aux
-# *.fdb_latexmk
-# *.out
-# *.synctex.gz
-# *.toc
-# *.fls
-# *.run.xml
-# *.bbl-SAVE-ERROR
-# *.bcf-SAVE-ERROR
-# *.bcf
-# *.bbl
-# *.blg
+# LaTex Build Artifacts
+*.aux
+*.fdb_latexmk
+*.out
+*.synctex.gz
+*.toc
+*.fls
+*.run.xml
+*.bbl-SAVE-ERROR
+*.bcf-SAVE-ERROR
+*.bcf
+*.bbl
+*.blg
