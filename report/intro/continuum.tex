@@ -3,7 +3,7 @@ Our aim is to simulate the hemodynamics of a time-dependent spatial fluid domain
 \begin{flalign*}
     \quad \Omega(t) &:= \{ x \in \R^N ~:~ x \text{ lies inside the blood vessel at time } t \} &&
 \end{flalign*}
-for all $t \in I_T$ s.t. 
+for all $t \in I_T$ s.t.
 \begin{flalign*}
     \quad I_T \defined [0, T], \quad T > 0. &&
 \end{flalign*}
@@ -11,6 +11,7 @@ The spatial-temporal domain is
 \begin{flalign*}
     \quad & \Omega \;:=\; \{ (x, t) \in \R^{N+1} ~:~ x \in \Omega(t), ~ t \in I_T \}, &&
 \end{flalign*}
+which is r.t. as the computational domain.
 On $\Omega(t)$, we say that
 \begin{flalign*}
     \quad & \phi:\Omega(t)\to\R \;\text{is a \emph{scalar field}}, & \\
@@ -42,7 +43,7 @@ Our assumption that blood is a simple fluid ensures $\vu, ~p, \text{ and } \rho$
         \quad D_t\phi \;:=\; \partial_t \phi + \vu\!\cdot\!\Div(\phi), &&
     \end{flalign*}
     be the material derivative $D_t \phi$ measuring the instantanous rate of change of
-    quantity $\phi$ moving with velocity field $\vu$. The literature also refers to $D_t$ as the 
+    quantity $\phi$ moving with velocity field $\vu$. The literature also refers to $D_t$ as the
     \emph{substantial derivative}, \emph{advective derivative}, \emph{lagrangian derivative}, or \emph{convective derivative}.
 \end{definition}
 For $\phi$ subject to the flow $\vu$, note that
@@ -61,7 +62,7 @@ By assumption blood is Newtonian, linear momentum balance follows from Newton's 
     \quad \rho(\partial_t \vu + (\vu\cdot\nabla)\vu ) \;=\; \Divbf(\vT) + \rho \vfb, \qquad \text{in} ~ \Omega(t) &&
 \end{flalign*}
 where $\vT$ is the Cauchy stress tensor, $\vfb$ may be some body force per unit mass $\big[\dfrac{m}{s^2}\big]$.
-Note that $\Divbf$ acts rowise on $\vT$, implying $\exists$ matrix 
+Note that $\Divbf$ acts rowise on $\vT$, implying $\exists$ matrix
 $A ~ : ~ \vT \vu = \vT ~\because~ \text{blood is a simple fluid}$.
 Let the rate-of-deformation tensor be defined as the symmetric
 part of the velocity gradient, i.e.,
@@ -110,13 +111,13 @@ feild $\vu$.
 \end{definition}
 \begin{definition}[Incompressible flow]
 \label{def:incompressible-flow}
-    An element $V \in \Omega$ subject to $\vu$ s.t. $V$ with constant rate of material density change 
+    An element $V \in \Omega$ subject to $\vu$ s.t. $V$ with constant rate of material density change
     (in both space and time so that $D_t \rho = 0$ for all $t \in I_T$) undergoes an \emph{incompressible flow} in $\Omega$.
 \end{definition}
 For all material elements $V \in \Omega$, \ref{def:incompressible-fluid} implies \ref{def:incompressible-flow}.
 Note, the converse is not generally true: an incompressible flow ($D_t\rho=0$) only preserves density
 along particle paths and allows $\rho=\rho(\vx)$ to vary spatially; but when the initial density
-is distributed uniformly in space, incompressible flow implies incompressible fluid. 
+is distributed uniformly in space, incompressible flow implies incompressible fluid.
 \begin{remark}[Divergence-free condition]
     \label{rmk:incompressibility-divergence-free}
     By assuming blood is incompressible fluid and flow, we have

@@ -1,39 +1,26 @@
 \label{subsec:physio-background}
-The circulatory system consists of a human's heart,
-vascular network, lungs, and organs. The heart is the source,
-transporting Oxygen-rich blood to the organs and
-deoxygenated (and carbon dioxide-enriched) blood back to the lungs.
-Lungs discharge $CO2$ and enrich the blood with Oxygen. We refer to these
-respective processes as the \emph{pulmonary circulation} and
-the \emph{systemic circulation} (resp.). The \emph{macrocirculatory
-system} consists of the heart and the large vessels in the systemic circulation.
-Particularly, the arteries of the macrocirculatory system transport
-oxygenated blood from the heart, driving the return of deoxygenated blood in
-large vessels back to the heart. Hemodynamics refers to the study of blood flow in
-the circulatory system.
+The circulatory system is the human heart, vascular network, lungs, and organs. The systems
+source is the heart, transporting oxygen-rich blood to the organs and deoxygenated (and
+carbon dioxide-enriched) blood back to the lungs. Lungs discharge $CO2$ and enrich the blood
+with Oxygen. These respective processes are r.t. the \emph{pulmonary circulation} and
+the \emph{systemic circulation} (resp.). The \emph{macrocirculatory system} consists of the
+heart and the large vessels in the systemic circulation. Particularly, the arteries of the
+macrocirculatory system transport oxygenated blood from the heart, driving the return
+of deoxygenated blood in large vessels back to the heart.
 
 \medskip
 
-Cardiovascular disease (CVD) is the leading cause of death in developed nations.
-According to the World Health Organization (WHO), CVD accounts for approximately
-30\% of all global deaths in 2012. Understanding the hemodynamics of the macrocirculatory system is crucial for
-diagnosing, treating, and preventing CVD. Consequently, our motivation is to
-simulate and analyze areterial stenosis with the aim to better enable
-patient-provider outcomes.
-
-\medskip
-
-A single beat of the heart propels blood through the macrocirculatory system,
-the "lub-dub" sound. We refer to the beat and the following sequence of events until the
-successive beat as the \emph{cardiac cycle}. The cardiac cycle consists of
-two main phases: systole and diastole, during which the heart chamber is
-accumulating blood and releasing blood (resp.). The beat can be recognized as a pulse
-wave in large vessels, characterized by the Wormersley number
+A single beat of the heart propels blood through the macrocirculatory system, the
+"lub-dub" sound. The beat and the following sequence of events until the successive
+beat as the \emph{cardiac cycle}. The cardiac cycle consists of two main phases:
+systole and diastole, during which the heart chamber is accumulating blood and
+releasing blood (resp.). The beat can be recognized as a pulse wave in large vessels,
+characterized by the Wormersley number
 \begin{flalign*}
         \quad & W_0 := 2R \cdot \sqrt{\frac{\omega \rho}{\eta}},  \quad : ~ \rho \text{ is fixed blood density} &&
 \end{flalign*}
-a dimensionless parameter comparing the frequency $\omega$
-of the pulse wave to the blood's dynamic viscosity $\eta$ and the vessel diameter $2R$.
+a dimensionless parameter comparing the frequency $\omega$ of the pulse wave to the
+blood's dynamic viscosity $\eta$ and the vessel diameter $2R$.
 The Reynolds number $Re$ characterizes flow in blood vessels
 \begin{flalign*}
         \quad & Re := 2R \cdot \frac{\rho U}{\eta}, \quad : ~ \rho \text{ is fixed blood density} &&
