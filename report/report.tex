@@ -24,6 +24,7 @@
 % ===================================================================
 \begin{document}
     \maketitle
+    \thispagestyle{empty}  % No page number on title page
 
     % ------------------ COVER PAGE
     \noindent Hemodynamics refers to study of bloods motion, herein,
@@ -33,7 +34,10 @@
     \medskip \paragraph{Keywords:} \medskip
     \textit{computational hemodynamics, PINN's, Deep-Reisz, discontinuous galerkin, Lax-Wendroff, fluid-structure ineraction (FSI)}
 
-    \medskip \tableofcontents \newpage
+    \todo{summarize final contributions here and update keywords}
+
+    % ------------------ TABLE OF CONTENTS
+    \newpage \tableofcontents \newpage
 
     % ------------------ PRELIMINARIES
     \subsection{Acroynms and Abbreviations}
@@ -110,7 +114,7 @@
             \label{subsec:physiology} \input{intro/physiology.tex}
         \bigskip
 
-        \subsection{Continuum}
+        \subsection{Continuum Hypothesis}
             \label{subsec:continuum} \input{intro/continuum.tex}
         \bigskip
 
