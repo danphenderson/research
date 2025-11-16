@@ -1,5 +1,5 @@
 A \emph{domain} in an open, nontrivial, bounded, path-connected subset of $\R^N$ for $N\in\{1,2,3\}$.
-Our aim is to simulate the hemodynamics of a time-dependent spatial fluid domain $\Omega(t)\subset\R^N$, where
+Our aim is to simulate the hemodynamics of a time-dependent fluid domain $\Omega(t)\subset\R^N$, where
 \begin{flalign*}
     \quad \Omega(t) &:= \{ x \in \R^N ~:~ x \text{ lies inside the blood vessel at time } t \} &&
 \end{flalign*}
@@ -11,15 +11,16 @@ The spatial-temporal domain is
 \begin{flalign*}
     \quad & \Omega \;:=\; \{ (x, t) \in \R^{N+1} ~:~ x \in \Omega(t), ~ t \in I_T \}, &&
 \end{flalign*}
-which is r.t. as the computational domain.
-On $\Omega(t)$, we say that
+occasionally r.t. as the computational domain.
+On the spatial domain $\Omega(t)$, we let
 \begin{flalign*}
-    \quad & \phi:\Omega(t)\to\R \;\text{is a \emph{scalar field}}, & \\
-    \quad & \vct f:\Omega(t)\to\R^N \;\text{is a \emph{vector field}}, &&\\
-    \quad & \vct T:\Omega(t)\to\R^{N\times N} \;\text{is a \emph{(second-order) tensor field}}. &&
+    \quad & \phi:\Omega(t)\to\R \;\text{ r.t. a \emph{scalar field}}, & \\
+    \quad & \vct f:\Omega(t)\to\R^N \;\text{ r.t. a \emph{vector field}}, &&\\
+    \quad & \vct T:\Omega(t)\to\R^{N\times N} \;\text{ r.t. a \emph{(second-order) tensor field}}. &&
 \end{flalign*}
-A second-order (rank-2) tensor $\vct T$ defines a linear map from $\R^N \to \R^N$, and once a basis is fixed,
+The tensor $\vct T$ defines a linear map from $\R^N \to \R^N$, and once a basis is fixed,
 $\exists ~ A \in \R^{N\times N}$ s.t. $\vct T(\vct x) = A \,\vct x$ for all $\vct x \in \Omega(t)$.
+
 \paragraph{Modeling Framework}
 At microscopic scales the continuum hypothesis breaks down as matter is a discrete collection of molecules,
 but at macroscopic scales empirical evidence suggests our models are accurate. Let the blood's velocity, thermodynamic pressure, and density fields be
