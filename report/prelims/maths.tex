@@ -1,10 +1,64 @@
+% domain disscussion
+We assume Zermelo-Fraenkel set theory with the axiom of choice (ZFC), and according to Cohen\href{https://en.wikipedia.org/wiki/Paul_Cohen},
+it's necessary to also posulate the existence of the continuum hypothesis (CH).
 A \emph{domain} will r.t. an open and bounded subset of $\R^N$ with nonempty interior $\Omg^\circ$,
-for all $N\in\{1,2,3\}$. By the Heine-Borel theorem, every domain $\Omg$ has a well-defined boundary
+for all $N\in\{1,2,3,4\}$. By the Heine-Borel theorem, every domain $\Omg$ has a well-defined boundary
 $\partial \Omg$ with compact closure $\OmgBar = \Omg \cup \pOmg$. The compact domains of $\R^N$ are
-precisely the closed and bounded subsets of $\R^N$. When every path between two points in $\Omg$
-may be continously contrated to a point without leaving $\Omg$, we say that $\Omg$ is \emph{simply connected}.
-A \emph{Lipschitz domain} is a domain $\Omg$ such that for every point $x\in\pOmg$, there exists a
-neighborhood $U_x$ of $x$ such that $\Omg \cap U_x$ is the region above the graph of a Lipschitz
-continuous function (after a suitable rotation and translation of coordinates). A \emph{convex domain}
-is a domain $\Omg$ such that for every $x,y\in\Omg$, the line segment connecting $x$ and $y$ is
-contained in $\Omg$.
+precisely the closed and bounded subsets of $\R^N$.
+
+% % simply connected, lipschitz domain, and convex domain
+% When every path between two points in $\Omg$ may be continously contrated to a point without leaving
+% $\Omg$, we say that $\Omg$ is \emph{simply connected}. A \emph{Lipschitz domain} is a domain $\Omg$
+% s.t for every point $x\in\pOmg$, there exists a neighborhood $U_x$ of $x$ s.t $\Omg \cap U_x$ is the
+% region above the graph of a Lipschitz continuous function (after a suitable rotation and translation
+% of coordinates). A \emph{convex domain} is a domain $\Omg$ s.t for every $x,y\in\Omg$, the line segment
+% connecting $x$ and $y$ is contained in $\Omg$.
+
+\medskip
+
+% function space discussion
+Given domain $\Omega$, the function space $\mathcal{F}(\Omg)$ is a linear
+space (sp.) $(F(\Omg), \, K)$ of scalar valued functions $f:\Omg \to K$; e.g. $F = C$ and $K = R$
+is $C^0(\Omg)$, the sp. of continuous real valued functions on $\Omg$. Let $C^{k}(\Omg)$ be the
+sp. of $k$-tides continuously differentiable functions on $\Omg$. Then $C^k(\OmgBar)$ is the sp. of functions
+$f \in C^k(\Omg)$ s.t $f$ and it's derivatives up to order $k$ may be continuously extended to the boundary $\pOmg$.
+The space $L^p(\Omg)$ denotes the Lebesgue sp. of $p$-integrable functions on $\Omg$. If We denote
+the space of Lipschitz continous functions on $\Omega$ as $Lip(\Omg)$.\todo{relate to $C(\Omg)$, cite brenners book}.
+
+
+\medskip
+
+% more on sp.s: topological to metric to normed to inner-product sp.,
+%   then completeness and banach sp. discussion; Hilbert sp.s are banach.
+
+\medskip
+
+% definition for scalar feilds
+For real-valued $f \in C^1(\Omg)$, the partial derivative w.r.t. the $i$-th coordinate of $\Omg$ is
+\begin{flalign*}
+    \quad \pd_i f = \frac{\pd f}{\pd x_i}, &&
+\end{flalign*}
+the gradient of $f$ is $\nabla f = \left(\pd_1 f, \ldots  \pd_N f\right)$
+and the Laplacian of $f$ is $\Delta f = \sum_{i=1}^N \pd_i^2 f.$
+\todo{introduce $C_0$}
+\medskip
+
+The integral of $f \in L^1(\Omg)$ is
+\begin{flalign*}
+    \quad \int_{\Omg} f(\vx) \, \dx \; \equiv \; \int_\Omg f ~ .&&
+\end{flalign*}
+\todo{introduce $L_{loc}$}
+For a vector field $\vct{F} = (F_1, \ldots, F_N) \in C^1(\Omg; \R^N)$,
+the divergence is defined as $\Div \vct{F} = \sum_{i=1}^N \pd_i F_i$.
+
+\medskip
+
+\td{Work In Progress (WIP) -- Complete Last. Incoporate following
+
+\begin{flalign*}
+    \quad & \phi:\Omg(t)\to\R \;\text{ r.t. a \emph{scalar field}}, & \\
+    \quad & \vct f:\Omg(t)\to\R^N \;\text{ r.t. a \emph{vector field}}, &&\\
+    \quad & \vct T:\Omg(t)\to\R^{N\times N} \;\text{ r.t. a \emph{(second-order) tensor field}}. &&
+\end{flalign*}
+The tensor $\vct T$ defines a linear map from $\R^N \to \R^N$, and once a basis is fixed,
+$\exists ~ A \in \R^{N\times N}$ s.t. $\vct T(\vct x) = A \,\vct x$ for all $\vct x \in \Omg(t)$.}

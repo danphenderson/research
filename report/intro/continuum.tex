@@ -1,40 +1,67 @@
-Our aim is to simulate bloods flow in a time-dependent fluid domain $\OmgBt \subset\R^N$, where
+W.a.t. simulate bloods flow in a time-dependent fluid domain $\OmgBt \subset\R^{N-1}$, where
 \begin{flalign*}
-    \quad \Omg(t) &:= \{ x \in \R^N ~:~ x \text{ lies inside the blood vessel at time } t \} &&
+    \quad \OmgBt &:= \{\vx ~:~ \vx \text{ lies inside the vessel at time } t \} &&
 \end{flalign*}
 for all $t \in I_T$ s.t.
 \begin{flalign*}
     \quad I_T \defined [0, T], \quad T > 0. &&
 \end{flalign*}
-The spatial-temporal domain is
+We r.t. the fluids spatial-temporal domain as the fluids \emph{computational domain}
 \begin{flalign*}
-    \quad & \Omg \;:=\; \{ (x, t) \in \R^{N+1} ~:~ x \in \Omg(t), ~ t \in I_T \}, &&
+    \quad & \Omg \;:=\; \{ (x, t) \in \R^{N+1} ~:~ x \in \Omg(t), ~ t \in I_T \}. &&
 \end{flalign*}
-We r.t. $\OmgBar$ as the computational domain. On the spatial fluid and vessel domain $\Omg(t)$, we let
-\begin{flalign*}
-    \quad & \phi:\Omg(t)\to\R \;\text{ r.t. a \emph{scalar field}}, & \\
-    \quad & \vct f:\Omg(t)\to\R^N \;\text{ r.t. a \emph{vector field}}, &&\\
-    \quad & \vct T:\Omg(t)\to\R^{N\times N} \;\text{ r.t. a \emph{(second-order) tensor field}}. &&
-\end{flalign*}
-The tensor $\vct T$ defines a linear map from $\R^N \to \R^N$, and once a basis is fixed,
-$\exists ~ A \in \R^{N\times N}$ s.t. $\vct T(\vct x) = A \,\vct x$ for all $\vct x \in \Omg(t)$.
 
-\paragraph{Modeling Framework}
-At microscopic scales the continuum hypothesis breaks down as matter is a discrete collection of molecules,
-but at macroscopic scales empirical evidence suggests our models are accurate. Let the blood's velocity, thermodynamic pressure, and density fields be
-\begin{flalign*}
-    \quad & \vu: \Omg(t) \to \R^3, ~ (x, y, z) \mapsto (u_1(x, y, z), ~ u_2(x, y, z), ~u_3(x, y, z))^\top, \quad \bigg[\; \frac{m}{s^2} \;\bigg] && \\
-    \quad & p: \Omg(t) \to \R, ~ (x, y, z) \mapsto p(x, y, z), \quad \bigg[\; Pa \equiv \frac{N}{m^2}\;\bigg] && \\
-    \quad & \rho: \Omg(t) \to \R^+, ~ (x, y, z) \mapsto \rho(x, y, z).\quad \bigg[\; \frac{kg}{m^3} \;\bigg]&&
-\end{flalign*}
-Our assumption that blood is a simple fluid ensures $\vu, ~p, \text{ and } \rho$ is sufficiently smooth in $\Omg$.
-\begin{remark}[Simple Fluid]
-    A \emph{simple fluid} is a fluid where the Cauchy stress tensor depends only on the current state of deformation and rate of deformation
-    at each point in the fluid, and not on the history of deformation.
-    The contrary are \emph{complex fluids}, where stress may depend on past deformations
-    r.t.a. viscoelastic fluids, which exhibit both viscous and elastic characteristics.
-    Here, we assume blood is a simple fluid, one that isn't subject to memory effects.
+\medskip
+
+The fluid region is modeled as a time-dependent family of open sets
+$\{\OmgBt\}_{t \in I_T} \subset \R^3$ occupied by blood at time $t$.
+For each $t \in I_T$, we assume that $\OmgBt$ is simply connected and has
+Lipschitz continuous boundary. Thus any closed curve in $\OmgBt$ can be
+continuously contracted to a point within $\OmgBt$, and standard results
+from potential theory (e.g.\ Poincaré-type lemmas) apply when introducing
+scalar potentials for irrotational vector fields. Under these regularity assumptions
+on $\pOmgB$, standard trace theorems hold for Sobolev spaces (e.g.\ $H^1(\OmgBt)$).
+In particular, the outward unit normal is defined a.e. on $\pOmgB$, so
+we can meaningfully speak of normal and tangential components of vector fields on the boundary.
+
+\medskip
+
+\begin{remark}
+    Often we may impose stronger conditions on $\pOmgB$, e.g., require that the
+    boundary be a $C^1$ closed surface. This is reasonable since the vessel wall
+    is typically smooth in healthy vessels. The additional regularity allows us
+    to globally define geometric quantities such as curvature and surface differential
+    operators on the fluids boundary $\pOmgB$.
 \end{remark}
+
+\medskip
+
+Using the natural coordinate system, let $N \equiv 4$ so that $\OmgBt \in \R^3$.
+We assume blood fluid is modeled as a continuum that deforms continously, i.e.,
+at every point $\vx \in \OmgBt$ and time $t \in I_T$, the blood's kinematic quantities
+are described by sufficiently smooth fields. At microscopic scales the continuum hypothesis
+breaks down, since matter is a discrete collection of molecules, but at macroscopic scales
+empirical evidence suggests such models remain accurate. Let blood's s.s. velocity,
+thermodynamic pressure, and density fields be
+\begin{flalign*}
+    \quad & \vu: \OmgBt \to \R^3,\;
+        (x, y, z) \mapsto (u_1(x, y, z),\, u_2(x, y, z),\, u_3(x, y, z))^\top,
+        \quad \bigg[\; \frac{m}{s} \;\bigg] && \\
+    \quad & p: \OmgBt \to \R,\;
+        (x, y, z) \mapsto p(x, y, z),
+        \quad \bigg[\; \mathrm{Pa} \equiv \frac{N}{m^2} \;\bigg] && \\
+    \quad & \rho: \OmgBt \to \R^+,\;
+        (x, y, z) \mapsto \rho(x, y, z),
+        \quad \bigg[\; \frac{kg}{m^3} \;\bigg]. &&
+\end{flalign*}
+
+\medskip
+
+A fluid that deforms indepenent of time is simple, such fluids deformation and rate of
+deformation aren't subject to material memory effects (also r.t. as viscoelastic effects).
+The contrary are complex fluids, their deformation is subject to both viscous and elastic
+characteristics.
+
 \begin{definition}
     \label{def:material_derivative}
     Let
@@ -60,7 +87,7 @@ By assumption blood is Newtonian, linear momentum balance follows from Newton's 
 \begin{flalign*}
     \quad \rho(\partial_t \vu + (\vu\cdot\nabla)\vu ) \;=\; \Divbf(\vT) + \rho \vfb, \qquad \text{in} ~ \Omg(t) &&
 \end{flalign*}
-where $\vT$ is the Cauchy stress tensor, $\vfb$ may be some body force per unit mass $\big[\dfrac{m}{s^2}\big]$.
+where $\vT$ is the Cauchy stress tensor describing the fluids deformation, $\vfb$ may be some body force per unit mass $\big[\dfrac{m}{s^2}\big]$.
 Note that $\Divbf$ acts rowise on $\vT$, implying $\exists$ matrix
 $A ~ : ~ \vT \vu = \vT ~\because~ \text{blood is a simple fluid}$.
 Let the rate-of-deformation tensor be defined as the symmetric
@@ -100,8 +127,7 @@ So an isotropic fluid at rest (quiescent state $\vu\equiv\vct{0}$) sustains only
 \begin{flalign*}
     \quad \implies \vT \;=\; -\,p\,\mathrm{I} \quad \text{when} ~ \vu \equiv \vct{0}. &&
 \end{flalign*}
-One may make a distinction between incompressible fluids and incompressible flows, and by
-assuming the former w.a.t.s. the divergence-free (senodial) condition on velocity
+One may make a distinction between incompressible fluids and incompressible flows.
 feild $\vu$.
 \begin{definition}[Incompressibile fluid]
     \label{def:incompressible-fluid}
@@ -110,13 +136,13 @@ feild $\vu$.
 \end{definition}
 \begin{definition}[Incompressible flow]
 \label{def:incompressible-flow}
-    An element $V \in \Omg$ subject to $\vu$ s.t. $V$ with constant rate of material density change
+    An element $V \in \Omg$ subject to $\vu$ with constant rate of material density change
     (in both space and time so that $D_t \rho = 0$ for all $t \in I_T$) undergoes an \emph{incompressible flow} in $\Omg$.
 \end{definition}
-For all material elements $V \in \Omg$, \ref{def:incompressible-fluid} implies \ref{def:incompressible-flow}.
+I.m.b.s. for all material elements $V \in \Omg$, \ref{def:incompressible-fluid} implies \ref{def:incompressible-flow}.
 Note, the converse is not generally true: an incompressible flow ($D_t\rho=0$) only preserves density
-along particle paths and allows $\rho=\rho(\vx)$ to vary spatially; but when the initial density
-is distributed uniformly in space, incompressible flow implies incompressible fluid.
+along particle paths and allows $\rho=\rho(\vx)$ to vary spatially; but, particularly, in our case the
+initial density is distributed uniformly in space, and here incompressible flow implies incompressible fluid.
 \begin{remark}[Divergence-free condition]
     \label{rmk:incompressibility-divergence-free}
     By assuming blood is incompressible fluid and flow, we have
