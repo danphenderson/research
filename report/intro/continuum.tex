@@ -1,7 +1,6 @@
-A \emph{domain} in an open, nontrivial, bounded, path-connected subset of $\R^N$ for $N\in\{1,2,3\}$.
-Our aim is to simulate the hemodynamics of a time-dependent fluid domain $\Omega(t)\subset\R^N$, where
+Our aim is to simulate bloods flow in a time-dependent fluid domain $\OmgBt \subset\R^N$, where
 \begin{flalign*}
-    \quad \Omega(t) &:= \{ x \in \R^N ~:~ x \text{ lies inside the blood vessel at time } t \} &&
+    \quad \Omg(t) &:= \{ x \in \R^N ~:~ x \text{ lies inside the blood vessel at time } t \} &&
 \end{flalign*}
 for all $t \in I_T$ s.t.
 \begin{flalign*}
@@ -9,27 +8,26 @@ for all $t \in I_T$ s.t.
 \end{flalign*}
 The spatial-temporal domain is
 \begin{flalign*}
-    \quad & \Omega \;:=\; \{ (x, t) \in \R^{N+1} ~:~ x \in \Omega(t), ~ t \in I_T \}, &&
+    \quad & \Omg \;:=\; \{ (x, t) \in \R^{N+1} ~:~ x \in \Omg(t), ~ t \in I_T \}, &&
 \end{flalign*}
-occasionally r.t. as the computational domain.
-On the spatial domain $\Omega(t)$, we let
+We r.t. $\OmgBar$ as the computational domain. On the spatial fluid and vessel domain $\Omg(t)$, we let
 \begin{flalign*}
-    \quad & \phi:\Omega(t)\to\R \;\text{ r.t. a \emph{scalar field}}, & \\
-    \quad & \vct f:\Omega(t)\to\R^N \;\text{ r.t. a \emph{vector field}}, &&\\
-    \quad & \vct T:\Omega(t)\to\R^{N\times N} \;\text{ r.t. a \emph{(second-order) tensor field}}. &&
+    \quad & \phi:\Omg(t)\to\R \;\text{ r.t. a \emph{scalar field}}, & \\
+    \quad & \vct f:\Omg(t)\to\R^N \;\text{ r.t. a \emph{vector field}}, &&\\
+    \quad & \vct T:\Omg(t)\to\R^{N\times N} \;\text{ r.t. a \emph{(second-order) tensor field}}. &&
 \end{flalign*}
 The tensor $\vct T$ defines a linear map from $\R^N \to \R^N$, and once a basis is fixed,
-$\exists ~ A \in \R^{N\times N}$ s.t. $\vct T(\vct x) = A \,\vct x$ for all $\vct x \in \Omega(t)$.
+$\exists ~ A \in \R^{N\times N}$ s.t. $\vct T(\vct x) = A \,\vct x$ for all $\vct x \in \Omg(t)$.
 
 \paragraph{Modeling Framework}
 At microscopic scales the continuum hypothesis breaks down as matter is a discrete collection of molecules,
 but at macroscopic scales empirical evidence suggests our models are accurate. Let the blood's velocity, thermodynamic pressure, and density fields be
 \begin{flalign*}
-    \quad & \vu: \Omega(t) \to \R^3, ~ (x, y, z) \mapsto (u_1(x, y, z), ~ u_2(x, y, z), ~u_3(x, y, z))^\top, \quad \bigg[\; \frac{m}{s^2} \;\bigg] && \\
-    \quad & p: \Omega(t) \to \R, ~ (x, y, z) \mapsto p(x, y, z), \quad \bigg[\; Pa \equiv \frac{N}{m^2}\;\bigg] && \\
-    \quad & \rho: \Omega(t) \to \R^+, ~ (x, y, z) \mapsto \rho(x, y, z).\quad \bigg[\; \frac{kg}{m^3} \;\bigg]&&
+    \quad & \vu: \Omg(t) \to \R^3, ~ (x, y, z) \mapsto (u_1(x, y, z), ~ u_2(x, y, z), ~u_3(x, y, z))^\top, \quad \bigg[\; \frac{m}{s^2} \;\bigg] && \\
+    \quad & p: \Omg(t) \to \R, ~ (x, y, z) \mapsto p(x, y, z), \quad \bigg[\; Pa \equiv \frac{N}{m^2}\;\bigg] && \\
+    \quad & \rho: \Omg(t) \to \R^+, ~ (x, y, z) \mapsto \rho(x, y, z).\quad \bigg[\; \frac{kg}{m^3} \;\bigg]&&
 \end{flalign*}
-Our assumption that blood is a simple fluid ensures $\vu, ~p, \text{ and } \rho$ is sufficiently smooth in $\Omega$.
+Our assumption that blood is a simple fluid ensures $\vu, ~p, \text{ and } \rho$ is sufficiently smooth in $\Omg$.
 \begin{remark}[Simple Fluid]
     A \emph{simple fluid} is a fluid where the Cauchy stress tensor depends only on the current state of deformation and rate of deformation
     at each point in the fluid, and not on the history of deformation.
@@ -52,15 +50,15 @@ For $\phi$ subject to the flow $\vu$, note that
     \quad & D_t \phi(\vx, t) \;=\; \lim_{\Delta t \to 0} \frac{\phi(\vx + \vu(\vx, t)\, \Delta t, t + \Delta t) - \phi(\vx, t)}{\Delta t}, &&
 \end{flalign*}
 i.e., $D_t \phi$ is the instantanous rate of change of quantity $\phi$ if a material fluid element $V(t)_{\vx}$
-positioned at $\vx \in \Omega(t)$ and moving with velocity $\vu(x, t)$.
+positioned at $\vx \in \Omg(t)$ and moving with velocity $\vu(x, t)$.
 By the incompressibile assumption of blood, the material density of $V(t)_{\vx}$ is $\rho(\vx, t) \equiv \rho_0$
-for all $\vx \in \Omega(t)$ and $t \in I_T$. Implying $D_t \rho = 0$, so mass conservation in $\Omega(t)$ reads
+for all $\vx \in \Omg(t)$ and $t \in I_T$. Implying $D_t \rho = 0$, so mass conservation in $\Omg(t)$ reads
 \begin{flalign*}
     \quad & \partial_t \rho + \Div(\rho \vu) = 0 \quad \impliedby \text{incompressibility assumption} &&
 \end{flalign*}
 By assumption blood is Newtonian, linear momentum balance follows from Newton's 2nd Law ($F = ma$) as
 \begin{flalign*}
-    \quad \rho(\partial_t \vu + (\vu\cdot\nabla)\vu ) \;=\; \Divbf(\vT) + \rho \vfb, \qquad \text{in} ~ \Omega(t) &&
+    \quad \rho(\partial_t \vu + (\vu\cdot\nabla)\vu ) \;=\; \Divbf(\vT) + \rho \vfb, \qquad \text{in} ~ \Omg(t) &&
 \end{flalign*}
 where $\vT$ is the Cauchy stress tensor, $\vfb$ may be some body force per unit mass $\big[\dfrac{m}{s^2}\big]$.
 Note that $\Divbf$ acts rowise on $\vT$, implying $\exists$ matrix
@@ -75,7 +73,7 @@ part of the velocity gradient, i.e.,
         \dfrac{\partial u_3}{\partial x} & \dfrac{\partial u_3}{\partial y} & \dfrac{\partial u_3}{\partial z}
     }. &&
 \end{flalign*}
-Note that $\vu \mapsto \vct{D}(\vu)$ captures spatial deformations of element $V_{\vx}$ in $\Omega$ under flow $\vu$.
+Note that $\vu \mapsto \vct{D}(\vu)$ captures spatial deformations of element $V_{\vx}$ in $\Omg$ under flow $\vu$.
 \begin{definition}
     \label{def:newtonian-fluid}
     A fluid is \emph{Newtonian} if its Cauchy stress tensor $\vT\;$ depends
@@ -107,15 +105,15 @@ assuming the former w.a.t.s. the divergence-free (senodial) condition on velocit
 feild $\vu$.
 \begin{definition}[Incompressibile fluid]
     \label{def:incompressible-fluid}
-    An element $V \in \Omega$ with constant density $\rho(\vx, t)$ for all $\vx \in V(t), t \in I_T$
+    An element $V \in \Omg$ with constant density $\rho(\vx, t)$ for all $\vx \in V(t), t \in I_T$
     is an \emph{incompressible fluid}.
 \end{definition}
 \begin{definition}[Incompressible flow]
 \label{def:incompressible-flow}
-    An element $V \in \Omega$ subject to $\vu$ s.t. $V$ with constant rate of material density change
-    (in both space and time so that $D_t \rho = 0$ for all $t \in I_T$) undergoes an \emph{incompressible flow} in $\Omega$.
+    An element $V \in \Omg$ subject to $\vu$ s.t. $V$ with constant rate of material density change
+    (in both space and time so that $D_t \rho = 0$ for all $t \in I_T$) undergoes an \emph{incompressible flow} in $\Omg$.
 \end{definition}
-For all material elements $V \in \Omega$, \ref{def:incompressible-fluid} implies \ref{def:incompressible-flow}.
+For all material elements $V \in \Omg$, \ref{def:incompressible-fluid} implies \ref{def:incompressible-flow}.
 Note, the converse is not generally true: an incompressible flow ($D_t\rho=0$) only preserves density
 along particle paths and allows $\rho=\rho(\vx)$ to vary spatially; but when the initial density
 is distributed uniformly in space, incompressible flow implies incompressible fluid.
@@ -133,7 +131,7 @@ is distributed uniformly in space, incompressible flow implies incompressible fl
         \quad & \iff \nabla \cdot \vu = 0, &&
     \end{flalign*}
     and we r.t. $\nabla \cdot \vu = \Div(\vu) = 0$ as the \emph{divergence-free condition} of $\vu$
-    in $\Omega(t)$.
+    in $\Omg(t)$.
 \end{remark}
 Consequently, the constitutive law simplifies as follows.
 \begin{definition}[Incompressible stress tensor]

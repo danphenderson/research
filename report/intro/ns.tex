@@ -93,11 +93,11 @@ to as fluid-structure interaction (FSI) models.\todo{discuss in a later section}
 \subsubsection{NS in Cylindrical Coordinates}
     \label{subsubsec:cylindrical-coords}
 
-    Let our vessel wall $\partial \Omega = [0, T] \times \Omega(t)$ be a surface in $\R^4$
+    Let our vessel wall $\partial \Omg = [0, T] \times \Omg(t)$ be a surface in $\R^4$
     that evolves in time which we refer to as the interface.
-    Let $\OmegaBar = \partial \Omega \cup \Omega$ be the closed and compact
+    Let $\OmgBar = \partial \Omg \cup \Omg$ be the closed and compact
     region enclosed by our interface. So the region enclosed by our interface
-    is $\Omega$, and we aim to model the velocity and pressure fields on $\Omega$.\\
+    is $\Omg$, and we aim to model the velocity and pressure fields on $\Omg$.\\
 
     The relationship between cartesian and cylidrical coordinates is
     \begin{flalign*}
@@ -108,7 +108,7 @@ to as fluid-structure interaction (FSI) models.\todo{discuss in a later section}
     Our fluid domain becomes
     \begin{equation*}
         \label{fluid-domain-cylidrical}
-        \Omega(t) \; = \; \{(r, ~,\theta ~, z) \in \R^3 ~ : ~r \in [0, R(z, t)], ~ \theta \in [0, 2\pi), ~ z \in [0, l) \}
+        \Omgt \; = \; \{(r, ~,\theta ~, z) \in \R^3 ~ : ~r \in [0, R(z, t)], ~ \theta \in [0, 2\pi), ~ z \in [0, l) \}
     \end{equation*}
     where $R(z,t)$ is the vessel radius at axial position $z$ and time $t$.
 

@@ -8,7 +8,7 @@ bifurcations and arterial networks. Our strategy involves a \emph{domain decompo
 We seek solutions to inital and boundary value problems of Eq.~\ref{def:NSEquations}.
 \begin{definition}
     \label{def:init_condition}
-    Let $\vct{u_0} : \Omega(0) \to R^3, ~ \vct{x} \mapsto \vct{u_0}(x) ~ : ~ \vu(0, \vct{x}) = \vct{u_0}$.
+    Let $\vct{u_0} : \Omg(0) \to R^3, ~ \vct{x} \mapsto \vct{u_0}(x) ~ : ~ \vu(0, \vct{x}) = \vct{u_0}$.
     We refer to $\vct{u_0}$ as the initial condition of velocity feild $\vu$
 \end{definition}
 \begin{definition}
@@ -30,10 +30,10 @@ In practice, $\vct{u_0}(z)$ may be prescribed or determined from sensor data.
     \medskip
 
     One may start by introducing a rigid-vessel assumption, which leads to a no slip condition
-    that $\vu \big|_{\partial\Omega} \; = \; \vct{0}$. Instead we seek
+    that $\vu \big|_{\pOmgt} \; = \; \vct{0}$. Instead we seek
     to model the link between blood flow and the deformation of the vessel wall.
     We begin our derivation of Dimension-Reduced models by assuming the following
-    transformation exists of our fluid domain boundary $\Omega(t)$ to a simplified geometry.
+    transformation exists of our fluid domain boundary $\Omgt$ to a simplified geometry.
 
     \medskip
 
@@ -49,7 +49,7 @@ In practice, $\vct{u_0}(z)$ may be prescribed or determined from sensor data.
 
     \newpage
 
-    We consider the fluid dynamics of the following fluid element contained in a portion of the lumen $\Omega(t)$
+    We consider the fluid dynamics of the following fluid element contained in a portion of the lumen $\Omgt$
     \begin{figure}[!htb]`'
         \label{fig:fluid-element}
         \centering
@@ -64,7 +64,7 @@ In practice, $\vct{u_0}(z)$ may be prescribed or determined from sensor data.
     Let $V_t$ be the fluid element of blood. The boundary of the fluid element is
     $\partial V_t \; = \; S_1(t) \cup S_2(t) \cup \partial V_{t,w}$ such that $\partial V_{t,w}$
     is the vessel wall in contact with the fluid element.
-    According to the Reynold's transport theorem for scalar feild $\phi \in L^1(\Omega(t))$.
+    According to the Reynold's transport theorem for scalar feild $\phi \in L^1(\Omgt)$.
     \begin{flalign*}
         \quad \dfrac{d}{dt} \int_{V_t} \phi dV \;
             = \; \int_{V_t} \dfrac{\partial \phi }{\partial t} dV \;
@@ -73,9 +73,9 @@ In practice, $\vct{u_0}(z)$ may be prescribed or determined from sensor data.
     where $\vct{u_b}$ is the velocity feild deforming the boundary $\partial V_t$
     (Pf. see \href{https://en.wikipedia.org/wiki/Reynolds_transport_theorem}{wiki}).
     If we assume the normal component of $\vct{u_b} = \vct{0}$ near the inlet
-    and outlet boundaries $S_1$ and $S_2$ (resp.) of $\Omega$, then the motion of the vessel wall
+    and outlet boundaries $S_1$ and $S_2$ (resp.) of $\Omg$, then the motion of the vessel wall
     is coupled to the blood flow through the fluid element $V_t$. The velocity $\vct{u_b}$
-    is equivalent to the velocity of the vessel wall $\partial \Omega(t)$ in contact with the boundary element $\partial V_t$.
+    is equivalent to the velocity of the vessel wall $\partial \Omgt$ in contact with the boundary element $\partial V_t$.
     I.e., the vessel wall velocity $\vct{u_w} = \vct{u_b}$.
     Now let $\vct{w} = \vct{u_w} - \vu$ be the relative velocity of the vessel wall
     w.r.t. the velocity $\vu = (u_1, u_2, u_3)^\top$ of the blood element $V_t$. Then it follows that
