@@ -1,20 +1,17 @@
-W.a.t. simulate bloods flow in a time-dependent fluid domain $\OmgBt \subset\R^{N-1}$, where
+W.a.t. simulate blood flow in a time-dependent fluid domain $\Omega_B(t) \subset \R^N$,
+where typically $N = 3$. For each $t \in I_T := [0, T] \subset \R$, with $T > 0$, we define
 \begin{flalign*}
-    \quad \OmgBt &:= \{\vx ~:~ \vx \text{ lies inside the vessel at time } t \} &&
+    \quad \Omega_B(t) &:= \{\vx \in \R^N : \vx \text{ lies inside the vessel at time } t\}. &&
 \end{flalign*}
-for all $t \in I_T$ s.t.
-\begin{flalign*}
-    \quad I_T \defined [0, T], \quad T > 0. &&
-\end{flalign*}
-We r.t. the fluids spatial-temporal domain as the fluids \emph{computational domain}
+Formally, we model the fluid region as a time-dependent family of open sets
+$\{\Omega_B(t)\}_{t \in I_T} \subset \R^N$ occupied by blood at time $t$.
+Let the fluids spatial-temporal domain be
 \begin{flalign*}
     \quad & \Omg \;:=\; \{ (x, t) \in \R^{N+1} ~:~ x \in \Omg(t), ~ t \in I_T \}. &&
 \end{flalign*}
 
 \medskip
 
-The fluid region is modeled as a time-dependent family of open sets
-$\{\OmgBt\}_{t \in I_T} \subset \R^3$ occupied by blood at time $t$.
 For each $t \in I_T$, we assume that $\OmgBt$ is simply connected and has
 Lipschitz continuous boundary. Thus any closed curve in $\OmgBt$ can be
 continuously contracted to a point within $\OmgBt$, and standard results
@@ -34,12 +31,12 @@ we can meaningfully speak of normal and tangential components of vector fields o
     operators on the fluids boundary $\pOmgB$.
 \end{remark}
 
+\todo{create assumption boxs for fluid domain}
 \medskip
 
-Using the natural coordinate system, let $N \equiv 4$ so that $\OmgBt \in \R^3$.
-We assume blood fluid is modeled as a continuum that deforms continously, i.e.,
-at every point $\vx \in \OmgBt$ and time $t \in I_T$, the blood's kinematic quantities
-are described by sufficiently smooth fields. At microscopic scales the continuum hypothesis
+Let $N \equiv 3$ so that $\OmgBt \in \R^3$, the natural coordinate system and dimension.
+Assume blood fluid is a continuum that deforms continously, i.e., at every point
+$\vx \in \OmgBt$ and time $t \in I_T$, the blood's kinematic quantities are described by sufficiently smooth fields. At microscopic scales the continuum hypothesis
 breaks down, since matter is a discrete collection of molecules, but at macroscopic scales
 empirical evidence suggests such models remain accurate. Let blood's s.s. velocity,
 thermodynamic pressure, and density fields be

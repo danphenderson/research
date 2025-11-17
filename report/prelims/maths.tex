@@ -1,8 +1,9 @@
 % domain disscussion
-We assume Zermelo-Fraenkel set theory with the axiom of choice (ZFC), and according to Cohen\href{https://en.wikipedia.org/wiki/Paul_Cohen},
-it's necessary to also posulate the existence of the continuum hypothesis (CH).
-A \emph{domain} will r.t. an open and bounded subset of $\R^N$ with nonempty interior $\Omg^\circ$,
-for all $N\in\{1,2,3,4\}$. By the Heine-Borel theorem, every domain $\Omg$ has a well-defined boundary
+We assume Zermelo-Fraenkel set theory with the axiom of choice (ZFC), and according to
+Cohen\href{https://en.wikipedia.org/wiki/Paul_Cohen}, it's consistent to assume the
+the continuum hypothesis (CH); a necessary posulate in continuum mechanics.
+A \emph{domain} r.t. an open and bounded subset of $\R^{N+1}$ with nonempty interior $\Omg^\circ$,
+for $N\in\{1,2,3\}$. By the Heine-Borel theorem, every domain $\Omg$ has a well-defined boundary
 $\partial \Omg$ with compact closure $\OmgBar = \Omg \cup \pOmg$. The compact domains of $\R^N$ are
 precisely the closed and bounded subsets of $\R^N$.
 
@@ -17,48 +18,82 @@ precisely the closed and bounded subsets of $\R^N$.
 \medskip
 
 % function space discussion
-Given domain $\Omega$, the function space $\mathcal{F}(\Omg)$ is a linear
-space (sp.) $(F(\Omg), \, K)$ of scalar valued functions $f:\Omg \to K$; e.g. $F = C$ and $K = R$
-is $C^0(\Omg)$, the sp. of continuous real valued functions on $\Omg$. Let $C^{k}(\Omg)$ be the
-sp. of $k$-tides continuously differentiable functions on $\Omg$. Then $C^k(\OmgBar)$ is the sp. of functions
-$f \in C^k(\Omg)$ s.t $f$ and it's derivatives up to order $k$ may be continuously extended to the boundary $\pOmg$.
-The space $L^p(\Omg)$ denotes the Lebesgue sp. of $p$-integrable functions on $\Omg$. If We denote
-the space of Lipschitz continous functions on $\Omega$ as $Lip(\Omg)$.\todo{relate to $C(\Omg)$, cite brenners book}.
+Given domain $\Omega$, the function space $\mathcal{F}(\Omg)$ is the vec.
+sp. $(F(\Omg), \, K)$ of scalar valued functions $f:\Omg \to K$. E.g. $C^0(\Omg)$ r.t.
+$(C(\Omg), \, \R)$, the vec. sp. of continuous real valued functions on $\Omg$.
+Let $C^{k}(\Omg)$ be the sp. of continuous and $k$-times continuously differentiable
+functions on $\Omg$. Then $C^k(\OmgBar)$ is the sp. of functions $f \in C^k(\Omg)$ s.t $f$
+and it's derivatives up to order $k$ may be continuously extended to the boundary $\pOmg$.
+The space $L^p(\Omg)$ denotes the Lebesgue sp. of $p$-integrable functions on $\Omg$.
+\todo{compact support, locally integrable, lipschitz sp., etc.}.
 
 
-\medskip
-
-% more on sp.s: topological to metric to normed to inner-product sp.,
+% TODO: more on sp.s: topological to metric to normed to inner-product sp.,
 %   then completeness and banach sp. discussion; Hilbert sp.s are banach.
+\medskip
+
+% basic feild notation
+Let $n = \dim(\Omega)$, then we say
+\begin{flalign*}
+    \quad & \phi:\Omg\to\R \;\text{ r.t. a \emph{scalar field}}, & \\
+    \quad & \vct f:\Omg\to\R^{n} \;\text{ r.t. a \emph{vector field}}, &&\\
+    \quad & \vct T:\Omg\to\R^{n\times n} \;\text{ r.t. a \emph{(second-order) tensor field}},&&
+\end{flalign*}
+and we say that $\phi(\vx)$, $\vct f(\vx)$, and $\vct T(\vx)$ are the values of the fields
+at point $\vx \in \Omg$. \footnote{The tensor $\vct T\vx$ is a linear map from $\R^n \to \R^n$,
+and once a basis is fixed, $\exists ~ A \in \R^{n\times n}$ s.t. $\vct T(\vct x) = A \,\vct x$ for all $\vct x \in \Omg$.}
 
 \medskip
 
-% definition for scalar feilds
-For real-valued $f \in C^1(\Omg)$, the partial derivative w.r.t. the $i$-th coordinate of $\Omg$ is
+% operators on scalar feilds
+If $f \in C^1(\Omg)$, the partial derivative w.r.t. coordinate
+$x_i$ is denoted
 \begin{flalign*}
-    \quad \pd_i f = \frac{\pd f}{\pd x_i}, &&
+    \quad \pd_{x_i} f = \frac{\pd f}{\pd x_i}, &&
 \end{flalign*}
-the gradient of $f$ is $\nabla f = \left(\pd_1 f, \ldots  \pd_N f\right)$
-and the Laplacian of $f$ is $\Delta f = \sum_{i=1}^N \pd_i^2 f.$
-\todo{introduce $C_0$}
-\medskip
-
-The integral of $f \in L^1(\Omg)$ is
-\begin{flalign*}
-    \quad \int_{\Omg} f(\vx) \, \dx \; \equiv \; \int_\Omg f ~ .&&
-\end{flalign*}
-\todo{introduce $L_{loc}$}
-For a vector field $\vct{F} = (F_1, \ldots, F_N) \in C^1(\Omg; \R^N)$,
-the divergence is defined as $\Div \vct{F} = \sum_{i=1}^N \pd_i F_i$.
+the gradient of $f$ is $\nabla f = \left(\pd_{x_i} f\right)_{i\in[n]}$, and
+the Laplacian of $f$ is $\del f = \sum_{i\in[n]} \pd_{x_i}^2 f.$
+\footnote{In coordinate free-terms the gradient $\nabla f(\vx)$ is defined s.t.
+$df = \inp{\nabla f}{\dx}$ for all infinitesimal displacements $\dx$.}
 
 \medskip
 
-\td{Work In Progress (WIP) -- Complete Last. Incoporate following
-
+For Lebesgue measure $\dx$ on $\R^n$ the integral of $f$ in $\Omg$ is
 \begin{flalign*}
-    \quad & \phi:\Omg(t)\to\R \;\text{ r.t. a \emph{scalar field}}, & \\
-    \quad & \vct f:\Omg(t)\to\R^N \;\text{ r.t. a \emph{vector field}}, &&\\
-    \quad & \vct T:\Omg(t)\to\R^{N\times N} \;\text{ r.t. a \emph{(second-order) tensor field}}. &&
+    \quad \int_{\Omg} f(\vx) \dx \; \equiv \; \int_\Omg f. ~ &&
 \end{flalign*}
-The tensor $\vct T$ defines a linear map from $\R^N \to \R^N$, and once a basis is fixed,
-$\exists ~ A \in \R^{N\times N}$ s.t. $\vct T(\vct x) = A \,\vct x$ for all $\vct x \in \Omg(t)$.}
+If $\pOmg \in C^1$, then $f \in L^{1}(\OmgBar)$ and the integral at the boundary is
+\begin{flalign*}
+    \quad \int_{\pOmg} f(\vx) \dSx \; \equiv \; \int_{\pOmg} f. &&
+\end{flalign*}
+\href{https://en.wikipedia.org/wiki/Gradient#Definition}
+\todo{Add def for operatorsin cylindrical, spherical coord?}
+\newpage
+For vector valued $\vf \in C^1(\Omg; \R^N)$, the divergence operator is
+\begin{flalign*}
+    \quad \Div \, \vf \defined \nabla \cdot \vf = \inp{\vf}{\nabla}_{\R^n} = \sum_{i=1}^N \pd_{x_i} f_i, &&
+\end{flalign*}
+and the Laplacian and integral are defined component-wise as
+\begin{flalign*}
+    \quad  \del \, \vf \defined \left( \del f_i \right)_{i\in[N]}
+    \quad \text{ and } \quad
+    \int_\Omg \, \vf \defined \bigg( \int_\Omg f_i \dx \bigg)_{i\in[N]}. &&
+\end{flalign*}
+
+\medskip
+
+For tensor valued $\vT \in C^1(\Omg; \R^{N\times N})$, the divergence operator is
+\begin{flalign*}
+    \quad \Divbf \, \vT \defined \left( \Div \, \vct T_{i\cdot} \right)_{i\in[N]}, &&
+\end{flalign*}
+where $\vT_{i\cdot}$ is the $i$-th row of $\vT$. The Laplacian and integral are defined
+component-wise as
+\begin{flalign*}
+    \quad  \del \, \vT \defined \left( \del T_{ij} \right)_{i,j\in[N]}
+    \quad \text{ and } \quad
+    \int_\Omg \, \vT \defined \bigg( \int_\Omg T_{ij} \dx \bigg)_{i,j\in[N]}. &&
+\end{flalign*}
+
+\td{
+    Work In Progress (WIP)
+}

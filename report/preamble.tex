@@ -1,40 +1,36 @@
 % Packages
-\usepackage{algorithm}
-\usepackage{algpseudocode}
-\usepackage{multicol}
-\usepackage{amsmath, amssymb, amsthm, mathtools, bm}
-\usepackage{geometry}
-\usepackage{lipsum} % For filler text
-\usepackage{array} % For better table formatting
-\usepackage{float} % For forcing table placement
-\usepackage{setspace} % For adjusting line spacing
-\usepackage{listings}
-\usepackage{hyperref}
-\usepackage{xcolor}
+% ---------- Basic Packages ----------
 \usepackage[utf8]{inputenc}
-\usepackage{caption}
-\usepackage{witharrows}
+\usepackage{array}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{multicol}
+\usepackage{xcolor}
 \usepackage{graphicx}
-\usepackage{amsopn}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{booktabs}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{lipsum}
 \usepackage{fancybox}
 \usepackage{todonotes}
-\usepackage[dvipsnames]{xcolor}
-\usepackage{mdframed}      % boxed theorems
-\usepackage{thmtools}      % couples well with mdframed
-\usepackage{booktabs}
-\usepackage{url}        % already loaded by hyperref, but harmless
-\usepackage{capt-of}    % if you prefer \captionof
-\usepackage{amsfonts}   % for \mathbb
-\usepackage{bm}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta, calc, decorations.pathmorphing, positioning}
+\usepackage{tikz} \usetikzlibrary{arrows.meta, calc, decorations.pathmorphing, positioning}
 
-
-
+% --------- Code Listings ----------
+\usepackage{listings}
 \captionsetup[lstlisting]{font={small}, labelfont={bf}, labelsep=colon}
 \renewcommand{\lstlistingname}{Code}
 
-
+% ---------- Math and Theorem Environments ----------
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsmath, amssymb, amsthm, amsfonts, mathtools, bm, amsopn}
+\usepackage{witharrows}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{mdframed}      % boxed theorems
+\usepackage{thmtools}      % couples well with mdframed
+\usepackage{capt-of}        % if you prefer \captionof
 % Define a theorem style that uses mdframed for the box
 \declaretheoremstyle[
   headfont=\normalfont\bfseries,
@@ -48,22 +44,9 @@
     innerrightmargin=8pt
   }
 ]{boxed}
-
 % Create the “assumption” environment, numbered within each section
-\declaretheorem[
-  name=Assumption,
-  style=boxed,
-  numberwithin=section
-]{assumption}
-
-
-% Page setup
-\geometry{letterpaper, margin=1in}
-\setlength{\parindent}{0pt}
-\linespread{1.5}
-\renewcommand{\arraystretch}{1.25} % Adjust as needed
-
-% Define solution environment and commonly used commands
+\declaretheorem[name=Assumption, style=boxed, numberwithin=section]{assumption}
+% Other logical environments
 \newenvironment{solution}
   {\renewcommand\qedsymbol{$\blacksquare$}\begin{proof}[\textbf{Solution}]}
   {\end{proof}}
@@ -79,12 +62,18 @@
 \theoremstyle{claim}
 \newtheorem*{claim}{Claim}
 
-% TODO notes
+% ---------- Page setup ----------
+\geometry{letterpaper, margin=1in}
+\setlength{\parindent}{0pt}
+\linespread{1.5}
+\renewcommand{\arraystretch}{1.25} % Adjust as needed
+
+% ---------- Shaded box's to tag ideas ----------
 \newcommand{\td}[1]{\todo[inline, color=red!20, size=\small]{#1}}
 \newcommand{\note}[1]{\todo[inline, color=blue!20, size=\small]{#1}}
 \newcommand{\remeber}[1]{\todo[inline, color=green!20, size=\small]{#1}}
 
-% Sets and number systems
+% ---------- Sets and number systems ----------
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\C}{\mathbb{C}}
@@ -92,30 +81,30 @@
 \newcommand{\N}{\mathbb{N}}
 
 
-% Generic Domains
+% ---------- Generic Domains ----------
 \newcommand{\Omg}{\Omega}
 \newcommand{\OmgBar}{\overline{\Omega}}
 \newcommand{\Omgt}{\Omega(t)}
 \newcommand{\pOmg}{\partial \Omega}
 \newcommand{\pOmgt}{\partial \Omega(t)}
 
-% Blood Domain
+%---------- Blood Domain ----------
 \newcommand{\OmgB}{\Omega_B}
 \newcommand{\OmgBt}{\Omega_B(t)}
 \newcommand{\pOmgB}{\partial \Omega_B}
-% Vessel Wall Domain
+
+%---------- Vessel Wall Domain ----------
 \newcommand{\OmgW}{\Omega_W}
 \newcommand{\OmgWt}{\Omega_W(t)}
 \newcommand{\pOmgW}{\partial \Omega_W}
 
-% Symbols
+% ---------- Symbols ----------
 \newcommand{\e}{\epsilon}
 \newcommand{\p}{\rho}
 \newcommand{\eps}{\epsilon}
 \newcommand{\la}{\lambda}
 
-
-% Linear Algebra
+% ---------- Linear Algebra ----------
 \newcommand{\matr}[1]{\begin{pmatrix}#1\end{pmatrix}} % For matrices
 \newcommand{\vect}[1]{\begin{bmatrix}#1\end{bmatrix}} % For column vectors
 \newcommand{\vct}[1]{\bm{#1}} % For bold vectors
@@ -128,20 +117,21 @@
 \DeclareMathOperator{\detm}{det} % Determinant
 \DeclareMathOperator{\rank}{rank} % Rank
 \DeclareMathOperator{\nullity}{nullity} % Nullity
-\newcommand{\del}{\Delta}
+
 \newcommand{\blockmat}[2]{\begin{pmatrix} #1 & #2 \end{pmatrix}} % Block matrix with 2 columns
 \newcommand{\augmatr}[2]{\left(\begin{array}{#1|#1}#2\end{array}\right)}
 \newcommand{\bmfour}[4]{\left( \begin{array}{c|c} #1 & #2 \\ \hline #3 & #4 \end{array} \right)} % 2x2 block matrix with lines
 \newcommand{\blockvect}[2]{\begin{bmatrix} #1 \\ #2 \end{bmatrix}} % Block vector with 2 rows
-\newcommand{\Div}{\text{div}}
-\newcommand{\Divbf}{\textbf{div}}
+
+
+% ---------- Vectors ----------
 \newcommand{\nhat}{\hat{\vct{n}}}
 \newcommand{\vu}{\vct{u}}
-
 \newcommand{\vT}{\vct{T}}
 \newcommand{\vx}{\vct{x}}
 \newcommand{\vb}{\vct{b}}
 \newcommand{\vfb}{\vct{f_b}}
+\newcommand{\vf}{\vct{f}}
 \newcommand{\vw}{\vct{w}}
 \newcommand{\vub}{\vct{u_b}}
 \newcommand{\ej}{\vct{e_j}}
@@ -149,21 +139,26 @@
 \newcommand{\et}{\vct{e_2}}
 \newcommand{\ett}{\vct{e_3}}
 
-
-% Operators
+% ---------- Operators ----------
 \newcommand{\defined}{\; := \;}
 \newcommand{\ol}{\overline}
 \newcommand{\pd}{\partial}
 \newcommand{\dt}{\frac{d}{dt}}
 \newcommand{\pdt}{\frac{\partial}{\partial t}}
 \newcommand{\dx}{\, d\vct{x}}
+\newcommand{\dSx}{\, dS_{\vct{x}}}
 \newcommand{\inp}[2]{\langle #1, \; #2 \rangle}
-% Define custom colors
+\newcommand{\del}{\Delta}
+\newcommand{\Div}{\text{div}}
+\newcommand{\Divbf}{\textbf{div}}
+
+% ---------- Define custom colors ----------
 \definecolor{bg}{rgb}{0.95,0.95,0.92}
 \definecolor{codeblue}{rgb}{0.25,0.5,0.75}
 \definecolor{keyword}{rgb}{0.5,0,0.5}
 \definecolor{string}{rgb}{0,0.5,0}
-% Define the style for IPython
+
+% ---------- Define the style for IPython ----------
 \lstdefinelanguage{ipython}{
   basicstyle=\ttfamily\footnotesize\color{black},
   keywordstyle=\color{keyword}\bfseries,
@@ -174,7 +169,8 @@
   numbers=left,
   numbersep=5pt
 }
-% Define the style for Julia
+
+% ---------- Define the style for Julia ----------
 \lstdefinelanguage{julia}{
   keywords={struct, abstract, primitive, typealias, bitstype, mutable, module, baremodule, import, importall, using, export, if, else, elseif, for, while, break, continue, function, return, type, global, local, const, let, do, try, catch, finally, end, quote, macro, where},
   basicstyle=\ttfamily\footnotesize\color{black},
@@ -206,7 +202,7 @@
            {λ}{{$\lambda$}}1
 }
 
-% Define the style for Mathematica
+% ---------- Define the style for Mathematica ----------
 \lstdefinelanguage{Mathematica}{
   keywords={Module,With,Block,If,Then,Else,Which,Switch,For,While,Return,Do,Table,Plot,Map,Apply,Function,Set,SetDelayed,Clear,Quit,NonlinearModelFit,FindMinimum,FindMaximum,FindRoot,NIntegrate,Integrate,Simplify,FullSimplify,DSolve,RSolve,NSolve,NDSolve,Limit,Series,Assuming,Expand,Factor,TableForm,MatrixForm,Part,Length,Dimensions,Transpose,MapThread,MapAt,Flatten,Thread,Join,Outer,ConstantArray,Riffle,ArrayPlot,Plot3D,ContourPlot,ParametricPlot,MatrixPlot,Graphics,Graphics3D,Manipulate,Evaluate,Sin,Cos,Exp,Log,Sqrt},
   keywordstyle=\color{keyword}\bfseries,
@@ -224,7 +220,7 @@
   escapeinside={(*}{*)}
 }
 
-% Optionally define a style for Mathematica code cells
+% ---------- Optionally define a style for Mathematica code cells ----------
 \lstdefinestyle{mathematicaStyle}{
   language=Mathematica,
   frame=lines,
