@@ -1,13 +1,13 @@
-W.a.t. simulate blood flow in a time-dependent fluid domain $\Omega_B(t) \subset \R^N$,
+W.a.t. simulate blood flow in a time-dependent fluid domain $\OmgBt \subset \R^N$,
 where typically $N = 3$. For each $t \in I_T := [0, T] \subset \R$, with $T > 0$, we define
 \begin{flalign*}
-    \quad \Omega_B(t) &:= \{\vx \in \R^N : \vx \text{ lies inside the vessel at time } t\}. &&
+    \quad \OmgBt &:= \{\vx \in \R^N : \vx \text{ lies inside the vessel at time } t\}. &&
 \end{flalign*}
 Formally, we model the fluid region as a time-dependent family of open sets
-$\{\Omega_B(t)\}_{t \in I_T} \subset \R^N$ occupied by blood at time $t$.
+$\{\OmgBt\}_{t \in I_T} \subset \R^N$ occupied by blood at time $t$.
 Let the fluids spatial-temporal domain be
 \begin{flalign*}
-    \quad & \Omg \;:=\; \{ (x, t) \in \R^{N+1} ~:~ x \in \Omg(t), ~ t \in I_T \}. &&
+    \quad & \Omg \;:=\; \{ (x, t) \in \R^{N+1} ~:~ x \in \Omgt, ~ t \in I_T \}. &&
 \end{flalign*}
 
 \medskip
@@ -35,7 +35,7 @@ on the boundary.
 \medskip
 
 For derivations that follow, we let $N \equiv 3$ so that $\OmgBt \in \R^3$. Bases of $\R^3$
-are denoted $\{\vct e_1, \vct e_2, \vct e_3 \}$ and we let $\{\ihat, \jhat, \khat\}$ r.t.
+are denoted $\{\vct{e}_1, \vct{e}_2, \vct{e}_3 \}$ and we let $\{\ihat, \jhat, \khat\}$ r.t.
 the standard orthonormal cartesian basis of $\R^3$.
 
 Assume blood fluid is a continuum that deforms continously, i.e., at every point
@@ -77,15 +77,15 @@ For $\phi$ subject to the flow $\vu$, note that
     \quad & D_t \phi(\vx, t) \;=\; \lim_{\Delta t \to 0} \frac{\phi(\vx + \vu(\vx, t)\, \Delta t, t + \Delta t) - \phi(\vx, t)}{\Delta t}, &&
 \end{flalign*}
 i.e., $D_t \phi$ is the instantanous rate of change of quantity $\phi$ if a material fluid element $V(t)_{\vx}$
-positioned at $\vx \in \Omg(t)$ and moving with velocity $\vu(x, t)$.
+positioned at $\vx \in \Omgt$ and moving with velocity $\vu(x, t)$.
 By the incompressibile assumption of blood, the material density of $V(t)_{\vx}$ is $\rho(\vx, t) \equiv \rho_0$
-for all $\vx \in \Omg(t)$ and $t \in I_T$. Implying $D_t \rho = 0$, so mass conservation in $\Omg(t)$ reads
+for all $\vx \in \Omgt$ and $t \in I_T$. Implying $D_t \rho = 0$, so mass conservation in $\Omgt$ reads
 \begin{flalign*}
     \quad & \partial_t \rho + \Div(\rho \vu) = 0 \quad \impliedby \text{incompressibility assumption} &&
 \end{flalign*}
 By assumption blood is Newtonian, linear momentum balance follows from Newton's 2nd Law ($F = ma$) as
 \begin{flalign*}
-    \quad \rho(\partial_t \vu + (\vu\cdot\nabla)\vu ) \;=\; \Divbf(\vT) + \rho \vfb, \qquad \text{in} ~ \Omg(t) &&
+    \quad \rho(\partial_t \vu + (\vu\cdot\nabla)\vu ) \;=\; \Divbf(\vT) + \rho \vfb, \qquad \text{in} ~ \Omgt &&
 \end{flalign*}
 where $\vT$ is the Cauchy stress tensor describing the fluids deformation, $\vfb$ may be some body force per unit mass $\big[\dfrac{m}{s^2}\big]$.
 Note that $\Divbf$ acts rowise on $\vT$, implying $\exists$ matrix
@@ -157,7 +157,7 @@ initial density is distributed uniformly in space, and here incompressible flow 
         \quad & \iff \nabla \cdot \vu = 0, &&
     \end{flalign*}
     and we r.t. $\nabla \cdot \vu = \Div(\vu) = 0$ as the \emph{divergence-free condition} of $\vu$
-    in $\Omg(t)$.
+    in $\Omgt$.
 \end{remark}
 Consequently, the constitutive law simplifies as follows.
 \begin{definition}[Incompressible stress tensor]

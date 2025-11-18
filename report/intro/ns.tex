@@ -1,4 +1,4 @@
-Let $\vct{f}$ an external force acting on a continumm of blood fluid.
+Let $\vf$ be an external force acting on a continuum of blood fluid.
 When modeling non-Newtonian effects (when $\eta \neq \text{ constant}$), the kinematic viscosity
 $\mu(\cdot)$ is often chosen by Careau model \cite{hemodynamics}
 \begin{flalign*}
@@ -19,9 +19,9 @@ Navier-Stokes (NS) equations.
     \label{def:nsconservative}
     \begin{flalign*}
         \quad & \begin{cases*}
-            \quad \partial_t(\rho \vct u) \;+\;  (\rho\vu\cdot\nabla)\vu
-                \;=\; -\,\nabla p \;+\; \Divbf\!\big( 2\,\eta\,\vct D(\vct u) \big) \;+\; \rho\,\vct f, \\
-            \quad \Div(\vct u) \;=\; 0,\qquad \rho \equiv \rho_0>0 \text{ (constant).}
+            \quad \partial_t(\rho \vu) \;\+\;  (\rho\vu\cdot\nabla)\vu
+                \;=\; -\,\nabla p \;\+\; \Divbf\!\big( 2\,\eta\,\vct{D}(\vu) \big) \;\+\; \rho\,\vf, \\
+            \quad \Div(\vu) \;=\; 0,\qquad \rho \equiv \rho_0>0 \text{ (constant).}
         \end{cases*} &&
     \end{flalign*}
 \end{definition}
@@ -30,7 +30,7 @@ Since $\rho \equiv \rho_0$ and $\eta = \mu |\vct{D}|^2$, the advective form foll
     \label{def:NSEquations}
     \begin{flalign*}
         \quad & \begin{cases*}
-        \quad \rho\big(\partial_t \vu + (\vu\cdot\nabla)\vu\big) = -\,\nabla p \;+\; \Divbf\!\Big( 2\,\mu(|\vct{D}|^2)\,\vct{D}\Big) \;+\; \rho\,\vct{f} \\
+            \quad \rho\big(\partial_t \vu + (\vu\cdot\nabla)\vu\big) = -\,\nabla p \;+\; \Divbf\!\Big( 2\,\mu(|\vct{D}|^2)\,\vct{D}\Big) \;+\; \rho\,\vf \\
         \quad \Div(\vu) = 0,
         \end{cases*} &&
     \end{flalign*}
@@ -41,6 +41,7 @@ We divide $\rho$ and obtain the kinematic-viscosity form from~\ref{def:NSEquatio
     \begin{flalign*}
         \quad & \begin{cases*}
         \quad \partial_t \vu + (\vu\cdot\nabla)\vu = -\,\frac{\nabla p}{\rho}\, \;+\; \Divbf\!\Big( \frac{2}{\rho}\,\mu(|\vct{D}|^2)\,\vct{D}\Big) \;+\; \vct{f}, \\
+            \quad \partial_t \vu + (\vu\cdot\nabla)\vu = -\,\frac{\nabla p}{\rho}\, \;+\; \Divbf\!\Big( \frac{2}{\rho}\,\mu(|\vct{D}|^2)\,\vct{D}\Big) \;+\; \vf, \\
         \quad \Div(\vu) = 0,
         \end{cases*} &&
     \end{flalign*}
@@ -77,10 +78,10 @@ Finally, we write the NS system in operator form.
     The total system comprises of four equations in four unknowns: the three components of the velocity field
     $\vu$ and the pressure field $p$.
 \end{remark}
-If pressure $p$ and the velocity $\vu$ are given, the Cauchy stress $\vct{T}$ is computed
+If pressure $p$ and the velocity $\vu$ are given, the Cauchy stress $\vT$ is computed
 from Eq. \ref{def:improssible-stress-tensor}. It follows that the wall shear stress (WSS) at the vessel wall is:
 \begin{flalign*}
-    \quad \text{WSS} \defined \langle \vct{t_{blood}}, ~\vct{T}\;\hat{n} \rangle \quad : \quad \begin{cases*}
+    \quad \text{WSS} \defined \langle \vct{t_{blood}}, ~\vT\;\hat{n} \rangle \quad : \quad \begin{cases*}
         t_{blood} \text{ is tangent of a flow line through a cross-sectional area} \\
         \hat{n} \text{ is outer normal of the cross-sectional area}
     \end{cases*}&&
@@ -93,9 +94,9 @@ to as fluid-structure interaction (FSI) models.\todo{discuss in a later section}
 \subsubsection{NS in Cylindrical Coordinates}
     \label{subsubsec:cylindrical-coords}
 
-    Let our vessel wall $\partial \Omg = [0, T] \times \Omg(t)$ be a surface in $\R^4$
+    Let our vessel wall $\pOmg = [0, T] \times \pOmgt$ be a surface in $\R^4$
     that evolves in time which we refer to as the interface.
-    Let $\OmgBar = \partial \Omg \cup \Omg$ be the closed and compact
+    Let $\OmgBar = \pOmg \cup \Omg$ be the closed and compact
     region enclosed by our interface. So the region enclosed by our interface
     is $\Omg$, and we aim to model the velocity and pressure fields on $\Omg$.\\
 

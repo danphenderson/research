@@ -57,38 +57,42 @@ Let $n = \dim(\Omg)$, then we say
 \end{flalign*}
 and we say that $\phi(\vx)$, $\vf(\vx)$, and $\vTx$ are the values of the fields
 at point $\vx \in \Omg$.\footnote{
-    The  $\vT \vx : \R^n \to \R^n$ is a linear map,
+    Note, for tensor $\vTx \in \R^{n \times n}$, $\exists$ a linear map  $A : \R^n \to \R^n$ s.t.
+    $\vTx(\vu) \mapsto A \, \vu$ for all $\vu \in \R^n$.
+
+
+    so $\exists ~ A \in \R^n \to \R^n$ is a linear map,
     and once a basis is fixed, $\exists ~ A \in \R^{n\times n}$ s.t. $\vTx = A \, \vx$ for all $\vx \in \Omg$.}
 
 \medskip
 
 % operators on scalar feilds
-If $f \in C^1(\Omg)$, the partial derivative w.r.t. coordinate
+If $\phi \in C^1(\Omg)$, the partial derivative w.r.t. coordinate
 $x_i$ is denoted
 \begin{flalign*}
-    \quad \pd_{x_i} f = \frac{\pd f}{\pd x_i}, &&
+    \quad \pd_{x_i} \phi = \frac{\pd \phi}{\pd x_i}, &&
 \end{flalign*}
-the gradient of $f$ is $\nabla f = \left(\pd_{x_i} f\right)_{i\in[n]}$ and
-the Laplacian of $f$ is $\del f = \sum_{i\in[n]} \pd_{x_i}^2 f.$
-\footnote{In coordinate free-terms the gradient $\nabla f(\vx)$ is defined s.t.
-$df = \inp{\nabla f}{\dx}$ for all infinitesimal displacements $\dx$.}
+the gradient of $\phi$ is $\nabla \phi = \left(\pd_{x_i} \phi\right)_{i\in[n]}$ and
+the Laplacian of $\phi$ is $\del \phi = \sum_{i\in[n]} \pd_{x_i}^2 \phi.$
+\footnote{In coordinate free-terms the gradient $\nabla \phi(\vx)$ is defined s.t.
+$d\phi = \inp{\nabla \phi}{\dx}$ for all infinitesimal displacements $\dx$.}
 
 \medskip
 
-For Lebesgue measure $\dx$ on $\R^n$ the integral of $f$ in $\Omg$ is
+For Lebesgue measure $\dx$ on $\R^n$ the integral of $\phi$ in $\Omg$ is
 \begin{flalign*}
-    \quad \int_{\Omg} f(\vx) \dx \; \equiv \; \int_\Omg f. ~ &&
+    \quad \int_{\Omg} \phi(\vx) \dx \; \equiv \; \int_\Omg \phi. ~ &&
 \end{flalign*}
-If $\pOmg \in C^1$, then $f \in C^{1}(\OmgBar) \supset L^1(\pOmg)$ and the integral at the boundary is
+If $\pOmg \in C^1$, then $\phi \in C^{1}(\OmgBar) \supset L^1(\pOmg)$ and the integral at the boundary is
 \begin{flalign*}
-    \quad \int_{\pOmg} f(\vx) \dSx \; \equiv \; \int_{\pOmg} f. &&
+    \quad \int_{\pOmg} \phi(\vx) \dSx \; \equiv \; \int_{\pOmg} \phi. &&
 \end{flalign*}
 % \href{https://en.wikipedia.org/wiki/Gradient#Definition}
 % \todo{Add def for operatorsin cylindrical, spherical coord?}
 
 \newpage
 
-For vector valued $\vf \in C^1(\Omg; \R^N)$, the divergence operator is
+For vector valued $\vf \in C^1(\Omg; \R^N)$ s.t. $\vf = (f_1, \, \ldots, f_N)^\top$, the divergence operator is
 \begin{flalign*}
     \quad \Div \, \vf \defined \nabla \cdot \vf = \inp{\vf}{\nabla}_{\R^n} = \sum_{i=1}^N \pd_{x_i} f_i, &&
 \end{flalign*}
@@ -98,10 +102,13 @@ and the Laplacian and integral are defined component-wise as
     \quad \text{ and } \quad
     \int_\Omg \, \vf \defined \bigg( \int_\Omg f_i \dx \bigg)_{i\in[N]}. &&
 \end{flalign*}
+Additionally,
 
 \medskip
 
-For tensor valued $\vT \in C^1(\Omg; \R^{N\times N})$, the divergence operator is
+
+For tensor valued $\vT \in C^1(\Omg; \R^{N\times N})$ s.t. $\vT = (T_{ij})_{i,j\in[N]}$, the divergence
+operator is
 \begin{flalign*}
     \quad \Divbf \, \vT \defined \left( \Div \, \vT_{i\cdot} \right)_{i\in[N]}, &&
 \end{flalign*}
