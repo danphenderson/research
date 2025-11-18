@@ -14,19 +14,21 @@ A single beat of the heart propels blood through the macrocirculatory system, th
 "lub-dub" sound. The beat and the following sequence of events until the successive
 beat as the \emph{cardiac cycle}. The cardiac cycle consists of two main phases:
 systole and diastole, during which the heart chamber is accumulating blood and
-releasing blood (resp.). The beat can be recognized as a pulse wave in large vessels,
-        characterized by the Womersley number
+releasing blood (resp.). The beat can be recongnized by the dimensionless paramter
 \begin{flalign*}
-        \quad & W_0 := 2R \cdot \sqrt{\frac{\omega \rho}{\eta}},  \quad : ~ \rho \text{ is fixed blood density} &&
+        \quad W_0 & \defined \sqrt{\frac{\rho \omega U}{\eta U L^-2}}&&\\
+        \quad & \;=\; \sqrt{L^2 \cdot \frac{\omega}{\mu}}&&
 \end{flalign*}
+r.t. as the Womersley number. Here,
 a dimensionless parameter comparing the frequency $\omega$ of the pulse wave to the
 blood's dynamic viscosity $\eta$ and the vessel diameter $2R$.
+\td{first place we introduce params.. formalize this more.}
 The Reynolds number $Re$ characterizes flow in blood vessels
 \begin{flalign*}
         \quad & Re := 2R \cdot \frac{\rho U}{\eta}, \quad : ~ \rho \text{ is fixed blood density} &&
 \end{flalign*}
 Low $Re$ indicates laminar flow, while high $Re$ suggests turbulent flow.
-\todo{Double check $W_0$ and $Re$ definitions with book1 and hemodynamics refs}
+\todo{Double check $Re$ definitions with book1 and wiki}
 
 \medskip
 
