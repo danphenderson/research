@@ -118,16 +118,24 @@
 \DeclareMathOperator{\rank}{rank} % Rank
 \DeclareMathOperator{\nullity}{nullity} % Nullity
 
+% Block Matrices and Vectors ----------
 \newcommand{\blockmat}[2]{\begin{pmatrix} #1 & #2 \end{pmatrix}} % Block matrix with 2 columns
 \newcommand{\augmatr}[2]{\left(\begin{array}{#1|#1}#2\end{array}\right)}
 \newcommand{\bmfour}[4]{\left( \begin{array}{c|c} #1 & #2 \\ \hline #3 & #4 \end{array} \right)} % 2x2 block matrix with lines
 \newcommand{\blockvect}[2]{\begin{bmatrix} #1 \\ #2 \end{bmatrix}} % Block vector with 2 rows
 
-
-% ---------- Vectors ----------
+% Unit vectors ----------
 \newcommand{\nhat}{\hat{\vct{n}}}
+\newcommand{\that}{\hat{\vct{t}}}
+\newcommand{\ihat}{\hat{\vct{i}}}
+\newcommand{\jhat}{\hat{\vct{j}}}
+\newcommand{\khat}{\hat{\vct{k}}}
+
+% Generic vectors and tensors. (bold notation) ---------
 \newcommand{\vu}{\vct{u}}
+\newcommand{\vv}{\vct{v}}
 \newcommand{\vT}{\vct{T}}
+\newcommand{\vTx}{\vct{T}(\vct{x})}
 \newcommand{\vx}{\vct{x}}
 \newcommand{\vb}{\vct{b}}
 \newcommand{\vfb}{\vct{f_b}}
@@ -136,10 +144,15 @@
 \newcommand{\vub}{\vct{u_b}}
 \newcommand{\ej}{\vct{e_j}}
 \newcommand{\eo}{\vct{e_1}}
-\newcommand{\et}{\vct{e_2}}
-\newcommand{\ett}{\vct{e_3}}
+\newcommand{\ef}{\vct{e_1}} % first basis vector
+\newcommand{\el}{\vct{e_n}} % nth basis vector
+
+% Basis vectors
+\newcommand{\generalbasis}{\{\vct{v_1}, \ldots, \, \vct{v_n}\}}
+\newcommand{\stdbasis}{\{\vct{e_1}, \ldots, \, \vct{e_n}\}}
 
 % ---------- Operators ----------
+\newcommand{\equivto}{\; \equiv \;}
 \newcommand{\defined}{\; := \;}
 \newcommand{\ol}{\overline}
 \newcommand{\pd}{\partial}
@@ -147,10 +160,12 @@
 \newcommand{\pdt}{\frac{\partial}{\partial t}}
 \newcommand{\dx}{\, d\vct{x}}
 \newcommand{\dSx}{\, dS_{\vct{x}}}
-\newcommand{\inp}[2]{\langle #1, \; #2 \rangle}
+
 \newcommand{\del}{\Delta}
 \newcommand{\Div}{\text{div}}
 \newcommand{\Divbf}{\textbf{div}}
+\newcommand{\inp}[2]{\langle #1, \; #2 \rangle}
+\newcommand{\blinform}[2]{a\big( #1, \; #2 \big)}
 
 % ---------- Define custom colors ----------
 \definecolor{bg}{rgb}{0.95,0.95,0.92}
