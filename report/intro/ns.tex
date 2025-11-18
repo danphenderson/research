@@ -21,11 +21,12 @@ Navier-Stokes (NS) equations.
         \quad & \begin{cases*}
             \quad \partial_t(\rho \vu) \;\+\;  (\rho\vu\cdot\nabla)\vu
                 \;=\; -\,\nabla p \;\+\; \Divbf\!\big( 2\,\eta\,\vct{D}(\vu) \big) \;\+\; \rho\,\vf, \\
-            \quad \Div(\vu) \;=\; 0,\qquad \rho \equiv \rho_0>0 \text{ (constant).}
+            \quad \Div(\vu) \;=\; 0,\qquad \rho \equivto \rho_0>0 \text{ (constant).}
         \end{cases*} &&
     \end{flalign*}
 \end{definition}
-Since $\rho \equiv \rho_0$ and $\eta = \mu |\vct{D}|^2$, the advective form follows from~\ref{def:nsconservative}.
+Since $\rho \equivto \rho_0$ and $\eta \equivto \mu |\vct{D}|^2$, the advective form follows
+from~\ref{def:nsconservative}.
 \begin{definition}[Generalized-Newtonian Navier-Stokes (NS)]
     \label{def:NSEquations}
     \begin{flalign*}
@@ -66,9 +67,9 @@ Finally, we write the NS system in operator form.
     where the terms:
     \begin{itemize}
         \item  $\rho (\vu\cdot\nabla)\vu = \rho \vect{
-            \langle \vu, \nabla \vu_1 \rangle\\
-            \langle \vu, \nabla \vu_2 \rangle\\
-            \langle \vu, \nabla \vu_3 \rangle
+            \inp{\vu}{\nabla \vu_1}\\
+            \inp{\vu}{\nabla \vu_2}\\
+            \inp{\vu}{\nabla \vu_3}
         }$ is the convective term governing acceleration of fluid (non-linear).
         \item $\Divbf\!\Big( 2\,\mu(|\vct{D}|^2)\,\vct{D}\Big)$ is the diffusive term describing the viscouselastic behavior (linear since $\mu$ is constant).
     \end{itemize}
@@ -81,7 +82,7 @@ Finally, we write the NS system in operator form.
 If pressure $p$ and the velocity $\vu$ are given, the Cauchy stress $\vT$ is computed
 from Eq. \ref{def:improssible-stress-tensor}. It follows that the wall shear stress (WSS) at the vessel wall is:
 \begin{flalign*}
-    \quad \text{WSS} \defined \langle \vct{t_{blood}}, ~\vT\;\hat{n} \rangle \quad : \quad \begin{cases*}
+    \quad \text{WSS} \defined \inp{\vct{t_{blood}}}{\vT\;\hat{n}} \quad : \quad \begin{cases*}
         t_{blood} \text{ is tangent of a flow line through a cross-sectional area} \\
         \hat{n} \text{ is outer normal of the cross-sectional area}
     \end{cases*}&&

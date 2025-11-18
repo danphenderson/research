@@ -151,9 +151,9 @@ initial density is distributed uniformly in space, and here incompressible flow 
         \quad & \iff \partial_t \rho + \Div(\rho \vu) = 0 &&\\
         \quad & \iff \Div(\rho_0 \vu) = 0 \quad (\because ~ \rho=\rho_0)&&\\
         \quad & \iff \nabla \cdot (\rho_0 \vu) = 0 &&\\
-        \quad & \iff \langle\rho_0 \vu, \nabla \rangle = 0 &&\\
-        \quad & \iff \rho_0 \langle \vu, \nabla \rangle = 0 &&\\
-        \quad & \iff\langle \vu, \nabla \rangle = 0 &&\\
+        \quad & \iff \inp{\rho_0 \vu}{\nabla} = 0 &&\\
+        \quad & \iff \rho_0 \inp{\vu}{\nabla} = 0 &&\\
+        \quad & \iff \inp{\vu}{\nabla} = 0 &&\\
         \quad & \iff \nabla \cdot \vu = 0, &&
     \end{flalign*}
     and we r.t. $\nabla \cdot \vu = \Div(\vu) = 0$ as the \emph{divergence-free condition} of $\vu$
