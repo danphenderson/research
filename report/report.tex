@@ -27,9 +27,18 @@
     \thispagestyle{empty}  % No page number on title page
 
     % ------------------ COVER PAGE
-    \noindent Hemodynamics refers to study of bloods motion, herein,
-    we report mathematical models that govern such kinematics within
-    the human vessel.
+    \noindent Hemodynamics studies bloods motion, herein,
+    we report mathematical models descrinbing the kinematics
+    of blood in the human macrocirculatory system. We review
+    physiological, rheological, and mathematical foundations
+    necessary for modeling blood flow in large vessels. We
+    discuss numerical methods for solving the governing
+    equations of blood flow, the incompressible Navier-Stokes
+    equations. Finally, we present recent advances in
+    computational hemodynamics, including physics-informed
+    neural networks (PINN's) and fluid-structure interaction
+    (FSI) models.
+
 
     \medskip \paragraph{Keywords:} \medskip
     \textit{computational hemodynamics, PINN's, Deep-Reisz, discontinuous galerkin, Lax-Wendroff, fluid-structure ineraction (FSI)}
@@ -39,6 +48,14 @@
     % ------------------ TABLE OF CONTENTS
     \newpage \tableofcontents \bigskip
 
+    Taging conventions are as follows:
+    \begin{itemize}
+        \item \red{Red Text means check accuracy or clarity}
+        \item \blue{Blue Text means misplaced or not necessary}
+        \item \green{Green Text means to possibly expand or add more references}
+    \end{itemize}
+
+    % ------------------ PRELIMINARIES
     \td{
         \textbf{Work in Progress (WIP). Tips to keep in mind:}\\
         ~- Start w/ literature suvery, summarizing each articles contribution once.
@@ -90,7 +107,7 @@
         Sec.~\ref{subsec:bloodmodel} discusses rheological assumptions that lead to
         constitutive relations between the material properties of blood. By conservation,
         the kinematic-viscosity Navier–Stokes (NS) equations are obtained  (Sec.~\ref{subsec:ns}).
-        The NS equations are a system of coupled system of nonlinear partial differential equations (PDEs),
+        The NS equations are a system of coupled nonlinear partial differential equations (PDEs),
         the foundation of our hemodynamic models.
 
         \medskip
@@ -125,7 +142,7 @@
             \label{subsec:physiology} \input{intro/physiology.tex}
         \bigskip
 
-        \subsection{Continuum}
+        \subsection{Continuum of Blood}
             \label{subsec:continuum} \input{intro/continuum.tex}
         \bigskip
 

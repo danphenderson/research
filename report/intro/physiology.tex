@@ -2,41 +2,50 @@
 The circulatory system is the human heart, vascular network, lungs, and organs. The systems
 source is the heart, transporting oxygen-rich blood to the organs and deoxygenated (and
 carbon dioxide-enriched) blood back to the lungs. Lungs discharge $\mathrm{CO}_2$ and enrich the blood
-with Oxygen. These processes are r.t. the \emph{pulmonary circulation} and
+with Oxygen, referred to as the \emph{pulmonary circulation} and
 the \emph{systemic circulation} (resp.). The \emph{macrocirculatory system} consists of the
-heart and the large vessels in the systemic circulation. Particularly, the arteries of the
+heart and the large vessels in the systemic circulation. The arteries of the
 macrocirculatory system transport oxygenated blood from the heart, driving the return
 of deoxygenated blood in large vessels back to the heart.
 
 \medskip
 
 A single beat of the heart propels blood through the macrocirculatory system, the
-"lub-dub" sound. The beat and the following sequence of events until the successive
-beat as the \emph{cardiac cycle}. The cardiac cycle consists of two main phases:
+"lub-dub" sound. The beat and the following sequence of events following until the successive
+beat is known as the \emph{cardiac cycle}. The cardiac cycle consists of two main phases:
 systole and diastole, during which the heart chamber is accumulating blood and
-releasing blood (resp.). The beat can be recongnized by the dimensionless paramter
+releasing blood (resp.). Normal resting heart rate is considered to be $\omega = 70$ bpm,
+so the cardiac cycle is approximately $0.86 s.$ and consists of:
+\begin{enumerate}
+        \item Systole (ventricular contraction) $\approx 0.3$ seconds.
+        \item Diastole (ventricular relaxation) $\approx 0.7$ seconds.
+\end{enumerate}
+During ventricular contraction, blood is ejected from the left ventricle into the aorta,
+creating a pressure wave that propagates through the arterial network. The Womersley number $W_0$
+characterizes the pulse waves in large vessels by comparing the pulse frequency $\omega$
+to the viscous effects determined by the kinematic viscosity $\mu \defined \eta / \rho$:
 \begin{flalign*}
-        \quad W_0 & \defined \sqrt{\frac{\rho \omega U}{\eta U L^-2}}&&\\
-        \quad & \;=\; \sqrt{L^2 \cdot \frac{\omega}{\mu}}&&
+        \quad W_0 & \defined \sqrt{\frac{\rho \omega U}{\eta U L^-2}} \equals \sqrt{L^2 \cdot \frac{\omega}{\mu}}
+        \quad \text{ s.t.} \quad \begin{cases*}
+                ~ L: \text{ characteristic length scale} \\
+                ~ U: \text{ characteristic velocity scale} \\
+                ~ \eta: \text{ dynamic viscosity} \\
+                ~ \rho: \text{ blood density}
+        \end{cases*}&&
 \end{flalign*}
-r.t. as the Womersley number. Here,
-a dimensionless parameter comparing the frequency $\omega$ of the pulse wave to the
-blood's dynamic viscosity $\eta$ and the vessel diameter $2R$.
-\td{first place we introduce params.. formalize this more.}
-The Reynolds number $Re$ characterizes flow in blood vessels
+\red{High $W_0$ indicates large, rapid pulses where inertial effects dominate viscous effects
+while low $W_0$ indicates small, slow pulses where viscous effects dominate inertial effects.}
+\yellow{The Reynolds number $Re$ characterizes flow in blood vessel
 \begin{flalign*}
         \quad & Re := 2R \cdot \frac{\rho U}{\eta}, \quad : ~ \rho \text{ is fixed blood density} &&
 \end{flalign*}
-Low $Re$ indicates laminar flow, while high $Re$ suggests turbulent flow.
+Low $Re$ indicates laminar flow, while high $Re$ suggests turbulent flow.}
 \todo{Double check $Re$ definitions with book1 and wiki}
 
 \medskip
 
 \subsubsection*{Observed Cardiac Cycle Characteristics}
-Normal resting heart rate is considered to be $\omega = 70$ bpm,
-so the cardiac cycle is approximately $0.86 s.$, consisting of:\\
-1. Systole (ventricular contraction) $\approx 0.3$ seconds.\\
-2. Diastole (ventricular relaxation) $\approx 0.7$ seconds.
+
 
 \medskip
 
@@ -44,16 +53,19 @@ The blood volume of a human is approximately 5.7-6.0 liters of blood,
 flowing a full cycle roughly every minute. The energy driving
 the flow comes from oxygen and nutrients absorbed from food, creating waste
 products that must be removed; the \emph{coronary artery}'s responsibility.
-The buildup of waste products results in Arteriosclerosis, a narrowing of
+\blue{The buildup of waste products results in Arteriosclerosis, a narrowing of
 the coronary artery, leading to reduced and turbulent blood flow. (Add citations
-here of turbulence in the presence of stenotic arteries).
+here of turbulence in the presence of stenotic arteries).}
 
 \medskip
 
 Note \autocite[Table~1.1, p.~10, §1.1]{book1}
-shows $W_0 \propto 2R$ and $Re \propto (2R)^{-1}$; we
+shows $W_0 \propto L$ and $Re \propto (L)^{-1}$; we
 observe large pulses and turbulent flow in large vessels and small pulses
 and laminar flow in small vessels.
+
+\td{Is there a relationship between $W_0$ and $Re$ we can exploit to simplify
+our models? Appears so...}
 
 \medskip
 
@@ -61,6 +73,6 @@ and laminar flow in small vessels.
 Blood consists of plasma and formed elements which we call cells. Red blood cells (RBCs) comprise
 $\approx 97\%$ of the cellular volume, and cellular volume is approximately $\approx 45\%$ of the blood volume.
 The remaining $\approx 55\%$ of blood volume is plasma, which is $\approx 90\%$ water. The ratio of RBC
-volume to total blood volume is the \emph{hematocrit value} $H$, a key metric governing apparent viscosity
-$\eta$: as $H$ increases, $\eta$ typically increases (cf.\ S6.5.1~\cite{hemodynamics}).
+volume to total blood volume is the \emph{hematocrit value} $H$, a key metric governing apparent
+viscosity $\eta$: as $H$ increases, $\eta$ typically increases (cf.\ S6.5.1~\cite{hemodynamics}).
 The formed elements suspended in plasma include white blood cells (WBCs) and platelets.

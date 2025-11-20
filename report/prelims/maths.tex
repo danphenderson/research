@@ -1,7 +1,7 @@
 % domain disscussion
-We assume Zermelo-Fraenkel set theory with the axiom of choice (ZFC), and according to
-Cohen\href{https://en.wikipedia.org/wiki/Paul_Cohen}, it's consistent to assume the
-the continuum hypothesis (CH); a necessary posulate in continuum mechanics.
+\red{Assume Zermelo-Fraenkel set theory with the axiom of choice (ZFC), and according to
+Cohen\href{https://en.wikipedia.org/wiki/Paul_Cohen}, it's consistent if we take
+the continuum hypothesis (CH); a necessary posulate in continuum mechanics.}
 A \emph{domain} r.t. an open and bounded subset of $\R^{N+1}$ with nonempty interior $\Omg^\circ$,
 for $N\in\{1,2,3\}$. By the Heine-Borel theorem, every domain $\Omg$ has a well-defined boundary
 $\partial \Omg$ with compact closure $\OmgBar = \Omg \cup \pOmg$. The compact domains of $\R^N$ are
@@ -21,6 +21,9 @@ of coordinates).
     ~- Completeness, Banach sp., Hilbert sp. defs and notation. Finite dim sp.s are complete,
     hence banach, and hilbert under a particular choice of inner-product; state such inner-product
     for our sp.s. \\
+    ~- Forgoe until we work with a Lipschitz boundary: Sobolev sp. defs and notation,
+    trace thm., Poincare inequality, Rellich-Kondrachov comp. thm., etc.
+    Distributional derivatives, test functions, multi-index notation
 }
 
 \medskip
@@ -57,7 +60,7 @@ Let $n = \dim(\Omg)$, then we say
     \quad & \vf:\Omg\to\R^{n} \;\text{ r.t. a \emph{vector field}}, &&\\
     \quad & \vT:\Omg\to\R^{n\times n} \;\text{ r.t. a \emph{(second-order) tensor field}},&&
 \end{flalign*}
-and we say that $\phi(\vx)$, $\vf(\vx)$, and $\vTx$ are the values of the fields
+and we write $\phi(\vx)$, $\vf(\vx)$, and $\vTx$ for the values at a point $\vx \in \Omg$.
 at point $\vx \in \Omg$.\footnote{
     Note, for tensor $\vTx \in \R^{n \times n}$, $\exists$ a linear map  $A : \R^n \to \R^n$ s.t.
     $\vTx(\vu) \mapsto A \, \vu$ for all $\vu \in \R^n$.
@@ -69,53 +72,56 @@ at point $\vx \in \Omg$.\footnote{
 \medskip
 
 % operators on scalar feilds
-If $\phi \in C^1(\Omg)$, the partial derivative w.r.t. coordinate
-$x_i$ is denoted
+For real-valued $\phi \in C^1(\Omg)$, the partial derivative w.r.t. coordinate
+$x_i$ is
 \begin{flalign*}
-    \quad \pd_{x_i} \phi = \frac{\pd \phi}{\pd x_i}, &&
+    \quad \pd_{x_i} \phi = \frac{\pd \phi}{\pd x_i}. &&
 \end{flalign*}
-the gradient of $\phi$ is $\nabla \phi = \left(\pd_{x_i} \phi\right)_{i\in[n]}$ and
-the Laplacian of $\phi$ is $\del \phi = \sum_{i\in[n]} \pd_{x_i}^2 \phi.$
-\footnote{In coordinate free-terms the gradient $\nabla \phi(\vx)$ is defined s.t.
-$d\phi = \inp{\nabla \phi}{\dx}$ for all infinitesimal displacements $\dx$.}
-
-\medskip
-
+In coordinate-free notation, for $\vx \in \Omg$ and $\nhat \in \R^n$, the normal derivative is\todo{define as declared in notation sec}
+\begin{flalign*}
+    \quad \pd_{\nhat} \phi(\vx) \defined \inp{\nabla \phi(\vx)}{\nhat}_{\R^n}. &&
+\end{flalign*}
 For Lebesgue measure $\dx$ on $\R^n$ the integral of $\phi$ in $\Omg$ is
 \begin{flalign*}
     \quad \int_{\Omg} \phi(\vx) \dx \; \equiv \; \int_\Omg \phi. ~ &&
 \end{flalign*}
-If $\pOmg \in C^1$, then $\phi \in C^{1}(\OmgBar) \supset L^1(\pOmg)$ and the integral at the boundary is
+If $\pOmg \in C^1$, then $\phi \in C^{1}(\OmgBar) \supset L^1(\pOmg)$ and
+the integral at the boundary is
 \begin{flalign*}
     \quad \int_{\pOmg} \phi(\vx) \dSx \; \equiv \; \int_{\pOmg} \phi. &&
 \end{flalign*}
+The gradient and Laplacian of $\phi$ are (respectively):
+\begin{flalign*}
+    \quad & \phi \; \mapsto \; \vct{\nabla}(\phi) \equivto  \nabla \phi \equals \big( \pd_{x_1}, \, \ldots, \, \pd_{x_N} \big)^\top \equals \left(\pd_{x_i} \phi\right)_{i\in[n]}.&& \\
+    \quad & \phi \; \mapsto \; \del \phi \equivto \nabla\cdot\nabla\phi \equals \sum_{i\in[n]} \pd_{x_i}^2 \phi. &&
+\end{flalign*}
+\todo{write operators in cylindrical coordinates}
+
+\medskip
+
+
 % \href{https://en.wikipedia.org/wiki/Gradient#Definition}
 % \todo{Add def for operatorsin cylindrical, spherical coord?}
 
 \medskip
 
-For vector valued $\vf \in C^1(\Omg; \R^N)$ s.t. $\vf = (f_1, \, \ldots, f_N)^\top$, the divergence operator is
+For vector-valued $\vf \in C^1(\Omg; \R^N)$ with components $\vf = (f_i)_{i\in[N]}$, the divergence is
 \begin{flalign*}
-    \quad \Div \, \vf \defined \nabla \cdot \vf = \inp{\vf}{\nabla}_{\R^n} = \sum_{i=1}^N \pd_{x_i} f_i, &&
+    \quad \Div \, \vf \defined \nabla \cdot \vf \equals \sum_{i=1}^N \pd_{x_i} f_i \equals \inp{\vf}{\nabla}_{\R^n}z &&
 \end{flalign*}
-and the Laplacian and integral are defined component-wise as
+The Laplacian and domain integral of $\vf$ are defined component-wise:
 \begin{flalign*}
-    \quad  \del \, \vf \defined \left( \del f_i \right)_{i\in[N]}
-    \quad \text{ and } \quad
-    \int_\Omg \, \vf \defined \bigg( \int_\Omg f_i \dx \bigg)_{i\in[N]}. &&
+    \quad &  \vf \; \mapsto \; \del \, \vf \defined \left( \del f_i \right)_{i\in[N]} &&\\
+    \quad &  \vf \; \mapsto \; \int_\Omg \, \vf \defined \bigg( \int_\Omg f_i \dx \bigg)_{i\in[N]}. &&
 \end{flalign*}
-Additionally,
 
 \medskip
 
-
-For tensor valued $\vT \in C^1(\Omg; \R^{N\times N})$ s.t. $\vT = (T_{ij})_{i,j\in[N]}$, the divergence
-operator is
-\begin{flalign*}
-    \quad \Divbf \, \vT \defined \left( \Div \, \vT_{i\cdot} \right)_{i\in[N]}, &&
+For tensor-valued $\vT \in C^1(\Omg; \R^{n\times n})$ with entries
+$\vT = (T_{ij})_{i,j=1}^n$, the divergence operator is\begin{flalign*}
+    \quad \Divbf \, \vT \defined \left( \Div \, \vt_{i} \right)_{i\in[N]} ~ : ~ \vt_i \text{ is the ith row of } \vT &&
 \end{flalign*}
-where $\vT_{i\cdot}$ is the $i$-th row of $\vT$. The Laplacian and integral are defined
-component-wise as
+The Laplacian and domain integral of $\vT$ are again defined component-wise:
 \begin{flalign*}
     \quad  \del \, \vT \defined \left( \del T_{ij} \right)_{i,j\in[N]}
     \quad \text{ and } \quad

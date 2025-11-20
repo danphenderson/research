@@ -15,12 +15,24 @@
 \usepackage{lipsum}
 \usepackage{fancybox}
 \usepackage{todonotes}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{mdframed} % boxed theorems
+\usepackage{thmtools} % couples well with mdframed
 \usepackage{tikz} \usetikzlibrary{arrows.meta, calc, decorations.pathmorphing, positioning}
+\usepackage{listings}
 
 % --------- Code Listings ----------
-\usepackage{listings}
 \captionsetup[lstlisting]{font={small}, labelfont={bf}, labelsep=colon}
 \renewcommand{\lstlistingname}{Code}
+
+% ---------- Color Commands ----------
+\DeclareRobustCommand{\yellow}[1]{\begingroup\color{Yellow}\ignorespaces#1\endgroup\ignorespacesafterend}
+\DeclareRobustCommand{\red}[1]{\begingroup\color{Red}\ignorespaces#1\endgroup\ignorespacesafterend}
+\DeclareRobustCommand{\blue}[1]{\begingroup\color{Blue}\ignorespaces#1\endgroup\ignorespacesafterend}
+\DeclareRobustCommand{\green}[1]{\begingroup\color{Green}\ignorespaces#1\endgroup\ignorespacesafterend}
+\DeclareRobustCommand{\gray}[1]{\begingroup\color{Gray}\ignorespaces#1\endgroup\ignorespacesafterend}
+\newenvironment{redblock}{\begingroup\color{Red}\ignorespaces}{\endgroup\ignorespacesafterend}
+
 
 % ---------- Math and Theorem Environments ----------
 \usepackage{algorithm}
@@ -31,36 +43,61 @@
 \usepackage{mdframed}      % boxed theorems
 \usepackage{thmtools}      % couples well with mdframed
 \usepackage{capt-of}        % if you prefer \captionof
-% Define a theorem style that uses mdframed for the box
-\declaretheoremstyle[
-  headfont=\normalfont\bfseries,
-  mdframed={
-    linewidth=0.5pt,
-    roundcorner=4pt,
-    backgroundcolor={gray!5},
-    innertopmargin=6pt,
-    innerbottommargin=6pt,
-    innerleftmargin=8pt,
-    innerrightmargin=8pt
-  }
-]{boxed}
-% Create the “assumption” environment, numbered within each section
-\declaretheorem[name=Assumption, style=boxed, numberwithin=section]{assumption}
-% Other logical environments
-\newenvironment{solution}
-  {\renewcommand\qedsymbol{$\blacksquare$}\begin{proof}[\textbf{Solution}]}
-  {\end{proof}}
-\newtheorem{lemma}{Lemma}
-  \renewcommand{\thelemma}{\Alph{lemma}}
-\newtheorem*{lem}{Lemma}
-\newtheorem{corollary}[lemma]{Corollary}
-\newtheorem*{theorem}{theorem}
+% ================== THEOREM ENVIRONMENTS ==================
+\numberwithin{equation}{subsection} % optional
+
+% Main shared counter “theorem” per section:
+\newtheorem{theorem}{Theorem}[subsection]
+
+% All others share the same counter as “theorem”:
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
 \theoremstyle{definition}
-\newtheorem{definition}{Definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{prop}[theorem]{Proposition}
+
 \theoremstyle{remark}
-\newtheorem*{remark}{Remark}
-\theoremstyle{claim}
-\newtheorem*{claim}{Claim}
+\newtheorem{remark}[theorem]{Remark}
+
+% Boxed Assumption using the custom style, sharing the same counter:
+\declaretheorem[
+  name=Assumption,
+  style=boxed,
+  sibling=theorem
+]{assumption}
+% % Define a theorem style that uses mdframed for the box
+% \declaretheoremstyle[
+%   headfont=\normalfont\bfseries,
+%   mdframed={
+%     linewidth=0.5pt,
+%     roundcorner=4pt,
+%     backgroundcolor={gray!5},
+%     innertopmargin=6pt,
+%     innerbottommargin=6pt,
+%     innerleftmargin=8pt,
+%     innerrightmargin=8pt
+%   }
+% ]{boxed}
+% % Create the “assumption” environment, numbered within each section
+% \declaretheorem[name=Assumption, style=boxed, numberwithin=section]{assumption}
+% % Other logical environments
+% \newenvironment{solution}
+%   {\renewcommand\qedsymbol{$\blacksquare$}\begin{proof}[\textbf{Solution}]}
+%   {\end{proof}}
+% \newtheorem{lemma}{Lemma}
+%   \renewcommand{\thelemma}{\Alph{lemma}}
+% \newtheorem*{lem}{Lemma}
+% \newtheorem{corollary}[lemma]{Corollary}
+% \newtheorem*{theorem}{theorem}
+% \theoremstyle{definition}
+% \newtheorem{definition}{Definition}
+% \theoremstyle{remark}
+% \newtheorem*{remark}{Remark}
+% \theoremstyle{claim}
+% \newtheorem*{claim}{Claim}
 
 % ---------- Page setup ----------
 \geometry{letterpaper, margin=1in}
@@ -80,6 +117,9 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
 
+% ---------- Summations ----------
+\newcommand{\sumforall}{\sum_{\forall i}}
+\newcommand{\sumfor}[1]{\sum_{\forall #1}}
 
 % ---------- Generic Domains ----------
 \newcommand{\Omg}{\Omega}
@@ -135,6 +175,7 @@
 \newcommand{\vu}{\vct{u}}
 \newcommand{\vv}{\vct{v}}
 \newcommand{\vT}{\vct{T}}
+\newcommand{\vt}{\vct{t}}
 \newcommand{\vTx}{\vct{T}(\vct{x})}
 \newcommand{\vx}{\vct{x}}
 \newcommand{\vb}{\vct{b}}
@@ -154,12 +195,19 @@
 % ---------- Operators ----------
 \newcommand{\equivto}{\; \equiv \;}
 \newcommand{\defined}{\; := \;}
+\newcommand{\equals}{\; = \;}
 \newcommand{\ol}{\overline}
 \newcommand{\pd}{\partial}
 \newcommand{\dt}{\frac{d}{dt}}
 \newcommand{\pdt}{\frac{\partial}{\partial t}}
 \newcommand{\dx}{\, d\vct{x}}
 \newcommand{\dSx}{\, dS_{\vct{x}}}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\range}{range}
+\DeclareMathOperator{\kernel}{ker}
+\newcommand{\inv}[1]{#1^{-1}}
+\DeclareMathOperator{\dia}{diag}
 
 \newcommand{\del}{\Delta}
 \newcommand{\Div}{\text{div}}
