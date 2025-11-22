@@ -70,40 +70,40 @@ the integral at the boundary is
 \end{flalign*}
 The gradient and Laplacian of $\phi$ are (respectively):
 \begin{flalign*}
-    \quad & \phi \; \mapsto \; \vct{\nabla}(\phi) \equivto  \nabla \phi \equals \big( \pd_{x_1}, \, \ldots, \, \pd_{x_N} \big)^\top \equals \left(\pd_{x_i} \phi\right)_{i\in[n]}.&& \\
-    \quad & \phi \; \mapsto \; \del \phi \equivto \nabla\cdot\nabla\phi \equals \sum_{i\in[n]} \pd_{x_i}^2 \phi. &&
+    \quad & \phi \; \mapsto \; \vct{\nabla}(\phi) \equivto  \nabla \phi \equals \big( \pd_{x_1}, \, \ldots, \, \pd_{x_N} \big)^\top \equals \left(\pd_{x_i} \phi\right)_{\forall{i}{[n]}}.&& \\
+    \quad & \phi \; \mapsto \; \del \phi \equivto \nabla\cdot\nabla\phi \equals \sum_{\forall{i}{[n]}} \pd_{x_i}^2 \phi. &&
 \end{flalign*}
 
 \medskip
 
-For vector-valued $\vf \in C^1(\Omg; \R^n)$ with components $\vf = (f_i)_{i\in[n]}$, the divergence is
+For vector-valued $\vf \in C^1(\Omg; \R^n)$ with components $\vf = (f_i)_{\forall{i}{[n]}}$, the divergence is
 \begin{flalign*}
-    \quad \Div \, \vf \defined \nabla \cdot \vf \equals \sum_{i=1}^n \pd_{x_i} f_i \equals \inp{\vf}{\nabla}_{\R^n}z &&
+    \quad \Div \, \vf \defined \nabla \cdot \vf \equals \sum_{\forall{i}{[n]}} \pd_{x_i} f_i \equals \inp{\vf}{\nabla}_{\R^n}z &&
 \end{flalign*}
 The Laplacian and domain integral of $\vf$ are defined component-wise:
 \begin{flalign*}
-    \quad &  \vf \; \mapsto \; \del \, \vf \defined \left( \del f_i \right)_{i\in[n]} &&\\
-    \quad &  \vf \; \mapsto \; \int_\Omg \, \vf \defined \bigg( \int_\Omg f_i \dx \bigg)_{i\in[n]}. &&
+    \quad &  \vf \; \mapsto \; \del \, \vf \defined \left( \del f_i \right)_{\forall{i}{[n]}} &&\\
+    \quad &  \vf \; \mapsto \; \int_\Omg \, \vf \defined \bigg( \int_\Omg f_i \dx \bigg)_{\forall{i}{[n]}}. &&
 \end{flalign*}
 
 \medskip
 
 For tensor-valued $\vT \in C^1(\Omg; \R^{n\times n})$ with entries
 $\vT = (T_{ij})_{i,j=1}^n$, the divergence operator is\begin{flalign*}
-    \quad \Divbf \, \vT \defined \left( \Div \, \vt_{i} \right)_{i\in[n]} ~ : ~ \vt_i \text{ is the ith row of } \vT &&
+    \quad \Divbf \, \vT \defined \left( \Div \, \vt_{i} \right)_{\forall{i}{[n]}} ~ : ~ \vt_i \text{ is the ith row of } \vT &&
 \end{flalign*}
 The Laplacian and domain integral of $\vT$ are again defined component-wise:
 \begin{flalign*}
-    \quad  \del \, \vT \defined \left( \del T_{ij} \right)_{i,j\in[n]}
+    \quad  \del \, \vT \defined \left( \del T_{ij} \right)_{\forall{i,j}{[n]}}
     \quad\text{ and } \
-    \int_\Omg \, \vT \defined \bigg( \int_\Omg T_{ij} \dx \bigg)_{i,j\in[n]}. &&
+    \int_\Omg \, \vT \defined \bigg( \int_\Omg T_{ij} \dx \bigg)_{\forall{i,j}{[n]}}. &&
 \end{flalign*}
 
 \medskip
 
 Let $K$ be compact (e.g. $\OmgBar$), then the sp. $(C^k(K), \, \R)$ is complete with norm
 \begin{flalign*}
-    \quad \norm{\phi}_{C^k(K)} &\defined \sum_{|\alpha| \leq k} \sup_{\vx \in K}
+    \quad \norm{\phi}_{C^k(K)} &\defined \sum_{\forallin{|\alpha|}{[k]}} \sup_{\vx \in K}
     \left| D^\alpha \phi(\vx) \right|. &&
 \end{flalign*}
 meaning that every Cauchy sequence $\{ \phi_j \}_{\forall j \in \N} \subset C^k(K)$ converges
