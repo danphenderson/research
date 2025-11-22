@@ -1,26 +1,95 @@
-W.a.t. simulate blood flow in a time-dependent fluid domain,
-where typically $N = 3$. For each $t \in I_T \defined [0, T] \subset \R$, with $T > 0$, we define
+W.a.t. simulate blood flow in a time-dependent fluid domain $\OmgB \subset \R^{N+1}$;
+we'll take $N \equivto 3$, the natural setting for the derivations that follow.
+For each $t \in I_T \defined [0, T] \subset \R$, with $T > 0$, we define
 \begin{flalign*}
     \quad \OmgBt &:= \{\vx \in \R^N : \vx \text{ lies inside the vessel at time } t\}. &&
 \end{flalign*}
 Formally, the fluid region is a time-dependent family of open sets
 $\{\OmgBt\}_{t \in I_T} \subset \R^N$ occupied by blood at time $t$.
-The fluids computational domain is the spatial-temporal lumen:
+Let $\OmgB(0)$ r.t. the \emph{reference} configuration and $\Omg(t)$
+r.t. the \emph{current} configuration.
+The fluids computational domain r.t. all possible configurations of $\OmgBt$, i.e.,
+the spatial-temporal lumen
 \begin{flalign*}
-    \quad & \Omg_B \;:=\; \{ (x, t) \in \R^{N+1} ~:~ x \in \Omgt, ~ t \in I_T \}. &&
+    \quad & \Omg_B \defined I_T \times \OmgBt \equivto \{ (t, \vx) \in \R^{N+1} ~:~ x \in \Omgt, ~ t \in I_T \}. &&
 \end{flalign*}
 
 \medskip
 
-For each $t \in I_T$, herein assume $\OmgBt$ is simply connected and has
-Lipschitz continuous boundary. Thus, any closed curve in $\OmgBt$ can be
-continuously contracted to a point within $\OmgBt$, and standard results
-from potential theory (e.g.\ Poincaré-type lemmas) apply when introducing
-scalar potentials for irrotational vector fields. Under these regularity assumptions
-on $\pOmgB$, standard trace theorems hold for Sobolev spaces (e.g.\ $H^1(\OmgBt)$).
-In particular, the outward unit normal is defined a.e. on $\pOmgB$, so
-we can meaningfully speak of normal and tangential components of vector fields
-on the boundary.
+For each material particle $\vxi \in \OmgB(0)$, let's assume $\vu(t, \vxi(t))$ is the flow
+feild determined from a system of $PDEs$ governing $\vxi$'s motion in $\OmgB$.
+Our aim here is to derive such PDEs -- the Navier-Stokes system.
+
+\medskip
+
+\paragraph{Blood Dynamics}
+The spatial configuration $\OmgBt$ is determined by a Lagrangian mapping
+\begin{flalign*}
+    \quad & \La_t: \OmgB(0) \mapsto \OmgBt, \quad \vxi \mapsto \vx(t, \vxi) \equals \La_t(\vxi) &&
+\end{flalign*}
+Let's impose that $\La_t$ is a continuous bijection $\forall t \in I_t$ in $\OmgBBar$, then
+$\exists ~ \inv{\La_t}: \ol{\OmgBt} \mapsto \ol{\OmgB(0)}$ s.t. $\vxi = \inv{\La_t}(\vx)$.
+Thus, there is a one-to-one correspondence between material fluid particles in the reference
+configuration and spatial points in the current configuration at each time $t$.
+The variables $(t, \vx)$ and $(t, \vxi)$ are refered to as the Eulerian and Lagrangian coordinates, resp..
+\begin{remark}
+    \label{rmk:eulerian-lagrangian}
+    Informally, the Eulerian approach focuses our attention to $\vx \in \OmgBt$, namely,
+    some fluid particle located at $\vx$ at a particular time $t$.
+    Whereas, the Lagrangian approach tracks individual fluid particles as they move
+    through space and time, following their trajectories from their initial positions
+    in the reference configuration.
+\end{remark}
+
+\medskip
+
+Let $V(t)$ denote a measurable material volume at time $t$ that moves with the fluid flow, i.e.,
+\begin{flalign*}
+    \quad V(t) &\subset \OmgBt, \quad \text{for each } t \in I_T &&
+\end{flalign*}
+Equivalently, $V(t)$ is the image of some reference volume $V(0) \subset \OmgB(0)$ under the
+Lagrangian mapping $\La_t$, i.e.,
+\begin{flalign*}
+    \quad V(t) & = \La_t\big(V(0)\big). &&
+\end{flalign*}
+
+\td{Define fields here, then follow with assumptions boxs for blood.}
+
+
+\medskip
+\begin{theorem}[Reynolds Transport Theorem]
+    \label{thm:reynolds-transport}
+    Let $V(0) \subset \OmgB(0)$ be a material volume in the reference configuration,
+    and $V(t) \subset \OmgBt$ its image in the current configuration under $\La_t$. For any
+    sufficiently smooth scalar field $\phi: \OmgB \to \R$,
+    \begin{flalign*}
+        \quad & \frac{d}{dt} \int_{V(t)} \phi(t, \vx) \, dV \;=\; \int_{V(t)} \partial_t \phi(t, \vx) \, dV
+            + \int_{\p V(t)} \phi(t, \vx) \, \inp{\vu}{\nhat} \, dS, &&
+    \end{flalign*}
+    where $\vu$ is the fluid velocity field and $\nhat$ the outward unit normal on $\p V(t)$.
+\end{theorem}
+\begin{proof}
+    Ref~\ref{book2}, theorem 2.2. pg. 21.
+\end{proof}
+
+
+
+\medskip
+
+
+For each $t \in I_T$, herein assume $\OmgBt$ is simply connected and boundary $\pOmgB(t) \in C^1$,
+so, any closed curve in $\OmgBt$ can be continuously contracted to a point within $\OmgBt$; such an
+assumption is reasonable in a health vessel with a smooth wall. This regularity allows us to globally
+define geometric quantities such as surface differential operators on the fluids boundary $\pOmgB$, then
+we may apply stokes thoerem and Green's identities on the $C^1$ boundaries, useful for obtaining weak
+integro-differential and variational formulations.
+
+\begin{remark}
+    A weaker regularity condition is that $\pOmgB$ is Lipschitz. Here we must
+    rely on standard trace theorems for Soblev spaces (e.g.\ $H^1(\OmgBt)$). In particular,
+    the outward unit normal is then defined a.e. on $\pOmgB(t)$, so we can meaningfully speak of
+    normal and tangential components of vector feilds on the boundary.
+\end{remark}
 
 \medskip
 
@@ -28,37 +97,23 @@ on the boundary.
 
 \medskip
 
-\begin{remark}
-    A stronger condition is that $\pOmgB \in C^1 \in \R^{N}$. A resonable assumption
-    in smooth healthy vessels constraining $V(t)_{\vx}$ evolution is that $\pOmgB$ is
-    continuously differentiable in both space and time. Additional regularity allows
-    us to globally define geometric quantities such as curvature and surface differential
-    operators on the fluids boundary $\pOmgB$, then we may apply stokes thoerem and Green's identities
-    on the $C^1$ boundaries, useful for obtaining week differential and variational
-    formulations.
-\end{remark}
-
-\medskip
-
-In the following derivations we let $N \equiv 3$ so that $\OmgBt \in \R^3$. General bases of $\R^3$
-are denoted $\{\vct{e}_1, \vct{e}_2, \vct{e}_3 \}$ whereas $\{\ihat, \jhat, \khat\}$ r.t.
-the standard orthonormal cartesian basis of $\R^3$. We assume blood fluid is a continuum that deforms continously, i.e., at every point
-$\vx \in \OmgBt$ and time $t \in I_T$, the blood's kinematic quantities are described by sufficiently smooth fields.
-At microscopic scales this continuum hypothesis breaks down, since matter is a discrete collection of molecules, but
-at macroscopic scales empirical evidence suggests such models remain accurate.
+In the following derivations we let $N \equiv 3$ so that $\OmgBt \subset \R^3$. We assume blood fluid is
+a continuum that deforms continously, i.e., at every point $\vx \in \OmgBt$ and time $t \in I_T$, the
+blood's kinematic quantities are described by sufficiently smooth fields. At microscopic scales this
+continuum hypothesis breaks down, since matter is a discrete collection of molecules, but at macroscopic scales empirical evidence suggests such models remain accurate.
 
 \medskip
 
 Let blood's velocity, thermodynamic pressure, and density fields be
 \begin{flalign*}
-    \quad & \vu: \OmgBt \to \R^3,\;
-        (x, y, z) \mapsto (u_1(x, y, z),\, u_2(x, y, z),\, u_3(x, y, z))^\top,
+    \quad & \vu: \OmgB \to \R^3,\;
+        (t, x, y, z) \mapsto (u_1(t, x, y, z),\, u_2(t, x, y, z),\, u_3(t, x, y, z))^\top,
         \quad \bigg[\; \frac{m}{s} \;\bigg] && \\
-    \quad & p: \OmgBt \to \R^+, \;
-        (x, y, z) \mapsto p(x, y, z),
+    \quad & p: \OmgB \to \R^+, \;
+        (t, x, y, z) \mapsto p(t, x, y, z),
         \quad \bigg[\; \mathrm{Pa} \equiv \frac{N}{m^2} \;\bigg] && \\
-    \quad & \rho: \OmgBt \to \R^+,\;
-        (x, y, z) \mapsto \rho(x, y, z),
+    \quad & \rho: \OmgB \to \R^+,\;
+        (t, x, y, z) \mapsto \rho(t, x, y, z),
         \quad \bigg[\; \frac{kg}{m^3} \;\bigg]. &&
 \end{flalign*}
 
@@ -67,24 +122,19 @@ Let blood's velocity, thermodynamic pressure, and density fields be
 \red{A fluid that deforms independent of time is simple, such fluids deformation and rate of
 deformation aren't subject to material memory effects (also r.t. as viscoelastic effects).
 The contrary are complex fluids, their deformation is subject to both viscous and elastic
-characteristics.}
+characteristics.} (Out of place)
 
 \begin{definition}
     \label{def:material_derivative}
-    Let\td{Divergence of a scalar feild?}
+    Let $V_{\vx}(t)$ be a material fluid element at position $\vx$ in the reference configuration
+    $\OmgB(0)$ whos motion is subject to velocity $\vu(t, \vx )$, then
     \begin{flalign*}
-        \quad D_t\phi \;:=\; \partial_t \phi + \vu\!\cdot\!\nabla \phi, &&
+        \quad D_t\phi \;:=\; \partial_t \phi + \vu\!\cdot\!\nabla \phi &&
     \end{flalign*}
-    be the material derivative $D_t \phi$ measuring the instantanous rate of change of
-    quantity $\phi$ moving with velocity field $\vu$. The literature also refers to $D_t$ as the
-    \emph{substantial derivative}, \emph{advective derivative}, \emph{lagrangian derivative}, or \emph{convective derivative}.
+    is the material derivative $D_t \phi$ measuring the instantanous rate of change of
+    a physical quantity $\phi$ moving with velocity field $\vu$.
+    The literature also r.t. $D_t$ as the \emph{substantial derivative}, \emph{advective derivative}, \emph{lagrangian derivative}, or \emph{convective derivative}.
 \end{definition}
-For $\phi$ subject to the flow $\vu$, note that
-\begin{flalign*}
-    \quad & D_t \phi(\vx, t) \;=\; \lim_{\Delta t \to 0} \frac{\phi(\vx + \vu(\vx, t)\, \Delta t, t + \Delta t) - \phi(\vx, t)}{\Delta t}, &&
-\end{flalign*}
-i.e., $D_t \phi$ is the instantanous rate of change of quantity $\phi$ if a material fluid element $V(t)_{\vx}$
-positioned at $\vx \in \Omgt$ whos kinematics are subject to velocity $\vu(\vx, t)$.
 \todo{Incompressible definition hasn't yet been given}
 \red{By the incompressibile assumption of blood}, the material density of $V(t)_{\vx}$ is $\rho(\vx, t) \equiv \rho_0$
 for all $\vx \in \Omgt$ and $t \in I_T$. \green{Implying $D_t \rho = 0$, so mass conservation in $\Omgt$ reads}
@@ -142,8 +192,8 @@ feild $\vu$.
 \end{definition}
 \begin{definition}[Incompressible flow]
 \label{def:incompressible-flow}
-    An element $V \in \Omg$ subject to $\vu$ with constant rate of material density change
-    (in both space and time so that $D_t \rho = 0$ for all $t \in I_T$) undergoes an \emph{incompressible flow} in $\Omg$.
+    An element $V \in \OmgB$ subject to $\vu$ with constant rate of material density change
+    (in both space and time so that $D_t \rho = 0$ for all $t \in I_T$) undergoes an \emph{incompressible flow} in $\OmgB$.
 \end{definition}
 I.m.b.s. for all material elements $V \in \Omg$, \ref{def:incompressible-fluid} implies \ref{def:incompressible-flow}.
 Note, the converse is not generally true: an incompressible flow ($D_t\rho=0$) only preserves density

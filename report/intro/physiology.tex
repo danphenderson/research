@@ -21,27 +21,29 @@ so the cardiac cycle is approximately $0.86 s.$ and consists of:
         \item Diastole (ventricular relaxation) $\approx 0.7$ seconds.
 \end{enumerate}
 During ventricular contraction, blood is ejected from the left ventricle into the aorta,
-creating a pressure wave that propagates through the arterial network. The Womersley number $W_0$
+creating a pressure wave that propagates through the arterial network. The Womersley number $W_0 $
 characterizes the pulse waves in large vessels by comparing the pulse frequency $\omega$
-to the viscous effects determined by the kinematic viscosity $\mu \defined \eta / \rho$:
+to the viscous effects determined by the kinematic viscosity $\mu \defined \eta / \rho ~ \units{\frac{cm^2}{s}}$:
 \begin{flalign*}
         \quad W_0 & \defined \sqrt{\frac{\rho \omega U}{\eta U L^-2}} \equals \sqrt{L^2 \cdot \frac{\omega}{\mu}}
-        \quad \text{ s.t.} \quad \begin{cases*}
-                ~ L: \text{ characteristic length scale} \\
-                ~ U: \text{ characteristic velocity scale} \\
-                ~ \eta: \text{ dynamic viscosity} \\
-                ~ \rho: \text{ blood density}
+        \units{-} \quad \text{ s.t.} \quad \begin{cases*}
+                ~ L: \text{ characteristic length scale } \units{cm} \\
+                ~ U: \text{ characteristic velocity scale } \units{\frac{cm}{s}} \\
+                ~ \eta: \text{ dynamic viscosity } \units{Pa \cdot s}\\
+                ~ \rho: \text{ blood density } \units{\frac{kg}{cm^3}} \\
         \end{cases*}&&
 \end{flalign*}
-\red{High $W_0$ indicates large, rapid pulses where inertial effects dominate viscous effects
-while low $W_0$ indicates small, slow pulses where viscous effects dominate inertial effects.}
-\yellow{The Reynolds number $Re$ characterizes flow in blood vessel
+High $W_0$ indicates large, rapid pulses where inertial effects dominate viscous effects
+while low $W_0$ indicates small, slow pulses where viscous effects dominate inertial effects.
+The Reynolds number $Re$ characterizes flow in blood vessel
 \begin{flalign*}
-        \quad & Re := 2R \cdot \frac{\rho U}{\eta}, \quad : ~ \rho \text{ is fixed blood density} &&
+        \quad & Re := L \cdot \frac{\rho U}{\eta} \units{-}.&&
 \end{flalign*}
-Low $Re$ indicates laminar flow, while high $Re$ suggests turbulent flow.}
-\todo{Double check $Re$ definitions with book1 and wiki}
-
+Low $Re$ indicates laminar flow while high $Re$ suggests turbulent flow.
+Note \autocite[Table~1.1, p.~10, §1.1]{book1}
+shows $W_0 \propto L$ and $Re \propto (L)^{-1}$; we
+observe large pulses and turbulent flow in large vessels and small pulses
+and laminar flow in small vessels.
 \medskip
 
 \subsubsection*{Observed Cardiac Cycle Characteristics}
@@ -59,10 +61,7 @@ here of turbulence in the presence of stenotic arteries).}
 
 \medskip
 
-Note \autocite[Table~1.1, p.~10, §1.1]{book1}
-shows $W_0 \propto L$ and $Re \propto (L)^{-1}$; we
-observe large pulses and turbulent flow in large vessels and small pulses
-and laminar flow in small vessels.
+
 
 \td{Is there a relationship between $W_0$ and $Re$ we can exploit to simplify
 our models? Appears so...}
