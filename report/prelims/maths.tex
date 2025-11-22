@@ -9,20 +9,6 @@ When every path between two points in $\Omg$ may be continously contrated to a p
 
 \medskip
 
-\td{
-    TODO:\\
-    ~- Metric sp, normed sp., inner-product sp. defs and notation; include stmt. that
-    Norm's induce metrics, metrics induce norms.\\
-    ~- Completeness, Banach sp., Hilbert sp. defs and notation. Finite dim sp.s are complete,
-    hence banach, and hilbert under a particular choice of inner-product; state such inner-product
-    for our sp.s. \\
-    ~- Forgoe until we work with a Lipschitz boundary: Sobolev sp. defs and notation,
-    trace thm., Poincare inequality, Rellich-Kondrachov comp. thm., etc.
-    Distributional derivatives, test functions, multi-index notation
-}
-
-\medskip
-
 % function sp. discussion
 Given domain $\Omg$, the function sp. $\mathcal{F}(\Omg)$ is the vector sp.
 $(F(\Omg), \, K)$ of scalar valued functions $f:\Omg \to K$. E.g. $C^0(\Omg)$ r.t.
@@ -36,6 +22,7 @@ And $C^k(\Omg;\; \R^m)$ denotes the functions $\vf:\Omg \to \R^m$ with component
 $C^k(\Omg)$, i.e., $\vf = (f_i)_{i\in[m]}$ with $f_i \in C^k(\Omg)$ for all $i \in[m]$.
 
 \medskip
+
 % basic feild notation
 Let $n = \dim(\Omg)$, then we say
 \begin{flalign*}
@@ -62,6 +49,7 @@ where $\alpha_i = 1$ and $\alpha_j = 0 ~ \forall ~ j \neq i.$
 
 \medskip
 
+% basic operators and notation
 For real-valued $\phi \in C^1(\Omg)$, the partial derivative w.r.t. coordinate
 $x_i$ is
 \begin{flalign*}
@@ -119,18 +107,16 @@ Let $K$ be compact (e.g. $\OmgBar$), then the sp. $(C^k(K), \, \R)$ is complete 
     \left| D^\alpha \phi(\vx) \right|. &&
 \end{flalign*}
 meaning that every Cauchy sequence $\{ \phi_j \}_{\forall j \in \N} \subset C^k(K)$ converges
-to a limit in $C^k(K)$. Thus, by definition the complete normed sp. $(C^k(K), \, \norm{\cdot}_{C^k(K)})$ is banach;
-in particular $C(\OmgBar)$ is banach with norm
+to a limit in $C^k(K)$. So the complete normed sp. $(C^k(K), \, \norm{\cdot}_{C^k(K)})$ is banach,
+by the definition of banach sp. In particular, for $k = 0$, we have
 \begin{flalign*}
     \quad \norm{\phi}_{C(\OmgBar)} &\defined \sup_{\vx \in \OmgBar} \left| \phi(\vx) \right|\equivto \max_{\vx \in \OmgBar} \left| \phi(\vx) \right| \equals \norm{\phi}_\infty \quad
     (\text{since $\OmgBar$ is compact}). &&
 \end{flalign*}
 
-
 \medskip
 
-
-% lp sp. discussion
+% linear sp. discussion
 Let $\phi \in L^p(\Omg)$ be a real-valued measurable function on $\Omg$, then the
 Lebesgue sp. $L^p(\Omg)$ is defined as
 \begin{flalign*}
@@ -147,22 +133,34 @@ are in $L^p(\Omg)$, i.e., $\vf = (f_i)_{i\in[m]}$ with $f_i \in L^p(\Omg)$ for a
 hence a banach sp. for all $1 \leq p \leq \infty$.
 
 \medskip
+When refering to a physical quantity, it's measure units are indicated as $\big[ \cdot \big]$;
+whereas dimensionless quantities are indicated as $\big[ - \big]$.
+\medskip
 
 \td{
-    TODO: forgoe unless working with a Lipschitz boundary, for now we'll assume $\pOmg$ is $C^1$.\\
+    TODO:\\
+    ~- forgoe until we work with a Lipschitz boundary: Hölder spaces, then Hilbert and Sobolev spaces. defs and notation,
+    then trace thm., Poincare inequality, Rellich-Kondrachov comp. thm., etc.
+    Distributional derivatives, test functions, multi-index notation, weak derivatives, weak
+    formulation, etc.\\
     ~- Add def. and notation for Lipschitz continuous functions/sp., $Lip(\Omg)$ and
     it's norm.\\
     ~- Add relation of $Lip(\Omg)$ to $C^0(\Omg)$, brenner's book. Don't state why,
     just cite.\\
-    ~- Proceed into Hölder spaces, then Hilbert and Sobolev spaces.\\
+    ~- Proceed into .\\
 }
+
 \medskip
 
-
-When refering to a physical quantity, it's measure units are indicated as $\big[ \cdot \big]$;
-whereas dimensionless quantities are indicated as $\big[ - \big]$.
 \td{
-    Work In Progress (WIP):\\
-    ~- Write cylindrical operators
+    Work In Progress (WIP): Misc items.\\
+    ~- Write cylindrical operators\\ % \href{https://en.wikipedia.org/wiki/Gradient#Definition}
+    ~- Write material on directional derivatives and gradients\\
+    ~- Write material on Jacobian and Hessian matrices\\
+    ~- More detail on integration? Fubini's thm., change of variables, etc.\\
+    ~- Scaling argument for completeness of $C^k(K)$ sp. norm and nondimensionalization\\
+    ~- Define metric sp, normed sp., inner-product sp. defs and notation; include stmt. that
+       norm's induce metrics, metrics induce norms.\\
+    ~- Finite dim sp.s are complete, hence banach, and hilbert under a particular choice of
+       inner-product; state such inner-product for their sp.s. \\
 }
-% \href{https://en.wikipedia.org/wiki/Gradient#Definition}
