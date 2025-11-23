@@ -56,14 +56,14 @@ The variables $(t, \vx)$ and $(t, \vxi)$ are refered to as the Eulerian and Lagr
     Let the Lagrangian velocity feild be defined as as the time derivative
     along the trajectory $T_{\vxi}$ of a flulid particle $\vxi \in \OmgB(0)$
     \begin{flalign*}
-        \quad \hat{\vu} \defined \pd_t ~ \vx(t, \vxi) \mapsto \hat{\vu}(t, \vxi) \quad \text{ in } ~ \OmgBt &&
+        \quad \hat{\vu} \defined \pd_t \vx(t, \vxi) \mapsto \hat{\vu}(t, \vxi) \quad \text{ in } ~ \OmgBt &&
     \end{flalign*}
 \end{definition}
 A change of corrdinates in~\ref{def:lagrangian-velocity}  yeilds the velocity feild $\vu$ in the Eulerian frame, i.e.,
 \begin{flalign*}
     \quad \vu \equals \hat{\vu} \circ \inv{\La_t} \quad \iff \quad \vu(t, \vx) \equals \hat{\vu}(t, \inv{\La_t(\vx)}) &&
 \end{flalign*}
-Then given velocity feild $\hat{\vu}$ and the reference configuration $\Omg(0)$, we arrive at the
+Then if the velocity feild $\hat{\vu}$ and the reference configuration $\Omg(0)$ are known, we arrive at the
 Cauchy problem
 \begin{flalign*}
     \quad \begin{cases*}
@@ -75,7 +75,7 @@ Cauchy problem
 
 \medskip
 
-\subsubsection*{Material Derivative}
+\subsubsection*{Material Derivatives}
 \begin{definition}
     \label{def:material-derivative}
     Let $\phi \in C^k(\OmgB)$ and $\hat{\phi} \equals \phi \circ \La_t$, then the \emph{material derivative}
@@ -87,7 +87,7 @@ Cauchy problem
 \end{definition}
 By the multivariable chain rule, $D_t \phi$ in~\ref{def:material-derivative} may be written as
 \begin{flalign*}
-    \quad D_t \big( \phi(t, \vx) \big) \equals \partial_t \phi + \inp{\nabla \phi}{\vu}_{\R^N}, &&
+    \quad D_t \big( \phi(t, \vx) \big) \equals \partial_t \phi + \inp{\nabla \phi}{\vu}_{\R^N} \quad \text{ in } \OmgB &&
 \end{flalign*}
 where we may see that the material derivative $D_t \phi$ measures the rate of variation of $\phi$ along trajectory $T_{\vxi}$.
 The literature also r.t. $D_t$ as the \emph{substantial derivative}, \emph{advective derivative}, \emph{lagrangian derivative}, or
@@ -95,8 +95,38 @@ The literature also r.t. $D_t$ as the \emph{substantial derivative}, \emph{advec
 
 \medskip
 
-Note, we may apply $D_t$ to velocity $\vu$ to obtain the acceleration. (see pg. 19 \cite{book2} for more details and examples)
+Now differentiating $\hat{\vu}$ w.r.t. $t$ yeilds the acceleration vector feild $\vahat$ in the Lagrangian frame
+\begin{flalign*}
+    \quad \vahat &\defined \pd_t \hat{\vu}(t, \vxi) = \pd_t^2 \vx(t, \vxi) \quad  \forallin{\vxi}{\OmgB(0)} &&\\
+        &\iff \va \equals D_t \vu \equals \partial_t \vu + (\vu \cdot \nabla) \vu &&\\
+        &\iff \va(t, \vx) \equals \pd_t \vu(t, \vx) + \sum_{i=1}^{N} u_i(t, \vx) \pd_{x_i} \vu(t, \vx) \quad \forallin{(t, \vx)}{\OmgB}. &&
+\end{flalign*}
+The acceleration $\va$ measures the rate of change of velocity $\vu$ along the trajectory $T_{\vxi}$, i.e.,
+we applied the material derivative to the velocity feild $\vu$ component-wise.
+In other words, $\va$ is the material derivative~\ref{def:material-derivative} applied component-wise to the velocity field $\vu$.
 
+(see pg. 19 \cite{book2} for more details and examples)
+
+\medskip
+
+The defermation gradient $\vFhat(t)$ in the Lagrangian frame is defined as
+\begin{flalign*}
+    \quad \vFhat(t) &\defined \nabla_{\vxi} \La_t(\vxi) \quad \forallin{\vxi}{\OmgB(0)} &&\\
+        &\iff \vFhat(t)(\vx) \equals \nabla_{\vxi} \La_t(\inv{\La_t}(\vx)) \equals \pd_{\vxi} \vx \quad \forallin{(t, \vx)}{\OmgB} &&
+\end{flalign*}
+The deformation gradient $\vFhat: \OmgB(0) \to \R^{N \times N}$ measures the local spatial deformation of fluid
+particles in the reference configuration as they move to the current configuration under $\La_t$ along trajectory $T_{\vxi}$.
+To ensure $\vFhat(t)$ is invertible, it is sufficient to note that $\La_t$ is a continuous bijection in $\OmgBBar$ with continuous inverse
+$\inv{\La_t}$. Thus by the inverse function theorem $\vFhat(t)$ is invertible $\forallin{\vxi}{\OmgB(0)}$. So we may define the Jacobian determinant $\hat{J}(t)$ in the Lagrangian frame as
+\begin{flalign*}
+    \quad \hat{J}(t)(\vxi) &\defined \det\big(\vFhat(t)(\vxi)\big) \quad \forallin{\vxi}{\OmgB(0)} &&\\
+        &\iff J(t)(\vx) \equals \det\big(\vFhat(t)(\inv{\La_t}(\vx))\big) \quad \forallin{(t, \vx)}{\OmgB} &&
+\end{flalign*}
+The Jacobian determinant $J(t)(\vx)$ measures the local change in volume of an infinitesimal fluid element
+as it moves from the reference configuration to the current configuration at time $t$ along trajectory $T_{\vxi}$.
+We'll later see that $\partial_t J$ relates to the fluids divergence $\Div(\vu)$.
+
+\medskip
 
 \subsection{NS-derivation}
 In the following derivations we let $N \equiv 3$ so that $\OmgBt \subset \R^3$. We assume blood fluid is
