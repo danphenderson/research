@@ -124,34 +124,20 @@ $\inv{\La_t}$. Thus by the inverse function theorem $\vFhat(t)$ is invertible $\
 \end{flalign*}
 The Jacobian determinant $J(t)(\vx)$ measures the local change in volume of an infinitesimal fluid element
 as it moves from the reference configuration to the current configuration at time $t$ along trajectory $T_{\vxi}$.
-We'll later see that $\partial_t J$ relates to the fluids divergence $\Div(\vu)$.
+The following lemma shows that $\partial_t J$ relates to the fluids divergence $\Div(\vu)$.
 
 \medskip
 
-\subsection{NS-derivation}
-In the following derivations we let $N \equiv 3$ so that $\OmgBt \subset \R^3$. We assume blood fluid is
-a continuum that deforms continously, i.e., at every point $\vx \in \OmgBt$ and time $t \in I_T$, the
-blood's kinematic quantities are described by sufficiently smooth fields. At microscopic scales this
-continuum hypothesis breaks down, since matter is a discrete collection of molecules, but at macroscopic
-scales empirical evidence suggests such models remain accurate.
-
-\medskip
-
-For each $t \in I_T$, herein assume $\OmgBt$ is simply connected and boundary $\pOmgB(t) \in C^1$,
-so, any closed curve in $\OmgBt$ can be continuously contracted to a point within $\OmgBt$; such an
-assumption is reasonable in a health vessel with a smooth wall. This regularity allows us to globally
-define geometric quantities such as surface differential operators on the fluids boundary $\pOmgB$, then
-we may apply stokes thoerem and Green's identities on the $C^1$ boundaries, useful for obtaining weak
-integro-differential and variational formulations.
-
-\medskip
-
-\begin{remark}
-    A weaker regularity condition is that $\pOmgB$ is Lipschitz. Here we must
-    rely on standard trace theorems for Soblev spaces (e.g.\ $H^1(\OmgBt)$). In particular,
-    the outward unit normal is then defined a.e. on $\pOmgB(t)$, so we can meaningfully speak of
-    normal and tangential components of vector feilds on the boundary.
-\end{remark}
+\begin{lemma}
+    \label{lem:jacobian-determinant-derivative}
+    The Jacobian determinant $J(t)(\vx)$ satisfies
+    \begin{flalign*}
+        \quad & D_t J(t)(\vx) \;=\; J(t)(\vx) \, \Div(\vu(t, \vx)) \quad \forallin{(t, \vx)}{\OmgB}. &&
+    \end{flalign*}
+    \begin{proof}
+        Ref~\cite{book2}, lemma 2.1, pg. 20.
+    \end{proof}
+\end{lemma}
 
 \medskip
 
@@ -180,6 +166,31 @@ Lagrangian mapping $\La_t$, i.e.,
     Ref~\cite{book2}, theorem 2.2. pg. 21.
 \end{proof}
 
+\subsection{NS-derivation}
+In the following derivations we let $N \equiv 3$ so that $\OmgBt \subset \R^3$. We assume blood fluid is
+a continuum that deforms continously, i.e., at every point $\vx \in \OmgBt$ and time $t \in I_T$, the
+blood's kinematic quantities are described by sufficiently smooth fields. At microscopic scales this
+continuum hypothesis breaks down, since matter is a discrete collection of molecules, but at macroscopic
+scales empirical evidence suggests such models remain accurate.
+
+\medskip
+
+For each $t \in I_T$, herein assume $\OmgBt$ is simply connected and boundary $\pOmgB(t) \in C^1$,
+so, any closed curve in $\OmgBt$ can be continuously contracted to a point within $\OmgBt$; such an
+assumption is reasonable in a health vessel with a smooth wall. This regularity allows us to globally
+define geometric quantities such as surface differential operators on the fluids boundary $\pOmgB$, then
+we may apply stokes thoerem and Green's identities on the $C^1$ boundaries, useful for obtaining weak
+integro-differential and variational formulations.
+
+\medskip
+
+\begin{remark}
+    A weaker regularity condition is that $\pOmgB$ is Lipschitz. Here we must
+    rely on standard trace theorems for Soblev spaces (e.g.\ $H^1(\OmgBt)$). In particular,
+    the outward unit normal is then defined a.e. on $\pOmgB(t)$, so we can meaningfully speak of
+    normal and tangential components of vector feilds on the boundary.
+\end{remark}
+
 \medskip
 Let blood's velocity, thermodynamic pressure, and density fields be
 \begin{flalign*}
@@ -206,12 +217,12 @@ One may make a distinction between incompressible fluids and incompressible flow
     An element $V \in \OmgB$ subject to $\vu$ with constant rate of material density change
     (in both space and time so that $D_t \rho = 0$ for all $t \in I_T$) undergoes an \emph{incompressible flow} in $\OmgB$.
 \end{definition}
-I.m.b.s. for all material elements $V \in \Omg$, \ref{def:incompressible-fluid} implies \ref{def:incompressible-flow}.
+I.m.b.s. for all material elements $V \in \OmgB$, \ref{def:incompressible-fluid} implies \ref{def:incompressible-flow}.
 Note, the converse is not generally true: an incompressible flow ($D_t\rho=0$) only preserves density
 along particle paths and allows $\rho=\rho(\vx)$ to vary spatially; but, particularly, in our case the
 initial density is distributed uniformly in space, and here incompressible flow also implies incompressible fluid.
 By the incompressibile assumption of blood fluid, the material density $\rho(\vx, t) \equiv \rho_0$
-for all $\vx \in \Omgt$ and $t \in I_T$. Constant blood density implies $D_t \rho = 0$, i.e., incompressibile flow in $\Omgt$
+for all $\vx \in \Omgt$ and $t \in I_T$. Constant blood density implies $D_t \rho = 0$, i.e., incompressibile flow in $\OmgBt$
 \begin{flalign*}
     \quad & \partial_t \rho + \nabla \cdot (\rho \vu) = 0 \quad \impliedby \quad \rho \text{ constant in } \OmgBt &&
 \end{flalign*}
