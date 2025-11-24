@@ -38,14 +38,17 @@ The $k$-th partial derivative of $\phi$ w.r.t. coordinate $x_i$ is
 \begin{flalign*}
     \quad & \pd_{x_i}^k \phi \equivto \frac{\pd^k \phi}{\pd x_i^k}. &&
 \end{flalign*}
-The generalized derivative of order $|\alpha|$ of scalar field $\phi$ is
+\red{The generalized derivative of order $|\alpha|$ of scalar field $\phi$ is
 \begin{flalign*}
     \quad & D^\alpha \phi \equivto \frac{\pd^{|\alpha|} \phi}{\pd x_1^{\alpha_1} \, \pd x_2^{\alpha_2} \, \ldots \, \pd x_n^{\alpha_n}}, &&
 \end{flalign*}
 where $\alpha = (\alpha_1, \alpha_2, \ldots, \alpha_n)$ is a multi-index with
 $|\alpha| = \alpha_1 + \alpha_2 + \ldots + \alpha_n$. For $|\alpha| = 1$,
 $D^\alpha \phi$ is a first-order partial derivative of $\phi$, e.g. $\pd_{x_i} \phi$
-where $\alpha_i = 1$ and $\alpha_j = 0 ~ \forall ~ j \neq i.$
+where $\alpha_i = 1$ and $\alpha_j = 0 ~ \forallin{j}{[n]} ~ : ~ j \neq i.$} \todo{
+    reserve multi-index notation for later when we work with weak derivatives, distributions, Sobolev spaces, etc.
+    }
+
 
 \medskip
 
@@ -77,30 +80,31 @@ The gradient and Laplacian of $\phi$ are (respectively):
 
 \medskip
 
-For vector-valued $\vf \in C^1(\Omg; \R^n)$ with components $\vf = (f_i)_{\forall{i}{[n]}}$, the divergence is
+
+For vector-valued $\vf \in C^1(\Omg; \R^n)$ with components $\vf = (f_i)_{\forallin{i}{[n]}}$, the divergence is
 \begin{flalign*}
-    \quad \Div \, \vf \defined \nabla \cdot \vf \equals \sum_{\forall{i}{[n]}} \pd_{x_i} f_i \equals \inp{\vf}{\nabla}_{\R^n}&&
+    \quad \Div \, \vf \defined \nabla \cdot \vf \equals \sum_{\forallin{i}{[n]}} \pd_{x_i} f_i \equals \inp{\vf}{\nabla}_{\R^n}&&
 \end{flalign*}
 The Laplacian and domain integral of $\vf$ are defined component-wise:
 \begin{flalign*}
-    \quad &  \vf \; \mapsto \; \del \, \vf \defined \left( \del f_i \right)_{\forall{i}{[n]}} &&\\
-    \quad &  \vf \; \mapsto \; \int_\Omg \, \vf \defined \bigg( \int_\Omg f_i \dx \bigg)_{\forall{i}{[n]}}. &&
+    \quad &  \vf \; \mapsto \; \del \, \vf \defined \left( \del f_i \right)_{\forallin{i}{[n]}} &&\\
+    \quad &  \vf \; \mapsto \; \int_\Omg \, \vf \defined \bigg( \int_\Omg f_i \dx \bigg)_{\forallin{i}{[n]}}. &&
 \end{flalign*}
 
 \medskip
 
 For tensor-valued $\vT \in C^1(\Omg; \R^{n\times n})$ with entries
 $\vT = (T_{ij})_{i,j=1}^n$, the divergence operator is\begin{flalign*}
-    \quad \Divbf \, \vT &\defined \left( \Div \, \vt_{i} \right)_{\forall{i}{[n]}} ~ : ~ \vt_i \text{ is the ith row of } \vT &&\\
-        & \equals \left( \nabla \cdot \vt_{i} \right)_{\forall{i}{[n]}} &&\\
-        & \equals \left( \sum_{\forall{j}{[n]}} \pd_{x_j} T_{ij} \right)_{\forall{i}{[n]}} && \\
-        & \equals \left( \inp{\vt_i}{\nabla}_{\R^n} \right)_{\forall{i}{[n]}}. &&
+    \quad \Divbf \, \vT &\defined \left( \Div \, \vt_{i} \right)_{\forallin{i}{[n]}} ~ : ~ \vt_i \text{ is the ith row of } \vT &&\\
+        & \equals \left( \nabla \cdot \vt_{i} \right)_{\forallin{i}{[n]}} &&\\
+        & \equals \left( \sum_{\forallin{j}{[n]}} \pd_{x_j} T_{ij} \right)_{\forallin{i}{[n]}} && \\
+        & \equals \left( \inp{\vt_i}{\nabla}_{\R^n} \right)_{\forallin{i}{[n]}}. &&
 \end{flalign*}
 The Laplacian and domain integral of $\vT$ are again defined component-wise:
 \begin{flalign*}
-    \quad  \del \, \vT \defined \left( \del T_{ij} \right)_{\forall{i,j}{[n]}}
+    \quad  \del \, \vT \defined \left( \del T_{ij} \right)_{\forallin{i,j}{[n]}}
         \quad\text{ and } \
-        \int_\Omg \, \vT \defined \bigg( \int_\Omg T_{ij} \dx \bigg)_{\forall{i,j}{[n]}}. &&
+        \int_\Omg \, \vT \defined \bigg( \int_\Omg T_{ij} \dx \bigg)_{\forallin{i,j}{[n]}}. &&
 \end{flalign*}
 
 \medskip
@@ -110,7 +114,7 @@ Let $K$ be compact (e.g. $\OmgBar$), then the sp. $(C^k(K), \, \R)$ is complete 
     \quad \norm{\phi}_{C^k(K)} &\defined \sum_{\forallin{|\alpha|}{[k]}} \sup_{\vx \in K}
         \left| D^\alpha \phi(\vx) \right|. &&
 \end{flalign*}
-meaning that every Cauchy sequence $\{ \phi_j \}_{\forall j \in \N} \subset C^k(K)$ converges
+meaning that every Cauchy sequence $\{ \phi_j \}_{\forallin{j}{\N}} \subset C^k(K)$ converges
 to a limit in $C^k(K)$. So the complete normed sp. $(C^k(K), \, \norm{\cdot}_{C^k(K)})$ is banach,
 by the definition of banach sp. In particular, for $k = 0$, we have
 \begin{flalign*}
@@ -151,12 +155,6 @@ whereas dimensionless quantities are indicated as $\big[ - \big]$.
     it's norm.\\
     ~- Add relation of $Lip(\Omg)$ to $C^0(\Omg)$, brenner's book. Don't state why,
     just cite.\\
-    ~- Proceed into .\\
-}
-
-\medskip
-
-\td{
     Work In Progress (WIP): Misc items.\\
     ~- Write cylindrical operators\\ % \href{https://en.wikipedia.org/wiki/Gradient#Definition}
     ~- Write material on directional derivatives and gradients\\

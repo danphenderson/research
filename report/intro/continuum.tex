@@ -86,24 +86,50 @@ for $\vu$—the Navier–Stokes equations.
     \medskip
 
 \subsubsection*{Material Derivatives}
+\begin{definition}
+    \label{def:material-derivative}
+    Let $\phi \in C^k(\Omega_B)$ and define
+    \[
+        \phihat(t,\vxi) \defined \phi\bigl(t, \vx(t,\vxi)\bigr).
+    \]
+    The \emph{material derivative} of $\phi$ is
+    \[
+        D_t \phi(t,\vx(t,\vxi))
+        \defined \pd_t \phihat(t,\vxi)
+        = \frac{d}{dt}\,\phi\bigl(t,\vx(t,\vxi)\bigr),
+        \qquad \vxi \in \Omega_B(0).
+    \]
+    Equivalently, for $(t,\vx)\in I_T\times\Omega_B(t)$,
+    \[
+        D_t \phi(t,\vx)
+        \defined \pd_t \phihat\bigl(t,\La_t^{-1}(\vx)\bigr).
+    \]
+\end{definition}
 
-    \begin{definition}
-        \label{def:material-derivative}
-        Let $\phi \in C^k(\OmgB)$ and $\phihat \equals \phi \circ \La_t$, then the \emph{material derivative}
-        $D_t \phi$ is the derivative of $\phi$ w.r.t. $t$ in the Lagrangian frame expressed as a function in the Eulerian frame, i.e.,
-        \begin{flalign*}
-            \quad D_t \big( \phi(t, \vx) \big) &\defined \pd_t \phihat(t, \vxi), \quad \text{ s.t. } \vxi \equals \inv{\La_t}(\vx) &&\\
-                & \equals \dfrac{d}{dt}\phi(t, \vx(t, \vxi)), \quad \forallin{\vxi}{\OmgB(0)}. &&
-        \end{flalign*}
-    \end{definition}
-    By the multivariable chain rule,
+
+\begin{definition}
+    \label{def:material-derivative}
+    Let $\phi \in C^k(\OmgB)$ and $\phihat \defined \phi \circ \La_t$ so that $\phihat(t, \vxi) \equals \phi(t, \vx(t, \vxi))$, then the \emph{material derivative}
+    $D_t \phi$ is the derivative of $\phi$ w.r.t. $t$ in the Lagrangian frame expressed as a function in the Eulerian frame, i.e.,
     \begin{flalign*}
-        \quad D_t \big( \phi(t, \vx) \big) &\equals \pd_t \phi(t,\vx) + \nabla \phi(t,\vx)\cdot \vu(t,\vx) &&\\
-            &\equals \pd_t \phi + \inp{\nabla \phi}{\vu}_{\R^N} \quad \text{ in } \OmgB &&
+        \quad D_t \big( \phi(t, \vx) \big) &\defined \pd_t \phihat(t, \vxi), \quad \text{ s.t. } \vxi \equals \inv{\La_t}(\vx) &&\\
+            & \equals \dfrac{d}{dt}\phi(t, \vx(t, \vxi)), \quad \forallin{\vxi}{\OmgB(0)}
+                \quad (\because ~ \phihat(t, \vxi) \equals \phi(t, \vx(t, \vxi))). &&
     \end{flalign*}
-    where one may see that the material derivative $D_t \phi$ measures the rate of variation of $\phi$ along trajectory $T_{\vxi}$
-    expressed in the Eulerian frame. The literature also r.t. $D_t$ as the \emph{substantial derivative}, \emph{advective derivative}, \emph{lagrangian derivative}, or
-    \emph{convective derivative}.
+\end{definition}
+By the multivariable chain rule we simplify as
+\begin{flalign*}
+    \quad D_t \big( \phi(t, \vx) \big) &\equals \pd_t \phi(t,\vx) + \nabla \phi(t,\vx)\cdot \vu(t,\vx)
+        \quad (\because \text{chain rule and since } \pd_t \vx = \vu) &&\\
+    &\equals \pd_t \phi + \inp{\nabla \phi}{\vu}_{\R^N} \quad \text{ in } \OmgB.&&
+\end{flalign*}
+By the divergence relationship $\Div(\phi \vu) \equals \nabla \phi \cdot \vu + \phi \, \Div(\vu)$, we rewrite as
+\begin{flalign*}
+    \quad D_t \big( \phi \big) &\equals \pd_t \phi + \Div(\phi\vu) - \phi\,\Div(\vu) \quad \text{ in } \OmgB. &&
+\end{flalign*}
+The material derivative~\ref{def:material-derivative} measures the rate of variation of $\phi$ along trajectory $T_{\vxi}$
+expressed in the Eulerian variables. The literature also r.t. $D_t$ as the \emph{substantial derivative}, \emph{advective derivative}, \emph{lagrangian derivative}, or
+\emph{convective derivative}.
 
 \medskip
 
@@ -111,34 +137,39 @@ Now differentiating $\vuhat$ w.r.t. $t$ yields the acceleration vector field $\v
 repsectively:
 \begin{flalign*}
     \quad \vahat(t, \vxi) &\defined \pd_t \vuhat(t, \vxi) = \pd_t^2 \vx(t, \vxi) \quad  \forallin{\vxi}{\OmgB(0)} &&\\
-        &\iff \va \equals D_t \vu \equals \pd_t \vu + (\vu \cdot \nabla) \vu &&\\
+        \iff \va &\equals D_t \vu \equals \pd_t \vu + (\vu \cdot \nabla) \vu \quad \text{ in } \OmgBt&&\\
         \va(t, \vx) &\equals \pd_t \vu(t, \vx) +  (\vu(t,\vx)\cdot\nabla)\vu(t,\vx) &&\\
-        \va(t, \vx) &\equals \pd_t \vu(t, \vx) + \sum_{i=1}^{N} u_i(t, \vx) \pd_{x_i} \vu(t, \vx) \quad \forallin{(t, \vx)}{\OmgB}. &&
+        &\equals \pd_t \vu(t, \vx) + \sum_{i=1}^{N} u_i(t, \vx) \pd_{x_i} \vu(t, \vx) \quad \forallin{(t, \vx)}{I_T \times \OmgBt} && \\
+        \iff \va &\equals \pd_t \vu + \sum_{i=1}^{N} u_i \, \pd_{x_i} \vu &&\\
+        &\equals \pd_t \vu + \inp{\nabla}{\vu} \vu \quad \text{ in } \OmgB. &&
 \end{flalign*}
 
 \medskip
-Let's denote the deformation gradient tensor $\vFhat_t$ and its counterpart $\vF_t$ be the gradient of $\La_t$ and $\inv{\La_t}$ in,
-defined respectively as:
+
+% Deformation gradient + Jacobian det.
+We denote the deformation gradient tensor in Lagrangian and Eulerian form by
+$\vFhat_t$ and $\vF_t$, respectively, defined by
 \begin{flalign*}
     \quad \vFhat_t(\vxi) &\defined \nabla_{\vxi} \La_t(\vxi) \quad \forallin{\vxi}{\OmgB(0)}. &&\\
-        &\iff \vF_t(\vx) \equals \nabla_{\vxi} \La_t(\inv{\La_t}(\vx)) \equals \pd_{\vxi} \vx(t, \vxi) \quad \forallin{(t, \vx)}{\OmgB}. &&
+        &\iff \vF_t(\vx) \equals \nabla_{\vxi} \La_t(\inv{\La_t}(\vx)) \equals \pd_{\vxi} \vx(t, \vxi)
+            \quad \forallin{(t, \vx)}{\OmgB}. &&
 \end{flalign*}
 The tensor $\vF_t$ measures the spatial deformation of infinitesimal fluid elements as they move from
 the reference configuration to the current configuration under $\La_t$ along trajectory $T_{\vxi}$.
-We assume that, for each fixed $t$, the mapping
-$\La_t : \OmgB(0) \to \OmgB(t)$ is a $C^1$–diffeomorphism with $\det \vFhat_t(\vxi) > 0 \forallin{\vxi}{\OmgB(0)}$\footnote{
+Suppose for each fixed $t$ the mapping$\La_t : \OmgB(0) \to \OmgB(t)$ is a $C^1$–diffeomorphism with
+$\det \vFhat_t(\vxi) > 0 \forallin{\vxi}{\OmgB(0)}$\footnote{
     Recall the $\det \vFhat$ may be interpreted as the signed volume change of an infinitesimal parallelepiped
     spanned by the column vectors of $\vFhat$; thus, $\det \vFhat_t(\vxi) > 0$ ensures that the orientation of fluid elements
     is preserved under the deformation mapping $\La_t$ at time $t$. Moreover, it prevents unphysical scenarios
     such as interpenetration of matter consisting of negative volumes.
 }.
-Then $\vFhat_t(\vxi)$ is invertible, and we define
+Then $\vFhat_t(\vxi)$ is invertible, and we define:
 \begin{flalign*}
-    \quad \Jhatdet_t(\vxi) & \defined \det\big(\vFhat_t(\vxi)\big) \quad \forallin{\vxi}{\OmgB(0)} &&\\
-        &\iff \Jdet_t(\vx) \equals \det\big(\vFhat_t(\inv{\La_t}(\vx))\big) \quad \forallin{(t, \vx)}{\OmgB} &&
+    \quad \Jhatdet_t(\vxi) & \defined \det\big(\vFhat_t(\vxi)\big) \quad \forallin{\vxi}{\OmgB(0)}. &&\\
+        &\iff \Jdet_t(\vx) \equals \det\big(\vFhat_t(\inv{\La_t}(\vx))\big) \quad \forallin{(t, \vx)}{\OmgB}. &&
 \end{flalign*}
 We r.t. such measure of spatial deformation $\Jhatdet_t(\vxi)$ as the Jacobian determinant of $\La_t$ at
-time $t$. The following lemma shows that $\pd_t \Jdet_t$ relates to the fluids divergence $\Div(\vu)$.
+time $t$. The following lemma shows that $\pd_t \Jdet_t$ relates to the fluid's divergence $\Div(\vu)$.
 
 \medskip
 
@@ -169,17 +200,18 @@ Lagrangian mapping $\La_t$, i.e.,
     \quad V(t) & = \La_t\big(V(0)\big). &&
 \end{flalign*}
 The following theorem, known as the Reynolds Transport Theorem, relates the time derivative of an integral
-over the moving volume $V(t)$ to integrals over $V(t)$ and its boundary $\p V(t)$.
+over the moving volume $V(t)$.
 \begin{theorem}[Reynolds Transport Theorem]
     \label{thm:reynolds-transport}
     Let $V(0) \subset \OmgB(0)$ be a material volume in the reference configuration,
-    and $V(t) \subset \OmgBt$ its image in the current configuration under $\La_t$. For any
-    sufficiently smooth scalar field $\phi: \OmgB \to \R$,
+    and $V(t) \subset \OmgBt$ its image in the current configuration under $\La_t$,
+    then for $\phi \in C^1(\OmgB)$ we have
     \begin{flalign*}
-        \quad & \frac{d}{dt} \int_{V(t)} \phi(t, \vx) \, dV \defined \int_{V(t)} \pd_t \phi(t, \vx) \, dV
-            + \int_{\p V(t)} \phi(t, \vx) \, \inp{\vu}{\nhat} \, dS, &&
+        \quad \dfrac{d}{dt} \int_{V(t)} \phi(t, \vx) \, d\vx
+            & \equals \int_{V(t)} D_t \phi(t, \vx) \, d\vx &&\\
+            & \equals \int_{V(t)} \pd_t \phi(t, \vx) \, d\vx + \int_{\p V(t)} \phi(t, \vx) \, \inp{\vu(t, \vx)}{\nhat} \, dS, &&
     \end{flalign*}
-    where $\vu$ is the fluid velocity field and $\nhat$ the outward unit normal on $\p V(t)$.
+    where $\nhat$ is the outward unit normal on $\p V(t)$.
 \end{theorem}
 \begin{proof}
     Ref~\cite{book2}, theorem 2.2. pg. 21.
@@ -191,6 +223,21 @@ a continuum that deforms continuously, i.e., at every point $\vx \in \OmgBt$ and
 blood's kinematic quantities are described by sufficiently smooth fields. At microscopic scales this
 continuum hypothesis breaks down, since matter is a discrete collection of molecules, but at macroscopic
 scales empirical evidence suggests such models remain accurate.
+
+\medskip
+
+Let blood's velocity, thermodynamic pressure, and density fields be
+\begin{flalign*}
+    \quad & \vu: \OmgB \to \R^3,\;
+        (t, x, y, z) \mapsto (u_1(t, x, y, z),\, u_2(t, x, y, z),\, u_3(t, x, y, z))^\top,
+        \quad \units{\frac{cm}{s}} && \\
+    \quad & p: \OmgB \to \R^+, \;
+        (t, x, y, z) \mapsto p(t, x, y, z),
+        \quad \units{\frac{N}{cm^2}} && \\
+    \quad & \rho: \OmgB \to \R^+,\;
+        (t, x, y, z) \mapsto \rho(t, x, y, z),
+        \quad \units{\frac{kg}{cm^3}}. &&
+\end{flalign*}
 
 \medskip
 
@@ -211,18 +258,7 @@ integro-differential and variational formulations.
 \end{remark}
 
 \medskip
-Let blood's velocity, thermodynamic pressure, and density fields be
-\begin{flalign*}
-    \quad & \vu: \OmgB \to \R^3,\;
-        (t, x, y, z) \mapsto (u_1(t, x, y, z),\, u_2(t, x, y, z),\, u_3(t, x, y, z))^\top,
-        \quad \units{\frac{cm}{s}} && \\
-    \quad & p: \OmgB \to \R^+, \;
-        (t, x, y, z) \mapsto p(t, x, y, z),
-        \quad \units{\frac{N}{cm^2}} && \\
-    \quad & \rho: \OmgB \to \R^+,\;
-        (t, x, y, z) \mapsto \rho(t, x, y, z),
-        \quad \units{\frac{kg}{cm^3}}. &&
-\end{flalign*}
+
 \begin{definition}[Incompressible fluid]
     \label{def:incompressible-fluid}
     A fluid is \emph{incompressible} if for each material element $V(0)\subset \Omega_B(0)$,
@@ -257,7 +293,8 @@ Taking the material derivative yields $D_t \rho = 0$ in $\OmgB$ -- In summary, w
 \end{flalign*}
 Note, the converse is not generally true: an incompressible flow ($D_t\rho=0$) only preserves density
 along $T_{\vxi}$, allowing $\rho=\rho(\vx)$ to vary spatially in the Eulerian frame. But particularly
-here, uniform initial density in $\OmgB(0)$ implies constant density in $\OmgB$ under incompressible flow.
+here, uniform initial density in $\OmgB(0)$ implies constant density in $\OmgB$ under the assumption of
+incompressible flow.
 \newpage
 \begin{remark}[Divergence-free condition]
     \label{rmk:incompressibility-divergence-free}

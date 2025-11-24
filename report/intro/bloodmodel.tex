@@ -1,4 +1,24 @@
-We start our disscusion with 1D and 0D models, reducing the
+We seek solutions to initial and boundary value problems of Eq.~\ref{def:NSEquations}.
+Let $\vu_0: \OmgB(0) \to \R^3$ be the initial velocity feild at $t = 0$.
+Then the initial condition is given by
+\begin{flalign*}
+    \quad & \vu(\vx, 0) \;=\; \vu_0(\vx) \quad \forallin{\vx}{\OmgB(0)}. &&
+\end{flalign*}
+In practice, $\vu_0(z)$ may be prescribed or determined
+from sensor data.
+For the boundary conditions, we consider the following:
+\begin{definition}[Inlet Boundary Condition]
+    \label{def:inlet-bc}
+    Let $\vu_0(z): [0, \ell] \to \R^3$ be a prescribed velocity profile
+    at the inlet boundary of $\OmgB(t)$ along the $z$-axis.
+\end{definition}
+\begin{definition}[Outlet Boundary Condition]
+    \label{def:outlet-bc}
+    Let $p_{out}(t): [0, T] \to \R$ be a prescribed pressure profile
+    at the outlet boundary of $\OmgB(t)$.
+\end{definition}
+
+We start our discussion with 1D and 0D models, reducing the
 d.o.f. in the NS system~\ref{def:NSEquations} by imposing further
 simplifying assumptions. Namely, w.a.t. compute average pressures
 and velocities after a relatively short simulation time by solving
@@ -6,22 +26,8 @@ the 1D NS system in a compliant vessel with suitable side conditions.
 Because our model averages pressure and velocity over a surface-area, we obtain
 a uniform distribution of WSS on the vessel.
 
-\medskip
-
-We seek solutions to inital and boundary value problems of Eq.~\ref{def:NSEquations}.
-\begin{definition}
-    \label{def:init_condition}
-    Let $\vct{u_0} : \Omg(0) \to R^3, ~ \vct{x} \mapsto \vct{u_0}(x) ~ : ~ \vu(0, \vct{x}) = \vct{u_0}$.
-    We refer to $\vct{u_0}$ as the initial condition of velocity feild $\vu$
-\end{definition}
-\begin{definition}
-    Let $\vct{u^0}(t)$ and $\vct{u^1}(t)$ be the velocity feilds at $S_0$ and $S_1$.
-\end{definition}
-In practice, $\vct{u_0}(z)$ may be prescribed or determined from sensor data.
-
 \subsection{Dimension-Reduced Models of Blood Flow}
     \label{subsec:dim-reduced-models}
-
     \subsubsection{1D Models}
         \label{subsubsec:1D}
         The 1D model reduces the spatial dimension of the NS system by assuming
@@ -116,7 +122,7 @@ In practice, $\vct{u_0}(z)$ may be prescribed or determined from sensor data.
 
         \begin{remark}
             \label{1DMassConservation}
-            By taking $f = \rho$ in \ref{def:1dReynolds}, mass conservation follows directly. Also, by our assumption
+            By taking $\phi = \rho$ in \ref{def:1dReynolds}, mass conservation follows directly. Also, by our assumption
             that blood is incompressible, we have $\begin{cases*}\Div(\vu) = 0\\\rho =\text{const.}\\
             \end{cases*}$ and we simplify \ref{def:1dReynolds} as
             \begin{flalign*}
