@@ -20,91 +20,71 @@ For each material particle initially at $\vxi \in \Omega_B(0)$,
 we assume its motion in $\Omega_B$ is governed by a velocity field
 $\vu : \Omega_B \to \R^N$.  Our aim here is to derive the governing PDE system
 for $\vu$—the Navier–Stokes equations.
+
 \medskip
 
 \subsubsection{Blood Dynamics}
-    \label{subsubsec:blood-dynamics}
+\label{subsubsec:blood-dynamics}
 
-    % Coordinate defs
-    Let the flow map be
-    \begin{flalign*}
-        \quad & \vx: I_T \times \Omega_B(0) \to \R^N, \quad (t, \vxi) \mapsto \vx(t, \vxi) &&
-    \end{flalign*}
-    For each fixed $t \in I_T$, the \emph{Lagrangian map} is from the reference configuration to the current configuration, i.e.
-    \begin{flalign*}
-        \quad & \La_t : \Omega_B(0) \to \Omega_B(t), \quad \vxi \mapsto \vx(t, \vxi) \quad \text{ s.t. }
-        \quad \La_t(\vxi) \equals \vx(t, \vxi). &&
-    \end{flalign*}
-    The variables $(t,\vx)$ and $(t,\vxi)$ are referred to as the Eulerian and Lagrangian
-    coordinates, resp..
+% Coordinate defs
+Let the flow map be
+\begin{flalign*}
+    \quad & \vx: I_T \times \Omega_B(0) \to \R^N, \quad (t, \vxi) \mapsto \vx(t, \vxi) &&
+\end{flalign*}
+For each fixed $t \in I_T$, the \emph{Lagrangian map} is from the reference configuration to the current configuration, i.e.
+\begin{flalign*}
+    \quad & \La_t : \Omega_B(0) \to \Omega_B(t), \quad \vxi \mapsto \vx(t, \vxi) \quad \text{ s.t. }
+    \quad \La_t(\vxi) \equals \vx(t, \vxi). &&
+\end{flalign*}
+The variables $(t,\vx)$ and $(t,\vxi)$ are referred to as the Eulerian and Lagrangian
+coordinates, resp..
 
+\medskip
+
+\begin{remark}[Eulerian vs. Lagrangian]
+    \label{rmk:eulerian-lagrangian}
+    Informally, the Eulerian approach focuses our attention to $\vx \in \OmgBt$, namely,
+    some fluid particle located at $\vx$ at a particular time $t$.
+    Whereas, the Lagrangian approach tracks an individual fluid particle $\vxi \in \OmgB(0)$
+    along it's trajectory $\vT_{\vxi} \defined \{ \vx(t,\vxi) : t \in I_T \}$ as it moves along a
+    characteristic curve in $\OmgB$.
     \medskip
+    For $\phi \in C^1(\OmgB)$ s.t. $(t, \vx) \mapsto \phi(t, \vx)$ in the Eulerian variables,
+    we'll let $\hat{\phi}(t,\vxi) \defined \phi\bigl(t,\La_t(\vxi)\bigr)$ s.t. $\vx(t) = \La_t(\vxi)$. I.e.,
+    we'll let $\phihat \equals \phi \circ \La_t$ and it follows that $\phi \equals \phihat \circ \inv{\La_t}$.
+\end{remark}
 
-    \begin{remark}[Eulerian vs. Lagrangian]
-        \label{rmk:eulerian-lagrangian}
-        Informally, the Eulerian approach focuses our attention to $\vx \in \OmgBt$, namely,
-        some fluid particle located at $\vx$ at a particular time $t$.
-        Whereas, the Lagrangian approach tracks an individual fluid particle $\vxi \in \OmgB(0)$
-        along it's trajectory $\vT_{\vxi} \defined \{ \vx(t,\vxi) : t \in I_T \}$ as it moves along a
-        characteristic curve in $\OmgB$.
-        \medskip
-        For $\phi \in C^1(\OmgB)$ s.t. $(t, \vx) \mapsto \phi(t, \vx)$ in the Eulerian variables,
-        we'll let $\hat{\phi}(t,\vxi) \defined \phi\bigl(t,\La_t(\vxi)\bigr)$ s.t. $\vx(t) = \La_t(\vxi)$. I.e.,
-        we'll let $\phihat \equals \phi \circ \La_t$ and it follows that $\phi \equals \phihat \circ \inv{\La_t}$.
-    \end{remark}
+\medskip
 
-    \medskip
-
-    % Principle kinematic quantity: velocity def. via Lagrangian Reference Frame
-    \begin{definition}
-        \label{def:lagrangian-velocity}
-        Let the Lagrangian velocity field be defined as
-        \begin{flalign*}
-            \quad \vuhat \defined \pd_t \vx(t, \vxi) \mapsto \vuhat(t, \vxi)
-                \quad \forallin{(t, \vxi)}{I_T \times \OmgB(0)} &&
-        \end{flalign*}
-    \end{definition}
-    A change of coordinates in~\ref{def:lagrangian-velocity} yields the velocity field $\vu$
-    in the Eulerian frame, i.e.,
-    \begin{flalign*}
-        \quad \vu \equals \vuhat \circ \inv{\La_t} \quad \iff \quad \vu(t, \vx)
-            \equals \vuhat(t, \inv{\La_t}(\vx)) &&
-    \end{flalign*}
-    Then if $\vuhat$ and $\OmgB(0)$ are known, we arrive at the Cauchy problem
-    for the trajectory $T_{\vxi}$ of each material particle $\vxi \in \OmgB(0)$:
-    \begin{flalign*}
-        \quad \begin{cases*}
-            \pd_t{\vx}(t, \vxi) \equals \vuhat(t, \vxi), \forallin{t}{I_T} \\
-            \vx(0, \vxi) \equals \vxi.
-        \end{cases*} &&
-    \end{flalign*}
-
-    \td{State conditions for well-posedness in the sense of hadamard? Explain existence, uniqueness, stability of solutions of the resulting
-    ODE system above via the Picard-Lindelof theorem.}
-
-
-    \medskip
-
-\subsubsection*{Material Derivatives}
+% Principle kinematic quantity: velocity def. via Lagrangian Reference Frame
 \begin{definition}
-    \label{def:material-derivative}
-    Let $\phi \in C^k(\Omega_B)$ and define
-    \[
-        \phihat(t,\vxi) \defined \phi\bigl(t, \vx(t,\vxi)\bigr).
-    \]
-    The \emph{material derivative} of $\phi$ is
-    \[
-        D_t \phi(t,\vx(t,\vxi))
-        \defined \pd_t \phihat(t,\vxi)
-        = \frac{d}{dt}\,\phi\bigl(t,\vx(t,\vxi)\bigr),
-        \qquad \vxi \in \Omega_B(0).
-    \]
-    Equivalently, for $(t,\vx)\in I_T\times\Omega_B(t)$,
-    \[
-        D_t \phi(t,\vx)
-        \defined \pd_t \phihat\bigl(t,\La_t^{-1}(\vx)\bigr).
-    \]
+    \label{def:lagrangian-velocity}
+    Let the Lagrangian velocity field be defined as
+    \begin{flalign*}
+        \quad \vuhat \defined \pd_t \vx(t, \vxi) \mapsto \vuhat(t, \vxi)
+            \quad \forallin{(t, \vxi)}{I_T \times \OmgB(0)} &&
+    \end{flalign*}
 \end{definition}
+A change of coordinates in~\ref{def:lagrangian-velocity} yields the velocity field $\vu$
+in the Eulerian frame, i.e.,
+\begin{flalign*}
+    \quad \vu \equals \vuhat \circ \inv{\La_t} \quad \iff \quad \vu(t, \vx)
+        \equals \vuhat(t, \inv{\La_t}(\vx)) &&
+\end{flalign*}
+Then if $\vuhat$ and $\OmgB(0)$ are known, we arrive at the Cauchy problem
+for the trajectory $T_{\vxi}$ of each material particle $\vxi \in \OmgB(0)$:
+\begin{flalign*}
+    \quad \begin{cases*}
+        \pd_t{\vx}(t, \vxi) \equals \vuhat(t, \vxi), \forallin{t}{I_T} \\
+        \vx(0, \vxi) \equals \vxi.
+    \end{cases*} &&
+\end{flalign*}
+
+\td{State conditions for well-posedness in the sense of hadamard? Explain existence, uniqueness, stability of solutions of the resulting
+ODE system above via the Picard-Lindelof theorem.}
+
+
+\medskip
 
 
 \begin{definition}
@@ -144,8 +124,6 @@ repsectively:
         &\equals \pd_t \vu + \inp{\nabla}{\vu} \vu \quad \text{ in } \OmgB. &&
 \end{flalign*}
 
-\medskip
-
 % Deformation gradient + Jacobian det.
 We denote the deformation gradient tensor in Lagrangian and Eulerian form by
 $\vFhat_t$ and $\vF_t$, respectively, defined by
@@ -156,7 +134,7 @@ $\vFhat_t$ and $\vF_t$, respectively, defined by
 \end{flalign*}
 The tensor $\vF_t$ measures the spatial deformation of infinitesimal fluid elements as they move from
 the reference configuration to the current configuration under $\La_t$ along trajectory $T_{\vxi}$.
-Suppose for each fixed $t$ the mapping$\La_t : \OmgB(0) \to \OmgB(t)$ is a $C^1$–diffeomorphism with
+Suppose for each fixed $t$ the mapping $\La_t : \OmgB(0) \to \OmgB(t)$ is a $C^1$–diffeomorphism with
 $\det \vFhat_t(\vxi) > 0 \forallin{\vxi}{\OmgB(0)}$\footnote{
     Recall the $\det \vFhat$ may be interpreted as the signed volume change of an infinitesimal parallelepiped
     spanned by the column vectors of $\vFhat$; thus, $\det \vFhat_t(\vxi) > 0$ ensures that the orientation of fluid elements
@@ -200,21 +178,36 @@ Lagrangian mapping $\La_t$, i.e.,
     \quad V(t) & = \La_t\big(V(0)\big). &&
 \end{flalign*}
 The following theorem, known as the Reynolds Transport Theorem, relates the time derivative of an integral
-over the moving volume $V(t)$.
+over the material derivative of $V(t)$.
 \begin{theorem}[Reynolds Transport Theorem]
     \label{thm:reynolds-transport}
     Let $V(0) \subset \OmgB(0)$ be a material volume in the reference configuration,
-    and $V(t) \subset \OmgBt$ its image in the current configuration under $\La_t$,
-    then for $\phi \in C^1(\OmgB)$ we have
+    and $V(t) \subset \OmgBt$ its image in the current configuration under $\La_t$.
+    Then for $\phi \in L^1(\OmgB)$ we have
     \begin{flalign*}
-        \quad \dfrac{d}{dt} \int_{V(t)} \phi(t, \vx) \, d\vx
-            & \equals \int_{V(t)} D_t \phi(t, \vx) \, d\vx &&\\
-            & \equals \int_{V(t)} \pd_t \phi(t, \vx) \, d\vx + \int_{\p V(t)} \phi(t, \vx) \, \inp{\vu(t, \vx)}{\nhat} \, dS, &&
-    \end{flalign*}
-    where $\nhat$ is the outward unit normal on $\p V(t)$.
+        \quad \dfrac{d}{dt} \int_{V(t)} \phi(t, \vx) \, \dx
+            & \equals \int_{V(t)} D_t \phi(t, \vx) \, + \phi(t, \vx) \, \inp{\nabla}{\vu(t, \vx)} \dx &&\\
+            & \equals \int_{V(t)} \pd_t \phi(t, \vx) \, + \, \inp{\nabla}{\phi(t, \vx)\vu(t, \vx)} \dx &&\\
+\end{flalign*}
 \end{theorem}
 \begin{proof}
-    Ref~\cite{book2}, theorem 2.2. pg. 21.
+    Observe
+    \begin{flalign*}
+        \quad \dfrac{d}{dt} \int_{V(t)} \phi(t, \vx)
+            &\equals \dfrac{d}{dt} \int_{V(0)} \phihat(t, \vxi) \Jhatdet_t(\vxi) \dxi
+                \quad \text{(by \ref{def:material-derivative} and \ref{lem:jacobian-determinant-derivative})}. && \\
+            & \equals  \int_{V(0)} \pd_t\bigg(\phihat(t, \vxi) \Jhatdet_t(\vxi)\bigg) \dxi &&\\
+            & \equals  \int_{V(0)} \pd_t\bigg(\phihat(t, \vxi)\bigg) \Jhatdet_t(\vxi)
+                + \phihat(t, \vxi)\pd_t\bigg(\Jhatdet_t(\vxi)\bigg) \dxi
+                \quad \text{(chain rule)} && \\
+            & \equals  \int_{V(t)} D_t\big(\phi(t, \vx)) \dx +
+                +  \int_{V(0)} \phihat(t, \vxi) \Jhatdet_t(\vxi) \Div(\vu(t, x(t, \vxi))) \dxi
+                \quad \text{(by again \ref{def:material-derivative} and \ref{lem:jacobian-determinant-derivative})}. && \\
+            & \equals  \int_{V(t)} D_t\big(\phi(t, \vx)) \dx + \int_{V(t)} \phi(t, \vx) \Div(\vu(t, \vx)) \dx
+                \quad \text{(change of variables)} && \\
+            & \equals  \int_{V(t)} \pd_t \phi(t, \vx) + \inp{\nabla}{\phi(t, \vx)\vu(t, \vx)} \dx
+                \quad \text{(by \ref{def:material-derivative})}. && \\
+    \end{flalign*}
 \end{proof}
 
 \subsection{NS-derivation}
@@ -295,7 +288,6 @@ Note, the converse is not generally true: an incompressible flow ($D_t\rho=0$) o
 along $T_{\vxi}$, allowing $\rho=\rho(\vx)$ to vary spatially in the Eulerian frame. But particularly
 here, uniform initial density in $\OmgB(0)$ implies constant density in $\OmgB$ under the assumption of
 incompressible flow.
-\newpage
 \begin{remark}[Divergence-free condition]
     \label{rmk:incompressibility-divergence-free}
     Mass conservation for a fluid with density $\rho$ and velocity $\vu$
@@ -331,13 +323,13 @@ for an infinitesimal fluid element $V(t) \subset \OmgBt$.
     \label{def:linear-momentum-balance}
     The linear momentum balance for a fluid element $V \in \OmgB$ under flow $\vu$ is
     \begin{flalign*}
-        \quad & \frac{d}{dt} \int_{V(t)} \rho \, \vu \, dV \defined \int_{V(t)} \Divbf(\vT) \, dV + \int_{V(t)} \rho \, \vfb \, dV,
+        \quad & \frac{d}{dt} \int_{V(t)} \rho \, \vu \, dV \equals \int_{V(t)} \Divbf(\vT) \, dV + \int_{V(t)} \rho \, \vfb \, dV,
         \quad (\because ~ \rho \equiv \rho_0) &&
     \end{flalign*}
     where $\vT$ is the Cauchy stress tensor describing the fluids deformation, $\vfb$ may be some body force per unit mass $\units{\dfrac{cm}{s^2}}$.
 \end{definition}
-By applying the Reynolds Transport Theorem~\ref{thm:reynolds-transport} to~\ref{def:linear-momentum-balance},
-we obtain the strong form of linear momentum balance in $\OmgB$:
+By applying the Reynolds Transport Theorem~\ref{thm:reynolds-transport} to linear momentum balance~\ref{def:linear-momentum-balance},
+we obtain the integral form of linear momentum balance:
 \begin{flalign*}
     \quad & \int_{V(t)} \rho \, \pd_t \vu \, dV + \int_{\p V(t)} \rho \, \vu \, \inp{\vu}{\nhat} \, dS \defined \int_{V(t)} \Divbf(\vT) \, dV + \int_{V(t)} \rho \, \vfb \, dV, &&
 \end{flalign*}
@@ -348,26 +340,26 @@ By the divergence theorem, we may rewrite the surface integral as a volume integ
 \end{flalign*}
 Since $V(t)$ is arbitrary, the integrands must be equal a.e. in $\OmgBt$, yielding differential form of linear momentum balance:
 \begin{flalign*}
-    \quad & \rho \, \pd_t \vu + \Div(\rho \, \vu \otimes \vu) \defined \Divbf(\vT) + \rho \, \vfb, \qquad \text{in} ~ \OmgBt &&
+    \quad & \rho \, \pd_t \vu + \Div(\rho \, \vu \otimes \vu) \equals \Divbf(\vT) + \rho \, \vfb, \qquad \text{in} ~ \OmgBt &&
 \end{flalign*}
 By incompressibility assumption of blood fluid~\ref{def:incompressible-fluid} we have $\rho \equiv \rho_0$ constant in $\OmgBt$,
 so the linear momentum balance simplifies to
 \begin{flalign*}
-    \quad & \rho \, \pd_t \vu + \rho \, \Div(\vu \otimes \vu) \defined \Divbf(\vT) + \rho \, \vfb, \qquad \text{in} ~ \OmgBt &&
+    \quad & \rho \, \pd_t \vu + \rho \, \Div(\vu \otimes \vu) \equals \Divbf(\vT) + \rho \, \vfb, \qquad \text{in} ~ \OmgBt &&
 \end{flalign*}
 Using the vector calculus identity $\Div(\vu \otimes \vu) = (\nabla \cdot \vu) \, \vu + (\vu \cdot \nabla) \vu$ we have
 \begin{flalign*}
     \quad \Div(\vu \otimes \vu) &= \Divbf\big(\vu \vu^\top\big) &&\\
     \quad &\equals \big(\nabla \cdot \vu\big) \, \vu + (\vu \cdot \nabla) \vu &&\\
     \quad &\equals 0 \cdot \vu + (\vu \cdot \nabla) \vu \quad (\because \Div \, \vu \equals 0 \text{ by remark~\ref{rmk:incompressibility-divergence-free}}) &&\\
-    \quad \implies& \rho \, \pd_t \vu + \rho \, (\vu \cdot \nabla) \vu \defined \Divbf(\vT) + \rho \, \vfb, \qquad \text{in} ~ \OmgBt &&
+    \quad \implies& \rho \, \pd_t \vu + \rho \, (\vu \cdot \nabla) \vu \equals \Divbf(\vT) + \rho \, \vfb, \qquad \text{in} ~ \OmgBt &&
 \end{flalign*}
 so the linear momentum balance~\ref{def:linear-momentum-balance} for incompressible fluid simplifies to the following form.
 \begin{definition}
     \label{def:linear-momentum-balance-strong}
     The differential form of linear momentum balance for an incompressible fluid element $V \in \OmgB$ under flow $\vu$ is
     \begin{flalign*}
-        \quad & \rho(\pd_t \vu + (\vu\cdot\nabla)\vu ) \defined \Divbf(\vT) + \rho \vfb, \qquad \text{in} ~ \OmgBt &&
+        \quad & \rho(\pd_t \vu + (\vu\cdot\nabla)\vu ) \equals \Divbf(\vT) + \rho \vfb, \qquad \text{in} ~ \OmgBt &&
     \end{flalign*}
 \end{definition}
 
@@ -382,14 +374,14 @@ the velocity field $\vu$ and its derivatives.
 Let the rate-of-deformation tensor be defined as the symmetric
 part of the velocity gradient, i.e.,
 \begin{flalign*}
-    \quad \vct{D}(\vu) \defined \tfrac{1}{2}\big(\nabla\vu+(\nabla\vu)^\top\big)
-    \quad \text{s.t.} \quad \nabla\vu \defined \vect{
-        \dfrac{\pd u_1}{\pd x} & \dfrac{\pd u_1}{\pd y} & \dfrac{\pd u_1}{\pd z} \\
-        \dfrac{\pd u_2}{\pd x} & \dfrac{\pd u_2}{\pd y} & \dfrac{\pd u_2}{\pd z} \\
-        \dfrac{\pd u_3}{\pd x} & \dfrac{\pd u_3}{\pd y} & \dfrac{\pd u_3}{\pd z}
-    }. &&
+    \quad \vct{D}(\vu) \defined \tfrac{1}{2}\big(\nabla\vu+(\nabla\vu)^\top\big) &&
 \end{flalign*}
 Note that $\vu \mapsto \vct{D}(\vu)$ captures spatial deformations of element $V$ in $\OmgB$ under flow $\vu$.
+Here $\vct{D}(\vu)$ is related to the gradient deformation tensor $\vF_t$ via
+\begin{flalign*}
+    \quad \vct{D}(\vu) \equals \tfrac{1}{2} \, D_t \vF_t \, \inv{\vF_t} &&
+\end{flalign*}
+where $D_t \vF_t$ is the material derivative of $\vF_t$ \red{(see ref~\cite{book2}, sec. 3.4, pg. 39, for derivation)}.
 \begin{definition}
     \label{def:newtonian-fluid}
     A fluid is \emph{Newtonian} if its Cauchy stress tensor $\vT\;$ depends
