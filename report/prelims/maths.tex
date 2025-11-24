@@ -91,7 +91,10 @@ The Laplacian and domain integral of $\vf$ are defined component-wise:
 
 For tensor-valued $\vT \in C^1(\Omg; \R^{n\times n})$ with entries
 $\vT = (T_{ij})_{i,j=1}^n$, the divergence operator is\begin{flalign*}
-    \quad \Divbf \, \vT \defined \left( \Div \, \vt_{i} \right)_{\forall{i}{[n]}} ~ : ~ \vt_i \text{ is the ith row of } \vT &&
+    \quad \Divbf \, \vT &\defined \left( \Div \, \vt_{i} \right)_{\forall{i}{[n]}} ~ : ~ \vt_i \text{ is the ith row of } \vT &&\\
+        & \equals \left( \nabla \cdot \vt_{i} \right)_{\forall{i}{[n]}} &&\\
+        & \equals \left( \sum_{\forall{j}{[n]}} \pd_{x_j} T_{ij} \right)_{\forall{i}{[n]}} && \\
+        & \equals \left( \inp{\vt_i}{\nabla}_{\R^n} \right)_{\forall{i}{[n]}}. &&
 \end{flalign*}
 The Laplacian and domain integral of $\vT$ are again defined component-wise:
 \begin{flalign*}

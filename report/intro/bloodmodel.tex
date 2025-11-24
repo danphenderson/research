@@ -1,7 +1,10 @@
-One chooses a model based upon the specific application, computational resources,
-and desired accuracy. We construct models of blood flow in
-various geometries, starting from a single vessel, then extending our approach to
-bifurcations and arterial networks. Our strategy involves a \emph{domain decomposition approach}.
+We start our disscusion with 1D and 0D models, reducing the
+d.o.f. in the NS system~\ref{def:NSEquations} by imposing further
+simplifying assumptions. Namely, w.a.t. compute average pressures
+and velocities after a relatively short simulation time by solving
+the 1D NS system in a compliant vessel with suitable side conditions.
+Because our model averages pressure and velocity over a surface-area, we obtain
+a uniform distribution of WSS on the vessel.
 
 \medskip
 
@@ -19,231 +22,227 @@ In practice, $\vct{u_0}(z)$ may be prescribed or determined from sensor data.
 \subsection{Dimension-Reduced Models of Blood Flow}
     \label{subsec:dim-reduced-models}
 
-    We start our disscusion with 1D and 0D models, reducing the
-    d.o.f. in the NS system~\ref{def:NSEquations} by imposing further
-    simplifying assumptions. Namely, w.a.t. compute average pressures
-    and velocities after a relatively short simulation time by solving
-    the 1D NS system in a compliant vessel with suitable side conditions.
-    Because our model averages pressure and velocity over a surface-area, we obtain
-    a uniform distribution of WSS on the vessel.
+    \subsubsection{1D Models}
+        \label{subsubsec:1D}
+        The 1D model reduces the spatial dimension of the NS system by assuming
+        axial symmetry of the vessel and averaging pressure and velocity
+        over cross-sectional areas orthogonal to the vessel centerline.
 
-    \medskip
+        One may start by introducing a rigid-vessel assumption, which leads to a no slip condition
+        that $\vu \big|_{\pOmgt} \; = \; \vct{0}$. Instead we seek
+        to model the link between blood flow and the deformation of the vessel wall.
+        We begin our derivation of Dimension-Reduced models by assuming the following
+        transformation exists of our fluid domain boundary $\Omgt$ to a simplified geometry.
 
-    One may start by introducing a rigid-vessel assumption, which leads to a no slip condition
-    that $\vu \big|_{\pOmgt} \; = \; \vct{0}$. Instead we seek
-    to model the link between blood flow and the deformation of the vessel wall.
-    We begin our derivation of Dimension-Reduced models by assuming the following
-    transformation exists of our fluid domain boundary $\Omgt$ to a simplified geometry.
+        \medskip
 
-    \medskip
+        \begin{figure}[!htb]
+            \label{fig:compliant-vessel}
+            \centering
+            \captionsetup{aboveskip=2pt,belowskip=2pt}
+            \includegraphics[width=0.95\linewidth,height=0.45\textheight,keepaspectratio]{compliant-vessel.png}
+            \caption{
+                From \cite{book1} [Fig. 3.2, pg. 37]
+            }
+        \end{figure}
 
-    \begin{figure}[!htb]
-        \label{fig:compliant-vessel}
-        \centering
-        \captionsetup{aboveskip=2pt,belowskip=2pt}
-        \includegraphics[width=0.95\linewidth,height=0.45\textheight,keepaspectratio]{compliant-vessel.png}
-        \caption{
-            From \cite{book1} [Fig. 3.2, pg. 37]
-        }
-    \end{figure}
+        \newpage
 
-    \newpage
-
-    We consider the fluid dynamics of the following fluid element contained in a portion of the lumen $\Omgt$
-    \begin{figure}[!htb]`'
-        \label{fig:fluid-element}
-        \centering
-        \captionsetup{aboveskip=2pt,belowskip=2pt}
-        \includegraphics[width=0.8\linewidth,height=0.25\textheight,keepaspectratio]{fig33.png}
-        \caption{
-            From \cite{book1} [Fig. 3.3, pg. XX]
-        }
-    \end{figure}
-    Let $S_1(t), ~ S_2(t)$ be the time-dependent shaded boundaries at $z = z_1$ and $z = z_2$ s.t.
-    $0 < z_1 < z_2 < \ell$.
-    Let $V_t$ be the fluid element of blood. The boundary of the fluid element is
-    $\partial V_t \; = \; S_1(t) \cup S_2(t) \cup \partial V_{t,w}$ such that $\partial V_{t,w}$
-    is the vessel wall in contact with the fluid element.
-    According to the Reynold's transport theorem for scalar feild $\phi \in L^1(\Omgt)$.
-    \begin{flalign*}
-        \quad \dfrac{d}{dt} \int_{V_t} \phi dV \;
-            = \; \int_{V_t} \dfrac{\partial \phi }{\partial t} dV \;
-            + \; \int_{\partial V_t}  (\vct{u_b} \cdot \nhat) \phi dS &&
-    \end{flalign*}
-    where $\vct{u_b}$ is the velocity feild deforming the boundary $\partial V_t$
-    (Pf. see \href{https://en.wikipedia.org/wiki/Reynolds_transport_theorem}{wiki}).
-    If we assume the normal component of $\vct{u_b} = \vct{0}$ near the inlet
-    and outlet boundaries $S_1$ and $S_2$ (resp.) of $\Omg$, then the motion of the vessel wall
-    is coupled to the blood flow through the fluid element $V_t$. The velocity $\vct{u_b}$
-    is equivalent to the velocity of the vessel wall $\partial \Omgt$ in contact with the boundary element $\partial V_t$.
-    I.e., the vessel wall velocity $\vct{u_w} = \vct{u_b}$.
-    Now let $\vct{w} = \vct{u_w} - \vu$ be the relative velocity of the vessel wall
-    w.r.t. the velocity $\vu = (u_1, u_2, u_3)^\top$ of the blood element $V_t$. Then it follows that
-    \begin{flalign*}
-        \quad \; \int_{\partial V_t} \big(\vct{u_b} \cdot \nhat \big)\phi \; dS ~
-            & = ~ \; \int_{\partial V_t} \big(\vct{u_w} \cdot \nhat \big)\phi \; dS &&\\
-        \quad \; & = \; \int_{\partial V_t} \big(\vct{w} \cdot \nhat \big)\phi \; dS
-            ~ + ~ \; \int_{\partial V_t} \big(\vu \cdot \nhat \big)\phi \; dS &&
-    \end{flalign*}
-    Let $\bar{\phi}$ denote the average value of $\phi$ defined over a surface $S$
-    \begin{flalign*}
-        \quad \bar{\phi} \defined \frac{1}{A} ~ \int_{S(z, t)} \phi \;dS\quad :  \quad  A(z, t) \defined \int_{S(z, t)} dS &&
-    \end{flalign*}
-    Now we may rewrite the volume integral in the LHS of RT theorem
-    \begin{flalign*}
-        \quad  \int_{V_t} \phi dV \; = \; \int_{z_1}^{z_2} \int_{S(z, t)} \phi \;dS \; dz
-            \;=\; \int_{z_1}^{z_2} A \cdot \bar{\phi} \; dz &&
-    \end{flalign*}
-    where $z_1 < z_2$ are fixed $z$-coordinates for $S_1$ and $S_2$.
-    Then we differentiate the integrands in the above equation w.r.t. $t$
-    \begin{flalign*}
-        \quad \int_{V_t} \dfrac{\partial \phi}{\partial t} dV \;=\; \int_{z_1}^{z_2} \dfrac{\partial}{\partial t} \bigg[A \cdot \bar{\phi} \bigg]\; dz, &&
-    \end{flalign*}
-    and we've rewritten the first term in the RHS of the reynolds system.
-    The surface integral in the RHS may be written as
-    \begin{flalign*}
-        \quad \int_{\partial V_t}  (\vct{u_b} \cdot \nhat) \phi dS = \int_{\partial V_t}  (\vct{u_b} \cdot \nhat) \phi dS.... &&
-    \end{flalign*}\todo{cleanup, ref. pg. 43}
-    With a little more work, one may obtain:
-    \begin{definition}
-        \label{def:1dReynolds}
-        The 1D Reynolds Transport theorem for both compressible and incompressible fluids:
+        We consider the fluid dynamics of the following fluid element contained in a portion of the lumen $\Omgt$
+        \begin{figure}[!htb]`'
+            \label{fig:fluid-element}
+            \centering
+            \captionsetup{aboveskip=2pt,belowskip=2pt}
+            \includegraphics[width=0.8\linewidth,height=0.25\textheight,keepaspectratio]{fig33.png}
+            \caption{
+                From \cite{book1} [Fig. 3.3, pg. XX]
+            }
+        \end{figure}
+        Let $S_1(t), ~ S_2(t)$ be the time-dependent shaded boundaries at $z = z_1$ and $z = z_2$ s.t.
+        $0 < z_1 < z_2 < \ell$.
+        Let $V_t$ be the fluid element of blood. The boundary of the fluid element is
+        $\partial V_t \; = \; S_1(t) \cup S_2(t) \cup \partial V_{t,w}$ such that $\partial V_{t,w}$
+        is the vessel wall in contact with the fluid element.
+        According to the Reynold's transport theorem for scalar feild $\phi \in L^1(\Omgt)$.
         \begin{flalign*}
-            \quad \frac{\partial }{\partial t} \bigg( A \bar{\phi} \bigg) \; + \; \frac{\partial}{\partial z}\big( A (\overline{\phi \cdot u_3}) \big)
-            \; = \; \int_S \bigg( \dfrac{\partial \phi}{\partial t} + \nabla \cdot (\phi \vu) \bigg) dS
-            \; + \; \int_{\partial S} \phi \vct{w} \cdot \nhat \; d \gamma &&
+            \quad \dfrac{d}{dt} \int_{V_t} \phi dV \;
+                = \; \int_{V_t} \dfrac{\partial \phi }{\partial t} dV \;
+                + \; \int_{\partial V_t}  (\vct{u_b} \cdot \nhat) \phi dS &&
         \end{flalign*}
-    \end{definition}
-
-    \begin{remark}
-        \label{1DMassConservation}
-        By taking $f = \rho$ in \ref{def:1dReynolds}, mass conservation follows directly. Also, by our assumption
-        that blood is incompressible, we have $\begin{cases*}\Div(\vu) = 0\\\rho =\text{const.}\\
-        \end{cases*}$ and we simplify \ref{def:1dReynolds} as
+        where $\vct{u_b}$ is the velocity feild deforming the boundary $\partial V_t$
+        (Pf. see \href{https://en.wikipedia.org/wiki/Reynolds_transport_theorem}{wiki}).
+        If we assume the normal component of $\vct{u_b} = \vct{0}$ near the inlet
+        and outlet boundaries $S_1$ and $S_2$ (resp.) of $\Omg$, then the motion of the vessel wall
+        is coupled to the blood flow through the fluid element $V_t$. The velocity $\vct{u_b}$
+        is equivalent to the velocity of the vessel wall $\partial \Omgt$ in contact with the boundary element $\partial V_t$.
+        I.e., the vessel wall velocity $\vct{u_w} = \vct{u_b}$.
+        Now let $\vct{w} = \vct{u_w} - \vu$ be the relative velocity of the vessel wall
+        w.r.t. the velocity $\vu = (u_1, u_2, u_3)^\top$ of the blood element $V_t$. Then it follows that
         \begin{flalign*}
-            \quad \frac{\partial A }{\partial t} \; + \; \frac{\partial}{\partial z}\big( A (\overline{u_3}) \big)
-            \; = \; \int_{\partial S} \vct{w} \cdot \nhat \; d \gamma &&
+            \quad \; \int_{\partial V_t} \big(\vct{u_b} \cdot \nhat \big)\phi \; dS ~
+                & = ~ \; \int_{\partial V_t} \big(\vct{u_w} \cdot \nhat \big)\phi \; dS &&\\
+            \quad \; & = \; \int_{\partial V_t} \big(\vct{w} \cdot \nhat \big)\phi \; dS
+                ~ + ~ \; \int_{\partial V_t} \big(\vu \cdot \nhat \big)\phi \; dS &&
         \end{flalign*}
-        The RHS term above describing the transport process across the vessel wall. \todo{complete, pg. 45}
-    \end{remark}
-
-    \begin{remark}
-        \label{1DMomentumConservation}
-        By taking $f = u_3$ in \ref{def:1dReynolds}, momentum conservation follows directly. Also,
-        by our assumption that blood is incompressible, we simplify \ref{def:1dReynolds} as
+        Let $\bar{\phi}$ denote the average value of $\phi$ defined over a surface $S$
         \begin{flalign*}
-            \quad \frac{\partial }{\partial t} \bigg( A u_3 \bigg) \; + \; \frac{\partial}{\partial z}\big( A (\overline{u_3^2}) \big)
-            \; = \; \int_S \bigg( \dfrac{\partial u_3}{\partial t} + \nabla u_3 \cdot \vu \bigg) dS
-            \; + \; \int_{\partial S} u_3 \vct{w} \cdot \nhat \; d \gamma &&
+            \quad \bar{\phi} \defined \frac{1}{A} ~ \int_{S(z, t)} \phi \;dS\quad :  \quad  A(z, t) \defined \int_{S(z, t)} dS &&
         \end{flalign*}
-        The RHS term above describing the transport process across the vessel wall.
-    \end{remark}
-
-
-    \begin{remark}[Tube law from a thin elastic cylindrical wall]
-        \label{rem:tube-law-derivation}
-        We briefly justify the pressure--area relation used in \textsf{aq\_1d\_compliant.jl}
+        Now we may rewrite the volume integral in the LHS of RT theorem
+        \begin{flalign*}
+            \quad  \int_{V_t} \phi dV \; = \; \int_{z_1}^{z_2} \int_{S(z, t)} \phi \;dS \; dz
+                \;=\; \int_{z_1}^{z_2} A \cdot \bar{\phi} \; dz &&
+        \end{flalign*}
+        where $z_1 < z_2$ are fixed $z$-coordinates for $S_1$ and $S_2$.
+        Then we differentiate the integrands in the above equation w.r.t. $t$
+        \begin{flalign*}
+            \quad \int_{V_t} \dfrac{\partial \phi}{\partial t} dV \;=\; \int_{z_1}^{z_2} \dfrac{\partial}{\partial t} \bigg[A \cdot \bar{\phi} \bigg]\; dz, &&
+        \end{flalign*}
+        and we've rewritten the first term in the RHS of the reynolds system.
+        The surface integral in the RHS may be written as
+        \begin{flalign*}
+            \quad \int_{\partial V_t}  (\vct{u_b} \cdot \nhat) \phi dS = \int_{\partial V_t}  (\vct{u_b} \cdot \nhat) \phi dS.... &&
+        \end{flalign*}\todo{cleanup, ref. pg. 43}
+        With a little more work, one may obtain:
         \begin{definition}
-            \label{def:tube-law}
+            \label{def:1dReynolds}
+            The 1D Reynolds Transport theorem for both compressible and incompressible fluids:
             \begin{flalign*}
-                \quad & p(A) - p_{ext} \;=\; \beta\big(\sqrt{A} - \sqrt{A_0}\big) &&
+                \quad \frac{\partial }{\partial t} \bigg( A \bar{\phi} \bigg) \; + \; \frac{\partial}{\partial z}\big( A (\overline{\phi \cdot u_3}) \big)
+                \; = \; \int_S \bigg( \dfrac{\partial \phi}{\partial t} + \nabla \cdot (\phi \vu) \bigg) dS
+                \; + \; \int_{\partial S} \phi \vct{w} \cdot \nhat \; d \gamma &&
             \end{flalign*}
         \end{definition}
-        used in the 1D $(A,Q)$ model.  Consider a straight cylindrical vessel with
-        (local) lumen radius $R(x,t)$, reference radius $R_0$, wall thickness
-        $h \ll R$, and internal pressure $p(x,t)$ relative to an external pressure
-        $p_{ext}$ (assumed constant in space and time for simplicity).  The
-        corresponding lumen area is
-        \begin{flalign*}
-            \quad & A(x,t) = \pi R(x,t)^2, &&
-            \qquad
-            A_0 = \pi R_0^2. &&
-        \end{flalign*}
 
-        Under the thin--wall assumption, balance of forces in the circumferential
-        direction (Young--Laplace law) yields
-        \begin{definition}
-            \label{def:laplace}
+        \begin{remark}
+            \label{1DMassConservation}
+            By taking $f = \rho$ in \ref{def:1dReynolds}, mass conservation follows directly. Also, by our assumption
+            that blood is incompressible, we have $\begin{cases*}\Div(\vu) = 0\\\rho =\text{const.}\\
+            \end{cases*}$ and we simplify \ref{def:1dReynolds} as
             \begin{flalign*}
-                \quad & (p - p_{ext})\,2\pi R \;=\; \sigma_\theta\,2h\pi &&
+                \quad \frac{\partial A }{\partial t} \; + \; \frac{\partial}{\partial z}\big( A (\overline{u_3}) \big)
+                \; = \; \int_{\partial S} \vct{w} \cdot \nhat \; d \gamma &&
             \end{flalign*}
-        \end{definition}
-        where $\sigma_\theta$ is the circumferential (hoop) Cauchy stress in the
-        vessel wall.  We model the wall as linearly elastic in the hoop direction,
-        so that
-        \begin{definition}
-            \label{def:linear-elastic}
+            The RHS term above describing the transport process across the vessel wall. \todo{complete, pg. 45}
+        \end{remark}
+
+        \begin{remark}
+            \label{1DMomentumConservation}
+            By taking $f = u_3$ in \ref{def:1dReynolds}, momentum conservation follows directly. Also,
+            by our assumption that blood is incompressible, we simplify \ref{def:1dReynolds} as
             \begin{flalign*}
-                \quad & \sigma_\theta \;=\; E_{eff}\,\varepsilon_\theta &&
+                \quad \frac{\partial }{\partial t} \bigg( A u_3 \bigg) \; + \; \frac{\partial}{\partial z}\big( A (\overline{u_3^2}) \big)
+                \; = \; \int_S \bigg( \dfrac{\partial u_3}{\partial t} + \nabla u_3 \cdot \vu \bigg) dS
+                \; + \; \int_{\partial S} u_3 \vct{w} \cdot \nhat \; d \gamma &&
             \end{flalign*}
-        \end{definition}
-        with an effective circumferential modulus $E_{eff} > 0$ and circumferential
-        strain
-        \begin{flalign*}
-            \quad & \varepsilon_\theta \;=\; \frac{\text{change in circumference} - {\text{reference circumference}}}{\text{reference circumference}} &&
-            \quad & = \; \frac{2\pi R - 2\pi R_0}{2\pi R_0} &&
-            \quad & = \; \frac{R - R_0}{R_0}. &&
-        \end{flalign*}
+            The RHS term above describing the transport process across the vessel wall.
+        \end{remark}
 
-        Equating \eqref{def:laplace} and \eqref{def:linear-elastic} gives
-        \begin{flalign*}
-            \quad & (p - p_{ext})\,2\pi R \;=\; E_{eff}\,\frac{R - R_0}{R_0}\,2h\pi &&\\
-            \quad & \iff (p - p_{ext})\,R \;=\; E_{eff}\,\frac{R - R_0}{R_0}\,h &&
-        \end{flalign*}
-        Express $R$ and $R_0$ in terms of the areas $A$ and $A_0$:
-        \begin{flalign*}
-            \quad  R & = \sqrt{\frac{A}{\pi}} &&\\
-            \quad & = \; \frac{\sqrt{A}}{\sqrt{\pi}}, &&\\
-            R_0 = \sqrt{\frac{A_0}{\pi}}
-            \quad & = \;
-            \frac{\sqrt{A_0}}{\sqrt{\pi}},
-        \end{flalign*}
-        so that
-        \begin{flalign*}
-            \quad R - R_0
-            \;=\;
-            \frac{\sqrt{A}}{\sqrt{\pi}} - \frac{\sqrt{A_0}}{\sqrt{\pi}} &&\\
-            \quad & = \; \frac{1}{\sqrt{\pi}}\big(\sqrt{A} - \sqrt{A_0}\big). &&
-        \end{flalign*}
-        Substituting into the expression for $p - p_{ext}$, we obtain
-        \begin{flalign*}
-            \quad & (p - p_{ext})\,\frac{\sqrt{A}}{\sqrt{\pi}}
-            \;=\;
-            E_{eff} h\,
-            \frac{\dfrac{1}{\sqrt{\pi}}\big(\sqrt{A} - \sqrt{A_0}\big)}{R_0} &&\\
-            \quad & \iff (p - p_{ext})\,\frac{\sqrt{A}}{\sqrt{\pi}}
-            \;=\;
-            E_{eff} h\,
-            \frac{\dfrac{1}{\sqrt{\pi}}\big(\sqrt{A} - \sqrt{A_0}\big)}{R_0}. &&\\
-        \end{flalign*}
-        For moderate deformations where $A$ remains close to $A_0$, we approximate
-        the factor $1/\sqrt{A}$ by its reference value $1/\sqrt{A_0}$, which yields
-        \begin{flalign*}
-            \quad & (p - p_{ext})\,\frac{\sqrt{A_0}}{\sqrt{\pi}}
-            \;=\;
-            E_{eff} h\,
-            \frac{\dfrac{1}{\sqrt{\pi}}\big(\sqrt{A} - \sqrt{A_0}\big)}{R_0} &&\\
-            \quad & \iff (p - p_{ext})
-            \;=\;
-            \frac{E_{eff} h}{R_0\sqrt{A_0}}\,
-            \big(\sqrt{A} - \sqrt{A_0}\big). &&
-        \end{flalign*}
-        Defining the lumped stiffness parameter
-        \begin{flalign*}
-            \quad & \beta \;:=\; \frac{E_{eff} h}{R_0\sqrt{A_0}}. &&
-        \end{flalign*}
-        we arrive at the tube law \eqref{eq:tube-law} used in the 1D model:
-        \begin{flalign*}
-            \quad &
-            p(A) - p_{ext}
-            \;=\;
-            \beta\big(\sqrt{A} - \sqrt{A_0}\big). &&
-        \end{flalign*}
-        In the numerical experiments below, we take $\beta$ and $A_0$ to be
-        constant along the vessel, so that $p$ can be written as a function of
-        $A$ alone.
-    \end{remark}
 
+        \begin{remark}[Tube law from a thin elastic cylindrical wall]
+            \label{rem:tube-law-derivation}
+            We briefly justify the pressure--area relation used in \textsf{aq\_1d\_compliant.jl}
+            \begin{definition}
+                \label{def:tube-law}
+                \begin{flalign*}
+                    \quad & p(A) - p_{ext} \;=\; \beta\big(\sqrt{A} - \sqrt{A_0}\big) &&
+                \end{flalign*}
+            \end{definition}
+            used in the 1D $(A,Q)$ model.  Consider a straight cylindrical vessel with
+            (local) lumen radius $R(x,t)$, reference radius $R_0$, wall thickness
+            $h \ll R$, and internal pressure $p(x,t)$ relative to an external pressure
+            $p_{ext}$ (assumed constant in space and time for simplicity).  The
+            corresponding lumen area is
+            \begin{flalign*}
+                \quad & A(x,t) = \pi R(x,t)^2, &&
+                \qquad
+                A_0 = \pi R_0^2. &&
+            \end{flalign*}
+
+            Under the thin--wall assumption, balance of forces in the circumferential
+            direction (Young--Laplace law) yields
+            \begin{definition}
+                \label{def:laplace}
+                \begin{flalign*}
+                    \quad & (p - p_{ext})\,2\pi R \;=\; \sigma_\theta\,2h\pi &&
+                \end{flalign*}
+            \end{definition}
+            where $\sigma_\theta$ is the circumferential (hoop) Cauchy stress in the
+            vessel wall.  We model the wall as linearly elastic in the hoop direction,
+            so that
+            \begin{definition}
+                \label{def:linear-elastic}
+                \begin{flalign*}
+                    \quad & \sigma_\theta \;=\; E_{eff}\,\varepsilon_\theta &&
+                \end{flalign*}
+            \end{definition}
+            with an effective circumferential modulus $E_{eff} > 0$ and circumferential
+            strain
+            \begin{flalign*}
+                \quad & \varepsilon_\theta \;=\; \frac{\text{change in circumference} - {\text{reference circumference}}}{\text{reference circumference}} &&
+                \quad & = \; \frac{2\pi R - 2\pi R_0}{2\pi R_0} &&
+                \quad & = \; \frac{R - R_0}{R_0}. &&
+            \end{flalign*}
+
+            Equating \eqref{def:laplace} and \eqref{def:linear-elastic} gives
+            \begin{flalign*}
+                \quad & (p - p_{ext})\,2\pi R \;=\; E_{eff}\,\frac{R - R_0}{R_0}\,2h\pi &&\\
+                \quad & \iff (p - p_{ext})\,R \;=\; E_{eff}\,\frac{R - R_0}{R_0}\,h &&
+            \end{flalign*}
+            Express $R$ and $R_0$ in terms of the areas $A$ and $A_0$:
+            \begin{flalign*}
+                \quad  R & = \sqrt{\frac{A}{\pi}} &&\\
+                \quad & = \; \frac{\sqrt{A}}{\sqrt{\pi}}, &&\\
+                R_0 = \sqrt{\frac{A_0}{\pi}}
+                \quad & = \;
+                \frac{\sqrt{A_0}}{\sqrt{\pi}},
+            \end{flalign*}
+            so that
+            \begin{flalign*}
+                \quad R - R_0
+                \;=\;
+                \frac{\sqrt{A}}{\sqrt{\pi}} - \frac{\sqrt{A_0}}{\sqrt{\pi}} &&\\
+                \quad & = \; \frac{1}{\sqrt{\pi}}\big(\sqrt{A} - \sqrt{A_0}\big). &&
+            \end{flalign*}
+            Substituting into the expression for $p - p_{ext}$, we obtain
+            \begin{flalign*}
+                \quad & (p - p_{ext})\,\frac{\sqrt{A}}{\sqrt{\pi}}
+                \;=\;
+                E_{eff} h\,
+                \frac{\dfrac{1}{\sqrt{\pi}}\big(\sqrt{A} - \sqrt{A_0}\big)}{R_0} &&\\
+                \quad & \iff (p - p_{ext})\,\frac{\sqrt{A}}{\sqrt{\pi}}
+                \;=\;
+                E_{eff} h\,
+                \frac{\dfrac{1}{\sqrt{\pi}}\big(\sqrt{A} - \sqrt{A_0}\big)}{R_0}. &&\\
+            \end{flalign*}
+            For moderate deformations where $A$ remains close to $A_0$, we approximate
+            the factor $1/\sqrt{A}$ by its reference value $1/\sqrt{A_0}$, which yields
+            \begin{flalign*}
+                \quad & (p - p_{ext})\,\frac{\sqrt{A_0}}{\sqrt{\pi}}
+                \;=\;
+                E_{eff} h\,
+                \frac{\dfrac{1}{\sqrt{\pi}}\big(\sqrt{A} - \sqrt{A_0}\big)}{R_0} &&\\
+                \quad & \iff (p - p_{ext})
+                \;=\;
+                \frac{E_{eff} h}{R_0\sqrt{A_0}}\,
+                \big(\sqrt{A} - \sqrt{A_0}\big). &&
+            \end{flalign*}
+            Defining the lumped stiffness parameter
+            \begin{flalign*}
+                \quad & \beta \;:=\; \frac{E_{eff} h}{R_0\sqrt{A_0}}. &&
+            \end{flalign*}
+            we arrive at the tube law \eqref{eq:tube-law} used in the 1D model:
+            \begin{flalign*}
+                \quad &
+                p(A) - p_{ext}
+                \;=\;
+                \beta\big(\sqrt{A} - \sqrt{A_0}\big). &&
+            \end{flalign*}
+            In the numerical experiments below, we take $\beta$ and $A_0$ to be
+            constant along the vessel, so that $p$ can be written as a function of
+            $A$ alone.
+        \end{remark}
+        \medskip
     \medskip
 
     \subsubsection{0D Models}

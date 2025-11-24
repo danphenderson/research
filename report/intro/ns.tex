@@ -1,20 +1,7 @@
-Let $\vf$ be an external force acting on a continuum of blood fluid.
-When modeling non-Newtonian effects (when $\eta \neq \text{ constant}$), the kinematic viscosity
-$\mu(\cdot)$ is often chosen by Careau model \cite{hemodynamics}
-\begin{flalign*}
-    \quad 2\,\mu(|\vct{D}|^2) = \eta_\infty + (\eta_0 - \eta_\infty) \cdot \big(1 + \kappa |\vct{D}|^2\big). &&
-\end{flalign*}
-Where $\eta_0$ and $~\eta_\infty$ are chosen to be the viscosity for very small
-and very large shear rates, resp., and $\kappa \in \R^+$ and $n \in (-0.5, 0)$ are model parameters.
-According to [\cite{book1}, pg. $38$], we often set
-\begin{flalign*}
-    \quad \eta_0 = 65.7 \cdot 10^{-3} ~Pa \cdot s, ~ \eta_\infty = 4.45\cdot10^{-3} ~Pa \cdot s,
-        \kappa = 212.2 ~s^2, ~ \text{ and } n = -0.325 &&
-\end{flalign*}
-In the Newtonian case, we choose $\eta = \eta_\infty$ which allows us to determine $\mu$
-as $\mu(|\vct{D}|^2) = \eta$.
 When coupling our momentum balance equation with the divergence-free condition of $\vu$, we obtain the
-Navier-Stokes (NS) equations.
+Navier-Stokes (NS) equations. We present several equivalent forms of the NS equations below.
+First, we write the NS system in conservative form.
+\medskip
 \begin{definition}[Conservative-Momentum Balance Form]
     \label{def:nsconservative}
     \begin{flalign*}
