@@ -73,7 +73,7 @@ a uniform distribution of WSS on the vessel.
             \quad \dfrac{d}{dt} \int_{V(t)} \phi(t, \vx) \dx
                 & \equals \int_{V(t)} \pd_t \phi(t, \vx) + \inp{\nabla}{\phi(t, \vx)\vub(t, \vx)} \dx &&\\
                 & \equals \int_{V(t)} \pd_t \phi(t, \vx) \dx
-                ~ + ~ \int_{\pd V(t)_w}  \inp{\vub(t, \vx)}{\nhat} \phi(t, \vx) dS, &&
+                ~ + ~ \int_{\pd V(t)_w}  \inp{\vub(t, \vx)}{\nhat} \phi(t, \vx) \dSx, &&
         \end{flalign*}
         where $\vub$ is the velocity feild on the boundary $\pd V(t)$
         (Pf. see \href{https://en.wikipedia.org/wiki/Reynolds_transport_theorem}{wiki}).
@@ -85,18 +85,18 @@ a uniform distribution of WSS on the vessel.
         Now let $\vct{w} = \vct{u_w} - \vu$ be the relative velocity of the vessel wall
         w.r.t. the velocity $\vu = (u_1, u_2, u_3)^\top$ of the blood element $V(t)$. Then it follows that
         \begin{flalign*}
-            \quad \; \int_{\pd_t} \big(\vub \cdot \nhat \big)\phi \; dS ~
-                & = ~ \; \int_{\pd_t} \big(\vct{u_w} \cdot \nhat \big)\phi \; dS &&\\
-            \quad \; & = \; \int_{\pd_t} \big(\vct{w} \cdot \nhat \big)\phi \; dS
-                ~ + ~ \; \int_{\pd_t} \big(\vu \cdot \nhat \big)\phi \; dS &&
+            \quad \; \int_{\pd_t} \big(\vub \cdot \nhat \big)\phi \; \dSx ~
+                & = ~ \; \int_{\pd_t} \big(\vct{u_w} \cdot \nhat \big)\phi \; \dSx &&\\
+            \quad \; & = \; \int_{\pd_t} \big(\vct{w} \cdot \nhat \big)\phi \; \dSx
+                ~ + ~ \; \int_{\pd_t} \big(\vu \cdot \nhat \big)\phi \; \dSx &&
         \end{flalign*}
         Let $\bar{\phi}$ denote the average value of $\phi$ defined over a surface $S$
         \begin{flalign*}
-            \quad \bar{\phi} \defined \frac{1}{A} ~ \int_{S(z, t)} \phi \;dS\quad :  \quad  A(z, t) \defined \int_{S(z, t)} dS &&
+            \quad \bar{\phi} \defined \frac{1}{A} ~ \int_{S(z, t)} \phi \;\dSx\quad :  \quad  A(z, t) \defined \int_{S(z, t)} \dSx &&
         \end{flalign*}
         Now we may rewrite the volume integral in the LHS of RT theorem
         \begin{flalign*}
-            \quad  \int_{V(t)} \phi dV \; = \; \int_{z_1}^{z_2} \int_{S(z, t)} \phi \;dS \; dz
+            \quad  \int_{V(t)} \phi dV \; = \; \int_{z_1}^{z_2} \int_{S(z, t)} \phi \;\dSx \; dz
                 \;=\; \int_{z_1}^{z_2} A \cdot \bar{\phi} \; dz &&
         \end{flalign*}
         where $z_1 < z_2$ are fixed $z$-coordinates for $S_1$ and $S_2$.
@@ -107,7 +107,7 @@ a uniform distribution of WSS on the vessel.
         and we've rewritten the first term in the RHS of the reynolds system.
         The surface integral in the RHS may be written as
         \begin{flalign*}
-            \quad \int_{\pd_t}  (\vub \cdot \nhat) \phi dS = \int_{\pd_t}  (\vub \cdot \nhat) \phi dS.... &&
+            \quad \int_{\pd_t}  (\vub \cdot \nhat) \phi \dSx = \int_{\pd_t}  (\vub \cdot \nhat) \phi \dSx.... &&
         \end{flalign*}\todo{cleanup, ref. pg. 43}
         With a little more work, one may obtain:
         \begin{definition}
@@ -115,7 +115,7 @@ a uniform distribution of WSS on the vessel.
             The 1D Reynolds Transport theorem for both compressible and incompressible fluids:
             \begin{flalign*}
                 \quad \frac{\partial }{\partial t} \bigg( A \bar{\phi} \bigg) \; + \; \frac{\partial}{\partial z}\big( A (\overline{\phi \cdot u_3}) \big)
-                \; = \; \int_S \bigg( \dfrac{\partial \phi}{\partial t} + \nabla \cdot (\phi \vu) \bigg) dS
+                \; = \; \int_S \bigg( \dfrac{\partial \phi}{\partial t} + \nabla \cdot (\phi \vu) \bigg) \dSx
                 \; + \; \int_{\partial S} \phi \vct{w} \cdot \nhat \; d \gamma &&
             \end{flalign*}
         \end{definition}
@@ -138,7 +138,7 @@ a uniform distribution of WSS on the vessel.
             by our assumption that blood is incompressible, we simplify \ref{def:1dReynolds} as
             \begin{flalign*}
                 \quad \frac{\partial }{\partial t} \bigg( A u_3 \bigg) \; + \; \frac{\partial}{\partial z}\big( A (\overline{u_3^2}) \big)
-                \; = \; \int_S \bigg( \dfrac{\partial u_3}{\partial t} + \nabla u_3 \cdot \vu \bigg) dS
+                \; = \; \int_S \bigg( \dfrac{\partial u_3}{\partial t} + \nabla u_3 \cdot \vu \bigg) \dSx
                 \; + \; \int_{\partial S} u_3 \vct{w} \cdot \nhat \; d \gamma &&
             \end{flalign*}
             The RHS term above describing the transport process across the vessel wall.

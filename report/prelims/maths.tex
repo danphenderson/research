@@ -34,6 +34,8 @@ and we write $\phi(\vx)$, $\vf(\vx)$, and $\vTx$\footnote{
     Note, for tensor $\vTx \in \R^{n \times n}$, $\exists$ a linear map  $A : \R^n \to \R^n$ s.t.
     $\vTx(\vu) \mapsto A \, \vu$ for all $\vu \in \R^n$.}
 for the values at a point $\vx \in \Omg$.
+When refering to a physical quantity, it's measure units are indicated as $\units{\cdot}$;
+whereas dimensionless quantities are indicated as $\units{-}$.
 The $k$-th partial derivative of $\phi$ w.r.t. coordinate $x_i$ is
 \begin{flalign*}
     \quad & \pd_{x_i}^k \phi \equivto \frac{\pd^k \phi}{\pd x_i^k}. &&
@@ -64,12 +66,12 @@ In coordinate-free notation, for $\vx \in \Omg$ and $\nhat \in \R^n$, the normal
 \end{flalign*}
 For Lebesgue measure $\dx$ on $\R^n$ the integral of $\phi$ in $\Omg$ is
 \begin{flalign*}
-    \quad \int_{\Omg} \phi(\vx) \dx \; \equiv \; \int_\Omg \phi. ~ &&
+    \quad \int_{\Omg} \phi(\vx) \dx. &&
 \end{flalign*}
 If $\pOmg \in C^1$, then $\phi \in C^{1}(\OmgBar) \supset L^1(\pOmg)$ and
 the integral at the boundary is
 \begin{flalign*}
-    \quad \int_{\pOmg} \phi(\vx) \dSx \; \equiv \; \int_{\pOmg} \phi. &&
+    \quad \int_{\pOmg} \phi(\vx) \dSx. &&
 \end{flalign*}
 The gradient and Laplacian of $\phi$ are (respectively):
 \begin{flalign*}
@@ -140,9 +142,7 @@ where $\sup$ here r.t. the essential supremum. It follows that $\vf \in L^p(\Omg
 are in $L^p(\Omg)$, i.e., $\vf = (f_i)_{i\in[m]}$ with $f_i \in L^p(\Omg)$ for all $i \in[m]$. The sp $(L^p(\Omg), \, \norm{\cdot}_{L^p(\Omg)})$ is complete,
 hence a banach sp. for all $1 \leq p \leq \infty$.
 
-\medskip
-When refering to a physical quantity, it's measure units are indicated as $\big[ \cdot \big]$;
-whereas dimensionless quantities are indicated as $\big[ - \big]$.
+
 \medskip
 
 \td{

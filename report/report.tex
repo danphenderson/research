@@ -31,13 +31,13 @@
     we report mathematical models describing the kinematics
     of blood in the human macrocirculatory system. We review
     physiological, rheological, and mathematical foundations
-    necessary for modeling blood flow in large vessels. We
-    discuss numerical methods for solving the governing
+    necessary for modeling blood flow in large vessels. \green{
+    We discuss numerical methods for solving the governing
     equations of blood flow, the incompressible Navier-Stokes
     equations. Finally, we present recent advances in
     computational hemodynamics, including physics-informed
     neural networks (PINN's) and fluid-structure interaction
-    (FSI) models.
+    (FSI) models. (TODO)}
 
 
     \medskip \paragraph{Keywords:} \medskip
@@ -45,17 +45,17 @@
 
     \todo{summarize final contributions here and update keywords}
 
-    % ------------------ TABLE OF CONTENTS
-    \newpage \tableofcontents \bigskip
+    \medskip
 
     Taging conventions are as follows:
     \begin{itemize}
-        \item \red{Red Text means check accuracy or clarity}
-        \item \blue{Blue Text means misplaced or not necessary}
-        \item \green{Green Text means to possibly expand or add more references}
+        \item \red{Red Text means check accuracy (or clarity)}
+        \item \blue{Blue Text means not necessary}
+        \item \green{Green Text means TODO}
     \end{itemize}
 
-    % ------------------ PRELIMINARIES
+    \medskip
+
     \td{
         \textbf{Work in Progress (WIP). Tips to keep in mind:}\\
         ~- Start w/ literature suvery, summarizing each articles contribution once.
@@ -67,19 +67,20 @@
         ~- Look into \href{https://www.zotero.org}[Zotero] to manage refs.\\
     }
 
+    % ------------------ TABLE OF CONTENTS
+    \newpage \tableofcontents \bigskip
+
+
     % ------------------ PRELIMINARIES
     \subsection{Acroynms and Abbreviations}
         \label{subsec:syms-abbrevs} \input{prelims/symbols-abbreviations.tex}
     \newpage
-
     \subsection{Mathematical Notation}
         \label{subsec:notation} \input{prelims/notation.tex}
     \newpage
-
     \subsection{Domain Specific Notation}
         \label{subsec:params} \input{prelims/parameters-units.tex}
     \newpage
-
     \subsection{Mathematical Foundations}
         \label{subsec:maths} \input{prelims/maths.tex}
     \newpage
