@@ -1,87 +1,107 @@
 W.a.t. simulate blood flow in a time-dependent fluid domain $\OmgB \subset \R^{N+1}$;
 we'll take $N \equivto 3$, the natural setting for the derivations that follow.
-For each $t \in I_T \defined [0, T] \subset \R$, with $T > 0$, we define
+For each $t \in I_T \defined [0, T] \subset \R$, with $T > 0$, we define the fluid domain
 \begin{flalign*}
     \quad \OmgBt &:= \{\vx \in \R^N : \vx \text{ lies inside the vessel at time } t\}. &&
 \end{flalign*}
 Formally, the fluid region is a time-dependent family of open sets
 $\{\OmgBt\}_{\forallin{t}{I_T}} \subset \R^N$ occupied by blood at time $t$.
-Let $\OmgB(0)$ r.t. the \emph{reference} configuration and $\OmgBt$
-r.t. the \emph{current} configuration.
-The fluid's computational domain r.t. all possible configurations of $\OmgBt$, i.e.,
-the spatial-temporal lumen
+Let $\OmgB(0)$ denote the \emph{reference} configuration and $\OmgBt$
+the \emph{current} configuration at time $t$.
+The fluid's computational domain refers to all possible configurations of $\OmgBt$, i.e.,
+the union over time of the spatial domains $\OmgBt$, which we define by
 \begin{flalign*}
-    \quad & \OmgB \defined I_T \times \OmgBt \equivto \{ (t, \vx) \in \R^{N+1} ~:~ x \in \Omgt, ~ t \in I_T \}. &&
+    \quad & \OmgB \defined \{ (t, \vx) ~:~ t \in I_T, \vx \in \OmgBt\} \subset I_T \times \R^N. &&
 \end{flalign*}
 
 \medskip
 
-For each material particle initially at $\vxi \in \Omega_B(0)$,
-we assume its motion in $\Omega_B$ is governed by a velocity field
-$\vu : \Omega_B \to \R^N$.  Our aim here is to derive the governing PDE system
-for $\vu$—the Navier–Stokes equations.
-
-\medskip
+For each material particle initially at $\vxi \in \OmgB(0)$,
+we assume that its motion is governed by an Eulerian velocity field
+$\vu : \OmgB \to \R^N, ~ (t,\vx) \mapsto \vu(t,\vx)$.
+Our aim in Sec.~\ref{subsubsec:blood-dynamics} is to derive equations describing
+the evolution of $\vxi$ as it moves from the reference configuration to the current
+configuration under the flow induced by $\vu$. Precisely, we seek a map
+$\La_t : \OmgB(0) \to \OmgB(t)$ that carries each particle
+$\vxi \in \OmgB(0)$ to its current position $\vx \in \OmgB(t)$ at time $t$.
 
 \subsubsection{Blood Dynamics}
 \label{subsubsec:blood-dynamics}
 
 % Coordinate defs
-Let the flow map be
+For each fixed $t \in I_T$, let the \emph{Lagrangian map} be the map from
+the reference configuration to the current configuration, i.e.
 \begin{flalign*}
-    \quad & \vx: I_T \times \Omega_B(0) \to \R^N, \quad (t, \vxi) \mapsto \vx(t, \vxi) &&
+    \quad & \La_t : \OmgB(0) \to \OmgB(t), \quad \vxi \mapsto \vx(t, \vxi) &&
 \end{flalign*}
-For each fixed $t \in I_T$, the \emph{Lagrangian map} is from the reference configuration to the current configuration, i.e.
-\begin{flalign*}
-    \quad & \La_t : \Omega_B(0) \to \Omega_B(t), \quad \vxi \mapsto \vx(t, \vxi) \quad \text{ s.t. }
-    \quad \La_t(\vxi) \equals \vx(t, \vxi). &&
-\end{flalign*}
-The variables $(t,\vx)$ and $(t,\vxi)$ are referred to as the Eulerian and Lagrangian
-coordinates, resp..
-
+where $\vx(t, \vxi)=\La_t(\vxi)$ is the particle $\vxi$'s position at time $t$.
+We assume that, for each $t \in I_T$, the map $\La_t : \OmgB(0) \to \OmgB(t)$ is a bijection,
+and that $(t,\vxi) \mapsto \La_t(\vxi)$ is sufficiently smooth in $t$ (e.g., $C^1$) so that
+$\pd_t \vx(t,\vxi)$ is well-defined.
+The pairs $(t, \vx)$ and $(t, \vxi)$ are respectively referred to as the Eulerian and Lagrangian
+coordinates. For fixed $\vxi \in \OmgB(0)$, we sometimes write $\vx(t;\vxi)$
+to emphasize the flow map of $\vxi$, with corresponding trajectory
+$T_{\vxi} = \{(t, \vx(t;\vxi)) ~ : ~ t \in I_T \}$.
 \medskip
 
 \begin{remark}[Eulerian vs. Lagrangian]
     \label{rmk:eulerian-lagrangian}
-    Informally, the Eulerian approach focuses our attention to $\vx \in \OmgBt$, namely,
-    some fluid particle located at $\vx$ at a particular time $t$.
-    Whereas, the Lagrangian approach tracks an individual fluid particle $\vxi \in \OmgB(0)$
-    along it's trajectory $\vT_{\vxi} \defined \{ \vx(t,\vxi) : t \in I_T \}$ as it moves along a
-    characteristic curve in $\OmgB$.
-    \medskip
-    For $\phi \in C^1(\OmgB)$ s.t. $(t, \vx) \mapsto \phi(t, \vx)$ in the Eulerian variables,
-    we'll let $\hat{\phi}(t,\vxi) \defined \phi\bigl(t,\La_t(\vxi)\bigr)$ s.t. $\vx(t) = \La_t(\vxi)$. I.e.,
-    we'll let $\phihat \equals \phi \circ \La_t$ and it follows that $\phi \equals \phihat \circ \inv{\La_t}$.
+    Informally, the Eulerian description focuses on what happens at a fixed
+    spatial location $\vx \in \OmgB(t)$ at a given time $t$; fields such as
+    $\phi(t,\vx)$ or $\vu(t,\vx)$ are viewed as functions of $(t,\vx)$.
+    In contrast, the Lagrangian description follows individual material
+    particles $\vxi \in \OmgB(0)$ along their trajectories
+    $t \mapsto \vx(t;\vxi)$.
+
+    Let
+    \begin{flalign*}
+        \quad \id{I_T} \times \La_t : I_T \times \OmgB(0) \to \OmgB, \quad  (t, \vxi) \mapsto (t, \La_t(\vxi)).&&
+    \end{flalign*}
+    Then (where defined) its inverse is
+    \begin{flalign*}
+        \quad \id{I_T} \times \inv{\La_t} : \OmgB \to I_T \times \OmgB(0), \quad (t, \vx) \mapsto (t, \inv{\La_t}(\vx)). &&
+    \end{flalign*}
 \end{remark}
 
 \medskip
 
 % Principle kinematic quantity: velocity def. via Lagrangian Reference Frame
-\begin{definition}
-    \label{def:lagrangian-velocity}
-    Let the Lagrangian velocity field be defined as
-    \begin{flalign*}
-        \quad \vuhat \defined \pd_t \vx(t, \vxi) \mapsto \vuhat(t, \vxi)
-            \quad \forallin{(t, \vxi)}{I_T \times \OmgB(0)} &&
-    \end{flalign*}
-\end{definition}
-A change of coordinates in~\ref{def:lagrangian-velocity} yields the velocity field $\vu$
+We define the Lagrangian velocity field by
+\begin{flalign*}
+    \quad \vuhat(t,\vxi) \defined \pd_t \vx(t, \vxi)
+        \quad \forall (t, \vxi) \in I_T \times \OmgB(0). &&
+\end{flalign*}
+A change of coordinates in $\vuhat$ yields the velocity field $\vu$
 in the Eulerian frame, i.e.,
 \begin{flalign*}
-    \quad \vu \equals \vuhat \circ \inv{\La_t} \quad \iff \quad \vu(t, \vx)
-        \equals \vuhat(t, \inv{\La_t}(\vx)) &&
+    \quad \vu(t, \vx) &\equals \big(\vuhat \circ (\id{I_T} \times \inv{\La_t})\big)\big(t, \vx\big). &&\\
+            &\equals \vuhat\bigl(t, \inv{\La_t}(\vx)\bigr) &&\\
+            & \equals \vuhat\bigl(t, \vxi\bigr) \quad \text{ s.t. } \vxi \equals \inv{\La_t}(\vx)
+                \quad \forallin{(t, \vx)}{\OmgB}. &&
 \end{flalign*}
-Then if $\vuhat$ and $\OmgB(0)$ are known, we arrive at the Cauchy problem
-for the trajectory $T_{\vxi}$ of each material particle $\vxi \in \OmgB(0)$:
+If $\vuhat$ and $\OmgB(0)$ are known, we arrive at the Cauchy problem for a particle trajectory in the
+Lagrangian frame:
 \begin{flalign*}
-    \quad \begin{cases*}
-        \pd_t{\vx}(t, \vxi) \equals \vuhat(t, \vxi), \forallin{t}{I_T} \\
+    \quad \begin{cases}
+        \pd_t{\vx}(t, \vxi) \equals \vuhat(t, \vxi), t \in I_T, \\
         \vx(0, \vxi) \equals \vxi.
-    \end{cases*} &&
+    \end{cases} &&
 \end{flalign*}
+Equivalently, if $\vu$ and $\OmgB$ are known, we arrive at the Cauchy problem for a particle trajectory in
+the Eulerian frame:
+\begin{flalign*}
+\quad \begin{cases}
+    \dfrac{d}{dt}\,\vx(t;\vxi) \equals \vu\bigl(t,\vx(t;\vxi)\bigr), t \in I_T,  \\
+    \vx(0;\vxi) \equals \vxi.
+\end{cases} &&
+\end{flalign*}
+In other words, for each $\vxi \in \OmgB(0)$, the trajectory $t \mapsto \vx(t;\vxi)$ is an integral curve of the
+Eulerian velocity field $\vu$.
 
-\td{State conditions for well-posedness in the sense of hadamard? Explain existence, uniqueness, stability of solutions of the resulting
-ODE system above via the Picard-Lindelof theorem.}
+\begin{theorem}[Well-posedness of particle trajectories (Hadamard)]
+    \label{thm:eulerian-well-posedness}
+    TODO: State and prove well-posedness in the sense of Hadamard (solution depends Lipschitz-continuously on initial data.)
+\end{theorem}
 
 
 \medskip
@@ -114,14 +134,14 @@ expressed in the Eulerian variables. The literature also r.t. $D_t$ as the \emph
 \medskip
 
 Now differentiating $\vuhat$ w.r.t. $t$ yields the acceleration vector field $\vahat$ in the Lagrangian and Eulerian frame
-repsectively:
+respectively:
 \begin{flalign*}
     \quad \vahat(t, \vxi) &\defined \pd_t \vuhat(t, \vxi) = \pd_t^2 \vx(t, \vxi) \quad  \forallin{\vxi}{\OmgB(0)} &&\\
         \iff \va &\equals D_t \vu \equals \pd_t \vu + (\vu \cdot \nabla) \vu \quad \text{ in } \OmgBt&&\\
         \va(t, \vx) &\equals \pd_t \vu(t, \vx) +  (\vu(t,\vx)\cdot\nabla)\vu(t,\vx) &&\\
-        &\equals \pd_t \vu(t, \vx) + \sum_{i=1}^{N} u_i(t, \vx) \pd_{x_i} \vu(t, \vx) \quad \forallin{(t, \vx)}{I_T \times \OmgBt} && \\
-        \iff \va &\equals \pd_t \vu + \sum_{i=1}^{N} u_i \, \pd_{x_i} \vu &&\\
-        &\equals \pd_t \vu + \inp{\nabla}{\vu} \vu \quad \text{ in } \OmgB. &&
+        &\equals \pd_t \vu(t, \vx) + \sum_{\forallin{i}{[N]}} u_i(t, \vx) \pd_{x_i} \vu(t, \vx) \quad \forallin{(t, \vx)}{I_T \times \OmgBt} && \\
+        \iff \va &\equals \pd_t \vu + \sum_{\forallin{i}{[N]}} u_i \, \pd_{x_i} \vu &&\\
+        &\equals \pd_t \vu + \inp{\nabla}{\vu}_{\R^N} \vu \quad \text{ in } \OmgB. &&
 \end{flalign*}
 
 % Deformation gradient + Jacobian det.
@@ -138,7 +158,7 @@ Suppose for each fixed $t$ the mapping $\La_t : \OmgB(0) \to \OmgB(t)$ is a $C^1
 $\det \vFhat_t(\vxi) > 0 \forallin{\vxi}{\OmgB(0)}$\footnote{
     Recall the $\det \vFhat$ may be interpreted as the signed volume change of an infinitesimal parallelepiped
     spanned by the column vectors of $\vFhat$; thus, $\det \vFhat_t(\vxi) > 0$ ensures that the orientation of fluid elements
-    is preserved under the deformation mapping $\La_t$ at time $t$. Moreover, it prevents unphysical scenarios
+    is preserved under the mapping $\La_t$ at time $t$. Moreover, it prevents unphysical scenarios
     such as interpenetration of matter consisting of negative volumes.
 }.
 Then $\vFhat_t(\vxi)$ is invertible, and we define:
@@ -215,9 +235,8 @@ over the material derivative of $V(t)$.
 \subsection{NS-derivation}
 In the following derivations we let $N \equiv 3$ so that $\OmgBt \subset \R^3$. We assume blood fluid is
 a continuum that deforms continuously, i.e., at every point $\vx \in \OmgBt$ and time $t \in I_T$, the
-blood's kinematic quantities are described by sufficiently smooth fields. At microscopic scales this
-continuum hypothesis breaks down, since matter is a discrete collection of molecules, but at macroscopic
-scales empirical evidence suggests such models remain accurate.
+blood's kinematic quantities are described by sufficiently smooth fields. At microscopic scales, this
+continuum hypothesis breaks down, since matter is a discrete collection of molecules, but at macroscopic scales empirical evidence suggests such models remain accurate.
 
 \medskip
 
@@ -256,7 +275,7 @@ integro-differential and variational formulations.
 
 \begin{definition}[Incompressible fluid]
     \label{def:incompressible-fluid}
-    A fluid is \emph{incompressible} if for each material element $V(0)\subset \Omega_B(0)$,
+    A fluid is \emph{incompressible} if for each material element $V(0)\subset \OmgB(0)$,
     the density of that element remains constant in time, i.e.
     \begin{flalign*}
         \quad \rho\bigl(t,\vx(t,\vxi)\bigr) \equals \rho_{V(0)} \in \R^+, \quad  \forallin{(t, \vxi)}{I_T \times V(0)}, &&
@@ -298,14 +317,14 @@ incompressible flow.
         \quad \partial_t \rho + \Div(\rho \vu) = 0
         \quad \Longleftrightarrow \quad
         D_t \rho + \rho\,\Div \vu = 0
-        \quad \text{in } \Omega_B. &&
+        \quad \text{in } \OmgB. &&
     \end{flalign*}
     For an incompressible fluid with constant density $\rho \equiv \rho_0$,
     Definition~\ref{def:incompressible-fluid} implies $D_t \rho = 0$, so
     \begin{flalign*}
         \quad 0 = D_t \rho + \rho_0 \Div \vu
         \quad \Longrightarrow \quad \Div \vu = 0
-        \quad \text{in } \Omega_B. &&
+        \quad \text{in } \OmgB. &&
     \end{flalign*}
     Combining this with Lemma~\ref{lem:jacobian-determinant-derivative},
     \begin{flalign*}
@@ -317,7 +336,7 @@ incompressible flow.
     \begin{flalign*}
         \quad & J_t(\vx) \equiv 1 \quad \text{and} \quad \Div \vu = 0. &&
     \end{flalign*}
-    We refer to $\nabla \cdot \vu = \Div \vu = 0$ as the \emph{divergence-free condition} in $\Omega_B(t)$.
+    We refer to $\nabla \cdot \vu = \Div \vu = 0$ as the \emph{divergence-free condition} in $\OmgB(t)$.
 \end{remark}
 By assumption blood is incompressible and newtonian, linear momentum balance follows from Newton's 2nd Law ($F = ma$)
 for an infinitesimal fluid element $V(t) \subset \OmgBt$.
@@ -351,8 +370,7 @@ so the linear momentum balance simplifies to
 \end{flalign*}
 Using the vector calculus identity $\Div(\vu \otimes \vu) = (\nabla \cdot \vu) \, \vu + (\vu \cdot \nabla) \vu$ we have
 \begin{flalign*}
-    \quad \Div(\vu \otimes \vu) &= \Divbf\big(\vu \vu^\top\big) &&\\
-    \quad &\equals \big(\nabla \cdot \vu\big) \, \vu + (\vu \cdot \nabla) \vu &&\\
+    \quad \Div(\vu \otimes \vu) &\equals \big(\nabla \cdot \vu\big) \, \vu + (\vu \cdot \nabla) \vu &&\\
     \quad &\equals 0 \cdot \vu + (\vu \cdot \nabla) \vu \quad (\because \Div \, \vu \equals 0 \text{ by remark~\ref{rmk:incompressibility-divergence-free}}) &&\\
     \quad \implies& \rho \, \pd_t \vu + \rho \, (\vu \cdot \nabla) \vu \equals \Divbf(\vT) + \rho \, \vfb, \qquad \text{in} ~ \OmgBt &&
 \end{flalign*}
