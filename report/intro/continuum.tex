@@ -75,8 +75,8 @@ A change of coordinates in $\vuhat$ yields the velocity field $\vu$
 in the Eulerian frame, i.e.,
 \begin{flalign*}
     \quad \vu(t, \vx) &\equals \big(\vuhat \circ (\id{I_T} \times \inv{\La_t})\big)\big(t, \vx\big). &&\\
-            &\equals \vuhat\bigl(t, \inv{\La_t}(\vx)\bigr) &&\\
-            & \equals \vuhat\bigl(t, \vxi\bigr) \quad \text{ s.t. } \vxi \equals \inv{\La_t}(\vx)
+            &\equals \vuhat\big(t, \inv{\La_t}(\vx)\big) &&\\
+            & \equals \vuhat\big(t, \vxi\big) \quad \text{ s.t. } \vxi \equals \inv{\La_t}(\vx)
                 \quad \forallin{(t, \vx)}{\OmgB}. &&
 \end{flalign*}
 If $\vuhat$ and $\OmgB(0)$ are known, we arrive at the Cauchy problem for a particle trajectory in the
@@ -91,7 +91,7 @@ Equivalently, if $\vu$ and $\OmgB$ are known, we arrive at the Cauchy problem fo
 the Eulerian frame:
 \begin{flalign*}
 \quad \begin{cases}
-    \dfrac{d}{dt}\,\vx(t;\vxi) \equals \vu\bigl(t,\vx(t;\vxi)\bigr), t \in I_T,  \\
+    \dfrac{d}{dt}\,\vx(t;\vxi) \equals \vu\big(t,\vx(t;\vxi)\big), t \in I_T,  \\
     \vx(0;\vxi) \equals \vxi.
 \end{cases} &&
 \end{flalign*}
@@ -278,7 +278,7 @@ integro-differential and variational formulations.
     A fluid is \emph{incompressible} if for each material element $V(0)\subset \OmgB(0)$,
     the density of that element remains constant in time, i.e.
     \begin{flalign*}
-        \quad \rho\bigl(t,\vx(t,\vxi)\bigr) \equals \rho_{V(0)} \in \R^+, \quad  \forallin{(t, \vxi)}{I_T \times V(0)}, &&
+        \quad \rho\big(t,\vx(t,\vxi)\big) \equals \rho_{V(0)} \in \R^+, \quad  \forallin{(t, \vxi)}{I_T \times V(0)}, &&
     \end{flalign*}
     where constant $\rho_{V(0)}$ can depend on initial fluid element $V(0)$.
 \end{definition}
@@ -297,7 +297,7 @@ for some constant $\rho_0$ independent of material element $V(0)$.
 Therefore uniform density in the reference configuration implies constant density along
 trajectory $T_{\vxi}$ to any current configuration, i.e.,
 \begin{flalign*}
-    \quad  \rho\bigl(t,\vx(t,\vxi)\bigr) & \equals \rho_0 \in \R^+, \quad  \forallin{(t, \vxi)}{I_T \times \OmgB(0)}. && \\
+    \quad  \rho\big(t,\vx(t,\vxi)\big) & \equals \rho_0 \in \R^+, \quad  \forallin{(t, \vxi)}{I_T \times \OmgB(0)}. && \\
     \quad & \implies \rho(t, \vx) \equals \rho_0 \in \R^+, \quad  \forallin{(t, \vx)}{\OmgB}. &&
 \end{flalign*}
 Taking the material derivative yields $D_t \rho = 0$ in $\OmgB$ -- In summary, we've shown:
@@ -391,8 +391,8 @@ the velocity field $\vu$ and its derivatives.
 
 \medskip
 
-Let the rate-of-deformation tensor be defined as the symmetric
-part of the velocity gradient, i.e.,
+% Rate-of-deformation (strain-rate) tensor
+Let the rate-of-deformation tensor be the symmetric part of the velocity gradient,
 \begin{flalign*}
     \quad \vct{D}(\vu) \defined \tfrac{1}{2}\big(\nabla\vu+(\nabla\vu)^\top\big) &&
 \end{flalign*}
@@ -449,7 +449,7 @@ Where $SO(3) \defined \{\vct{Q} \in \R^{3 \times 3} : \vct{Q}\,\vct{Q}^{\top} = 
     where the bulk viscosity $\lambda \in \R^+$ is a material parameter quantifying the fluid's resistance
     to uniform compression.
 \end{definition}
-So newtonian isotropic fluids at rest (quiescent state $\vu\equiv\vct{0}$) sustains only hydrostatic stress:
+So newtonian isotropic fluids at rest (quiescent state) sustains only hydrostatic stress:
 \begin{flalign*}
     \quad \implies \vT \equals -\,p\,\mathrm{I} \quad \text{when} ~ \vu \equiv \vct{0}. &&
 \end{flalign*}
