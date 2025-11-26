@@ -1,0 +1,113 @@
+The 1D model reduces the spatial dimension of the NS system by assuming
+axial symmetry of the vessel and averaging pressure and velocity
+over cross-sectional areas orthogonal to the vessel centerline.
+One may start by introducing a rigid-vessel assumption, which leads to a no slip condition
+that $\vu \big|_{\pOmgBt} \; = \; \vct{0}$. Instead we seek
+to model the link between blood flow and the deformation of the vessel wall.
+We begin our derivation of Dimension-Reduced models by assuming the following
+transformation exists of our fluid domain boundary $\Omgt$ to a simplified geometry.
+
+\medskip
+
+\begin{figure}[!htb]
+    \label{fig:compliant-vessel}
+    \centering
+    \captionsetup{aboveskip=2pt,belowskip=2pt}
+    \includegraphics[width=0.95\linewidth,height=0.45\textheight,keepaspectratio]{compliant-vessel.png}
+    \caption{
+        From \cite{book1} [Fig. 3.2, pg. 37]
+    }
+\end{figure}
+
+\newpage
+
+We consider the fluid dynamics of the following fluid element contained in a portion of the lumen $\Omgt$
+\begin{figure}[!htb]`'
+    \label{fig:fluid-element}
+    \centering
+    \captionsetup{aboveskip=2pt,belowskip=2pt}
+    \includegraphics[width=0.8\linewidth,height=0.25\textheight,keepaspectratio]{fig33.png}
+    \caption{
+        From \cite{book1} [Fig. 3.3, pg. XX]
+    }
+\end{figure}
+Let $S_1(t), ~ S_2(t)$ be the time-dependent shaded boundaries at $z = z_1$ and $z = z_2$ s.t.
+$0 < z_1 < z_2 < \ell$.
+Let $V(t)$ be the fluid element of blood. The boundary of the fluid element is
+$\pd V(t) \; = \; S_1(t) \cup S_2(t) \cup \pd V(t)_w$ such that $\pd V(t)_w$
+is the vessel wall in contact with the fluid element.
+According to the Reynold's transport theorem for scalar feild $\phi \in L^1(\Omgt)$
+\begin{flalign*}
+    \quad \dfrac{d}{dt} \int_{V(t)} \phi(t, \vx) \dx
+        & \equals \int_{V(t)} \pd_t \phi(t, \vx) + \inp{\nabla}{\phi(t, \vx)\vub(t, \vx)} \dx &&\\
+        & \equals \int_{V(t)} \pd_t \phi(t, \vx) \dx
+        ~ + ~ \int_{\pd V(t)_w}  \inp{\vub(t, \vx)}{\nhat} \phi(t, \vx) \dSx, &&
+\end{flalign*}
+where $\vub$ is the velocity feild on the boundary $\pd V(t)$
+(Pf. see \href{https://en.wikipedia.org/wiki/Reynolds_transport_theorem}{wiki}).
+If we assume the normal component of $\vub = \vct{0}$ near the inlet
+and outlet boundaries $S_1$ and $S_2$ (resp.) of $\Omg$, then the motion of the vessel wall
+is coupled to the blood flow through the fluid element $V(t)$. The velocity $\vub$
+is equivalent to the velocity of the vessel wall $\partial \Omgt$ in contact with the boundary element $\pd_t$.
+I.e., the vessel wall velocity $\vct{u_w} = \vub$.
+Now let $\vct{w} = \vct{u_w} - \vu$ be the relative velocity of the vessel wall
+w.r.t. the velocity $\vu = (u_1, u_2, u_3)^\top$ of the blood element $V(t)$. Then it follows that
+\begin{flalign*}
+    \quad \; \int_{\pd_t} \big(\vub \cdot \nhat \big)\phi \; \dSx ~
+        & = ~ \; \int_{\pd_t} \big(\vct{u_w} \cdot \nhat \big)\phi \; \dSx &&\\
+    \quad \; & = \; \int_{\pd_t} \big(\vct{w} \cdot \nhat \big)\phi \; \dSx
+        ~ + ~ \; \int_{\pd_t} \big(\vu \cdot \nhat \big)\phi \; \dSx &&
+\end{flalign*}
+Let $\bar{\phi}$ denote the average value of $\phi$ defined over a surface $S$
+\begin{flalign*}
+    \quad \bar{\phi} \defined \frac{1}{A} ~ \int_{S(z, t)} \phi \;\dSx\quad :  \quad  A(z, t) \defined \int_{S(z, t)} \dSx &&
+\end{flalign*}
+Now we may rewrite the volume integral in the LHS of RT theorem
+\begin{flalign*}
+    \quad  \int_{V(t)} \phi dV \; = \; \int_{z_1}^{z_2} \int_{S(z, t)} \phi \;\dSx \; dz
+        \;=\; \int_{z_1}^{z_2} A \cdot \bar{\phi} \; dz &&
+\end{flalign*}
+where $z_1 < z_2$ are fixed $z$-coordinates for $S_1$ and $S_2$.
+Then we differentiate the integrands in the above equation w.r.t. $t$
+\begin{flalign*}
+    \quad \int_{V(t)} \dfrac{\partial \phi}{\partial t} dV \;=\; \int_{z_1}^{z_2} \dfrac{\partial}{\partial t} \bigg[A \cdot \bar{\phi} \bigg]\; dz, &&
+\end{flalign*}
+and we've rewritten the first term in the RHS of the reynolds system.
+The surface integral in the RHS may be written as
+\begin{flalign*}
+    \quad \int_{\pd_t}  (\vub \cdot \nhat) \phi \dSx = \int_{\pd_t}  (\vub \cdot \nhat) \phi \dSx.... &&
+\end{flalign*}\todo{cleanup, ref. pg. 43}
+With a little more work, one may obtain:
+\begin{definition}
+    \label{def:1dReynolds}
+    The 1D Reynolds Transport theorem for both compressible and incompressible fluids:
+    \begin{flalign*}
+        \quad \frac{\partial }{\partial t} \bigg( A \bar{\phi} \bigg) \; + \; \frac{\partial}{\partial z}\big( A (\overline{\phi \cdot u_3}) \big)
+        \; = \; \int_S \bigg( \dfrac{\partial \phi}{\partial t} + \nabla \cdot (\phi \vu) \bigg) \dSx
+        \; + \; \int_{\partial S} \phi \vct{w} \cdot \nhat \; d \gamma &&
+    \end{flalign*}
+\end{definition}
+
+\begin{remark}
+    \label{1DMassConservation}
+    By taking $\phi = \rho$ in \ref{def:1dReynolds}, mass conservation follows directly. Also, by our assumption
+    that blood is incompressible, we have $\begin{cases*}\Div(\vu) = 0\\\rho =\text{const.}\\
+    \end{cases*}$ and we simplify \ref{def:1dReynolds} as
+    \begin{flalign*}
+        \quad \frac{\partial A }{\partial t} \; + \; \frac{\partial}{\partial z}\big( A (\overline{u_3}) \big)
+        \; = \; \int_{\partial S} \vct{w} \cdot \nhat \; d \gamma &&
+    \end{flalign*}
+    The RHS term above describing the transport process across the vessel wall. \todo{complete, pg. 45}
+\end{remark}
+
+\begin{remark}
+    \label{1DMomentumConservation}
+    By taking $f = u_3$ in \ref{def:1dReynolds}, momentum conservation follows directly. Also,
+    by our assumption that blood is incompressible, we simplify \ref{def:1dReynolds} as
+    \begin{flalign*}
+        \quad \frac{\partial }{\partial t} \bigg( A u_3 \bigg) \; + \; \frac{\partial}{\partial z}\big( A (\overline{u_3^2}) \big)
+        \; = \; \int_S \bigg( \dfrac{\partial u_3}{\partial t} + \nabla u_3 \cdot \vu \bigg) \dSx
+        \; + \; \int_{\partial S} u_3 \vct{w} \cdot \nhat \; d \gamma &&
+    \end{flalign*}
+    The RHS term above describing the transport process across the vessel wall.
+\end{remark}

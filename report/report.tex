@@ -155,35 +155,48 @@
 
     \section{Blood Flow Models}
         \label{sec:bloodmodels}
-        We seek solutions to initial and boundary value problems of Eq.~\ref{def:NSEquations}.
-        Let $\vu_0: \OmgB(0) \to \R^3$ be the initial velocity feild at $t = 0$.
-        Then the initial condition is given by
+        We seek solution $\vu$ to initial and boundary value problems of
+        Eq.~\ref{def:kinematic-viscosity-ns}. Let $\vu_0: \OmgB(0) \to \R^N, ~ \vx \mapsto \vu_0(\vx)$
+        such that $\Div(\vu_0) = 0$ in $\OmgB(0)$.
+        Then the initial condition is given by the initial \emph{velocity profile} $\vu_0$
         \begin{flalign*}
-            \quad & \vu(\vx, 0) \;=\; \vu_0(\vx) \quad \forallin{\vx}{\OmgB(0)}. &&
+            \quad & \vu(\vx, 0) \defined \vu_0(\vx) \quad \forallin{\vx}{\OmgB(0)}. &&
         \end{flalign*}
-        In practice, $\vu_0(z)$ may be prescribed or determined
+        In practice, $\vu_0(\vx)$ may be prescribed or determined
         from sensor data.
         For the boundary conditions, we consider the following:
         \begin{definition}[Inlet Boundary Condition]
             \label{def:inlet-bc}
-            Let $\vu_0(z): [0, \ell] \to \R^3$ be a prescribed velocity profile
-            at the inlet boundary of $\OmgB(t)$ along the $z$-axis.
+            Let $\vu_0(\vx): S_{in} \to \R^N$ be a prescribed velocity profile
+            at the inlet boundary of $\OmgB(t)$.
         \end{definition}
         \begin{definition}[Outlet Boundary Condition]
             \label{def:outlet-bc}
-            Let $p_{out}(t): [0, T] \to \R$ be a prescribed pressure profile
+            Let $p_{out}(t): I_T \to \R^+$ be a prescribed pressure profile
             at the outlet boundary of $\OmgB(t)$.
         \end{definition}
+        Above definitions~\ref{def:inlet-bc} and~\ref{def:outlet-bc} are
+        a particular choice of suitable boundary conditions for
+        solving Eq.~\ref{def:kinematic-viscosity-ns}. Other choices
+        of boundary conditions are possible, e.g., prescribing
+        periodic velocity profiles at the inlet and outlet boundaries
+        of $\OmgB(t)$; e.g., for modeling blood flow in a closed loop.
+
+        \medskip
+
 
         We start our discussion with 1D and 0D models, reducing the
         d.o.f. in the NS system~\ref{def:NSEquations} by imposing further
-        simplifying assumptions. Namely, w.a.t. compute average pressures
-        and velocities after a relatively short simulation time by solving
-        the 1D NS system in a compliant vessel with suitable side conditions.
-        Because our model averages pressure and velocity over a surface-area, we obtain
-        a uniform distribution of WSS on the vessel.
-        Then, we discuss 2D and 3D models, which resolve spatial variations
-        in pressure and velocity fields by solving the full NS system.
+        simplifying assumptions. Such dimension reduced models
+        compute average pressures and velocities after a relatively short simulation time,
+        yeilding uniform distributions of WSS on the vessel wall $\OmgW(t)$ at each
+        time $t \in I_T$. Then we disscuss 2D models, which resolve velocity profiles
+        in a vessel's cross-sectional plane, thus capturing WSS variations
+        along the vessel wall. Finally, we discuss 3D models, which resolve
+        full velocity profiles in a vessel, thus capturing complex flow
+        patterns such as recirculation zones and vorticess.
+
+        \bigskip
 
         \subsection{0D Models}
             \label{subsec:0dmodels} \input{models/0d-models.tex}
@@ -198,10 +211,9 @@
         \bigskip
 
         \subsection{3D Models}
+            \td{find old notes on existence and uniqueness of 3D NS}
             \label{subsec:3dmodels} \input{models/3d-models.tex}
         \bigskip
-
-
 
 
 
