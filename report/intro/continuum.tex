@@ -229,6 +229,7 @@ over the material derivative of $V(t)$.
                 \quad \text{(by \ref{def:material-derivative})}. && \\
     \end{flalign*}
 \end{proof}
+\td{cleanup? Also, corollary by applying divergence theorem}
 
 \medskip
 
@@ -352,12 +353,12 @@ for an infinitesimal fluid element $V(t) \subset \OmgBt$.
 By applying the Reynolds Transport Theorem~\ref{thm:reynolds-transport} to linear momentum balance~\ref{def:linear-momentum-balance},
 we obtain the integral form of linear momentum balance:
 \begin{flalign*}
-    \quad & \int_{V(t)} \rho \, \pd_t \vu \, dV + \int_{\p V(t)} \rho \, \vu \, \inp{\vu}{\nhat} \, dS \defined \int_{V(t)} \Divbf(\vT) \, dV + \int_{V(t)} \rho \, \vfb \, dV, &&
+    \quad & \int_{V(t)} \rho \, \pd_t \vu \, dV + \int_{\p V(t)} \rho \, \vu \, \inp{\vu}{\nhat} \, dS \equals \int_{V(t)} \Divbf(\vT) \, dV + \int_{V(t)} \rho \, \vfb \, dV, &&
 \end{flalign*}
 for any material volume $V(t) \subset \OmgBt$.
 By the divergence theorem, we may rewrite the surface integral as a volume integral
 \begin{flalign*}
-    \quad & \int_{V(t)} \rho \, \pd_t \vu \, dV + \int_{V(t)} \Div(\rho \, \vu \otimes \vu) \, dV \defined \int_{V(t)} \Divbf(\vT) \, dV + \int_{V(t)} \rho \, \vfb \, dV, &&
+    \quad & \int_{V(t)} \rho \, \pd_t \vu \, dV + \int_{V(t)} \Div(\rho \, \vu \otimes \vu) \, dV \equals \int_{V(t)} \Divbf(\vT) \, dV + \int_{V(t)} \rho \, \vfb \, dV, &&
 \end{flalign*}
 Since $V(t)$ is arbitrary, the integrands must be equal a.e. in $\OmgBt$, yielding differential form of linear momentum balance:
 \begin{flalign*}
@@ -422,6 +423,9 @@ Where $SO(3) \defined \{\vct{Q} \in \R^{3 \times 3} : \vct{Q}\,\vct{Q}^{\top} = 
     By \ref{def:isotropic}, the Cauchy stress $\vT$ of an isotropic fluid depends only on
     the invariants of $\vct{D}(\vu)$, i.e., the eigenvalues of $\vct{D}(\vu)$.
 \end{remark}
+
+\medskip
+
 \begin{remark}[Simple vs. complex fluids]
     In the terminology of continuum mechanics, a \emph{simple} fluid is one whose
     constitutive response at a point depends only on the instantaneous values of
@@ -431,6 +435,9 @@ Where $SO(3) \defined \{\vct{Q} \in \R^{3 \times 3} : \vct{Q}\,\vct{Q}^{\top} = 
     More complex models (e.g.\ viscoelastic fluids) incorporate memory effects
     so that the stress depends on the deformation history.
 \end{remark}
+
+\medskip
+
 \begin{remark}[Blood isotropy justification]
     \label{rmk:blood-isotropy-justification}
     Blood is often modeled as an isotropic fluid since its microstructure (RBCs, WBCs, platelets)
@@ -439,7 +446,9 @@ Where $SO(3) \defined \{\vct{Q} \in \R^{3 \times 3} : \vct{Q}\,\vct{Q}^{\top} = 
     to deformation is independent of direction.
     \red{[\cite{book1}, sec. 3.1]} (Check source)
 \end{remark}
+
 \medskip
+
 \begin{definition}[Newtonian, isotropic constitutive law]
     \label{def:fluidsmodel}
     For a Newtonian, isotropic fluid the Cauchy stress is
@@ -449,6 +458,9 @@ Where $SO(3) \defined \{\vct{Q} \in \R^{3 \times 3} : \vct{Q}\,\vct{Q}^{\top} = 
     where the bulk viscosity $\lambda \in \R^+$ is a material parameter quantifying the fluid's resistance
     to uniform compression.
 \end{definition}
+
+\medskip
+
 So newtonian isotropic fluids at rest (quiescent state) sustains only hydrostatic stress:
 \begin{flalign*}
     \quad \implies \vT \equals -\,p\,\mathrm{I} \quad \text{when} ~ \vu \equiv \vct{0}. &&
@@ -462,6 +474,9 @@ because then $\Div(\vu) \equals 0$ in $\OmgB$ (refer to~\ref{rmk:incompressibili
         \quad \vT ~ = ~ -\,p\,\mathrm{I} + 2\,\eta\,\vct{D}(\vu). &&
     \end{flalign*}
 \end{definition}
+
+\medskip
+
 \begin{remark}[Dynamic vs. Kinematic Viscosity]
     In our model assumptions, \emph{dynamic viscosity} $\eta \in \R^+$ and  \emph{kinematic viscosity} $\mu \in \R^+$
     relate as
@@ -497,7 +512,9 @@ because then $\Div(\vu) \equals 0$ in $\OmgB$ (refer to~\ref{rmk:incompressibili
     In large vessels, $\eta_r$ is often constant, justifying the Newtonian assumption.
     [\cite{book1}, sec. 3.1]
 \end{remark}
+
 \medskip
+
 When modeling non-Newtonian effects (when $\eta \neq \text{ constant}$), the kinematic viscosity
 $\mu(\cdot)$ is often chosen by Carreau model \cite{hemodynamics}
 \begin{flalign*}

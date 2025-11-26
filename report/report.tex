@@ -153,7 +153,7 @@
         \bigskip
 
 
-    \section{Blood Flow Models}
+    \section{Modeling Flow in a Single Vessel}
         \label{sec:bloodmodels}
         We seek solution $\vu$ to initial and boundary value problems of
         Eq.~\ref{def:kinematic-viscosity-ns}. Let $\vu_0: \OmgB(0) \to \R^N, ~ \vx \mapsto \vu_0(\vx)$
@@ -167,13 +167,13 @@
         For the boundary conditions, we consider the following:
         \begin{definition}[Inlet Boundary Condition]
             \label{def:inlet-bc}
-            Let $\vu_0(\vx): S_{in} \to \R^N$ be a prescribed velocity profile
-            at the inlet boundary of $\OmgB(t)$.
+            Let $\vu_0(\vx): S_1(0) \to \R^N$ be a prescribed velocity profile
+            at the inlet boundary $S_1(0)$.
         \end{definition}
         \begin{definition}[Outlet Boundary Condition]
             \label{def:outlet-bc}
             Let $p_{out}(t): I_T \to \R^+$ be a prescribed pressure profile
-            at the outlet boundary of $\OmgB(t)$.
+            at the outlet boundary $S_2(0)$.
         \end{definition}
         Above definitions~\ref{def:inlet-bc} and~\ref{def:outlet-bc} are
         a particular choice of suitable boundary conditions for
@@ -211,7 +211,6 @@
         \bigskip
 
         \subsection{3D Models}
-            \td{find old notes on existence and uniqueness of 3D NS}
             \label{subsec:3dmodels} \input{models/3d-models.tex}
         \bigskip
 

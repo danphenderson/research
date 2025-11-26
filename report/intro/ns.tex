@@ -6,9 +6,9 @@ First, we write the NS system in conservative form.
     \label{def:nsconservative}
     \begin{flalign*}
         \quad & \begin{cases*}
-            \quad \partial_t(\rho \vu) \; +\;  (\rho\vu\cdot\nabla)\vu
-                \;=\; -\,\nabla p \;\+\; \Divbf\!\big( 2\,\eta\,\vct{D}(\vu) \big) \;\+\; \rho\,\vf, \\
-            \quad \Div(\vu) \;=\; 0,\qquad \rho \equivto \rho_0>0 \text{ (constant).}
+            \quad \pd_t(\rho \vu) \; +\;  (\rho\vu\cdot\nabla)\vu
+                \equals -\,\nabla p \;\+\; \Divbf\!\big( 2\,\eta\,\vct{D}(\vu) \big) \;\+\; \rho\,\vf, \\
+            \quad \Div(\vu) \equals 0,\qquad \rho \equivto \rho_0>0 \text{ (constant).}
         \end{cases*} &&
     \end{flalign*}
 \end{definition}
@@ -18,34 +18,37 @@ from~\ref{def:nsconservative}.
     \label{def:NSEquations}
     \begin{flalign*}
         \quad & \begin{cases*}
-            \quad \rho\big(\partial_t \vu + (\vu\cdot\nabla)\vu\big) = -\,\nabla p \;+\; \Divbf\!\Big( 2\,\mu(|\vct{D}|^2)\,\vct{D}\Big) \;+\; \rho\,\vf \\
+            \quad \rho\big(\pd_t \vu + (\vu\cdot\nabla)\vu\big) \equals -\,\nabla p \;+\; \Divbf\!\Big( 2\,\mu(|\vct{D}|^2)\,\vct{D}\Big) \;+\; \rho\,\vf \\
         \quad \Div(\vu) = 0,
         \end{cases*} &&
     \end{flalign*}
 \end{definition}
-We divide $\rho$ and obtain the kinematic-viscosity form from~\ref{def:NSEquations}.
+We divide $\rho$ and obtain the kinematic-viscosity form from~\ref{def:NSEquations}
+as presented in \cite{book1}, \cite{book2}, and \red{\cite{hemodynamics} (confirm)}.
 \begin{definition}[Kinematic-Viscosity Navier-Stokes (NS)]
     \label{def:kinematic-viscosity-ns}
     \begin{flalign*}
         \quad & \begin{cases*}
-        \quad \partial_t \vu + (\vu\cdot\nabla)\vu = -\,\frac{\nabla p}{\rho}\, \;+\; \Divbf\!\Big( \frac{2}{\rho}\,\mu(|\vct{D}|^2)\,\vct{D}\Big) \;+\; \vct{f}, \\
-            \quad \partial_t \vu + (\vu\cdot\nabla)\vu = -\,\frac{\nabla p}{\rho}\, \;+\; \Divbf\!\Big( \frac{2}{\rho}\,\mu(|\vct{D}|^2)\,\vct{D}\Big) \;+\; \vf, \\
+        \quad \pd_t \vu + (\vu\cdot\nabla)\vu \equals -\,\frac{\nabla p}{\rho}\, \;+\; \Divbf\!\Big( \frac{2}{\rho}\,\mu(|\vct{D}|^2)\,\vct{D}\Big) \;+\; \vct{f}, \\
         \quad \Div(\vu) = 0,
         \end{cases*} &&
     \end{flalign*}
 \end{definition}
-Finally, we write the NS system in operator form.
+\medskip
+Finally, we write the NS system in operator form. \red{(check arguments of F.
+Rewrite with Laplacian instead of divergence of stress tensor?)}
+{\small
 \begin{definition}
     \label{def:standard-form-ns}
     We write Eq. \ref{def:NSEquations} in standard form
     \begin{flalign*}
         \quad & \begin{cases*}
-            \quad F\!\big(\partial_t\vu,\,\nabla\vu,\,\nabla p,\, \vu,\, p;\, \rho, \mu\big) \;=\; \vct{f}, \\
-            \quad \Div(\vu) \;=\; 0,
+            \quad F\big(\pd_t\vu,\,\nabla\vu,\,\nabla p,\, \vu,\, p;\, \rho, \mu\big) \equals \vct{f}, \\
+            \quad \Div(\vu) \equals 0,
         \end{cases*} && \\
-        \text{where} \quad & F\!\big(\partial_t\vu,\,\nabla\vu,\,\nabla p,\, \vu,\, p;\, \rho, \mu\big) \defined \partial_t \vu \;+\;  (\vu\cdot\nabla)\vu \;+\; \frac{\nabla p}{\rho}  \;-\;  \Divbf\!\Big( \frac{2}{\rho}\;\mu\;(|\vct{D}|^2)\,\vct{D}\Big) &&
+        \text{where} \quad & F\big(\pd_t\vu,\,\nabla\vu,\,\nabla p,\, \vu,\, p;\, \rho, \mu\big) \defined \pd_t \vu \;+\;  (\vu\cdot\nabla)\vu \;+\; \frac{\nabla p}{\rho}  \;-\;  \Divbf\!\Big( \frac{2}{\rho}\;\mu\;(|\vct{D}|^2)\,\vct{D}\Big) &&
     \end{flalign*}
-\end{definition}
+\end{definition}}
 \begin{remark}
     \label{classifying NS}
     The NS equations are a non-linear coupled system of PDEs.
@@ -53,7 +56,7 @@ Finally, we write the NS system in operator form.
     The first equation follows from the balance of linear momentum and it's
     terms are characterized as:
     \begin{itemize}
-        \item  The convective term $\rho (\vu\cdot\nabla)\vu = \rho \vect{
+        \item  The convective term $(\vu\cdot\nabla)\vu = \vect{
             \inp{\vu}{\nabla \vu_1}\\
             \inp{\vu}{\nabla \vu_2}\\
             \inp{\vu}{\nabla \vu_3}
@@ -81,31 +84,162 @@ to as fluid-structure interaction (FSI) models.\todo{discuss in a later section}
 
 \medskip
 
+\subsection{Existence and Uniqueness of NS}
+    \label{subsec:existenceUniqueness}
+
+    \begin{remark}[Global Regularity Problem for (NS)]\
+        \label{rem:global-regularity}
+        \textit{For any smooth, spatially localized initial data $ \mathbf{u}_0 $,
+        does there exist a global smooth solution $ (\mathbf{u}, p) $ to NS~\ref{def:NSEquations}, when $N\equals 3$.
+        Such question is one of the Millennium Prize Problems posed
+        by the Clay Mathematics Institute in 2000, with a prize of one million
+        dollars for a correct solution.}
+    \end{remark}
+
+    \begin{theorem}[Local Existence and Uniqueness]
+        \label{thm:local-existenceUniqueness}
+        Given smooth, localized initial data $\vct{u}_0$, there exists a maximal time $0 < T_* \leq \infty$
+        for which a unique solution exists.
+    \end{theorem}
+
+    \medskip
+
+    If $T_* < \infty$, a \textbf{blow-up} occurs:
+    \begin{flalign*}
+        \quad & \sup_{x \in \mathbb{R}^3} |\mathbf{u}(t, x)| \to +\infty \quad \text{as} \quad t \to T_*. &&
+    \end{flalign*}
+    Otherwise, if $T_* = \infty$, then $|\vct{u}| \to 0$ as $t \to \infty$. Numerical evidence suggests global regularity
+    holds in most practical cases, but turbulent behavior can emerge for large initial data.
+
+    \subsubsection*{Heuristic Considerations and Energy Balance}
+        Starting from the incompressibility condition:
+        \begin{flalign*}
+            \quad & \Div(\vct{u}) = 0 && \\
+            \quad & \iff ~ \rho \text{ is constant in } \Omega(t) && \\
+            \quad & \iff ~ \text{ chain rule applies to } \Divbf\big(\frac{2}{\rho} \mu (|\vct{D}|^2) \vct{D}\big) &&\\
+            \quad \implies &  \Divbf\big(\frac{2}{\rho} \mu (|\vct{D}|^2) \vct{D}\big) = \nabla \cdot \big(\frac{2}{\rho} \mu (|\vct{D}|^2) \vct{D}\big)&&\\
+            \quad & = \langle\frac{2}{\rho} \mu (|\vct{D}|^2) \vct{D}, \nabla \rangle&&\\
+            \quad  & = \frac{2}{\rho} \langle \mu (|\vct{D}|^2) \vct{D}, \nabla \rangle&&\\
+            \quad & = \frac{2}{\rho} \nabla \cdot \big( \mu (|\vct{D}|^2) \vct{D}\big)&&\\
+            \quad & \therefore \quad \frac{2}{\rho}~ \Divbf\big( \mu (|\vct{D}|^2) \vct{D}\big) = 0.&&
+        \end{flalign*}
+        This vanishes if $\mu$ is constant (Newtonian fluid) and $\rho$ is constant (incompressibility).
+        So the diffusive term becomes:
+        \begin{flalign*}
+            \quad \frac{2\eta}{\rho} \Delta \vct{u}, \quad \text{with } \eta = \mu \rho.&&
+        \end{flalign*}\todo{show simplification of diffusive term to laplacian}
+        We heuristically compare dominant terms:
+        \begin{enumerate}
+            \item If $\eta \Delta \vct{u} \gg (\vct{u} \cdot \nabla) \vct{u}$, viscous dissipation dominates $\Rightarrow$ smooth, regular behavior.\
+            \item If $(\vct{u} \cdot \nabla) \vct{u} \gg \eta \Delta \vct{u}$, nonlinearity dominates $\Rightarrow$ turbulence, potential blow-up.
+        \end{enumerate}
+        We construct rigorous energy estimates in Section~\ref{sec:math-models}.
+    \medskip
+
 \subsubsection{NS in Cylindrical Coordinates}
     \label{subsubsec:cylindrical-coords}
-
-    Let our vessel wall $\pOmg = [0, T] \times \pOmgt$ be a surface in $\R^4$
-    that evolves in time which we refer to as the interface.
-    Let $\OmgBar = \pOmg \cup \Omg$ be the closed and compact
-    region enclosed by our interface. So the region enclosed by our interface
-    is $\Omg$, and we aim to model the velocity and pressure fields on $\Omg$.\\
-
     The relationship between cartesian and cylidrical coordinates is
     \begin{flalign*}
         \quad (x, ~y, ~z) ~ \mapsto (r \sin(\theta), ~ r\cos(\theta), ~z), \quad r = \sqrt{x^2 + y^2}.&&
     \end{flalign*}
-    Assume a vessel of length $L$ is aligned with the z-axis
+
+    \medskip
+
+    Let $(r,\theta,z)$ denote cylindrical coordinates on $\R^3$ with
+    orthonormal basis $(\e_r,\e_\theta,\e_z)$, and write the velocity as
+    \begin{flalign*}
+        \quad \vu(t, r,\theta,z) &\equivto u_r(t, r, \theta,z)\,\e_r \;+\; u_\theta(t, r, \theta,z)\,\e_\theta \;+\; u_z(t, r, \theta,z)\,\e_z. &&\\
+        &\equals u_r\,\e_r \;+\; u_\theta\,\e_\theta \;+\; u_z\,\e_z
+    \end{flalign*}
+    where $u_r, u_\theta, u_z: \OmgB \to \R$ are the cylindrical
+    velocity components in the radial, azimuthal, and axial directions respectively. Then the kinematic-viscosity form of NS~\ref{def:kinematic-viscosity-ns} in cylindrical coordinates
+    involves the following differential operators:
+    \begin{flalign*}
+        \quad (\vu\cdot\nabla) &\equals u_r \,\pd_r \;+\; \frac{u_\theta}{r}\,\pd_\theta \;+\; u_z \,\pd_z, &&\\
+        \nabla p &\equals \pd_r p\,\e_r \;+\; \frac{1}{r}\,\pd_\theta p\,\e_\theta \;+\; \pd_z p\,\e_z, &&\\
+        \Div(\vu) &\equals \frac{1}{r}\,\pd_r(r u_r) \;+\; \frac{1}{r}\,\pd_\theta u_\theta \;+\; \pd_z u_z. &&
+    \end{flalign*}
+    The components of the rate-of-strain tensor $\vct{D} = \tfrac{1}{2}\big(\nabla\vu + (\nabla\vu)^\top\big)$
+    with respect to $(\e_r,\e_\theta,\e_z)$:
+    \begin{flalign*}
+        \quad D_{rr} &= \pd_r u_r, & D_{\theta\theta} &= \frac{1}{r}\,\pd_\theta u_\theta + \frac{u_r}{r}, & D_{zz} &= \pd_z u_z, && \\
+        \quad D_{r\theta} &= \frac{1}{2}\Big(\pd_r u_\theta - \frac{u_\theta}{r} + \frac{1}{r}\,\pd_\theta u_r\Big), &
+        D_{rz} &= \frac{1}{2}\big(\pd_r u_z + \pd_z u_r\big), & D_{\theta z}&= \frac{1}{2}\Big(\frac{1}{r}\,\pd_\theta u_z + \pd_z u_\theta\Big) &&.
+    \end{flalign*}
+    The viscous (extra) stress is $\vct{\tau} = 2\,\mu(|\vct{D}|^2)\,\vct{D}$, so
+    \begin{flalign*}
+        \quad \tau_{ij} = 2\,\mu(|\vct{D}|^2)\,D_{ij}, \qquad i,j\in\{r,\theta,z\}. &&
+    \end{flalign*}
+    Writing $\vct{f} = f_r\,\e_r + f_\theta\,\e_\theta + f_z\,\e_z$, the three components of the momentum equation are
+    \begin{flalign*}
+        \text{(radial)}\quad
+        &\pd_t u_r
+        + u_r \pd_r u_r
+        + \frac{u_\theta}{r}\pd_\theta u_r
+        + u_z \pd_z u_r
+        - \frac{u_\theta^2}{r} &&\\
+        &\quad \equals -\,\frac{1}{\rho}\,\pd_r p
+        + \frac{1}{\rho}\Big[
+              \frac{1}{r}\pd_r(r \tau_{rr})
+            + \frac{1}{r}\pd_\theta \tau_{r\theta}
+            + \pd_z \tau_{rz}
+            - \frac{1}{r}\tau_{\theta\theta}
+          \Big]
+        + f_r, && \\
+        \text{(azimuthal)}\quad
+        &\pd_t u_\theta
+        + u_r \pd_r u_\theta
+        + \frac{u_\theta}{r}\pd_\theta u_\theta
+        + u_z \pd_z u_\theta
+        + \frac{u_r u_\theta}{r} \\
+        &\quad \equals -\,\frac{1}{\rho r}\,\pd_\theta p
+        + \frac{1}{\rho}\Big[
+              \frac{1}{r}\pd_r(r \tau_{r\theta})
+            + \frac{1}{r}\pd_\theta \tau_{\theta\theta}
+            + \pd_z \tau_{\theta z}
+            + \frac{1}{r}\tau_{r\theta}
+          \Big]
+        + f_\theta, &&\\
+        \text{(axial)}\quad
+        &\pd_t u_z
+        + u_r \pd_r u_z
+        + \frac{u_\theta}{r}\pd_\theta u_z
+        + u_z \pd_z u_z \\
+        &\quad \equals -\,\frac{1}{\rho}\,\pd_z p
+        + \frac{1}{\rho}\Big[
+              \frac{1}{r}\pd_r(r \tau_{rz})
+            + \frac{1}{r}\pd_\theta \tau_{\theta z}
+            + \pd_z \tau_{zz}
+          \Big]
+        + f_z. &&
+    \end{flalign*}
+    The incompressibility condition in cylindrical coordinates is
+    \begin{flalign*}
+        \quad \frac{1}{r}\,\pd_r(r u_r) \;+\; \frac{1}{r}\,\pd_\theta u_\theta \;+\; \pd_z u_z \equals 0. &&
+    \end{flalign*}
+
+
+
+    \begin{figure}[!htb]
+    \label{fig:compliant-vessel}
+        \centering
+        \captionsetup{aboveskip=2pt,belowskip=2pt}
+        \includegraphics[width=0.45\linewidth,height=0.45\textheight,keepaspectratio]{compliant-vessel.png}
+        \caption{
+            From \cite{book1} [Fig. 3.2, pg. 37]: A compliant vessel with
+            time-dependent radius $R(z,t)$ along the axial position $z$.
+            Since $\pOmgB \in C^1$, the normal vector $\hat{n}$ is well-defined a.e. on the boundary.
+            We assume such transformation is possible for blood vessels in our model.
+        }
+    \end{figure}
+    Assume a vessel of length $\ell$ is aligned with the z-axis
     whose cross-section is circular with radius $R(z,t)$ at axial position $z$ and time $t$.
     Our fluid domain becomes
     \begin{equation*}
         \label{fluid-domain-cylidrical}
-        \Omgt \; = \; \{(r, ~,\theta ~, z) \in \R^3 ~ : ~r \in [0, R(z, t)], ~ \theta \in [0, 2\pi), ~ z \in [0, l) \}
+        \Omgt \; = \; \{(r, ~\theta ~, z) \in \R^3 ~ : ~r \in [0, R(z, t)], ~ \theta \in [0, 2\pi), ~ z \in [0, \ell) \}
     \end{equation*}
     where $R(z,t)$ is the vessel radius at axial position $z$ and time $t$.
 
     \medskip
-    \td{
-        Ref. notes for further details on deriving the transformation rules for vector
-        calculus operators, or, notes where I do the derivation directly.
-        Then discuss simplifications for axisymmetric flow.
-    }
+    \td{WIP: continue from here...}
