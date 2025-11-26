@@ -105,7 +105,7 @@
         Sec.~\ref{subsec:continuum} reviews the continuum hypothesis, a necessary postulate
         in fluid mechanics which treats blood as a continuous medium. This framing reduces
         the hemodynamic problem to describing blood’s motion in a continuum. Then
-        Sec.~\ref{subsec:bloodmodel} discusses rheological assumptions that lead to
+        Sec.~\ref{subsec:bloodmodels} discusses rheological assumptions that lead to
         constitutive relations between the material properties of blood. By conservation,
         the kinematic-viscosity Navier–Stokes (NS) equations are obtained  (Sec.~\ref{subsec:ns}).
         The NS equations are a system of coupled nonlinear partial differential equations (PDEs),
@@ -152,9 +152,55 @@
             \label{subsec:ns} \input{intro/ns.tex}
         \bigskip
 
-        \subsection{Modeling Blood Flow}
-            \label{subsec:bloodmodel} \input{intro/bloodmodel.tex}
+
+    \section{Blood Flow Models}
+        \label{sec:bloodmodels}
+        We seek solutions to initial and boundary value problems of Eq.~\ref{def:NSEquations}.
+        Let $\vu_0: \OmgB(0) \to \R^3$ be the initial velocity feild at $t = 0$.
+        Then the initial condition is given by
+        \begin{flalign*}
+            \quad & \vu(\vx, 0) \;=\; \vu_0(\vx) \quad \forallin{\vx}{\OmgB(0)}. &&
+        \end{flalign*}
+        In practice, $\vu_0(z)$ may be prescribed or determined
+        from sensor data.
+        For the boundary conditions, we consider the following:
+        \begin{definition}[Inlet Boundary Condition]
+            \label{def:inlet-bc}
+            Let $\vu_0(z): [0, \ell] \to \R^3$ be a prescribed velocity profile
+            at the inlet boundary of $\OmgB(t)$ along the $z$-axis.
+        \end{definition}
+        \begin{definition}[Outlet Boundary Condition]
+            \label{def:outlet-bc}
+            Let $p_{out}(t): [0, T] \to \R$ be a prescribed pressure profile
+            at the outlet boundary of $\OmgB(t)$.
+        \end{definition}
+
+        We start our discussion with 1D and 0D models, reducing the
+        d.o.f. in the NS system~\ref{def:NSEquations} by imposing further
+        simplifying assumptions. Namely, w.a.t. compute average pressures
+        and velocities after a relatively short simulation time by solving
+        the 1D NS system in a compliant vessel with suitable side conditions.
+        Because our model averages pressure and velocity over a surface-area, we obtain
+        a uniform distribution of WSS on the vessel.
+        Then, we discuss 2D and 3D models, which resolve spatial variations
+        in pressure and velocity fields by solving the full NS system.
+
+        \subsection{0D Models}
+            \label{subsec:0dmodels} \input{models/0d-models.tex}
         \bigskip
+
+        \subsection{1D Models}
+            \label{subsec:1dmodels} \input{models/1d-models.tex}
+        \bigskip
+
+        \subsection{2D Models}
+            \label{subsec:2dmodels} \input{models/2d-models.tex}
+        \bigskip
+
+        \subsection{3D Models}
+            \label{subsec:3dmodels} \input{models/3d-models.tex}
+        \bigskip
+
 
 
 
