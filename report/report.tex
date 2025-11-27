@@ -196,8 +196,6 @@
         full velocity profiles in a vessel, thus capturing complex flow
         patterns such as recirculation zones and vorticess.
 
-        \bigskip
-
         \subsection{0D Models}
             \label{subsec:0dmodels} \input{models/0d-models.tex}
         \bigskip
@@ -214,8 +212,30 @@
             \label{subsec:3dmodels} \input{models/3d-models.tex}
         \bigskip
 
+    \section{Lerning Arterial Flow via PINNs}
+        \label{sec:learning-flows}
+        As disscussed in Sec.~\ref{sec:bloodmodels}, traditional numerical methods
+        for solving the NS equations, such as finite difference methods (FDM),
+        finite element methods (FEM), and finite volume methods (FVM), require
+        discretizing the spatial domain $\OmgB(t)$ into a mesh or grid. An
+        alternative approach leverages modern machine learning (ML) techniques,
+        particularly deep neural networks (DNNs), to learn solution representations to the
+        NS equations. Physics-informed neural networks (PINNs) are the first class of DNNs
+        we discuss for learning arterial flows. Then we discuss Deep-Riesz DNNs,
+        a recent class of DNNs for learning weak solution representations to PDEs.
 
+        \medskip
 
+        A DNNs are universal function approximators, able to learn arbitrary nonlinear
+        mappings between finite-dimensional spaces. This property is formalized
+        in the following theorem.
+
+        \begin{theorem}[Universal Approximation Theorem of Nonlinear Operators]
+            \todo{TW-Bauer continuity conditions...}
+        \end{theorem}
+
+        \subsection{Pysics-Informed Neural Networks}
+            \label{subsec:pinns} \input{learning/pinns.tex}
     % ------------------ APPENDIX
     \section{Appendix}
         \label{sec:appendix}
