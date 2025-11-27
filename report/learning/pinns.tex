@@ -2,9 +2,142 @@ Machine learning techniques for learning solutions to initial-boundary
 value problems were first proposed by Lagaris et al. \ref{Lagaris1998} in
 1998. Since then, a variety of neural network architectures and training strategies
 have been proposed for learning solutions to PDEs. In this section, we introduce
-physics-informed neural networks (PINNs) as introduced by Raissi et al. \ref{RaissiM2019},
-one of the most widely used methods for learning strong solutions to PDEs. We then
-present a workflow to learn arterial flows.
+physics-informed neural networks (PINNs), one of the most widely used methods for learning forward and inverse problems.
 
-\subsection{Physics-Informed Neural Networks}
+\medskip
+
+PINNs were introduced by Raissi et al. (\ref{RaissiM2019}, 2019) as a unified
+framework to tackle two distinct but related problems, namely,
+\begin{enumerate}
+    \item Data driven solutions: inference problems for both forward and inverse
+    initial-boundary value problems.
+    \item Data driven discovery of PDEs: discovering the parameters and structure of
+    of the underlying differential operator governing the observed data.
+\end{enumerate}
+In both cases, numerical expeirments where conducted using a feed-forward
+DNN (FNN) architecture with hyperbolic tangent activation function $\vsigma$ on classical problems in mathematical physics.
+
+\medskip
+\begin{definition}
+    \label{def:fnn}
+    An $L$-layer (or $L-1$ hidden layer) \textbf{feed-forward neural network (FNN)} is
+    defined recursively as
+    \begin{flalign*}
+        \quad \text{input layer: }  & \vN{0}(\vx) \equals \vx \in \R^{d_{in}} && \\
+        \quad \text{hidden layer: } & \vN{l}(\vx) \equals \vsigma\big(\vN{l}(\vx) \equals \vW{l} \vN{l-1}(\vx) + \vb{l}\big) \in \R^{N_l}, ~\forallin{l}{[L-1]} && \\
+        \quad \text{output layer: } & \vN{L}(\vx) \equals \vW{L} \vN{L-1}(\vx) + \vb{L} \in \R^{d_{out}}, &&
+    \end{flalign*}
+    so that $N (\vx):\R^{d_{in}} \mapsto \R^{d_{out}}$ is the FNN, $\vW{l} \in \R^{N_l \times N_{l-1}}$ are the weight matrices, and $\vb{l} \in \R^{N_l}$ are the bias vectors.
+    Here $N_l$ is the number of neurons in the $l$-th layer, and the nonlinear activation function $\vsigma:\R^{N_l} \mapsto \R^{N_{l+1}}$ is applied component-wise.
+\end{definition}
+
+Funamental to any ML task is to define a suitable loss function $\vmL(\vtheta)$, where $\vtheta$ is the vector of all weights and biases in the network
+to be optimized.
+
+\medskip
+
+Now we can write $\vtheta = \{\vW{l}, \vb{l}\}_\forallin{l}{[L]}$, and we'll denote the $L$-layer FNN as $N(\vx; \vtheta) \equals N_L(\vx)$.
+The backward-propogation step maps $\vtheta \mapsto \vtheta^*$ by solving the optimization problem
+\begin{equation}
+    \label{eq:opt-problem}
+    \vtheta^* = \argmin_{\vtheta} \vmL(\vtheta).
+\end{equation}
+\begin{remark}
+    \label{rem:optimizer}
+    The backward progation step of training refers to solving~\eqref{eq:opt-problem},
+    which is commonly acheived using the following optimization algorithms:
+    \begin{itemize}
+        \item For small-regime dense networks, we often prefer a Quasi-Newton (QN) method like L-BFGS,
+        due to its fast convergence and ability to converge to second-order stationary points. Precisely,
+        such methods escape saddle points by approximating the inverse Hessian $\vH_k$ of the loss function
+        at each iteration $k$ with gradient information; providing local second-order information at iterate
+        $\theta_k$. The advantage of a QN method is that it approximates Newton dynamics but doesn't suffer the
+        computational cost of calculating the full Hessian, as in Newton's method. A practical QN implementation
+        takes step $\vs_k$ minimizing the quadratic model
+        \begin{equation}
+            \label{eq:qn-trust-region}
+            \quad \begin{cases*}
+                \min_{\vs} ~ \vmL(\vtheta_k) + \nabla \vmL(\vtheta_k)^T \vs + \tfrac{1}{2} \vs^T \vH_k \vs \\
+                \text{s.t. } ~ \inp{\vs}{\vs} \leq \Delta_k^2,
+            \end{cases*}
+        \end{equation}
+        where $\Delta_k$ is the trust-region radius at iteration $k$. I.e., in practice QN methods naviagate
+        the loss function landscape by solving a series of trust-region subproblems instead of a traditional
+        line search to determine $\vtheta^{k+1} \equals \vtheta^k + \vs$. See Ch. 3~\ref{NocedalJW2006} for more details.
+
+        \medskip
+
+        L-BFGS has been observed to outperform first-order methods for PINN training \ref{WangZ2021}.
+        Following, Azzam et. al present an embarrassingly parallel algorithm for computing
+        Jacobian-vector products during gradient evaluation using forward-mode automatic differentiation.
+        Namely, when computing $\nabla \vmL(\vtheta_k)$ it is possible to compute $\vJ(\vtheta_k) \vd$ for any vector $\vd$ at
+        $O(1)$ additional cost. Then since $\vJ(\vtheta_k) \vd = \nabla^2 \vmL(\vtheta_k) \vd$, naturally,
+        this leads to strategies for sampling column space of $\nabla^2 \vmL(\vtheta_k)$.
+        But note the optimal step $\vs$ is obtained from \eqref{eq:qn-trust-region} as:
+        \begin{flalign*}
+            \quad \vs_k & = -(\vH_k + \lambda \ident)^{-1} \nabla \vmL(\vtheta_k), &&
+        \end{flalign*}
+        for some $\lambda \geq 0$ chosen to satisfy the trust-region constraint.
+        Thus, by computing $\vJ(\vtheta_k) \vd$ for various $\vd$, one can form a low-rank approximation
+        of $\nabla^2 \vmL(\vtheta_k)$, and use the Sherman-Morrison-Woodbury formula to efficiently compute
+        $(\vH_k + \lambda \ident)^{-1} \nabla \vmL(\vtheta_k)$.
+        Various sampling strategies are explored and implemented in the Julia-based software package \ref{blockopt},
+        where \textit{ForwardDiff.jl}~\cite{RevelsLubinPapamarkou2016} provides the forward-mode AD capabilities.
+        Future work on integrating this approach into PINN training for smaller dense networks is promising. \cite{AzzamEtAll2022}
+        \medskip
+        \td{
+            provide more details/links to other commonly used QN implementations, e.g., Optim.jl, XGBoost, SciPy, etc.
+        }
+        \item \red{In medium-sized networks or problems requiring moderate accuracy, second-order methods like
+        Newton-CG are preferred due to their ability to converge rapidly to second-order stationary points.
+        Here, the Newton step $\vs_k$ at iteration $k$ is computed by solving the linear system
+        \begin{equation}
+            \label{eq:newton-cg}
+            \nabla^2 \vmL(\vtheta_k) \vs = -\nabla \vmL(\vtheta_k),
+        \end{equation}
+        using the conjugate gradient (CG) method. Note, CG only requires Hessian-vector products
+        $\nabla^2 \vmL(\vtheta_k) \vd$, which can be computed efficiently using Pearlmutter's
+        method \ref{Pearlmutter1994}. This allows Newton-CG to scale to larger problems
+        than traditional Newton's method, which requires forming and storing the full Hessian matrix.}
+        \medskip
+        \item For larger networks or problems with lower accuracy requirements, first-order methods like Adam or SGD are preferred
+        due to their scalability resulting from low per-iteration computational cost.
+        Note, such methods follow the dynamics of gradient flow, and consequently converge to first-order stationary points.
+        However, there is research to suggest that convergence to saddle points is avoided in high-dimensional settings
+        due to the abundance of negative curvature directions around such points \ref{GeEtAl2015}.
+        \td{
+            provide details/links to commonly used first-order optimizers, e.g., Flux.jl, PyTorch, TensorFlow, etc.
+            Confirm first order methods utilize reverse-mode AD?
+        }
+    \end{itemize}
+\end{remark}
+
+
+\subsection{PINNs Vs. FEM}
     \label{subsec:pinns}
+
+    \begin{table}[htb]
+    \centering
+    \begin{minipage}{0.85\textwidth}
+        \centering
+        \label{table:fem-vs-pinn}
+        \begin{tabular}{@{}lll@{}}
+            \toprule
+            & \textbf{PINN} & \textbf{FEM} \\
+            \midrule
+            Basis function   & NN(non-linear)                       & Piecewise polynomial (linear) \\
+            Parameters       & Weights \& biases                    & Point values\\
+            Training points  & Scattered points (mesh-free)         & Mesh Points \\
+            PDE embedding    & Loss function                        & Algebraic System \\
+            Parameter Solver & Gradient-Based Optimizer             & Linear Solve\\
+            Errors           & $\eps_{app}, \eps_{gen}, \eps_{opt}$ & Quadrature errors \\
+            Error bounds     & Unknown                              & Partially Known \\
+            \bottomrule
+        \end{tabular}
+    \end{minipage}
+\end{table}
+
+
+
+
+\newpage
